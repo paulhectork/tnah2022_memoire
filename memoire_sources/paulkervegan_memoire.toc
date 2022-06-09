@@ -1,0 +1,30 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {french}{}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Résumé}{i}{chapter*.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Introduction}{1}{chapter*.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{I\hspace {1em}Du document numérisé au \texttt {XML-TEI} : nature du corpus, structure des documents et méthode de production des données}{3}{part.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Présentation du corpus}{5}{chapter.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}Production des données : OCRisation et structure des documents traités}{7}{chapter.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Du texte à la \texttt {TEI} : méthode de transformation des documents OCRisés en fichiers \texttt {XML-TEI} valides}{9}{chapter.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{II\hspace {1em}Normalisation, enrichissements et extraction d'informations : une chaîne de traitement pour des données semi-structurées}{11}{part.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}Homogénéiser et normaliser un corpus complexe}{13}{chapter.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Extraction d'informations}{15}{chapter.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Vers une étude des facteurs déterminant le prix des documents : alignement des entrées du catalogue avec Wikidata et exploitation de données normalisées}{17}{chapter.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{III\hspace {1em}Après la \texttt {TEI} : l'application web \textit {Katabase}, interface de diffusion des données}{19}{part.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Table des figures}{21}{chapter*.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Liste des tableaux}{23}{chapter*.4}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Table des matières}{25}{chapter*.5}%

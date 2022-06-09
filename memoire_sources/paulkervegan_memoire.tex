@@ -1,0 +1,122 @@
+% métadonnées
+\author{Paul, Hector KERVEGAN}
+\title{Traitement et exploitation d'un corpus textuel semi-structuré : le cas des catalogues de vente de manuscrits.}
+\date{05.09.2022}
+
+% encodage, format, langue et police
+\documentclass[a4paper, 12pt, twoside]{book}
+\usepackage[english, french]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage{lmodern}
+\usepackage{graphicx}
+
+% code et couleurs
+\usepackage{minted}
+\usepackage{tikz}
+
+% mise en page ENC
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\setlength\parindent{1cm}
+
+% bibliographie, notes de bas de page, table des matières citations et index
+\usepackage[toc]{appendix}
+\usepackage{csquotes}
+\usepackage[backend=biber,sorting=nyt,style=enc]{biblatex}
+\nocite{*}
+\usepackage{imakeidx}
+% \makeindex
+% \makeindex[name=lieux,title=Index des noms de lieux]
+\usepackage{tocbibind}
+
+% définition des acronymes
+\usepackage[automake, acronym, toc]{glossaries}
+\makeglossaries
+	\setacronymstyle{short-long}
+	% modèle: \newacronym{dom}{\textsc{dom}}{\emph{Document Object Model}}
+	% modèle bis: \newglossaryentry{meta}{name=métadonnée,description={donnée servant à définir ou décrire une autre donné quel que soit son support}}
+	
+
+% hyperref
+\usepackage{hyperref}
+\hypersetup{
+	pdfauthor={Paul, Hector KERVEGAN}, 
+	pdftitle={Traitement et exploitation d'un corpus textuel semi-structuré : le cas des catalogues de vente de manuscrits.}, 
+	pdfsubject={Traitement de données textuelles},
+	pdfkeywords={catalogues de vente}{mss}{katabase}{reconnaissance optique de caractères}{ocr}{web design}{visualisation de données}{traitement automatisé du language}{web de données}{Python}}
+
+% commandes perso
+\newcommand{\alto}{\texttt{Alto}}
+\newcommand{\escr}{\texttt{eScriptorium}}
+\newcommand{\js}{\texttt{Javascript}}
+\newcommand{\json}{\texttt{JSON}}
+\newcommand{\py}{\texttt{Python}}
+\newcommand{\rgx}{\textit{expressions régulières}}
+\newcommand{\tei}{\texttt{TEI}}
+\newcommand{\xml}{\texttt{XML}}
+\newcommand{\xmltei}{\texttt{XML-TEI}}
+\newcommand{\xsl}{\texttt{XSL}}
+
+
+	
+% modèle : https://www.overleaf.com/project/61a6185ee83481070ab68d99
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% DÉBUT %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\onehalfspacing
+	
+\begin{titlepage}
+		
+\end{titlepage}
+
+\frontmatter
+\chapter*{Résumé}
+\addcontentsline{toc}{chapter}{Résumé}
+
+\mainmatter
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%% PREMIÈRE PARTIE %%%%%%%%%%%%%%%%%%%%%%
+\part{Du document numérisé au \xmltei : nature du corpus, structure des documents et méthode de production des données}
+\chapter{Présentation du corpus}
+Ce chapitre est dédié à une présentation des documents traités dans le cadre du projet MSS : nature, quantité de documents (et d'entrées individuelles), dates et différents types de catalogues vendus. On pourra également représenter la répartition des ventes par an grâce aux graphiques produits pour le site web avec Plotly. Cette partie s'appuie sur les mémoires effectués par d'ancien.ne.s stagiaires de Katabase, qui ont déjà beaucoup analysé la nature et les enjeux du corpus (Lucile Rondeau du Noyer, par exemple).
+
+\chapter{Production des données : OCRisation et structure des documents traités}
+Cette partie s'attache autant à présenter le processus d'OCRisation (qui est déjà bien établi et ne constitue pas le cœur de mon stage) que la structure des documents. Alors que le chapitre d'au dessus s'intéresse au catalogues dans leur ensemble, ici, on étudie le corpus au niveau de la page et de l'entrée individuelle. En effet, l'OCRisation repose sur la segmentation, et donc sur l'établissement d'une structure "abstraite" d'une page (c'est-à-dire, d'un découpage de la page en zones).
+
+\chapter{Du texte à la \tei : méthode de transformation des documents OCRisés en fichiers \xmltei valides}
+Après une étape d'OCRisation via \escr, le texte extrait des PDFs peut être exporté soit en texte brut, soit en \xml \texttt{Page} ou \alto. Ces formats s'attachent à garder une relation entre le \xml et le document numérisé (les zones de texte sont indiquées, chaque ligne est dans une balise...). Cependant, l'unité intellectuelle centrale à la suite du projet, ce n'est pas la page numérisée, mais l'entrée de catalogue. Un format plus complexe que le \xml d'\escr est donc nécessaire. Assez logiquement, la suite du projet s'appuie sur une traduction des catalogues en \tei. Jusqu'à maintenant, cette transformation était faite par \texttt{GROBID-Dictionnaries} et des feuilles \xsl. Le projet \texttt{GROBID-Dictionnaries} étant maintenu de façon assez opaque, le choix a été fait de remplacer cet outil par une solution plus simple (qui ne passe pas par le \textit{machine learning}) et modulable. En s'appuyant sur la nature "semi-structurée" du corpus, il est possible de séparer les différentes parties du texte à en identifiant des séparateurs. Ce chapitre s'intéresse donc à la transformation de \alto vers la \tei à l'aide d'\rgx. En changeant d'unité intellectuelle -- ou en choisissant de privilégier une unité au sein des catalogues plutôt qu'une autre (page, série d'entrées...) --, on prend de la distance et on interprète le catalogue papier.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%% DEUXIEME PARTIE %%%%%%%%%%%%%%%%%%%%%%
+\part{Normalisation, enrichissements et extraction d'informations : une chaîne de traitement pour des données semi-structurées}
+\chapter{Homogénéiser et normaliser un corpus complexe}
+
+\chapter{Extraction d'informations}
+double enjeu (garantir info historique et utilisation contemporaine)
+
+\chapter{Vers une étude des facteurs déterminant le prix des documents : alignement des entrées du catalogue avec Wikidata et exploitation de données normalisées}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%% TROISIÈME PARTIE %%%%%%%%%%%%%%%%%%%%%%
+\part{Après la \tei : l'application web \textit{Katabase}, interface de diffusion des données}
+
+% ici la future bibliographie
+\listoffigures
+\listoftables
+\tableofcontents
+\end{document}
