@@ -23,7 +23,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {part}{III\hspace {1em}Après la \texttt {TEI}{}: l'application web \textit {Katabase}, interface de diffusion des données}{19}{part.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Utiliser une interface web et présenter le corpus différemment}{21}{chapter.7}%
+\contentsline {chapter}{\numberline {7}Nouvelles présentations du corpus: l'interface web Katabase}{21}{chapter.7}%
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {8}Visualisation et interfaces: un problème pour les humanités numériques ?}{23}{chapter.8}%
 \defcounter {refsection}{0}\relax 
