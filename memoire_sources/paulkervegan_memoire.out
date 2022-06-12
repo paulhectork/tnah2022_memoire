@@ -1,14 +1,16 @@
 \BOOKMARK [0][-]{chapter*.1}{Résumé}{}% 1
 \BOOKMARK [0][-]{chapter*.2}{Introduction}{}% 2
-\BOOKMARK [-1][-]{part.1}{I Du document numérisé au XML-TEI : nature du corpus, structure des documents et méthode de production des données}{}% 3
+\BOOKMARK [-1][-]{part.1}{I Du document numérisé au XML-TEI: nature du corpus, structure des documents et méthode de production des données}{}% 3
 \BOOKMARK [0][-]{chapter.1}{Présentation du corpus}{part.1}% 4
 \BOOKMARK [0][-]{chapter.2}{Production des données : OCRisation et structure des documents traités}{part.1}% 5
-\BOOKMARK [0][-]{chapter.3}{Du texte à la TEI : méthode de transformation des documents OCRisés en fichiers XML-TEI valides}{part.1}% 6
+\BOOKMARK [0][-]{chapter.3}{Du texte à la TEI: méthode de transformation des documents OCRisés en fichiers XML-TEIvalides}{part.1}% 6
 \BOOKMARK [-1][-]{part.2}{II Normalisation, enrichissements et extraction d'informations : une chaîne de traitement pour des données semi-structurées}{}% 7
 \BOOKMARK [0][-]{chapter.4}{Homogénéiser et normaliser un corpus complexe}{part.2}% 8
 \BOOKMARK [0][-]{chapter.5}{Extraction\040d'informations}{part.2}% 9
 \BOOKMARK [0][-]{chapter.6}{Vers une étude des facteurs déterminant le prix des documents : alignement des entrées du catalogue avec Wikidata et exploitation de données normalisées}{part.2}% 10
-\BOOKMARK [-1][-]{part.3}{III Après la TEI : l'application web Katabase, interface de diffusion des données}{}% 11
-\BOOKMARK [0][-]{chapter*.3}{Table\040des\040figures}{part.3}% 12
-\BOOKMARK [0][-]{chapter*.4}{Liste\040des\040tableaux}{part.3}% 13
-\BOOKMARK [0][-]{chapter*.5}{Table des matières}{part.3}% 14
+\BOOKMARK [-1][-]{part.3}{III Après la TEI: l'application web Katabase, interface de diffusion des données}{}% 11
+\BOOKMARK [0][-]{chapter.7}{Utiliser une interface web et présenter le corpus différemment}{part.3}% 12
+\BOOKMARK [0][-]{chapter.8}{Visualisation et interfaces : un problème pour les humanités numériques ?}{part.3}% 13
+\BOOKMARK [0][-]{chapter*.3}{Table\040des\040figures}{part.3}% 14
+\BOOKMARK [0][-]{chapter*.4}{Liste\040des\040tableaux}{part.3}% 15
+\BOOKMARK [0][-]{chapter*.5}{Table des matières}{part.3}% 16
