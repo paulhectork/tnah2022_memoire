@@ -177,6 +177,128 @@
       \true{nocite}
       \keyw{,visualisation}
     \endentry
+    \entry{gabay_selling_2020}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=7fe1ec35c644906499707ac25bc7780b}{%
+           family={Gabay},
+           familyi={G\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e03658a9b3b3c43116de7803016cb916}{%
+           family={Rondeau\bibnamedelimb du\bibnamedelima Noyer},
+           familyi={R\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim N\bibinitperiod},
+           given={Lucie},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fcc658722514ac3820b3882c1fd255bd}{%
+           family={Khemakhem},
+           familyi={K\bibinitperiod},
+           given={Mohamed},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Milan}%
+      }
+      \list{publisher}{1}{%
+        {AIUCD}%
+      }
+      \strng{namehash}{7a1135a95f52c0b8334fe2f6d7988a9e}
+      \strng{fullhash}{7a1135a95f52c0b8334fe2f6d7988a9e}
+      \strng{bibnamehash}{7a1135a95f52c0b8334fe2f6d7988a9e}
+      \strng{authorbibnamehash}{7a1135a95f52c0b8334fe2f6d7988a9e}
+      \strng{authornamehash}{7a1135a95f52c0b8334fe2f6d7988a9e}
+      \strng{authorfullhash}{7a1135a95f52c0b8334fe2f6d7988a9e}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{{IX} Convegno {AIUCD}}
+      \field{eventtitle}{{IX} Convegno {AIUCD}}
+      \field{month}{1}
+      \field{title}{Selling autograph manuscripts in 19th c. Paris: digitising the Revue des Autographes}
+      \field{urlday}{13}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://hal.archives-ouvertes.fr/hal-02388407
+      \endverb
+      \verb{url}
+      \verb https://hal.archives-ouvertes.fr/hal-02388407
+      \endverb
+      \keyw{,katabase}
+    \endentry
+    \entry{gabay_quantifying_2020}{inproceedings}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=7fe1ec35c644906499707ac25bc7780b}{%
+           family={Gabay},
+           familyi={G\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e03658a9b3b3c43116de7803016cb916}{%
+           family={Rondeau\bibnamedelimb du\bibnamedelima Noyer},
+           familyi={R\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim N\bibinitperiod},
+           given={Lucie},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=237f3e60430254bc9d3619d213685032}{%
+           family={Gille\bibnamedelima Levenson},
+           familyi={G\bibinitperiod\bibinitdelim L\bibinitperiod},
+           given={Matthias},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=bfdee404a13dedf03861dbdea73ddfe5}{%
+           family={Petkovic},
+           familyi={P\bibinitperiod},
+           given={Ljudmila},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b6ad87ce5d6b45f75a393b5f1480fc6f}{%
+           family={Bartz},
+           familyi={B\bibinitperiod},
+           given={Alexandre},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Ottawa}%
+      }
+      \strng{namehash}{19260dbbe635aee5f8a6812d16a87608}
+      \strng{fullhash}{5e105d1e14b6533e50a8602c2040ff99}
+      \strng{bibnamehash}{19260dbbe635aee5f8a6812d16a87608}
+      \strng{authorbibnamehash}{19260dbbe635aee5f8a6812d16a87608}
+      \strng{authornamehash}{19260dbbe635aee5f8a6812d16a87608}
+      \strng{authorfullhash}{5e105d1e14b6533e50a8602c2040ff99}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{booktitle}{Digital Humanities {DH}2020}
+      \field{eventtitle}{Digital Humanities {DH}2020}
+      \field{month}{7}
+      \field{shorttitle}{Quantifying the Unknown}
+      \field{title}{Quantifying the Unknown: How many manuscripts of the marquise de Sévigné still exist?}
+      \field{urlday}{13}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://hal.archives-ouvertes.fr/hal-02898929/
+      \endverb
+      \verb{url}
+      \verb https://hal.archives-ouvertes.fr/hal-02898929/
+      \endverb
+      \keyw{,katabase}
+    \endentry
     \entry{janes_du_2021}{thesis}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=5f546eb83fed6a27d64bf1171830f4cf}{%
@@ -221,6 +343,150 @@
       \endverb
       \keyw{,katabase}
     \endentry
+    \entry{khemakhem_automatically_2018}{inproceedings}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=fcc658722514ac3820b3882c1fd255bd}{%
+           family={Khemakhem},
+           familyi={K\bibinitperiod},
+           given={Mohamed},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b1d6926babb0baaf7da478b412d14d9b}{%
+           family={Romary},
+           familyi={R\bibinitperiod},
+           given={Laurent},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7fe1ec35c644906499707ac25bc7780b}{%
+           family={Gabay},
+           familyi={G\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8c80f7045cb0f8f6e42b3919a8d779ad}{%
+           family={Bohbot},
+           familyi={B\bibinitperiod},
+           given={Hervé},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=22dbfd087c8e5ef465277e0cdf487bcc}{%
+           family={Frontini},
+           familyi={F\bibinitperiod},
+           given={Francesca},
+           giveni={F\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=f43314352b36cb09b6fee94ae2da9f23}{%
+           family={Luxardo},
+           familyi={L\bibinitperiod},
+           given={Giancarlo},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Tokyo}%
+      }
+      \strng{namehash}{c526a871d80c87ad0efabaecf2c42772}
+      \strng{fullhash}{227479cde35134d3cbcd972e6fe1583f}
+      \strng{bibnamehash}{c526a871d80c87ad0efabaecf2c42772}
+      \strng{authorbibnamehash}{c526a871d80c87ad0efabaecf2c42772}
+      \strng{authornamehash}{c526a871d80c87ad0efabaecf2c42772}
+      \strng{authorfullhash}{227479cde35134d3cbcd972e6fe1583f}
+      \field{extraname}{1}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{The annual {TEI} Conference and Members Meeting}
+      \field{eventtitle}{The annual {TEI} Conference and Members Meeting}
+      \field{month}{9}
+      \field{title}{Automatically Encoding Encyclopedic-like Resources in {TEI}}
+      \field{urlday}{13}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{year}{2018}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://hal.archives-ouvertes.fr/hal-01819505
+      \endverb
+      \verb{url}
+      \verb https://hal.archives-ouvertes.fr/hal-01819505
+      \endverb
+      \keyw{,katabase}
+    \endentry
+    \entry{khemakhem_information_2020}{inproceedings}{}
+      \name{author}{6}{}{%
+        {{un=0,uniquepart=base,hash=fcc658722514ac3820b3882c1fd255bd}{%
+           family={Khemakhem},
+           familyi={K\bibinitperiod},
+           given={Mohamed},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7fe1ec35c644906499707ac25bc7780b}{%
+           family={Gabay},
+           familyi={G\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=112621ffc82f00730b2aa58962b35aea}{%
+           family={Joyeux-Prunel},
+           familyi={J\bibinithyphendelim P\bibinitperiod},
+           given={Béatrice},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b1d6926babb0baaf7da478b412d14d9b}{%
+           family={Romary},
+           familyi={R\bibinitperiod},
+           given={Laurent},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=023c2e1cc7764831b0bab7b8f4cfb326}{%
+           family={Saint-Raymond},
+           familyi={S\bibinithyphendelim R\bibinitperiod},
+           given={Léa},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e03658a9b3b3c43116de7803016cb916}{%
+           family={Rondeau\bibnamedelimb du\bibnamedelima Noyer},
+           familyi={R\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim N\bibinitperiod},
+           given={Lucie},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Zagreb}%
+      }
+      \strng{namehash}{c526a871d80c87ad0efabaecf2c42772}
+      \strng{fullhash}{524119b8c1e748ab1c0d55894bc484d2}
+      \strng{bibnamehash}{c526a871d80c87ad0efabaecf2c42772}
+      \strng{authorbibnamehash}{c526a871d80c87ad0efabaecf2c42772}
+      \strng{authornamehash}{c526a871d80c87ad0efabaecf2c42772}
+      \strng{authorfullhash}{524119b8c1e748ab1c0d55894bc484d2}
+      \field{extraname}{2}
+      \field{sortinit}{K}
+      \field{sortinithash}{d3edc18d54b9438a72c24c925bfb38f4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{{DARIAH} Annual event 2020}
+      \field{eventtitle}{{DARIAH} Annual event 2020}
+      \field{month}{5}
+      \field{title}{Information Extraction Workflow for Digitised Entry-based Documents.}
+      \field{urlday}{13}
+      \field{urlmonth}{6}
+      \field{urlyear}{1997}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://hal.archives-ouvertes.fr/hal-02508549
+      \endverb
+      \verb{url}
+      \verb https://hal.archives-ouvertes.fr/hal-02508549
+      \endverb
+      \keyw{,katabase}
+    \endentry
     \entry{masure_design_2017}{book}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=9003957350e8ec208d9b5b05ea4f0cc9}{%
@@ -255,6 +521,60 @@
       \field{dateera}{ce}
       \true{nocite}
       \keyw{,visualisation}
+    \endentry
+    \entry{piketty_les_2001}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=125a3a980ec7ff459f2e77e8e82118b6}{%
+           family={Piketty},
+           familyi={P\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Paris}%
+      }
+      \list{publisher}{1}{%
+        {Bernard Grasset}%
+      }
+      \strng{namehash}{125a3a980ec7ff459f2e77e8e82118b6}
+      \strng{fullhash}{125a3a980ec7ff459f2e77e8e82118b6}
+      \strng{bibnamehash}{125a3a980ec7ff459f2e77e8e82118b6}
+      \strng{authorbibnamehash}{125a3a980ec7ff459f2e77e8e82118b6}
+      \strng{authornamehash}{125a3a980ec7ff459f2e77e8e82118b6}
+      \strng{authorfullhash}{125a3a980ec7ff459f2e77e8e82118b6}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{{ISBN} 2-246-61651-4}
+      \field{pagetotal}{807}
+      \field{title}{Les hauts revenus en France au {XXe} siècle : inégalités et redistributions, 1901-1998}
+      \field{year}{2001}
+      \field{dateera}{ce}
+      \true{nocite}
+      \keyw{,econometrie}
+    \endentry
+    \entry{noauthor_precision_2022}{online}{}
+      \field{sortinit}{P}
+      \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
+      \field{labeltitlesource}{title}
+      \field{title}{Précision et rappel}
+      \field{titleaddon}{Wikipedia. L'encyclopédie libre}
+      \field{urlday}{13}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://fr.wikipedia.org/wiki/Pr%C3%A9cision_et_rappel
+      \endverb
+      \verb{url}
+      \verb https://fr.wikipedia.org/wiki/Pr%C3%A9cision_et_rappel
+      \endverb
+      \keyw{,econometrie}
     \endentry
     \entry{rondeau_du_noyer_encoder_2019}{thesis}{}
       \name{author}{1}{}{%
@@ -297,6 +617,65 @@
       \endverb
       \verb{url}
       \verb https://github.com/lairaines/M2TNAH
+      \endverb
+      \keyw{,katabase}
+    \endentry
+    \entry{rondeau_du_noyer_scaling_2019}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=e03658a9b3b3c43116de7803016cb916}{%
+           family={Rondeau\bibnamedelimb du\bibnamedelima Noyer},
+           familyi={R\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim N\bibinitperiod},
+           given={Lucie},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7fe1ec35c644906499707ac25bc7780b}{%
+           family={Gabay},
+           familyi={G\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=fcc658722514ac3820b3882c1fd255bd}{%
+           family={Khemakhem},
+           familyi={K\bibinitperiod},
+           given={Mohamed},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b1d6926babb0baaf7da478b412d14d9b}{%
+           family={Romary},
+           familyi={R\bibinitperiod},
+           given={Laurent},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Graz}%
+      }
+      \strng{namehash}{611df4c0716439d027df018fc16fe8c2}
+      \strng{fullhash}{eced179c640b00d48d9ff1b13fcfbb0b}
+      \strng{bibnamehash}{611df4c0716439d027df018fc16fe8c2}
+      \strng{authorbibnamehash}{611df4c0716439d027df018fc16fe8c2}
+      \strng{authornamehash}{611df4c0716439d027df018fc16fe8c2}
+      \strng{authorfullhash}{eced179c640b00d48d9ff1b13fcfbb0b}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{{TEI} 2019: What is text, really? {TEI} and beyond}
+      \field{eventtitle}{{TEI} 2019: What is text, really? {TEI} and beyond}
+      \field{month}{9}
+      \field{title}{Scaling up Automatic Structuring of Manuscript Sales Catalogues}
+      \field{urlday}{13}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://hal.archives-ouvertes.fr/hal-02272962
+      \endverb
+      \verb{url}
+      \verb https://hal.archives-ouvertes.fr/hal-02272962
       \endverb
       \keyw{,katabase}
     \endentry

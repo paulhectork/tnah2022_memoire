@@ -9,9 +9,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {1}Présentation du corpus}{5}{chapter.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}Production des données: OCRisation et structure des documents traités}{7}{chapter.2}%
+\contentsline {chapter}{\numberline {2}Production des données: océrisation et structure des documents traités}{7}{chapter.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Du texte à la \texttt {TEI}{}: méthode de transformation des documents OCRisés en fichiers \texttt {XML-TEI}{} valides}{9}{chapter.3}%
+\contentsline {chapter}{\numberline {3}Du texte à la \texttt {TEI}{}: méthode de transformation des documents océrisés en fichiers \texttt {XML-TEI}{} valides}{9}{chapter.3}%
 \defcounter {refsection}{0}\relax 
 \contentsline {part}{II\hspace {1em}Normalisation, enrichissements et extraction d'informations: une chaîne de traitement pour des données semi-structurées}{11}{part.2}%
 \defcounter {refsection}{0}\relax 
@@ -31,6 +31,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{À propos du projet Katabase / MSS}{25}{section*.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Visualisation et design d'interfaces}{25}{section*.5}%
+\contentsline {section}{Visualisation et design d'interfaces}{26}{section*.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Table des matières}{27}{chapter*.6}%
+\contentsline {section}{Économétrie et statistiques}{26}{section*.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Table des matières}{27}{chapter*.7}%

@@ -2,8 +2,8 @@
 \BOOKMARK [0][-]{chapter*.2}{Introduction}{}% 2
 \BOOKMARK [-1][-]{part.1}{I Du document numérisé au XML-TEI: nature du corpus, structure des documents et méthode de production des données}{}% 3
 \BOOKMARK [0][-]{chapter.1}{Présentation du corpus}{part.1}% 4
-\BOOKMARK [0][-]{chapter.2}{Production des données: OCRisation et structure des documents traités}{part.1}% 5
-\BOOKMARK [0][-]{chapter.3}{Du texte à la TEI: méthode de transformation des documents OCRisés en fichiers XML-TEI valides}{part.1}% 6
+\BOOKMARK [0][-]{chapter.2}{Production des données: océrisation et structure des documents traités}{part.1}% 5
+\BOOKMARK [0][-]{chapter.3}{Du texte à la TEI: méthode de transformation des documents océrisés en fichiers XML-TEI valides}{part.1}% 6
 \BOOKMARK [-1][-]{part.2}{II Normalisation, enrichissements et extraction d'informations: une chaîne de traitement pour des données semi-structurées}{}% 7
 \BOOKMARK [0][-]{chapter.4}{Homogénéiser et normaliser un corpus complexe}{part.2}% 8
 \BOOKMARK [0][-]{chapter.5}{Extraction\040d'informations}{part.2}% 9
@@ -14,4 +14,5 @@
 \BOOKMARK [0][-]{chapter*.3}{Bibliographie}{part.3}% 14
 \BOOKMARK [1][-]{section*.4}{À propos du projet Katabase / MSS}{chapter*.3}% 15
 \BOOKMARK [1][-]{section*.5}{Visualisation\040et\040design\040d'interfaces}{chapter*.3}% 16
-\BOOKMARK [0][-]{chapter*.6}{Table des matières}{part.3}% 17
+\BOOKMARK [1][-]{section*.6}{Économétrie et statistiques}{chapter*.3}% 17
+\BOOKMARK [0][-]{chapter*.7}{Table des matières}{part.3}% 18

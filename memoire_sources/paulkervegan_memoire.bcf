@@ -634,6 +634,10 @@
         <bcf:per_datasource>bibliographie/katabase.bib</bcf:per_datasource>
         <bcf:map_step map_field_set="keywords" map_field_value=",katabase" map_append="1"/>
       </bcf:map>
+      <bcf:map map_overwrite="1">
+        <bcf:per_datasource>bibliographie/ecostat.bib</bcf:per_datasource>
+        <bcf:map_step map_field_set="keywords" map_field_value=",econometrie" map_append="1"/>
+      </bcf:map>
     </bcf:maps>
     <bcf:maps datatype="bibtex" level="driver">
       <bcf:map>
@@ -2179,9 +2183,18 @@
   <bcf:bibdata section="0">
     <bcf:datasource type="file" datatype="bibtex">bibliographie/visualisation.bib</bcf:datasource>
     <bcf:datasource type="file" datatype="bibtex">bibliographie/katabase.bib</bcf:datasource>
+    <bcf:datasource type="file" datatype="bibtex">bibliographie/ecostat.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="0" nocite="1">*</bcf:citekey>
+    <bcf:citekey order="1">rondeau_du_noyer_encoder_2019</bcf:citekey>
+    <bcf:citekey order="1">corbieres_du_2020</bcf:citekey>
+    <bcf:citekey order="1">janes_du_2021</bcf:citekey>
+    <bcf:citekey order="2">noauthor_precision_2022</bcf:citekey>
+    <bcf:citekey order="3">albouy_mediation_2019</bcf:citekey>
+    <bcf:citekey order="4">drucker_visualisation_2020</bcf:citekey>
+    <bcf:citekey order="5">masure_design_2017</bcf:citekey>
+    <bcf:citekey order="6">agamben_what_2009</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">
