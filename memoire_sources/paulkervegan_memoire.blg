@@ -1,0 +1,22 @@
+[0] Config.pm:304> INFO - This is Biber 2.14 (beta)
+[1] Config.pm:307> INFO - Logfile is 'paulkervegan_memoire.blg'
+[70] biber:322> INFO - === lun. juin 13, 2022, 14:59:24
+[81] Biber.pm:415> INFO - Reading 'paulkervegan_memoire.bcf'
+[145] Biber.pm:940> INFO - Using all citekeys in bib section 0
+[158] Biber.pm:4256> INFO - Processing section 0
+[158] Utils.pm:75> INFO - Globbing data source 'bibliographie/visualisation.bib'
+[158] Utils.pm:91> INFO - Globbed data source 'bibliographie/visualisation.bib' to bibliographie/visualisation.bib
+[158] Utils.pm:75> INFO - Globbing data source 'bibliographie/katabase.bib'
+[159] Utils.pm:91> INFO - Globbed data source 'bibliographie/katabase.bib' to bibliographie/katabase.bib
+[167] Biber.pm:4455> INFO - Looking for bibtex format file 'bibliographie/visualisation.bib' for section 0
+[168] bibtex.pm:1653> INFO - LaTeX decoding ...
+[175] bibtex.pm:1471> INFO - Found BibTeX data source 'bibliographie/visualisation.bib'
+[217] Biber.pm:4455> INFO - Looking for bibtex format file 'bibliographie/katabase.bib' for section 0
+[217] bibtex.pm:1653> INFO - LaTeX decoding ...
+[222] bibtex.pm:1471> INFO - Found BibTeX data source 'bibliographie/katabase.bib'
+[249] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[250] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'variable = shifted' with 'variable = non-ignorable'
+[250] Biber.pm:4084> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'fr-FR'
+[250] Biber.pm:4090> INFO - No sort tailoring available for locale 'fr-FR'
+[262] bbl.pm:652> INFO - Writing 'paulkervegan_memoire.bbl' with encoding 'UTF-8'
+[265] bbl.pm:755> INFO - Output to paulkervegan_memoire.bbl

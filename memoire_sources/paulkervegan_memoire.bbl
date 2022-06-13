@@ -1,0 +1,306 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nyt/global//global/global}
+    \entry{agamben_what_2009}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=8c74b403c34f5bada1d8b1bd87b56556}{%
+           family={Agamben},
+           familyi={A\bibinitperiod},
+           given={Giorgio},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Stanford}%
+      }
+      \list{publisher}{1}{%
+        {Stanford University Press}%
+      }
+      \strng{namehash}{8c74b403c34f5bada1d8b1bd87b56556}
+      \strng{fullhash}{8c74b403c34f5bada1d8b1bd87b56556}
+      \strng{bibnamehash}{8c74b403c34f5bada1d8b1bd87b56556}
+      \strng{authorbibnamehash}{8c74b403c34f5bada1d8b1bd87b56556}
+      \strng{authornamehash}{8c74b403c34f5bada1d8b1bd87b56556}
+      \strng{authorfullhash}{8c74b403c34f5bada1d8b1bd87b56556}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{edition}{Première édition}
+      \field{isbn}{{ISBN} 978-0804762304}
+      \field{pagetotal}{80}
+      \field{series}{Meridian: Crossing aesthetics}
+      \field{title}{What is an apparatus? and Other Essays}
+      \field{year}{2009}
+      \field{dateera}{ce}
+      \true{nocite}
+      \keyw{,visualisation}
+    \endentry
+    \entry{albouy_mediation_2019}{thesis}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=3f5897d60f76c11de1036accafdce252}{%
+           family={Albouy},
+           familyi={A\bibinitperiod},
+           given={Ségolène},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {École nationale des Chartes}%
+      }
+      \list{location}{1}{%
+        {Paris}%
+      }
+      \strng{namehash}{3f5897d60f76c11de1036accafdce252}
+      \strng{fullhash}{3f5897d60f76c11de1036accafdce252}
+      \strng{bibnamehash}{3f5897d60f76c11de1036accafdce252}
+      \strng{authorbibnamehash}{3f5897d60f76c11de1036accafdce252}
+      \strng{authornamehash}{3f5897d60f76c11de1036accafdce252}
+      \strng{authorfullhash}{3f5897d60f76c11de1036accafdce252}
+      \field{sortinit}{A}
+      \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{pagetotal}{116}
+      \field{shorttitle}{Médiation des données de la recherche}
+      \field{title}{Médiation des données de la recherche. Élaboration d'une plateforme en ligne pour une base de tables astronomiques anciennes.}
+      \field{type}{Mémoire pour le diplôme de master "Technologies numériques appliquées à l'histoire"}
+      \field{urlday}{13}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://github.com/Segolene-Albouy/Memoire-TNAH2019
+      \endverb
+      \verb{url}
+      \verb https://github.com/Segolene-Albouy/Memoire-TNAH2019
+      \endverb
+      \keyw{,visualisation}
+    \endentry
+    \entry{corbieres_du_2020}{thesis}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=6d642274097649c3b1706d4ee8b1280d}{%
+           family={Corbières},
+           familyi={C\bibinitperiod},
+           given={Caroline},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {École nationale des Chartes}%
+      }
+      \list{location}{1}{%
+        {Paris}%
+      }
+      \strng{namehash}{6d642274097649c3b1706d4ee8b1280d}
+      \strng{fullhash}{6d642274097649c3b1706d4ee8b1280d}
+      \strng{bibnamehash}{6d642274097649c3b1706d4ee8b1280d}
+      \strng{authorbibnamehash}{6d642274097649c3b1706d4ee8b1280d}
+      \strng{authornamehash}{6d642274097649c3b1706d4ee8b1280d}
+      \strng{authorfullhash}{6d642274097649c3b1706d4ee8b1280d}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{pagetotal}{87}
+      \field{shorttitle}{Du catalogue au fichier {TEI}}
+      \field{title}{Du catalogue au fichier {TEI}. Création d'un workflow pour encoder automatiquement en {XML}-{TEI} des catalogues d'exposition.}
+      \field{type}{Mémoire pour le diplôme de master "Technologies numériques appliquées à l'histoire"}
+      \field{urlday}{13}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://github.com/carolinecorbieres/Memoire_TNAH
+      \endverb
+      \verb{url}
+      \verb https://github.com/carolinecorbieres/Memoire_TNAH
+      \endverb
+      \keyw{,katabase}
+    \endentry
+    \entry{drucker_visualisation_2020}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=1cfaef74f23558d563be1ef6740cc386}{%
+           family={Drucker},
+           familyi={D\bibinitperiod},
+           given={Johanna},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Paris}%
+      }
+      \list{publisher}{1}{%
+        {Éditions B42}%
+      }
+      \strng{namehash}{1cfaef74f23558d563be1ef6740cc386}
+      \strng{fullhash}{1cfaef74f23558d563be1ef6740cc386}
+      \strng{bibnamehash}{1cfaef74f23558d563be1ef6740cc386}
+      \strng{authorbibnamehash}{1cfaef74f23558d563be1ef6740cc386}
+      \strng{authornamehash}{1cfaef74f23558d563be1ef6740cc386}
+      \strng{authorfullhash}{1cfaef74f23558d563be1ef6740cc386}
+      \field{sortinit}{D}
+      \field{sortinithash}{c438b3d5d027251ba63f5ed538d98af5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{{ISBN} 978-2-490077-24-3}
+      \field{number}{03}
+      \field{pagetotal}{194}
+      \field{series}{Esthétique des données}
+      \field{title}{Visualisation : l'interprétation modélisante}
+      \field{year}{2020}
+      \field{dateera}{ce}
+      \true{nocite}
+      \keyw{,visualisation}
+    \endentry
+    \entry{janes_du_2021}{thesis}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=5f546eb83fed6a27d64bf1171830f4cf}{%
+           family={Janès},
+           familyi={J\bibinitperiod},
+           given={Juliette},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {École nationale des Chartes}%
+      }
+      \list{location}{1}{%
+        {Paris}%
+      }
+      \strng{namehash}{5f546eb83fed6a27d64bf1171830f4cf}
+      \strng{fullhash}{5f546eb83fed6a27d64bf1171830f4cf}
+      \strng{bibnamehash}{5f546eb83fed6a27d64bf1171830f4cf}
+      \strng{authorbibnamehash}{5f546eb83fed6a27d64bf1171830f4cf}
+      \strng{authornamehash}{5f546eb83fed6a27d64bf1171830f4cf}
+      \strng{authorfullhash}{5f546eb83fed6a27d64bf1171830f4cf}
+      \field{sortinit}{J}
+      \field{sortinithash}{c45040a764d616897e7f5b30174d7b92}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{pagetotal}{94}
+      \field{shorttitle}{Du catalogue papier au numérique}
+      \field{title}{Du catalogue papier au numérique. Une chaîne de traitement ouverte pour l'extraction d'information issue de documents structurés}
+      \field{type}{Mémoire pour le diplôme de master "Technologies numériques appliquées à l'histoire"}
+      \field{urlday}{13}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://github.com/Juliettejns/Memoire_TNAH
+      \endverb
+      \verb{url}
+      \verb https://github.com/Juliettejns/Memoire_TNAH
+      \endverb
+      \keyw{,katabase}
+    \endentry
+    \entry{masure_design_2017}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=9003957350e8ec208d9b5b05ea4f0cc9}{%
+           family={Masure},
+           familyi={M\bibinitperiod},
+           given={Anthony},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Paris}%
+      }
+      \list{publisher}{1}{%
+        {Éditions B42}%
+      }
+      \strng{namehash}{9003957350e8ec208d9b5b05ea4f0cc9}
+      \strng{fullhash}{9003957350e8ec208d9b5b05ea4f0cc9}
+      \strng{bibnamehash}{9003957350e8ec208d9b5b05ea4f0cc9}
+      \strng{authorbibnamehash}{9003957350e8ec208d9b5b05ea4f0cc9}
+      \strng{authornamehash}{9003957350e8ec208d9b5b05ea4f0cc9}
+      \strng{authorfullhash}{9003957350e8ec208d9b5b05ea4f0cc9}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{{ISBN} 978-2-917855-72-0}
+      \field{number}{01}
+      \field{pagetotal}{146}
+      \field{series}{Esthétique des données}
+      \field{title}{Design et humanités numériques}
+      \field{year}{2017}
+      \field{dateera}{ce}
+      \true{nocite}
+      \keyw{,visualisation}
+    \endentry
+    \entry{rondeau_du_noyer_encoder_2019}{thesis}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=e03658a9b3b3c43116de7803016cb916}{%
+           family={Rondeau\bibnamedelimb du\bibnamedelima Noyer},
+           familyi={R\bibinitperiod\bibinitdelim d\bibinitperiod\bibinitdelim N\bibinitperiod},
+           given={Lucie},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {École nationale des Chartes}%
+      }
+      \list{location}{1}{%
+        {Paris}%
+      }
+      \strng{namehash}{e03658a9b3b3c43116de7803016cb916}
+      \strng{fullhash}{e03658a9b3b3c43116de7803016cb916}
+      \strng{bibnamehash}{e03658a9b3b3c43116de7803016cb916}
+      \strng{authorbibnamehash}{e03658a9b3b3c43116de7803016cb916}
+      \strng{authornamehash}{e03658a9b3b3c43116de7803016cb916}
+      \strng{authorfullhash}{e03658a9b3b3c43116de7803016cb916}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{shorttitle}
+      \field{pagetotal}{64}
+      \field{shorttitle}{Encoder automatiquement des catalogues en {XML}-{TEI}}
+      \field{title}{Encoder automatiquement des catalogues en {XML}-{TEI}. Principes, évaluation et application à la revue des autographes de la librairie Charavay}
+      \field{type}{Mémoire pour le diplôme de master "Technologies numériques appliquées à l'histoire"}
+      \field{urlday}{13}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://github.com/lairaines/M2TNAH
+      \endverb
+      \verb{url}
+      \verb https://github.com/lairaines/M2TNAH
+      \endverb
+      \keyw{,katabase}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

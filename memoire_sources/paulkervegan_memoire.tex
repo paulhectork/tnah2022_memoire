@@ -22,22 +22,38 @@
 \onehalfspacing
 \setlength\parindent{1cm}
 
-% bibliographie, notes de bas de page, table des matières citations et index
+% bibliographie
 \usepackage[toc]{appendix}
 \usepackage{csquotes}
 \usepackage[backend=biber,sorting=nyt,style=enc]{biblatex}
 \nocite{*}
+\addbibresource{bibliographie/visualisation.bib}
+\addbibresource{bibliographie/katabase.bib}
+\defbibnote{intro}{Cette bibliographie contient tous les ressources utilisées pour l'écriture de ce mémoire.}
+
+\DeclareSourcemap{%
+	\maps[datatype=bibtex]{%
+		\map[overwrite]{%
+			\perdatasource{bibliographie/visualisation.bib}
+			\step[fieldset=keywords,
+				fieldvalue={,visualisation},
+				append]
+		}
+		\map[overwrite]{%
+			\perdatasource{bibliographie/katabase.bib}
+			\step[fieldset=keywords,
+				fieldvalue={,katabase},
+				append]
+		}
+	}
+}
+
+
+% notes de bas de page, table des matières citations et index
 \usepackage{imakeidx}
 % \makeindex
 % \makeindex[name=lieux,title=Index des noms de lieux]
 \usepackage{tocbibind}
-
-% définition des acronymes
-\usepackage[automake, acronym, toc]{glossaries}
-\makeglossaries
- \setacronymstyle{short-long}
- % modèle: \newacronym{dom}{\textsc{dom}}{\emph{Document Object Model}}
- % modèle bis: \newglossaryentry{meta}{name=métadonnée,description={donnée servant à définir ou décrire une autre donné quel que soit son support}}
  
 
 % hyperref
@@ -47,6 +63,14 @@
  pdftitle={Traitement et exploitation d'un corpus textuel semi-structuré: le cas des catalogues de vente de manuscrits.}, 
  pdfsubject={Traitement de données textuelles},
  pdfkeywords={catalogues de vente}{mss}{katabase}{reconnaissance optique de caractères}{ocr}{web design}{visualisation de données}{traitement automatisé du language}{web de données}{Python}}
+
+
+% définition des acronymes
+\usepackage[automake, acronym, toc]{glossaries}
+\makeglossaries
+\setacronymstyle{short-long}
+% modèle: \newacronym{dom}{\textsc{dom}}{\emph{Document Object Model}}
+% modèle bis: \newglossaryentry{meta}{name=métadonnée,description={donnée servant à définir ou décrire une autre donné quel que soit son support}}
 
 % commandes perso
 \newcommand{\alto}{\texttt{Alto}}
@@ -157,8 +181,22 @@ Dans cette partie, je m'intéresserai plus spécifiquement aux problématiques t
 \chaptermark{Visualisation et interfaces}
 Ce chapitre de conclusion, plus théorique, revient sur les débats actuels concernant le lien entre interfaces graphiques, visualisation de données et humanités numériques. En s'appuyant (entre autres) sur les théories de Johanna Drucker et Anthony Masure, il s'attache à réintégrer les questions \enquote{visuelles} propres aux humanités numériques à un contexte plus large. Le chapitre revient sur les origines des interfaces graphiques (et donc sur les objectifs implicites qui structurent nos interactions avec les machines) ; il cherche à remettre la visualisation dans les humanités numériques en lien avec une tendance globale à la visualisation -- tendance qui vient du monde de l'entreprise, ce qui n'est pas anodin. Du fait de la quantité de significations implicites sous-jacentes à la construction d'interfaces, il est, je pense, nécessaire d'avoir une approche théorique et critique du rapport des humanités numériques aux problématiques de design et aux \enquote{dispositifs} (Agamben) que sont nos outils de travail.
 
-% ici la future bibliographie
-\listoffigures
-\listoftables
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHIE %%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+\chapter*{Bibliographie}
+\addcontentsline{toc}{chapter}{Bibliographie}
+\printbibliography[heading=subbibintoc,keyword={katabase},title={À propos du projet Katabase / MSS}]
+\printbibliography[heading=subbibintoc,keyword={visualisation},title={Visualisation et design d'interfaces}]
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%% TOCS %%%%%%%%%%%%%%%%%%%%%%
+% \listoffigures
+% \listoftables
 \tableofcontents
 \end{document}

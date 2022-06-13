@@ -27,8 +27,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {8}Visualisation et interfaces: un problème pour les humanités numériques ?}{23}{chapter.8}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Table des figures}{25}{chapter*.3}%
+\contentsline {chapter}{Bibliographie}{25}{chapter*.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Liste des tableaux}{27}{chapter*.4}%
+\contentsline {section}{À propos du projet Katabase / MSS}{25}{section*.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Table des matières}{29}{chapter*.5}%
+\contentsline {section}{Visualisation et design d'interfaces}{25}{section*.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Table des matières}{27}{chapter*.6}%
