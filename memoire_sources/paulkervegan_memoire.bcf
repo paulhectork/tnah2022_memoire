@@ -2191,10 +2191,11 @@
     <bcf:citekey order="1">corbieres_du_2020</bcf:citekey>
     <bcf:citekey order="1">janes_du_2021</bcf:citekey>
     <bcf:citekey order="2">noauthor_precision_2022</bcf:citekey>
-    <bcf:citekey order="3">albouy_mediation_2019</bcf:citekey>
-    <bcf:citekey order="4">drucker_visualisation_2020</bcf:citekey>
-    <bcf:citekey order="5">masure_design_2017</bcf:citekey>
-    <bcf:citekey order="6">agamben_what_2009</bcf:citekey>
+    <bcf:citekey order="3">drucker_visualisation_2020</bcf:citekey>
+    <bcf:citekey order="4">albouy_mediation_2019</bcf:citekey>
+    <bcf:citekey order="5">drucker_visualisation_2020</bcf:citekey>
+    <bcf:citekey order="6">masure_design_2017</bcf:citekey>
+    <bcf:citekey order="7">agamben_what_2009</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">

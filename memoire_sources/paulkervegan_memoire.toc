@@ -79,16 +79,32 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {part}{III\hspace {1em}Après la \texttt {TEI}{}: l'application web \textit {Katabase}, interface de diffusion des données}{23}{part.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Nouvelles présentations du corpus: l'interface web Katabase}{25}{chapter.7}%
+\contentsline {chapter}{\numberline {7}Design d'interface dans un projet d'humanités numériques: l'application web \textit {Katabase}}{25}{chapter.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {8}Visualisation et interfaces: un problème pour les humanités numériques ?}{27}{chapter.8}%
+\contentsline {section}{\numberline {7.1}Le design d'interfaces: une reconfiguration des méthodes de recherche et une transformation du corpus}{25}{section.7.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliographie}{29}{chapter*.5}%
+\contentsline {subsection}{\numberline {7.1.1}Le design comme inversion des méthodes}{25}{subsection.7.1.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{À propos du projet Katabase / MSS}{29}{section*.6}%
+\contentsline {subsection}{\numberline {7.1.2}Interface et document}{26}{subsection.7.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Visualisation et design d'interfaces}{30}{section*.7}%
+\contentsline {section}{\numberline {7.2}La conception d'interface, un problème pour les humanités numériques?}{26}{section.7.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Économétrie et statistiques}{30}{section*.8}%
+\contentsline {subsection}{\numberline {7.2.1}L'interface comme méthode de communication}{27}{subsection.7.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Table des matières}{31}{chapter*.9}%
+\contentsline {subsection}{\numberline {7.2.2}Pour une approche pragmatique du design d'interfaces dans un contexte d'humanités numériques}{27}{subsection.7.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.2.3}Rejeter les interfaces?}{27}{subsection.7.2.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {8}Visualisations}{29}{chapter.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {9}Visualisation et interfaces: un problème pour les humanités numériques ?}{31}{chapter.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliographie}{33}{chapter*.5}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{À propos du projet Katabase / MSS}{33}{section*.6}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Visualisation et design d'interfaces}{34}{section*.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Économétrie et statistiques}{34}{section*.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Table des matières}{35}{chapter*.9}%
