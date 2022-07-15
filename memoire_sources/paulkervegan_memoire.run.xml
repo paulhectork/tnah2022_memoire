@@ -41,7 +41,7 @@
   >
 ]>
 <requests version="1.0">
-  <internal package="biblatex" priority="9" active="1">
+  <internal package="biblatex" priority="9" active="0">
     <generic>latex</generic>
     <provides type="dynamic">
       <file>paulkervegan_memoire.bcf</file>
@@ -83,6 +83,7 @@
       <file>bibliographie/visualisation.bib</file>
       <file>bibliographie/katabase.bib</file>
       <file>bibliographie/ecostat.bib</file>
+      <file>bibliographie/textprocessing.bib</file>
     </requires>
   </external>
 </requests>

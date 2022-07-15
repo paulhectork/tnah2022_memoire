@@ -7,104 +7,120 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {part}{I\hspace {1em}Du document numérisé au \texttt {XML-TEI}: nature du corpus, structure des documents et méthode de production des données}{3}{part.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {1}Présentation du corpus}{5}{chapter.1}%
+\contentsline {chapter}{\numberline {1}Le marché des manuscrits autographes au prisme des catalogues de vente}{5}{chapter.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.1}Intérêt scientifique des catalogues de vente}{5}{section.1.1}%
+\contentsline {section}{\numberline {1.1}Pourquoi étudier le marché des manuscrits autographes?}{5}{section.1.1}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.2}La structure du corpus : périodisation, producteurs des documents et classification}{5}{section.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.3}La structure des catalogues}{6}{section.1.3}%
+\contentsline {subsection}{\numberline {1.2.1}Le corpus de catalogues de vente de manuscrits}{6}{subsection.1.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}Production des données: océrisation et structure des documents traités}{7}{chapter.2}%
+\contentsline {subsection}{\numberline {1.2.2}Structure des catalogues}{6}{subsection.1.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Du texte à la \texttt {TEI}{}: méthode de transformation des documents océrisés en fichiers \texttt {XML-TEI}{} valides}{9}{chapter.3}%
+\contentsline {chapter}{\numberline {2}Production des données: de l'OCR à la \texttt {TEI}{}}{7}{chapter.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Points de départ pour une transformation en \texttt {TEI}{}}{9}{section.3.1}%
+\contentsline {section}{\numberline {2.1}Extraire le texte des imprimés}{7}{section.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.1}L'\texttt {Alto}{}, base du processus de \enquote {traduction}}{9}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {2.1.1}Comprendre la structure du document pour préparer l'édition numérique}{7}{subsection.2.1.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.2}Au delà des manuscrits: dériver une structure pour les entrées afin de permettre la transformation des fichiers}{10}{subsection.3.1.2}%
+\contentsline {subsubsection}{Appréhender la structure de la page à l'aide de SegmOnto}{7}{section*.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Le résultat à produire: présentation de l'édition \texttt {TEI}{} des catalogues de vente de manuscrits}{10}{section.3.2}%
+\contentsline {subsubsection}{Description des entrées de catalogue: préparer l'édition \texttt {TEI}{}}{7}{section*.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Processus de \enquote {traduction} des documents de l'\texttt {Alto}{} à la \texttt {TEI}{}}{10}{section.3.3}%
+\contentsline {section}{\numberline {2.2}L'encodage des manuscrits en \texttt {XML-TEI}{}}{8}{section.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {part}{II\hspace {1em}Normalisation, enrichissements et extraction d'informations: une chaîne de traitement pour des données semi-structurées}{11}{part.2}%
+\contentsline {subsection}{\numberline {2.2.1}Encoder les catalogues en \texttt {TEI}{}}{8}{subsection.2.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}Homogénéiser et normaliser un corpus complexe}{13}{chapter.4}%
+\contentsline {subsection}{\numberline {2.2.2}L'encodage en \texttt {TEI}{}: un processus sélectif réduisant les significations du texte}{8}{subsection.2.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Extraction d'informations}{15}{chapter.5}%
+\contentsline {part}{II\hspace {1em}Normalisation, enrichissements et extraction d'informations: une chaîne de traitement pour des données semi-structurées}{9}{part.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Vers une étude des facteurs déterminant le prix des documents: alignement des entrées du catalogue avec Wikidata et exploitation de données normalisées}{17}{chapter.6}%
+\contentsline {chapter}{\numberline {3}Homogénéiser et normaliser un corpus complexe}{11}{chapter.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Questions introductives: pourquoi et comment s'aligner avec Wikidata ?}{18}{section.6.1}%
+\contentsline {chapter}{\numberline {4}Extraction d'informations}{13}{chapter.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.1}Pourquoi s'aligner avec des identifiants Wikidata?}{18}{subsection.6.1.1}%
+\contentsline {chapter}{\numberline {5}Vers une étude des facteurs déterminant le prix des documents: alignement des entrées du catalogue avec Wikidata et exploitation de données normalisées}{15}{chapter.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.2}Comment traduire des descriptions textuelles datant du XIXème siècle en chaînes de caractères qui puissent retourner un résultat sur Wikidata?}{19}{subsection.6.1.2}%
+\contentsline {section}{\numberline {5.1}Questions introductives: pourquoi et comment s'aligner avec Wikidata ?}{16}{section.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.3}Comment négocier avec le moteur de recherche de Wikidata?}{19}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {5.1.1}Pourquoi s'aligner avec des identifiants Wikidata?}{16}{subsection.5.1.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.4}Quelles données extraire via \texttt {SPARQL}?}{19}{subsection.6.1.4}%
+\contentsline {subsection}{\numberline {5.1.2}Comment traduire des descriptions textuelles datant du XIX\up {ème} s. en chaînes de caractères qui puissent retourner un résultat sur Wikidata?}{17}{subsection.5.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Préparer et structurer les données}{19}{section.6.2}%
+\contentsline {subsection}{\numberline {5.1.3}Comment négocier avec le moteur de recherche de Wikidata?}{17}{subsection.5.1.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.1}Présentation générale}{20}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {5.1.4}Quelles données extraire via \texttt {SPARQL}?}{17}{subsection.5.1.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.2}Identifier le type de nom}{20}{subsection.6.2.2}%
+\contentsline {section}{\numberline {5.2}Préparer et structurer les données}{17}{section.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.3}Reconstruire un prénom complet à partir de son abréviation}{20}{subsection.6.2.3}%
+\contentsline {subsection}{\numberline {5.2.1}Présentation générale}{18}{subsection.5.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.4}Extraire des informations normalisées à partir d'un nom et de sa description}{20}{subsection.6.2.4}%
+\contentsline {subsection}{\numberline {5.2.2}Identifier le type de nom}{18}{subsection.5.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Extraire des identifiants Wikidata}{20}{section.6.3}%
+\contentsline {subsection}{\numberline {5.2.3}Reconstruire un prénom complet à partir de son abréviation}{18}{subsection.5.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.1}Présentation générale}{21}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {5.2.4}Extraire des informations normalisées à partir d'un nom et de sa description}{18}{subsection.5.2.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.2}Gérer la montée en charge: optimisation et réduction du temps d'exécution}{21}{subsection.6.3.2}%
+\contentsline {section}{\numberline {5.3}Extraire des identifiants Wikidata}{18}{section.5.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.3.3}Évaluation du script : tests, performance et qualité des données extraites de Wikidata}{21}{subsection.6.3.3}%
+\contentsline {subsection}{\numberline {5.3.1}Présentation générale}{19}{subsection.5.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Après l'alignement, l'enrichissement: utiliser \texttt {SPARQL}{} pour produire des données structurées}{21}{section.6.4}%
+\contentsline {subsection}{\numberline {5.3.2}Gérer la montée en charge: optimisation et réduction du temps d'exécution}{19}{subsection.5.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4.1}Produire des données exploitables via \texttt {SPARQL}{}}{21}{subsection.6.4.1}%
+\contentsline {subsection}{\numberline {5.3.3}Évaluation du script : tests, performance et qualité des données extraites de Wikidata}{19}{subsection.5.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.4.2}Rendre les données exploitables}{22}{subsection.6.4.2}%
+\contentsline {section}{\numberline {5.4}Après l'alignement, l'enrichissement: utiliser \texttt {SPARQL}{} pour produire des données structurées}{19}{section.5.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Lier la \texttt {TEI}{} aux données nouvellement produites}{22}{section*.3}%
+\contentsline {subsection}{\numberline {5.4.1}Produire des données exploitables via \texttt {SPARQL}{}}{19}{subsection.5.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Produire des données permettant d'étudier les facteurs déterminant la valeur d'un manuscrit}{22}{section*.4}%
+\contentsline {subsection}{\numberline {5.4.2}Rendre les données exploitables}{20}{subsection.5.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.5}Des données à la monnaie: premiers résultats de l'étude}{22}{section.6.5}%
+\contentsline {subsubsection}{Lier la \texttt {TEI}{} aux données nouvellement produites}{20}{section*.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {part}{III\hspace {1em}Après la \texttt {TEI}{}: l'application web \textit {Katabase}, interface de diffusion des données}{23}{part.3}%
+\contentsline {subsubsection}{Produire des données permettant d'étudier les facteurs déterminant la valeur d'un manuscrit}{20}{section*.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {7}Design d'interface dans un projet d'humanités numériques: l'application web \textit {Katabase}}{25}{chapter.7}%
+\contentsline {section}{\numberline {5.5}Des données à la monnaie: premiers résultats de l'étude}{20}{section.5.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.1}Le design d'interfaces: une reconfiguration des méthodes de recherche et une transformation du corpus}{25}{section.7.1}%
+\contentsline {part}{III\hspace {1em}Après la \texttt {TEI}{}: l'application web \textit {Katabase}{}, interface de diffusion des données}{21}{part.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.1.1}Le design comme inversion des méthodes}{25}{subsection.7.1.1}%
+\contentsline {chapter}{\numberline {6}Design d'interface dans un projet d'humanités numériques: l'application web \textit {Katabase}{}}{23}{chapter.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.1.2}Interface et document}{26}{subsection.7.1.2}%
+\contentsline {section}{\numberline {6.1}Le design d'interfaces: une reconfiguration des méthodes de recherche et une transformation du corpus}{23}{section.6.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.2}La conception d'interface, un problème pour les humanités numériques?}{26}{section.7.2}%
+\contentsline {subsection}{\numberline {6.1.1}Le design comme inversion des méthodes}{23}{subsection.6.1.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.2.1}L'interface comme méthode de communication}{27}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {6.1.2}Interface et document}{24}{subsection.6.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.2.2}Pour une approche pragmatique du design d'interfaces dans un contexte d'humanités numériques}{27}{subsection.7.2.2}%
+\contentsline {section}{\numberline {6.2}La conception d'interface, un problème pour les humanités numériques?}{24}{section.6.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {7.2.3}Rejeter les interfaces?}{27}{subsection.7.2.3}%
+\contentsline {subsection}{\numberline {6.2.1}Pour une approche pragmatique du design d'interfaces dans un contexte d'humanités numériques}{25}{subsection.6.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {8}Visualisations}{29}{chapter.8}%
+\contentsline {subsection}{\numberline {6.2.2}Rejeter les interfaces?}{25}{subsection.6.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {9}Visualisation et interfaces: un problème pour les humanités numériques ?}{31}{chapter.9}%
+\contentsline {chapter}{\numberline {7}Donner à voir un corpus textuel}{27}{chapter.7}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliographie}{33}{chapter*.5}%
+\contentsline {section}{\numberline {7.1}Visualisation, design et sciences: des relations complexes}{27}{section.7.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{À propos du projet Katabase / MSS}{33}{section*.6}%
+\contentsline {subsection}{\numberline {7.1.1}L'utilisation de supports visuels dans les sciences: une longue histoire}{28}{subsection.7.1.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Visualisation et design d'interfaces}{34}{section*.7}%
+\contentsline {subsection}{\numberline {7.1.2}Une vision objective? Visualisation et prétention à l'objectivité}{28}{subsection.7.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Économétrie et statistiques}{34}{section*.8}%
+\contentsline {subsection}{\numberline {7.1.3}La tendance visuelle des humanités numériques}{28}{subsection.7.1.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Table des matières}{35}{chapter*.9}%
+\contentsline {section}{\numberline {7.2}Interpréter le corpus de manuscrits}{29}{section.7.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.2.1}La visualisation comme objet de connaissance}{29}{subsection.7.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.2.2}La visualisation comme interprétation}{29}{subsection.7.2.2}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Bibliographie}{31}{chapter*.7}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Projet \textit {MSS}{} / \textit {Katabase}{}{}}{31}{section*.8}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Édition numérique, traitement automatisé et analyse de texte}{32}{section*.9}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Visualisation et design d'interfaces}{32}{section*.10}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Économétrie et statistiques}{33}{section*.11}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{Table des matières}{35}{chapter*.12}%

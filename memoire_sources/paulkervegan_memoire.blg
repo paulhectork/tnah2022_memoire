@@ -1,27 +1,32 @@
 [0] Config.pm:304> INFO - This is Biber 2.14 (beta)
 [1] Config.pm:307> INFO - Logfile is 'paulkervegan_memoire.blg'
-[103] biber:322> INFO - === lun. juin 13, 2022, 18:49:28
-[122] Biber.pm:415> INFO - Reading 'paulkervegan_memoire.bcf'
-[221] Biber.pm:940> INFO - Using all citekeys in bib section 0
-[242] Biber.pm:4256> INFO - Processing section 0
-[243] Utils.pm:75> INFO - Globbing data source 'bibliographie/visualisation.bib'
-[243] Utils.pm:91> INFO - Globbed data source 'bibliographie/visualisation.bib' to bibliographie/visualisation.bib
-[243] Utils.pm:75> INFO - Globbing data source 'bibliographie/katabase.bib'
-[243] Utils.pm:91> INFO - Globbed data source 'bibliographie/katabase.bib' to bibliographie/katabase.bib
-[243] Utils.pm:75> INFO - Globbing data source 'bibliographie/ecostat.bib'
-[243] Utils.pm:91> INFO - Globbed data source 'bibliographie/ecostat.bib' to bibliographie/ecostat.bib
-[258] Biber.pm:4455> INFO - Looking for bibtex format file 'bibliographie/visualisation.bib' for section 0
-[259] bibtex.pm:1653> INFO - LaTeX decoding ...
-[270] bibtex.pm:1471> INFO - Found BibTeX data source 'bibliographie/visualisation.bib'
-[339] Biber.pm:4455> INFO - Looking for bibtex format file 'bibliographie/katabase.bib' for section 0
-[341] bibtex.pm:1653> INFO - LaTeX decoding ...
-[358] bibtex.pm:1471> INFO - Found BibTeX data source 'bibliographie/katabase.bib'
-[447] Biber.pm:4455> INFO - Looking for bibtex format file 'bibliographie/ecostat.bib' for section 0
-[448] bibtex.pm:1653> INFO - LaTeX decoding ...
-[452] bibtex.pm:1471> INFO - Found BibTeX data source 'bibliographie/ecostat.bib'
-[495] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'variable = shifted' with 'variable = non-ignorable'
-[495] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[495] Biber.pm:4084> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'fr-FR'
-[495] Biber.pm:4090> INFO - No sort tailoring available for locale 'fr-FR'
-[527] bbl.pm:652> INFO - Writing 'paulkervegan_memoire.bbl' with encoding 'UTF-8'
-[540] bbl.pm:755> INFO - Output to paulkervegan_memoire.bbl
+[68] biber:322> INFO - === ven. juil. 15, 2022, 23:31:44
+[80] Biber.pm:415> INFO - Reading 'paulkervegan_memoire.bcf'
+[143] Biber.pm:940> INFO - Using all citekeys in bib section 0
+[157] Biber.pm:4256> INFO - Processing section 0
+[157] Utils.pm:75> INFO - Globbing data source 'bibliographie/visualisation.bib'
+[157] Utils.pm:91> INFO - Globbed data source 'bibliographie/visualisation.bib' to bibliographie/visualisation.bib
+[157] Utils.pm:75> INFO - Globbing data source 'bibliographie/katabase.bib'
+[157] Utils.pm:91> INFO - Globbed data source 'bibliographie/katabase.bib' to bibliographie/katabase.bib
+[157] Utils.pm:75> INFO - Globbing data source 'bibliographie/ecostat.bib'
+[157] Utils.pm:91> INFO - Globbed data source 'bibliographie/ecostat.bib' to bibliographie/ecostat.bib
+[157] Utils.pm:75> INFO - Globbing data source 'bibliographie/textprocessing.bib'
+[157] Utils.pm:91> INFO - Globbed data source 'bibliographie/textprocessing.bib' to bibliographie/textprocessing.bib
+[166] Biber.pm:4455> INFO - Looking for bibtex format file 'bibliographie/visualisation.bib' for section 0
+[167] bibtex.pm:1653> INFO - LaTeX decoding ...
+[178] bibtex.pm:1471> INFO - Found BibTeX data source 'bibliographie/visualisation.bib'
+[235] Biber.pm:4455> INFO - Looking for bibtex format file 'bibliographie/katabase.bib' for section 0
+[236] bibtex.pm:1653> INFO - LaTeX decoding ...
+[247] bibtex.pm:1471> INFO - Found BibTeX data source 'bibliographie/katabase.bib'
+[299] Biber.pm:4455> INFO - Looking for bibtex format file 'bibliographie/ecostat.bib' for section 0
+[299] bibtex.pm:1653> INFO - LaTeX decoding ...
+[302] bibtex.pm:1471> INFO - Found BibTeX data source 'bibliographie/ecostat.bib'
+[308] Biber.pm:4455> INFO - Looking for bibtex format file 'bibliographie/textprocessing.bib' for section 0
+[308] bibtex.pm:1653> INFO - LaTeX decoding ...
+[312] bibtex.pm:1471> INFO - Found BibTeX data source 'bibliographie/textprocessing.bib'
+[357] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[357] UCollate.pm:68> INFO - Overriding locale 'fr-FR' defaults 'variable = shifted' with 'variable = non-ignorable'
+[357] Biber.pm:4084> INFO - Sorting list 'nyt/global//global/global' of type 'entry' with template 'nyt' and locale 'fr-FR'
+[357] Biber.pm:4090> INFO - No sort tailoring available for locale 'fr-FR'
+[381] bbl.pm:652> INFO - Writing 'paulkervegan_memoire.bbl' with encoding 'UTF-8'
+[392] bbl.pm:755> INFO - Output to paulkervegan_memoire.bbl

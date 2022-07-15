@@ -19,7 +19,7 @@
 
 \refsection{0}
   \datalist[entry]{nyt/global//global/global}
-    \entry{agamben_what_2009}{book}{}
+    \entry{agamben_quest-ce_2006}{book}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=8c74b403c34f5bada1d8b1bd87b56556}{%
            family={Agamben},
@@ -32,7 +32,7 @@
         {Stanford}%
       }
       \list{publisher}{1}{%
-        {Stanford University Press}%
+        {Payot-Rivages}%
       }
       \strng{namehash}{8c74b403c34f5bada1d8b1bd87b56556}
       \strng{fullhash}{8c74b403c34f5bada1d8b1bd87b56556}
@@ -44,12 +44,11 @@
       \field{sortinithash}{a3dcedd53b04d1adfd5ac303ecd5e6fa}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{edition}{Première édition}
-      \field{isbn}{{ISBN} 978-0804762304}
-      \field{pagetotal}{80}
-      \field{series}{Meridian: Crossing aesthetics}
-      \field{title}{What is an apparatus? and Other Essays}
-      \field{year}{2009}
+      \field{isbn}{978-2-7436-2868-0}
+      \field{pagetotal}{64}
+      \field{series}{Rivages Poche / Petite Bibliothèque}
+      \field{title}{Qu'est-ce qu'un dispositif?}
+      \field{year}{2006}
       \field{dateera}{ce}
       \true{nocite}
       \keyw{,visualisation}
@@ -97,6 +96,55 @@
       \verb https://github.com/Segolene-Albouy/Memoire-TNAH2019
       \endverb
       \keyw{,visualisation}
+    \endentry
+    \entry{christensen_segmonto_2022}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=924d6687f037178387f3d71baf1c72f5}{%
+           family={Christensen},
+           familyi={C\bibinitperiod},
+           given={Kelly},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=7fe1ec35c644906499707ac25bc7780b}{%
+           family={Gabay},
+           familyi={G\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=865eef5eb27967d9e0c01708cbad832e}{%
+           family={Pinche},
+           familyi={P\bibinitperiod},
+           given={Ariane},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=16d4f02e5493261103bfb3611317d21d}{%
+           family={Camps},
+           familyi={C\bibinitperiod},
+           given={Jean-Baptiste},
+           giveni={J\bibinithyphendelim B\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Paris: École nationale des Chartes}%
+      }
+      \strng{namehash}{5d7b033e51a6ce48a60f3d1a0cbab12d}
+      \strng{fullhash}{f0642b2a3526da58033e48128ab1c0b7}
+      \strng{bibnamehash}{5d7b033e51a6ce48a60f3d1a0cbab12d}
+      \strng{authorbibnamehash}{5d7b033e51a6ce48a60f3d1a0cbab12d}
+      \strng{authornamehash}{5d7b033e51a6ce48a60f3d1a0cbab12d}
+      \strng{authorfullhash}{f0642b2a3526da58033e48128ab1c0b7}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Documents anciens et reconnaissance automatique des écritures manuscrites}
+      \field{day}{23}
+      \field{month}{6}
+      \field{title}{{SegmOnto} – A Controlled Vocabulary to Describe Historical Textual Sources}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \true{nocite}
+      \keyw{,text}
     \endentry
     \entry{corbieres_du_2020}{thesis}{}
       \name{author}{1}{}{%
@@ -167,11 +215,11 @@
       \field{sortinithash}{c438b3d5d027251ba63f5ed538d98af5}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{{ISBN} 978-2-490077-24-3}
+      \field{isbn}{978-2-490-07724-3}
       \field{number}{03}
       \field{pagetotal}{194}
       \field{series}{Esthétique des données}
-      \field{title}{Visualisation : l'interprétation modélisante}
+      \field{title}{Visualisation: l'interprétation modélisante}
       \field{year}{2020}
       \field{dateera}{ce}
       \true{nocite}
@@ -298,6 +346,39 @@
       \verb https://hal.archives-ouvertes.fr/hal-02898929/
       \endverb
       \keyw{,katabase}
+    \endentry
+    \entry{hentschel_visual_2014}{book}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=4ac0c15896d38c353e810015718f887a}{%
+           family={Hentschel},
+           familyi={H\bibinitperiod},
+           given={Klaus},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Oxford}%
+      }
+      \list{publisher}{1}{%
+        {Oxford University Press}%
+      }
+      \strng{namehash}{4ac0c15896d38c353e810015718f887a}
+      \strng{fullhash}{4ac0c15896d38c353e810015718f887a}
+      \strng{bibnamehash}{4ac0c15896d38c353e810015718f887a}
+      \strng{authorbibnamehash}{4ac0c15896d38c353e810015718f887a}
+      \strng{authornamehash}{4ac0c15896d38c353e810015718f887a}
+      \strng{authorfullhash}{4ac0c15896d38c353e810015718f887a}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{978-0-19-871787-4}
+      \field{pagetotal}{512}
+      \field{title}{Visual cultures in science and technology. A Comparative History}
+      \field{year}{2014}
+      \field{dateera}{ce}
+      \true{nocite}
+      \keyw{,visualisation}
     \endentry
     \entry{janes_du_2021}{thesis}{}
       \name{author}{1}{}{%
@@ -512,7 +593,7 @@
       \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{{ISBN} 978-2-917855-72-0}
+      \field{isbn}{978-2-917855-72-0}
       \field{number}{01}
       \field{pagetotal}{146}
       \field{series}{Esthétique des données}
@@ -520,6 +601,47 @@
       \field{year}{2017}
       \field{dateera}{ce}
       \true{nocite}
+      \keyw{,visualisation}
+    \endentry
+    \entry{orain_laboratoire_2021}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=1a2e34b2bd2513c1fb317dc1b96e0062}{%
+           family={Orain},
+           familyi={O\bibinitperiod},
+           given={Olivier},
+           giveni={O\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Pierrefitte-sur-Seine: Archives nationales}%
+      }
+      \strng{namehash}{1a2e34b2bd2513c1fb317dc1b96e0062}
+      \strng{fullhash}{1a2e34b2bd2513c1fb317dc1b96e0062}
+      \strng{bibnamehash}{1a2e34b2bd2513c1fb317dc1b96e0062}
+      \strng{authorbibnamehash}{1a2e34b2bd2513c1fb317dc1b96e0062}
+      \strng{authornamehash}{1a2e34b2bd2513c1fb317dc1b96e0062}
+      \strng{authorfullhash}{1a2e34b2bd2513c1fb317dc1b96e0062}
+      \field{sortinit}{O}
+      \field{sortinithash}{ff8d4eeb5101e3cf3809959b3592d942}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Design graphique, recherche et patrimoine des sciences sociales. Le Laboratoire de graphique de Jacques Bertin}
+      \field{day}{14}
+      \field{month}{10}
+      \field{title}{Le Laboratoire de cartographie dans le contexte de développement des sciences sociales et humaines, des années 1950 aux années 1970}
+      \field{urlday}{14}
+      \field{urlmonth}{7}
+      \field{urlyear}{2022}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://dai.ly/x85jbir
+      \endverb
+      \verb{url}
+      \verb https://dai.ly/x85jbir
+      \endverb
       \keyw{,visualisation}
     \endentry
     \entry{piketty_les_2001}{book}{}
@@ -547,9 +669,9 @@
       \field{sortinithash}{bb5b15f2db90f7aef79bb9e83defefcb}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{{ISBN} 2-246-61651-4}
+      \field{isbn}{2-246-61651-4}
       \field{pagetotal}{807}
-      \field{title}{Les hauts revenus en France au {XXe} siècle : inégalités et redistributions, 1901-1998}
+      \field{title}{Les hauts revenus en France au {XXe} siècle: inégalités et redistributions, 1901-1998}
       \field{year}{2001}
       \field{dateera}{ce}
       \true{nocite}
@@ -575,6 +697,101 @@
       \verb https://fr.wikipedia.org/wiki/Pr%C3%A9cision_et_rappel
       \endverb
       \keyw{,econometrie}
+    \endentry
+    \entry{renon_design_2015}{incollection}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=48a61f6e62730f445fcdb488ca42ea50}{%
+           family={Renon},
+           familyi={R\bibinitperiod},
+           given={Anne-Lyse},
+           giveni={A\bibinithyphendelim L\bibinitperiod},
+           givenun=0}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=2e1a70e76b8db72a78020b9f6cf0d3c0}{%
+           family={Lantenois},
+           familyi={L\bibinitperiod},
+           given={Annick},
+           giveni={A\bibinitperiod}}}%
+        {{hash=dbf8fce63c51b7fab868587921e03652}{%
+           family={Rouffineau},
+           familyi={R\bibinitperiod},
+           given={Gilles},
+           giveni={G\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Paris, Grenoble}%
+      }
+      \list{publisher}{1}{%
+        {Éditions B42, École supérieure d'art et de design de Grenoble-Valcence}%
+      }
+      \strng{namehash}{48a61f6e62730f445fcdb488ca42ea50}
+      \strng{fullhash}{48a61f6e62730f445fcdb488ca42ea50}
+      \strng{bibnamehash}{48a61f6e62730f445fcdb488ca42ea50}
+      \strng{authorbibnamehash}{48a61f6e62730f445fcdb488ca42ea50}
+      \strng{authornamehash}{48a61f6e62730f445fcdb488ca42ea50}
+      \strng{authorfullhash}{48a61f6e62730f445fcdb488ca42ea50}
+      \strng{editorbibnamehash}{5c5eed8c31f09b28345d1a1bcecd1e5f}
+      \strng{editornamehash}{5c5eed8c31f09b28345d1a1bcecd1e5f}
+      \strng{editorfullhash}{5c5eed8c31f09b28345d1a1bcecd1e5f}
+      \field{extraname}{1}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Voir l’architecture. Contribution du design à la construction des savoirs}
+      \field{isbn}{978-2-917855-54-6}
+      \field{title}{``Design graphique" et ``objectivité", la question des méta-altas}
+      \field{year}{2015}
+      \field{dateera}{ce}
+      \true{nocite}
+      \field{pages}{71\bibrangedash 81}
+      \range{pages}{11}
+      \keyw{,visualisation}
+    \endentry
+    \entry{renon_design_2016}{thesis}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=48a61f6e62730f445fcdb488ca42ea50}{%
+           family={Renon},
+           familyi={R\bibinitperiod},
+           given={Anne-Lyse},
+           giveni={A\bibinithyphendelim L\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{institution}{1}{%
+        {École des Hautes Études en Sciences Sociales, Institut Marcel Mauss}%
+      }
+      \list{location}{1}{%
+        {Paris}%
+      }
+      \strng{namehash}{48a61f6e62730f445fcdb488ca42ea50}
+      \strng{fullhash}{48a61f6e62730f445fcdb488ca42ea50}
+      \strng{bibnamehash}{48a61f6e62730f445fcdb488ca42ea50}
+      \strng{authorbibnamehash}{48a61f6e62730f445fcdb488ca42ea50}
+      \strng{authornamehash}{48a61f6e62730f445fcdb488ca42ea50}
+      \strng{authorfullhash}{48a61f6e62730f445fcdb488ca42ea50}
+      \field{extraname}{2}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{pagetotal}{429}
+      \field{title}{Design et esthétique dans les pratiques de la science}
+      \field{type}{Thèse de doctorat}
+      \field{urlday}{8}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.academia.edu/36754513/Design_et_esth%C3%A9tique_dans_les_pratiques_de_la_science
+      \endverb
+      \verb{url}
+      \verb https://www.academia.edu/36754513/Design_et_esth%C3%A9tique_dans_les_pratiques_de_la_science
+      \endverb
+      \keyw{,visualisation}
     \endentry
     \entry{rondeau_du_noyer_encoder_2019}{thesis}{}
       \name{author}{1}{}{%
@@ -678,6 +895,103 @@
       \verb https://hal.archives-ouvertes.fr/hal-02272962
       \endverb
       \keyw{,katabase}
+    \endentry
+    \entry{sahle_digital_2016}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=7e9193ca223d5fdff911d1c5b5356805}{%
+           family={Sahle},
+           familyi={S\bibinitperiod},
+           given={Patrick},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {London/Cambridge}%
+      }
+      \strng{namehash}{7e9193ca223d5fdff911d1c5b5356805}
+      \strng{fullhash}{7e9193ca223d5fdff911d1c5b5356805}
+      \strng{bibnamehash}{7e9193ca223d5fdff911d1c5b5356805}
+      \strng{authorbibnamehash}{7e9193ca223d5fdff911d1c5b5356805}
+      \strng{authornamehash}{7e9193ca223d5fdff911d1c5b5356805}
+      \strng{authorfullhash}{7e9193ca223d5fdff911d1c5b5356805}
+      \field{extraname}{1}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Medieval and modern manuscript studies in the digital age}
+      \field{day}{2}
+      \field{month}{5}
+      \field{title}{Digital modelling. Modelling the digital edition}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://dixit.uni-koeln.de/wp-content/uploads/2015/04/Camp1-Patrick_Sahle_-_Digital_Modelling.pdf
+      \endverb
+      \verb{url}
+      \verb https://dixit.uni-koeln.de/wp-content/uploads/2015/04/Camp1-Patrick_Sahle_-_Digital_Modelling.pdf
+      \endverb
+      \keyw{,text}
+    \endentry
+    \entry{sahle_what_2016}{incollection}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=7e9193ca223d5fdff911d1c5b5356805}{%
+           family={Sahle},
+           familyi={S\bibinitperiod},
+           given={Patrick},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=9da6437088231b521add78fa2a167d06}{%
+           family={Driscoll},
+           familyi={D\bibinitperiod},
+           given={Matthew\bibnamedelima James},
+           giveni={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=61d29395a0c9ab5d31820441d0ee5eb5}{%
+           family={Pierazzo},
+           familyi={P\bibinitperiod},
+           given={Elena},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Cambridge}%
+      }
+      \list{publisher}{1}{%
+        {Open Book Publishers}%
+      }
+      \strng{namehash}{7e9193ca223d5fdff911d1c5b5356805}
+      \strng{fullhash}{7e9193ca223d5fdff911d1c5b5356805}
+      \strng{bibnamehash}{7e9193ca223d5fdff911d1c5b5356805}
+      \strng{authorbibnamehash}{7e9193ca223d5fdff911d1c5b5356805}
+      \strng{authornamehash}{7e9193ca223d5fdff911d1c5b5356805}
+      \strng{authorfullhash}{7e9193ca223d5fdff911d1c5b5356805}
+      \strng{editorbibnamehash}{133b7dd8a4481c491de3604d01409b45}
+      \strng{editornamehash}{133b7dd8a4481c491de3604d01409b45}
+      \strng{editorfullhash}{133b7dd8a4481c491de3604d01409b45}
+      \field{extraname}{2}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Digital scholarly editing. Theories and practices}
+      \field{isbn}{978-2-8218-8400-7}
+      \field{title}{What is a scholarly digital edition?}
+      \field{urlday}{10}
+      \field{urlmonth}{7}
+      \field{urlyear}{2022}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb http://books.openedition.org/obp/3397
+      \endverb
+      \verb{url}
+      \verb http://books.openedition.org/obp/3397
+      \endverb
+      \keyw{,text}
     \endentry
   \enddatalist
 \endrefsection

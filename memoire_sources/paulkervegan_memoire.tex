@@ -30,6 +30,7 @@
 \addbibresource{bibliographie/visualisation.bib}
 \addbibresource{bibliographie/katabase.bib}
 \addbibresource{bibliographie/ecostat.bib}
+\addbibresource{bibliographie/textprocessing.bib}
 \defbibnote{intro}{Cette bibliographie contient tous les ressources utilisées pour l'écriture de ce mémoire.}
 
 \DeclareSourcemap{%
@@ -42,6 +43,10 @@
  		\perdatasource{bibliographie/katabase.bib}
  		\step[fieldset=keywords, fieldvalue={,katabase}, append]
  	}
+	\map[overwrite]{%
+		\perdatasource{bibliographie/textprocessing.bib}
+		\step[fieldset=keywords, fieldvalue={,text}, append]
+	}
  	\map[overwrite]{%
  		\perdatasource{bibliographie/ecostat.bib}
  		\step[fieldset=keywords, fieldvalue={,econometrie}, append]
@@ -55,8 +60,10 @@
 % \makeindex
 % \makeindex[name=lieux,title=Index des noms de lieux]
 \usepackage{tocbibind}
- 
 
+% autres paquets
+\usepackage{ifthen}
+ 
 % hyperref
 \usepackage{hyperref}
 \hypersetup{
@@ -74,7 +81,7 @@
 % modèle: \newacronym{dom}{\textsc{dom}}{\emph{Document Object Model}}
 % modèle bis: \newglossaryentry{meta}{name=métadonnée,description={donnée servant à définir ou décrire une autre donné quel que soit son support}}
 
-% commandes perso
+% commandes perso: abréviations
 \newcommand{\alto}{\texttt{Alto}}
 \newcommand{\escr}{\texttt{eScriptorium}}
 \newcommand{\html}{\texttt{HTML}}
@@ -90,6 +97,11 @@
 \newcommand{\xml}{\texttt{XML}}
 \newcommand{\xmltei}{\texttt{XML-TEI}}
 \newcommand{\xsl}{\texttt{XSL}}
+
+% commandes perso: autres
+\newcommand{\siecle}[1]{
+	#1\ifthenelse{\equal{#1}{I}}{\up{er}}{\up{ème}} 
+	s.}
 
 % modèle: https://www.overleaf.com/project/61a6185ee83481070ab68d99
 % liste des mémoires: https://docs.google.com/spreadsheets/d/1CZRaEX4BMqHNtqr97Dhg9UV9bPTt_4XS_IgPL5A-ZbU/edit
@@ -125,8 +137,7 @@
 		
 		\begin{large}
 			Mémoire pour le diplôme de master \\
-			\emph{Technologies numériques appliquées à
-				l'histoire}
+			\emph{Technologies numériques appliquées à l'histoire}
 			
 			\bigskip
 			
@@ -156,53 +167,49 @@ Les deux dernières questions, au premier abord plus théoriques, me semblent ce
 
 %%%%%%%%%%%%%%%%%%%%%%% PREMIÈRE PARTIE %%%%%%%%%%%%%%%%%%%%%%
 \part{Du document numérisé au \xmltei: nature du corpus, structure des documents et méthode de production des données}
-\chapter{Présentation du corpus}
-Ce chapitre est dédié à une présentation des documents traités dans le cadre du projet MSS: nature, quantité de documents (et d'entrées individuelles), dates et différents types de catalogues vendus. On pourra également représenter la répartition des ventes par an grâce aux graphiques produits pour le site web avec Plotly (à moins que cela ait plus de sens en troisième partie). Ce chapitre s'appuie sur les mémoires effectués par d'ancien.ne.s stagiaires de Katabase, qui ont déjà beaucoup analysé la nature et les enjeux du corpus\footcite{rondeau_du_noyer_encoder_2019, corbieres_du_2020, janes_du_2021}.
+\chapter{Le marché des manuscrits autographes au prisme des catalogues de vente}
+\chaptermark{Le marché des manuscrits autographes}
+Ce chapitre présente l'objet d'étude du projet \mss{} : étudier le marché des manuscrits autographes du \siecle{XIX}. parisien à partir de ses catalogues de vente et étudier la construction du canon littéraire au prisme du marché du manuscrit.
 
-\section{Intérêt scientifique des catalogues de vente}
+\section{Pourquoi étudier le marché des manuscrits autographes?}
+Cette section porte sur l'intérêt scientifique des objets d'étude du projet (marché des manuscrits et étude de la construction du canon).
+
 
 \section{La structure du corpus : périodisation, producteurs des documents et classification}
-aka quand et en quelle masse les documents sont produits, qui sont les producteur.ices (Charavay, RDA... ATTENTION À PAS FAIRE DE CONFUSION AVEC LE TERME DE PRODUCTEUR ON EST RELU PAR DES ARCHIVISTES) et quelle catégorisation entre les catalogues on peut faire (LAV, RDA / prix fixes et prix non fixes...)
-% peut-être fusionner les 2 sections du dessus pour faire des sections / subsection / subsubsection ? 
+Ici est faite une présentation des documents traités dans le cadre du projet MSS. La présentation est à deux niveaux: au niveau du corpus et des catalogues. Ce chapitre s'appuie sur les mémoires effectués par d'ancien.ne.s stagiaires de \ktb{}, qui ont déjà beaucoup analysé la nature et les enjeux du corpus\footcite{rondeau_du_noyer_encoder_2019, corbieres_du_2020, janes_du_2021}.
 
-\section{La structure des catalogues}
-(parler des catalogues au niveau du catalogue complet, pas de la page ; voir si on parlerait pas plutôt de ça dans la partie suivante)
+\subsection{Le corpus de catalogues de vente de manuscrits}
+Ici est présenté le corpus: nature, quantité de documents (et d'entrées individuelles), dates, différentes classifications qui peuvent être faites (revues, catalogues de ventes aux enchères, catalogues à prix fixes ou d'enchères...).
+	
+\subsection{Structure des catalogues}
+Ici sera présentée la structure des catalogues; la structure de chaque page ne sera détaillée qu'à la partie suivante.
 
 
-\chapter{Production des données: océrisation et structure des documents traités}
+\chapter{Production des données: de l'OCR à la \tei{}}
 \chaptermark{Production des données}
 Cette partie s'attache autant à présenter le processus d'océrisation (qui est déjà bien établi et ne constitue pas le cœur de mon stage) que la structure des documents. Alors que le chapitre précédent s'intéresse aux catalogues dans leur ensemble, ici, on étudie le corpus au niveau de la page et de l'entrée individuelle. En effet, l'océrisation repose sur la segmentation, et donc sur l'établissement d'une structure \enquote{abstraite} d'une page (c'est-à-dire, d'un découpage de la page en zones).
 
-%%%%% idées de partie: structure de la page et segmonto compliancy (ATTENTION À LA CONF DE L'AUTRE JOUR), un truc sur l'OCR
+\section{Extraire le texte des imprimés}
+\subsection{Comprendre la structure du document pour préparer l'édition numérique}
 
+\subsubsection{Appréhender la structure de la page à l'aide de SegmOnto}
+La structure des catalogues est présentée au niveau de la page. L'ontologie SegmOnto\footcite{christensen_segmonto_2022} est utilisée, autant pour appréhender la structure de la page que pour exprimer cette structure de façon standardisée.
 
-\chapter{Du texte à la \tei{}: méthode de transformation des documents océrisés en fichiers \xmltei{} valides}
-\chaptermark{Du texte à la \tei{}}
-Après une étape d'océrisation via \escr{}, le texte extrait des PDF peut être exporté soit en texte brut, soit en \xml{} \texttt{Page} ou \alto{}. Ces formats s'attachent à garder une relation entre le \xml{} et le document numérisé (les zones de texte sont indiquées, chaque ligne est dans une balise...). Cependant, l'unité intellectuelle centrale à la suite du projet, ce n'est pas la page numérisée, mais l'entrée de catalogue. Un format plus complexe que le \xml{} d'\escr{} est donc nécessaire. Assez logiquement, la suite du projet s'appuie sur une traduction des catalogues en \tei{}. 
-
-Jusqu'à maintenant, cette transformation était faite par \texttt{GROBID-Dictionnaries} et des feuilles \xsl{}. Le projet \texttt{GROBID-Dictionnaries} étant maintenu de façon assez opaque, le choix a été fait de remplacer cet outil par une solution plus simple (qui ne passe pas par le \textit{machine learning}) et modulable. En s'appuyant sur la nature \enquote{semi-structurée} du corpus, il est possible de séparer les différentes parties du texte en identifiant des séparateurs. Ce chapitre s'intéresse donc à la transformation de \alto{} vers la \tei{}à l'aide d'\rgx{}. En changeant d'unité intellectuelle -- ou en choisissant de privilégier une unité au sein des catalogues plutôt qu'une autre (page, série d'entrées...) --, on prend de la distance et on interprète le catalogue papier.
-
-\section{Points de départ pour une transformation en \tei{}}
-
-\subsection{L'\alto{}, base du processus de \enquote{traduction}}
-Ici, on présente la structure du \alto{} produit par \escr{}, qui est la base à partir de laquelle la transformation en \tei{} est faite.
-
-\subsection{Au delà des manuscrits: dériver une structure pour les entrées afin de permettre la transformation des fichiers}
-Cette sous-section s'intéresse à la structure des entrées individuelles, à deux niveaux:
+\subsubsection{Description des entrées de catalogue: préparer l'édition \tei{}}
+Ici, la structure des catalogues est présentée au niveau de l'entrée, c'est à dire du lot mis en vente. C'est à autour de la structure des entrées qu'est construite l'édition \xmltei{}. On s'intéresse à la structure des entrées individuelles à deux niveaux:
 \begin{itemize}
 	\item Au niveau intellectuel: quelles sont les différentes parties d'une entrée (titre, description du manuscrit, prix...).
-	\item Au niveau \enquote{textuel}: quels sont les séparateurs, c'est à dire les éléments dans le texte qui permettent de séparer les pages de catalogue en entrées et les entrées en sous-éléments) correspondant à la structure intellectuelle décrite ci-dessus.
+	\item Au niveau  \enquote{textuel}: quels sont les séparateurs, c'est à dire les éléments dans le texte qui permettent de séparer les pages de catalogue en entrées et les entrées en sous-éléments) correspondant à la structure intellectuelle décrite ci-dessus.
 \end{itemize}
 
+\section{L'encodage des manuscrits en \xmltei{}}
+\subsection{Encoder les catalogues en \tei{}}
+Ici est présentée la représentation \xmltei{} des catalogues de vente.
 
-\section{Le résultat à produire: présentation de l'édition \tei{} des catalogues de vente de manuscrits}
-Ici, on présente le résultat attendu de la transformation \alto{}, soit une édition numérique en \tei{} des catalogues de vente. On s'intéresse autant à la structure des documents \xml{} (quelles balises sont utilisées...) qu'à l'intérêt scientifique d'une édition numérique (balisage sémantique, possibilité de normaliser les informations grâce à des attributs).
+\subsection{L'encodage en \tei{}: un processus sélectif réduisant les significations du texte}
+Après une étape d'océrisation via \escr{}, le texte extrait des PDF peut être exporté soit en texte brut, soit en \xml{} \texttt{Page} ou \alto{}. Ces formats s'attachent à garder une relation entre le \xml{} et le document numérisé (les zones de texte sont indiquées, chaque ligne est dans une balise...). Cependant, l'unité intellectuelle centrale à la suite du projet, ce n'est pas la page numérisée, mais l'entrée de catalogue. Un format plus complexe que le \xml{} d'\escr{} est donc nécessaire. Assez logiquement, la suite du projet s'appuie sur une traduction des catalogues en \tei{}. On s'intéresse autant à la structure des documents \xml{} (quelles balises sont utilisées...) qu'à l'intérêt scientifique d'une édition numérique (balisage sémantique, possibilité de normaliser les informations grâce à des attributs).
 
-\section{Processus de \enquote{traduction} des documents de l'\alto{} à la \tei{}}
-Cette section s'intéresse au processus technique de transformation des documents de l'\alto{} vers la \tei{}.
-
-
-
+L'édition numérique en \xmltei{} des catalogues implique une certaine perte d'informations: l'intégralité des significations contenues dans les catalogues imprimés ne peut être traduite en \tei{} (la police, ou la qualité du papier, peuvent être documentés mais ne peuvent pas être reproduites). Ce genre de perte d'information a lieu, à différents degrés, dans la plupart des éditions \tei{}: ce format n'est pas un substitut des documents originels. Dans le projet \mssktb{}, d'autres informations sont perdues: l'édition numérique n'est pas censée être exhaustive des catalogues. La \tei{} n'est pas utilisée comme un format de conservation, mais comme un format de traitement qui sera enrichi dans les différentes étapes. Afin de mesurer ce qui est conservé et ce qui est perdu du document originel, l'édition \tei{} sera analysée à la lumière de la roue du philologue Patrick Sahle\footcite{sahle_digital_2016} qui détaille les significations plurielles d'un texte.
 
 
 
@@ -218,7 +225,7 @@ Ce chapitre s'intéresse à la manière dont les fichiers \tei{} sont traités a
 \chapter{Extraction d'informations}
 Ici sont décrits le processus et les objectifs de l'extraction d'informations à partir des fichiers \tei{}. Des données sont extraites pour chaque entrée de catalogue (un travail largement effectué par A. Bartz, que j'ai légèrement mis à jour) : prix (dans la monnaie de l'époque et en francs constants), date de vente normalisée, nom de l'auteur.ice et description du manuscrit... Un second processus d'extraction produit des données pour chaque catalogue de vente: titre du catalogue, date de vente, nombre d'items vendus, prix minimum, inférieur et maximum, prix moyen et médian, variance... En même temps que ces processus d'extraction d'informations, un script de conversion des monnaies (françaises et étrangères) en francs constants 1900 a été élaboré. En annulant l'effet de l'inflation, les francs constant permettent d'étudier l'évolution réelle des prix.
 
-L'extraction d'informations pour les entrées individuelles permet surtout de faire une réconciliation des manuscrits vendus (c'est à dire, de retrouver les items vendus plusieurs fois). Le deuxième processus permet de produire des données statistiques sur l'évolution du cours et du volume du marché des manuscrits (nombre d'items en vente, évolution des prix); c'est à partir de ces informations normalisées que sont construites les visualisations intégrées au site de Katabase.
+L'extraction d'informations pour les entrées individuelles permet surtout de faire une réconciliation des manuscrits vendus (c'est à dire, de retrouver les items vendus plusieurs fois). Le deuxième processus permet de produire des données statistiques sur l'évolution du cours et du volume du marché des manuscrits (nombre d'items en vente, évolution des prix); c'est à partir de ces informations normalisées que sont construites les visualisations intégrées au site de \ktb{}.
 
 
 \chapter{Vers une étude des facteurs déterminant le prix des documents: alignement des entrées du catalogue avec Wikidata et exploitation de données normalisées}
@@ -242,10 +249,10 @@ Une fois ce travail effectué, l'enrichissement des données à proprement parle
 Cette section, introductive, répond à une question évidentes mais essentielle, puisqu'elles permettent de mettre au clair l'intérêt et les (multiples) difficultés dans l'alignement avec Wikidata.
 
 \subsection{Pourquoi s'aligner avec des identifiants Wikidata?} 
-Nos données sont déjà complètes, une pipeline entière existe déjà. Cependant, il peut être difficile de déterminer ce qui fait le prix d'un manuscrit. On aborde les manuscrits avec nos propres catégories intellectuelles du XXIème siècle, et notre connaissance de l'histoire de l'époque. Il n'est pas non plus possible de reconstruire d'une manière exacte le regard qu'un public du XIXème siècle aurait sur ces manuscrits -- ce qui permettait de revenir à une perception antérieure de la valeur. Il faut donc chercher à contourner ces biais en produisant des données aussi objectives que possibles. Ainsi, un maximum de variales sont à notre disposition pour calculer des régressions linéaires (qui permettent de prédire l'impact d'une variable sur l'évolution des prix).
+Nos données sont déjà complètes, une pipeline entière existe déjà. Cependant, il peut être difficile de déterminer ce qui fait le prix d'un manuscrit. On aborde les manuscrits avec nos propres catégories intellectuelles du \siecle{XXI}, et notre connaissance de l'histoire de l'époque. Il n'est pas non plus possible de reconstruire d'une manière exacte le regard qu'un public du \siecle{XIX} aurait sur ces manuscrits -- ce qui permettait de revenir à une perception antérieure de la valeur. Il faut donc chercher à contourner ces biais en produisant des données aussi objectives que possibles. Ainsi, un maximum de variales sont à notre disposition pour calculer des régressions linéaires (qui permettent de prédire l'impact d'une variable sur l'évolution des prix).
 
-\subsection{Comment traduire des descriptions textuelles datant du XIXème siècle en chaînes de caractères qui puissent retourner un résultat sur Wikidata?} 
-Ce problème est autant linguistique de technique. Une personne ou une chose est nommée ou décrite d'une certaine manière dans un catalogue de vente ancien. Il n'y a aucune garantie que cette caractérisation corresponde à ce qui est disponible sur Wikidata: l'orthographe des noms évoluent, tout comme la manière de nommer certains métiers. À ces évolutions graphiques s'ajoutent des évolutions intellectuelles: les titres de noblesse sont un marqueur plus important au XIXème siècle français que dans un XXIème siècle mondialisé. Une personne n'est que rarement décrite par son titre dans Wikidata.
+\subsection{Comment traduire des descriptions textuelles datant du XIX\up{ème} s. en chaînes de caractères qui puissent retourner un résultat sur Wikidata?} 
+Ce problème est autant linguistique de technique. Une personne ou une chose est nommée ou décrite d'une certaine manière dans un catalogue de vente ancien. Il n'y a aucune garantie que cette caractérisation corresponde à ce qui est disponible sur Wikidata: l'orthographe des noms évoluent, tout comme la manière de nommer certains métiers. À ces évolutions graphiques s'ajoutent des évolutions intellectuelles: les titres de noblesse sont un marqueur plus important au \siecle{XIX} français que dans un \siecle{XXI} mondialisé. Une personne n'est que rarement décrite par son titre dans Wikidata.
 
 \subsection{Comment négocier avec le moteur de recherche de Wikidata?} 
 Si les catalogues de vente fonctionnent avec leurs propres catégories mentales, le même peut être dit de Wikidata: certains types de données sont plus souvent référencées que d'autres et Wikidata utilise un vocabulaire qui lui est propre. Par expérience, le moteur de recherche de Wikidata est assez \enquote{rigide}: contrairement à un moteur généraliste, il n'admet pas d'orthographes alternatives, par exemple. Le traitement des données textuelles et tout le processus de normalisation des données dépendent de ces faits: il faut trouver quelles informations sont référencées par Wikidata et comment elles sont référencées, et développer une méthodologie pour obtenir les meilleurs résultats possibles.
@@ -306,8 +313,8 @@ Sous réserve que l'étude des régressions linéaires ait été fait à temps (
 
 
 %%%%%%%%%%%%%%%%%%%%%% TROISIÈME PARTIE %%%%%%%%%%%%%%%%%%%%%%
-\part{Après la \tei{}: l'application web \textit{Katabase}, interface de diffusion des données}
-\chapter{Design d'interface dans un projet d'humanités numériques: l'application web \textit{Katabase}}
+\part{Après la \tei{}: l'application web \ktb{}, interface de diffusion des données}
+\chapter{Design d'interface dans un projet d'humanités numériques: l'application web \ktb{}}
 \chaptermark{Design d'interface...}
 Ce chapitre s'intéresse aux relations entre \textit{web design}, données textuelles et humanités numériques, à partir de l'exemple du site web développé pour le projet \ktb{}.
 
@@ -330,21 +337,45 @@ En plus de perturber nos méthodes, la conception d'interfaces influence la perc
 
 
 \section{La conception d'interface, un problème pour les humanités numériques?}
+\chaptermark{La conception d'interfaces}
 Cette section s'intéresse aux rôle des interfaces en humanités numériques.
 
-\subsection{L'interface comme méthode de communication}
-
+% À SUPPRIMER ???
+% \subsection{L'interface comme méthode de communication}
+% Les sites internet sont des médias qui cherchent à communiquer un ou des messages à . Si l'application web de \ktb{} a pour but principal de transmettre des informations, elle cherche aussi à traduire des informations, 
 
 \subsection{Pour une approche pragmatique du design d'interfaces dans un contexte d'humanités numériques}
-Le design graphique demande des compétences spécifiques qui ne font pas directement partie des cursus d'humanités numériques. Cependant, le design ne sert pas seulement à faire des sites qui soient \enquote{beaux}, il joue un rôle essentiel en encadrant la réception des contenus présentés. Cependant, les approches plus \enquote{élaborées} de design d'interfaces demandent des financements et des techniques qui sont souvent hors de portée d'un projet universitaire. Des approches plus \enquote{critiques} du design ont également été développées dans les humanités numériques\footcite{drucker_visualisation_2020}. Ces approches ont tendance à être difficiles à mettre en œuvre; leur portée critique peut aller à l'encontre de l'utilité des interfaces, en faisant de l'interface l'objet principal d'intérêt, aux dépends des contenus présentés. 
+Le design graphique demande des compétences spécifiques qui ne font pas directement partie des cursus d'humanités numériques. Il ne sert pas seulement à faire des sites qui soient \enquote{beaux}, il joue un rôle essentiel en encadrant la réception des contenus présentés. Cependant, les approches plus \enquote{élaborées} de design d'interfaces demandent des financements et des techniques qui sont souvent hors de portée d'un projet universitaire. Des approches plus \enquote{critiques} du design ont également été développées dans les humanités numériques\footcite{drucker_visualisation_2020}. Ces approches ont tendance à être difficiles à mettre en œuvre; leur portée critique peut aller à l'encontre de l'utilité des interfaces, en faisant de l'interface l'objet principal d'intérêt, aux dépends des contenus présentés. 
 
 À l'opposé de ces approches, ce qui est défendu dans le cadre du projet \mssktb{} est une approche à la fois informée et pragmatique du \textit{web design}. Informée, car être conscient des enjeux du design permet un meilleur positionnement en tant qu'ingénieur.e, et donc une présentation des contenus plus intéressante. Pragmatique, parce que les solutions qui sont présentées sont des solutions techniquement réalisables dans le cadre d'un projet universitaire. C'est ici qu'est présentée la charte graphique développée pour l'application web \ktb{}.
 
 \subsection{Rejeter les interfaces?}
 Après avoir parlé de l'intérêt des interfaces et présenté l'approche suivie au sein du projet \mssktb{}, cette partie s'attache à développer une critique des interfaces. À partir d'une approche historique des interfaces graphiques, des contextes dans lesquelles elles se sont développées, nous revenons sur les concepts centraux à leur développement que sont la notion d'utilisateur et de design d'expérience. Il ne s'agit pas de remettre en cause l'utilisation d'interfaces, mais de défendre une approche critique et consciente de l'impact que la standardisation des \enquote{expériences utilisateur} sur internet peuvent avoir sur la diffusion des connaissances.
 
-\chapter{Visualisations}
+\chapter{Donner à voir un corpus textuel}
+Ce chapitre s'intéresse aux visualisations développées pour l'application web \ktb{}.
 
+\section{Visualisation, design et sciences: des relations complexes}
+Ici, on s'intéresse à la place qu'occupe la visualisation de données dans la recherche scientifique. Le rapport entre les sciences et la visualisation est loin d'être simple et unidirectionnel: cette dernière n'est pas juste un outil, une méthode utilisée dans la recherche scientifique pour des raisons pratiques. Il est plus intéressant de penser la visualisation (et donc le design) et les sciences comme des domaines en interaction, qui s'influencent mutuellement. De la même manière que l'écriture implique des manières de penser particulières \footcite[p. 111-116]{masure_design_2017} en donnant au discours une existence spatiale (le texte est répandu sur une page et des renvois peuvent être fait d'un endroit de la page à un autre), la visualisation implique ses propres manières de penser et influence donc la recherche. Dans notre cas par exemple, produire des visualisations implique de s'intéresser à des informations quantifiables; cela encourage donc une approche statistique du corpus. À l'inverse, la recherche scientifique ne fait pas qu'\enquote{utiliser} le design. Certaines pratiques sont favorisées et deviennent force d'autorité dans des disciplines scientifiques. Se créent alors des \enquote{cultures visuelles}\footcite[p. 14]{hentschel_visual_2014} propres à ces disciplines, avec leurs traditions et motifs.
+
+\subsection{L'utilisation de supports visuels dans les sciences: une longue histoire}
+Ici, on retrace une histoire de l'utilisation du visuel dans les sciences (au sens large: sciences \enquote{dures} et sciences humaines), à partir (entres-autres) du travail de Anne-Lyse Renon\footcite[p. 47-88]{renon_design_2016} et de K. Hentschel\footcite{hentschel_visual_2014}.
+
+\subsection{Une vision objective? Visualisation et prétention à l'objectivité}
+Cette partie fait un retour sur la manière dont le visuel et la production de graphiques ont été utilisés comme arguments d'autorité, afin de montrer des faits de façon \enquote{objective}\footcite{renon_design_2015}.
+
+\subsection{La tendance visuelle des humanités numériques}
+Pour finir, on fait un bref retour sur la manière dont les humanités numériques \enquote{intensifient} la tendance à la visualisation, ou complexifient le rapport entre sciences et visualisation, pour deux raisons. En premier lieu, les humanités numériques viennent avec le développement de nouveaux outils. Ensuite, les humanités numériques marquent un retour à une approche quantitative et graphique dans les sciences humaines -- approche qui trouve ses sources, entre-autres, dans l'École des Annales et sa collaboration avec le Laboratoire de Graphique de Jacques Bertin\footcite{orain_laboratoire_2021}, ainsi que dans le structuralisme, où les \enquote{structures} trouvent leur meilleure représentation sous forme graphique. Cette tendance visuelle des humanités numériques n'est pas sans poser problème, puisque les visualisations sont développées par des personnes qui n'ont pas nécessairement de formation en graphisme. Une approche pragmatique de la visualisation a tendance à primer (les graphiques servent à prouver quelque chose), plutôt qu'une approche critique (les représentations graphiques sont des interprétations, où les données sont signifiantes, mais où les formes et les méthodes de représentation importent aussi).
+
+
+\section{Interpréter le corpus de manuscrits}
+Ce chapitre s'intéresse à la manière dont le corpus de catalogues de vente de \ktb{} a été traduit en graphiques et à la manière dont ces représentations permettent un nouveau regard sur le corpus.
+
+\subsection{La visualisation comme objet de connaissance}
+Ici, on développe une analyse du corpus de catalogues et des manuscrits qui y sont décrits à partir des visualisations produites. Par leur capacité à traduire les informations sous des formes synthétiques\footcite[p. 36]{hentschel_visual_2014}, les visualisations sont des objets de connaissance qui permettent de comprendre le corpus traité.
+
+\subsection{La visualisation comme interprétation}
+Les représentations graphiques ne font pas que montrer des phénomènes. Leur rôle est moins analytique que démonstratif: elles ne révèlent pas une information qui serait cachée dans les données, mais interprètent celles-ci conformément à une problématique de recherche\footcite[p. 78]{drucker_visualisation_2020}. Représenter un jeu de données, c'est donc le lire, l'interpréter en fonction de certaines questions scientifiques. Ce processus interprétatif est donc partiel (on ne dit pas tout ce qui est dans un jeu de données, mais seulement ce qui est pertinent dans un certain contexte); il est aussi influencé par les propriétés graphiques des visualisations. Cette sous-section s'intéresse donc, à partir d'exemples concrets, à la manière dont les propriétés graphiques (choix de formes et de couleurs) ainsi que le pré-traitement des données et d'autres décisions techniques (représentation des prix en francs courants ou constants) influencent la lecture et la perception du corpus.
 
 % \part{Après la \tei{}: l'application web \textit{Katabase}, interface de diffusion des données}
 % \chapter{Nouvelles présentations du corpus: l'interface web Katabase}
@@ -358,28 +389,18 @@ Après avoir parlé de l'intérêt des interfaces et présenté l'approche suivi
 
 %Les deux premières parties ont été réalisées par Alexandre Bartz. Elles ne concernent pas le cœur du projet. J'y reviens cependant pour mettre en avant que la création d'une interface web implique l'éloignement du document originel. Le site internet marque avant tout un éloignement intellectuel avec les documents: le catalogue n'y est plus l'unité intellectuelle dominante, alors qu'il restait l'un des critères structurants des fichiers \tei{} (un fichier représentant un catalogue). Sur le site web, on peut accéder directement aux éléments vendus, sans avoir à passer par les catalogues. L'éloignement du document originel est aussi technique, puisqu'on abandonne totalement la \tei{} et les formats sémantiques au profit de formats de présentation (\html{}), tout en s'appuyant largement sur des formats \enquote{techniques} et pratiques (le \json, qui est simplement un moyen de rendre des données rapidement accessibles).
 
-Dans cette partie, je m'intéresserai plus spécifiquement aux problématiques techniques et scientifiques liées à la visualisation de données, qui ont constitué une des missions centrales de mon stage:
-\begin{itemize}
- \item Qu'est-ce que l'on cherche à montrer avec ces visualisations ?
- 	\item Comment intégrer ces visualisations de manière \enquote{élégante} et efficace au site ? Par exemple, 7 types de graphiques sont produits pour l'index des catalogues. Il faut donc trouver un moyen de tous les présenter, sans pour autant alourdir excessivement la page. La visualisation doit également être pensée en concertation avec le reste du design du site web (largement mis à jour pendant mon stage), et s'intégrer à sa charte graphique.
- \item Comment construire ces visualisations ? Comment faciliter la lecture d'informations complexes ? Quel impact les visualisations ont-elles sur la perception des informations ? Pour ces problématiques techniques, je pense (entres autres) m'appuyer sur le mémoire de Ségolène Albouy\footcite{albouy_mediation_2019}.
-\end{itemize}
 
-\chapter{Visualisation et interfaces: un problème pour les humanités numériques ?}
-\chaptermark{Visualisation et interfaces}
-Ce chapitre de conclusion, plus théorique, revient sur les débats actuels concernant le lien entre interfaces graphiques, visualisation de données et humanités numériques. En s'appuyant (entre autres) sur les théories de Johanna Drucker\footcite{drucker_visualisation_2020} et Anthony Masure\footcite{masure_design_2017}, il s'attache à réintégrer les questions \enquote{visuelles} propres aux humanités numériques à un contexte plus large. Le chapitre revient sur les origines des interfaces graphiques (et donc sur les objectifs implicites qui structurent nos interactions avec les machines) ; il cherche à remettre la visualisation dans les humanités numériques en lien avec une tendance globale à la visualisation -- tendance qui vient du monde de l'entreprise, ce qui n'est pas anodin. Du fait de la quantité de significations implicites sous-jacentes à la construction d'interfaces, il est, je pense, nécessaire d'avoir une approche théorique et critique du rapport des humanités numériques aux problématiques de design et aux \enquote{dispositifs}\footcite{agamben_what_2009} que sont nos outils de travail.
+%%%%%%%%%% à supprimer %%%%%%%%%%%
+% Dans cette partie, je m'intéresserai plus spécifiquement aux problématiques techniques et scientifiques liées à la visualisation de données, qui ont constitué une des missions centrales de mon stage:
+% \begin{itemize}
+%  \item Qu'est-ce que l'on cherche à montrer avec ces visualisations ?
+%  	\item Comment intégrer ces visualisations de manière \enquote{élégante} et efficace au site ? Par exemple, 7 types de graphiques sont produits pour l'index des catalogues. Il faut donc trouver un moyen de tous les présenter, sans pour autant alourdir excessivement la page. La visualisation doit également être pensée en concertation avec le reste du design du site web (largement mis à jour pendant mon stage), et s'intégrer à sa charte graphique.
+% \item Comment construire ces visualisations ? Comment faciliter la lecture d'informations complexes ? Quel impact les visualisations ont-elles sur la perception des informations ? Pour ces problématiques techniques, je pense (entres autres) m'appuyer sur le mémoire de Ségolène Albouy\footcite{albouy_mediation_2019}.
+% \end{itemize}
 
-%%%% PLANS POSSIBLES ET IDÉES%%%
-- interface web : un objet problématique et une nouvelle interprétation des documents (en gros, sur l'historique des interfaces + sur ce qui arrive aux documents quand on les transforme en un site web)
-
-- le design : un nouveau problème pour les humanités ? en gros, je dis que le web design et la question d'esthétique est une question nv pour les humanités "non-créatrices", où la forme reste assez secondaire à l'idée; ici, on est dans un entre-deux, où penser la forme est nécessaire. remettre ça en question de 2 manières: 
-	- une histoire de la visualisation de données et du design en sciences avec A.L. Renon ; 
-	- le fait que s'intéresser à des questions de design dans les DH, sans vraiment d'approche critique ou de connaissance des enjeux du design, ça vient avec 2 dangers :
-		- faire des interfaces qui desservent le contenu, en les traduisant mal ou en figeant les humanités dans un langage esthétique dépassé
-		- faire du web design avec une position acritique, c'est risquer de suivre les dominantes, et donc de copier un langage esthétique qui est déterminé par le système économique
-- une partie sur la visualisation comme interprétation
-- pour une approche critique du design, mon ptit plaidoyer final
-
+% \chapter{Visualisation et interfaces: un problème pour les humanités numériques ?}
+% \chaptermark{Visualisation et interfaces}
+% Ce chapitre de conclusion, plus théorique, revient sur les débats actuels concernant le lien entre interfaces graphiques, visualisation de données et humanités numériques. En s'appuyant (entre autres) sur les théories de Johanna Drucker\footcite{drucker_visualisation_2020} et Anthony Masure\footcite{masure_design_2017}, il s'attache à réintégrer les questions \enquote{visuelles} propres aux humanités numériques à un contexte plus large. Le chapitre revient sur les origines des interfaces graphiques (et donc sur les objectifs implicites qui structurent nos interactions avec les machines) ; il cherche à remettre la visualisation dans les humanités numériques en lien avec une tendance globale à la visualisation -- tendance qui vient du monde de l'entreprise, ce qui n'est pas anodin. Du fait de la quantité de significations implicites sous-jacentes à la construction d'interfaces, il est, je pense, nécessaire d'avoir une approche théorique et critique du rapport des humanités numériques aux problématiques de design et aux \enquote{dispositifs}\footcite{agamben_what_2009} que sont nos outils de travail.
 
 
 
@@ -389,7 +410,8 @@ Ce chapitre de conclusion, plus théorique, revient sur les débats actuels conc
 \chapter*{Bibliographie}
 \chaptermark{Bibliographie}
 \addcontentsline{toc}{chapter}{Bibliographie}
-\printbibliography[heading=subbibintoc,keyword={katabase},title={À propos du projet Katabase / MSS}]
+\printbibliography[heading=subbibintoc,keyword={katabase},title={Projet \mssktb{}}]
+\printbibliography[heading=subbibintoc,keyword={text},title={Édition numérique, traitement automatisé et analyse de texte}]
 \printbibliography[heading=subbibintoc,keyword={visualisation},title={Visualisation et design d'interfaces}]
 \printbibliography[heading=subbibintoc,keyword={econometrie},title={Économétrie et statistiques}]
 
