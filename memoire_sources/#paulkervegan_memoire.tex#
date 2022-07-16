@@ -180,7 +180,7 @@ Ici est faite une présentation des documents traités dans le cadre du projet M
 
 \subsection{Le corpus de catalogues de vente de manuscrits}
 Ici est présenté le corpus: nature, quantité de documents (et d'entrées individuelles), dates, différentes classifications qui peuvent être faites (revues, catalogues de ventes aux enchères, catalogues à prix fixes ou d'enchères...).
-
+	
 \subsection{Structure des catalogues}
 Ici sera présentée la structure des catalogues; la structure de chaque page ne sera détaillée qu'à la partie suivante.
 
@@ -206,38 +206,26 @@ Ici, la structure des catalogues est présentée au niveau de l'entrée, c'est �
 \subsection{Encoder les catalogues en \tei{}}
 Ici est présentée la représentation \xmltei{} des catalogues de vente.
 
-\subsection{L'encodage en \tei{}: un processus sélectif qui réduit les significations du texte}
+\subsection{L'encodage en \tei{}: un processus sélectif réduisant les significations du texte}
 Après une étape d'océrisation via \escr{}, le texte extrait des PDF peut être exporté soit en texte brut, soit en \xml{} \texttt{Page} ou \alto{}. Ces formats s'attachent à garder une relation entre le \xml{} et le document numérisé (les zones de texte sont indiquées, chaque ligne est dans une balise...). Cependant, l'unité intellectuelle centrale à la suite du projet, ce n'est pas la page numérisée, mais l'entrée de catalogue. Un format plus complexe que le \xml{} d'\escr{} est donc nécessaire. Assez logiquement, la suite du projet s'appuie sur une traduction des catalogues en \tei{}. On s'intéresse autant à la structure des documents \xml{} (quelles balises sont utilisées...) qu'à l'intérêt scientifique d'une édition numérique (balisage sémantique, possibilité de normaliser les informations grâce à des attributs).
 
-L'édition numérique en \xmltei{} des catalogues implique une certaine perte d'informations: l'intégralité des significations contenues dans les catalogues imprimés ne peut être traduite en \tei{} (la police, ou la qualité du papier, peuvent être documentés mais ne peuvent pas être reproduites). Ce genre de perte d'information a lieu, à différents degrés, dans la plupart des éditions \tei{}: ce format n'est pas un substitut des documents originels. Dans le projet \mssktb{}, d'autres informations sont perdues: l'édition numérique n'est pas censée être exhaustive des catalogues. La \tei{} n'est pas utilisée comme un format de conservation, mais comme un format de traitement qui sera enrichi dans les différentes étapes. Afin de mesurer ce qui est conservé et ce qui est perdu du document originel, l'édition \tei{} sera analysée à la lumière de la \enquote{roue du texte} du philologue Patrick Sahle\footcite{sahle_digital_2016} qui modélise les significations plurielles d'un texte.
+L'édition numérique en \xmltei{} des catalogues implique une certaine perte d'informations: l'intégralité des significations contenues dans les catalogues imprimés ne peut être traduite en \tei{} (la police, ou la qualité du papier, peuvent être documentés mais ne peuvent pas être reproduites). Ce genre de perte d'information a lieu, à différents degrés, dans la plupart des éditions \tei{}: ce format n'est pas un substitut des documents originels. Dans le projet \mssktb{}, d'autres informations sont perdues: l'édition numérique n'est pas censée être exhaustive des catalogues. La \tei{} n'est pas utilisée comme un format de conservation, mais comme un format de traitement qui sera enrichi dans les différentes étapes. Afin de mesurer ce qui est conservé et ce qui est perdu du document originel, l'édition \tei{} sera analysée à la lumière de la roue du philologue Patrick Sahle\footcite{sahle_digital_2016} qui détaille les significations plurielles d'un texte.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%% DEUXIEME PARTIE %%%%%%%%%%%%%%%%%%%%%%
 \part{Normalisation, enrichissements et extraction d'informations: une chaîne de traitement pour des données semi-structurées}
 
-\chapter{Faire sens d'un corpus complexe: homogénéisation des données et extraction d'informations}
+% IDÉE: FUSIONNER LES DEUX PARTIES D'EN DESSOUS SOUS LE TITRE: Normaliser un corpus complexe et en extraire des informations: une série de \enquote{traductions} des documents originels ???????????????????????
 
-\section{Homogénéiser et normaliser un corpus complexe}
-Cette section s'intéresse à la manière dont les fichiers \tei{} sont traités afin de pouvoir ensuite en extraire des informations. C'est directement grâce la structure des entrées (et grâce à la nature \enquote{semi-structurée} des catalogues) qu'est possible le traitement automatisé des documents.
+\chapter{Homogénéiser et normaliser un corpus complexe}
+Ce chapitre s'intéresse à la manière dont les fichiers \tei{} sont traités afin de pouvoir ensuite en extraire des informations. C'est directement grâce la structure des entrées (et grâce à la nature \enquote{semi-structurée} des catalogues) qu'est possible le traitement automatisé des documents. Cette partie s'attache également à rappeler les questions de recherche qui sous-tendent la normalisation des documents (ajouter plus de structure au document \tei{} pour l'exploiter plus facilement, uniformiser la notation des tailles et des dimensions des documents...). Cette partie sera probablement relativement brève, puisque l'étape de normalisation des données a déjà été faite par d'autres stagiaires et documentée d'autres mémoires.
 
-\subsection{Pourquoi chercher à normaliser le corpus?}
-La question mérite d'être posée: si il faut travailler le corpus pour pouvoir en extraire des informations, et pour pouvoir donc en faire sens, ce processus peut également impacter la nature du texte et ses significations. Tout comme l'édition \tei{} originelle est un processus sélectif, le traitement des documents encodés est lui un processus sélectif: certaines informations contenues par l'encodage sont privilégiées aux dépens d'autres. Il s'agit ici d'expliciter ces choix (travailler sur les prix, les formats et dimensions des manuscrits plutôt que sur leur sujet) et de les justifier. Cette section s'attache donc à rappeler les questions de recherche qui sous-tendent la normalisation des documents (ajouter plus de structure au document \tei{} pour l'exploiter plus facilement, uniformiser la notation des tailles et des dimensions des documents...).
 
-\subsection{Comment normaliser le corpus tout en préservant sa valeur documentaire?}
-Ici, on s'intéresse à la manière dont la \tei{} est mise à profit pour enrichir le corpus tout en conservant le contenu textuel des catalogues. Les différentes étapes de normalisation sont également rappelées (ce travail n'étant pas au cœur de mon stage, il s'agira plutôt d'un rappel que d'une présentation technique détaillée).
+\chapter{Extraction d'informations}
+Ici sont décrits le processus et les objectifs de l'extraction d'informations à partir des fichiers \tei{}. Des données sont extraites pour chaque entrée de catalogue (un travail largement effectué par A. Bartz, que j'ai légèrement mis à jour) : prix (dans la monnaie de l'époque et en francs constants), date de vente normalisée, nom de l'auteur.ice et description du manuscrit... Un second processus d'extraction produit des données pour chaque catalogue de vente: titre du catalogue, date de vente, nombre d'items vendus, prix minimum, inférieur et maximum, prix moyen et médian, variance... En même temps que ces processus d'extraction d'informations, un script de conversion des monnaies (françaises et étrangères) en francs constants 1900 a été élaboré. En annulant l'effet de l'inflation, les francs constant permettent d'étudier l'évolution réelle des prix.
 
-\section{Faire sens du corpus: extraction d'informations et fouille de texte}
-Ici sont décrits le processus et les objectifs de l'extraction d'informations à partir des fichiers \tei{}. C'est à partir de cette opération d'extraction que sont construites les visualisations, qui permettent une approche graphique du corpus et une meilleure compréhension de celui-ci.
-
-\subsection{Extraire des informations au niveau des catalogues}
-Des données sont extraites pour chaque entrée de catalogue (un travail largement effectué par A. Bartz, que j'ai légèrement mis à jour) : prix (dans la monnaie de l'époque et en francs constants), date de vente normalisée, nom de l'auteur.ice et description du manuscrit... L'extraction d'informations pour les entrées individuelles permet surtout de faire une réconciliation des manuscrits vendus (c'est à dire, de retrouver les items vendus plusieurs fois).
-
-\subsection{Extraire des informations au niveau des entrées}
-Un second processus d'extraction produit des données pour chaque catalogue de vente: titre du catalogue, date de vente, nombre d'items vendus, prix minimum, inférieur et maximum, prix moyen et médian, variance... Ce processus permet de produire des données statistiques sur l'évolution du cours et du volume du marché des manuscrits (nombre d'items en vente, évolution des prix).
-
-\subsection{Vers une approche économique du corpus: la conversion automatique des prix en francs constants}
-En même temps que ces processus d'extraction d'informations, un script de conversion des monnaies (françaises et étrangères) en francs constants 1900 a été élaboré. En annulant l'effet de l'inflation, les francs constant permettent d'étudier l'évolution réelle des prix.
+L'extraction d'informations pour les entrées individuelles permet surtout de faire une réconciliation des manuscrits vendus (c'est à dire, de retrouver les items vendus plusieurs fois). Le deuxième processus permet de produire des données statistiques sur l'évolution du cours et du volume du marché des manuscrits (nombre d'items en vente, évolution des prix); c'est à partir de ces informations normalisées que sont construites les visualisations intégrées au site de \ktb{}.
 
 
 \chapter{Vers une étude des facteurs déterminant le prix des documents: alignement des entrées du catalogue avec Wikidata et exploitation de données normalisées}
@@ -435,3 +423,4 @@ Les représentations graphiques ne font pas que montrer des phénomènes. Leur r
 % \listoftables
 \tableofcontents
 \end{document}
+
