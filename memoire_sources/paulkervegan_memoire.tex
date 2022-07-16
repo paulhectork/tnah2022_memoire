@@ -81,6 +81,13 @@
 % modèle: \newacronym{dom}{\textsc{dom}}{\emph{Document Object Model}}
 % modèle bis: \newglossaryentry{meta}{name=métadonnée,description={donnée servant à définir ou décrire une autre donné quel que soit son support}}
 
+% commandes perso: autres que les abbréviations
+\newcommand{\siecle}[1]{%
+	#1%
+	\ifthenelse{\equal{#1}{I}}{\up{er}}{\up{ème}}%
+	~s.%
+}
+
 % commandes perso: abréviations
 \newcommand{\alto}{\texttt{Alto}}
 \newcommand{\escr}{\texttt{eScriptorium}}
@@ -98,54 +105,47 @@
 \newcommand{\xmltei}{\texttt{XML-TEI}}
 \newcommand{\xsl}{\texttt{XSL}}
 
-% commandes perso: autres
-\newcommand{\siecle}[1]{
-	#1\ifthenelse{\equal{#1}{I}}{\up{er}}{\up{ème}} 
-	s.}
-
 % modèle: https://www.overleaf.com/project/61a6185ee83481070ab68d99
 % liste des mémoires: https://docs.google.com/spreadsheets/d/1CZRaEX4BMqHNtqr97Dhg9UV9bPTt_4XS_IgPL5A-ZbU/edit
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% DÉBUT %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
-\onehalfspacing
-
-\begin{titlepage}
-	\begin{center}
-		
-		\bigskip
-		
-		\begin{large}
-			ÉCOLE NATIONALE DES CHARTES
-		\end{large}
-		\begin{center}
-			\rule{2cm}{0.02cm}
-		\end{center}
-		
-		\begin{Large}
-			\textbf{Paul, Hector Kervegan}\\
-		\end{Large}
-		
-		\vfill
-		
-		\begin{Huge}
-			\textbf{Traitement, exploitation et analyse d'un corpus semi-structuré: le cas des catalogues de vente de manuscrits}
-		\end{Huge}
+	\onehalfspacing
 	
-		\vfill
-		
-		\begin{large}
-			Mémoire pour le diplôme de master \\
-			\emph{Technologies numériques appliquées à l'histoire}
-			
+	\begin{titlepage}
+		\begin{center}		
 			\bigskip
 			
-			2022
-		\end{large}
-		
-	\end{center}
-\end{titlepage}
+			\begin{large}
+				ÉCOLE NATIONALE DES CHARTES\\
+			\end{large}
+			
+			\rule{2cm}{0.02cm}
+			
+			\begin{Large}
+				\textbf{Paul, Hector Kervegan}\\
+			\end{Large}
+			
+			\vfill
+			
+			\begin{Huge}
+				\textbf{Traitement, exploitation et analyse d'un corpus semi-structuré: le cas des catalogues de vente de manuscrits}
+			\end{Huge}
+			
+			\vfill
+			
+			\begin{large}
+				Mémoire pour le diplôme de master \\
+				\emph{Technologies numériques appliquées à l'histoire}
+				
+				\bigskip
+				
+				2022
+			\end{large}
+			
+		\end{center}
+	\end{titlepage}
 
 \frontmatter
 \chapter*{Résumé}
@@ -217,6 +217,7 @@ L'édition numérique en \xmltei{} des catalogues implique une certaine perte d'
 \part{Normalisation, enrichissements et extraction d'informations: une chaîne de traitement pour des données semi-structurées}
 
 \chapter{Faire sens d'un corpus complexe: homogénéisation des données et extraction d'informations}
+\chaptermark{Faire sens d'un corpus complexe}
 
 \section{Homogénéiser et normaliser un corpus complexe}
 Cette section s'intéresse à la manière dont les fichiers \tei{} sont traités afin de pouvoir ensuite en extraire des informations. C'est directement grâce la structure des entrées (et grâce à la nature \enquote{semi-structurée} des catalogues) qu'est possible le traitement automatisé des documents.
@@ -244,13 +245,13 @@ En même temps que ces processus d'extraction d'informations, un script de conve
 \chaptermark{Vers une étude...}
 Ce chapitre est construit autour d'une question de recherche: comment produire des informations exploitables pour une étude économétrique à partir d'un corpus textuel semi-structuré? Un des objectifs du projet est de faire l'étude des facteurs déterminant le prix d'un manuscrit. Pour faire cette étude, il faut obtenir, pour chaque entrée du catalogue, un certain nombre d'informations normalisées. Le travail d'extraction de données présentes dans les catalogues a déjà été fait par de précédent.e.s stagiaires. Ces données sont principalement quantitatives: prix des manuscrits, dimensions et nombre de pages, date de création. Il est nécessaire de compléter les informations par des données qualitatives et d'enrichir les données disponibles avec des sources extérieures. Pour ce faire, il a été choisi d'aligner le nom des auteur.ice.s des manuscrits avec des identifiants Wikidata; dès lors que l'on a un identifiant Wikidata, il est possible de récupérer automatiquement des informations sur les personnes via \sparql. Le choix de travailler uniquement sur les noms, et non sur la description des documents, a deux motivations:
 \begin{itemize}
- \item Les noms de personnes (et la manière dont elles sont décrites) constituent la partie la plus normalisée des documents. La description des manuscrits est plutôt en \enquote{texte libre}. Dans la continuité avec le reste du projet, nous sommes resté dans une approche \enquote{basse technologie}, qui consiste à s'appuyer majoritairement sur des solutions techniquement simples. C'est pourquoi nous avons préférer traiter les noms avec des tables de correspondance\footnote{C'est à dire, des tables qui permettent de normaliser la manière dont les informations figurent dans les catalogues, et donc de remplacer des termes \enquote{vernaculaires} par leurs équivalents utilisés par Wikidata} et des \rgx{}, plutôt que de faire du TAL sur la description des documents.
- \item Toutes les informations \enquote{simples} (données quantitatives facilement normalisables: dates etc.) ont déjà été extraites des descriptions des manuscrits.
+	\item Les noms de personnes (et la manière dont elles sont décrites) constituent la partie la plus normalisée des documents. La description des manuscrits est plutôt en \enquote{texte libre}. Dans la continuité avec le reste du projet, nous sommes resté dans une approche \enquote{basse technologie}, qui consiste à s'appuyer majoritairement sur des solutions techniquement simples. C'est pourquoi nous avons préférer traiter les noms avec des tables de correspondance\footnote{C'est à dire, des tables qui permettent de normaliser la manière dont les informations figurent dans les catalogues, et donc de remplacer des termes \enquote{vernaculaires} par leurs équivalents utilisés par Wikidata} et des \rgx{}, plutôt que de faire du TAL sur la description des documents.
+	\item Toutes les informations \enquote{simples} (données quantitatives facilement normalisables: dates etc.) ont déjà été extraites des descriptions des manuscrits.
 \end{itemize}
 
 Ce travail d'enrichissement a été fait en deux temps. 
 
-La première étape, et la plus difficile, est l'alignement avec Wikidata. Cela demande d'extraire un ensemble d'informations à partir du nom de la personne et de la description de celle-ci (nom, prénom, titre de noblesse, occupation, dates de vie et de mort...). À partir de ces informations, stockées dans un dictionnaire, un algorithme construit successivement différentes chaînes de caractères à rechercher sur l'API de Wikidata. L'objectif est que le premier résultat recherché sur Wikidata soit correct. Sur un jeu de test, le score F1 \footnote{Le score F1, ou \textit{F-score}, est la moyenne harmonique de la précision (vrais positifs par rapport au total de résultats obtenus) et du rappel (nombre de résultats positifs par rapport au total de résultats positifs).\footcite{noauthor_precision_2022}} obtenu est de 68\%. Un relecture \enquote{manuelle} des résultats est donc nécessaire.
+La première étape, et la plus difficile, est l'alignement avec Wikidata. Cela demande d'extraire un ensemble d'informations à partir du nom de la personne et de la description de celle-ci. Parmi les informations extraites: nom, prénom, titre de noblesse, occupation, dates de vie et de mort. À partir de ces informations, stockées dans un dictionnaire, un algorithme construit successivement différentes chaînes de caractères à rechercher sur l'API de Wikidata. L'objectif est que le premier résultat recherché sur Wikidata soit correct. Sur un jeu de test, le score F1 \footnote{Le score F1, ou \textit{F-score}, est la moyenne harmonique de la précision (vrais positifs par rapport au total de résultats obtenus) et du rappel (nombre de résultats positifs par rapport au total de résultats positifs).\footcite{noauthor_precision_2022}} obtenu est de 68\%. Un relecture \enquote{manuelle} des résultats est donc nécessaire.
 
 La deuxième étape, nettement plus simple, consiste à lancer des requêtes Wikidata sur les identifiants récupérés afin de récupérer des informations sur les auteur.ice.s des manuscrits (cette partie du travail est encore en cours) pour enrichir nos données.
 
@@ -258,19 +259,26 @@ Une fois ce travail effectué, l'enrichissement des données à proprement parle
 
 
 \section{Questions introductives: pourquoi et comment s'aligner avec Wikidata ?}
-Cette section, introductive, répond à une question évidentes mais essentielle, puisqu'elles permettent de mettre au clair l'intérêt et les (multiples) difficultés dans l'alignement avec Wikidata.
+\chaptermark{Questions introductives}
+Cette section, introductive, répond à des questions évidentes mais essentielles: elles permettent de mettre au clair l'intérêt et les (multiples) difficultés dans l'alignement avec Wikidata.
 
 \subsection{Pourquoi s'aligner avec des identifiants Wikidata?} 
 Nos données sont déjà complètes, une pipeline entière existe déjà. Cependant, il peut être difficile de déterminer ce qui fait le prix d'un manuscrit. On aborde les manuscrits avec nos propres catégories intellectuelles du \siecle{XXI}, et notre connaissance de l'histoire de l'époque. Il n'est pas non plus possible de reconstruire d'une manière exacte le regard qu'un public du \siecle{XIX} aurait sur ces manuscrits -- ce qui permettait de revenir à une perception antérieure de la valeur. Il faut donc chercher à contourner ces biais en produisant des données aussi objectives que possibles. Ainsi, un maximum de variales sont à notre disposition pour calculer des régressions linéaires (qui permettent de prédire l'impact d'une variable sur l'évolution des prix).
 
-\subsection{Comment traduire des descriptions textuelles datant du XIX\up{ème} s. en chaînes de caractères qui puissent retourner un résultat sur Wikidata?} 
+\subsection{Quelles données rechercher via \sparql?}
+Dans cette sous-section, nous détaillons les données récupérées via \sparql{} ainsi que les choix scientifiques qui sous-tendent nos décisions.
+
+\subsection{Comment traduire des descriptions textuelles datant du XIX\up{ème}~s. en chaînes de caractères qui puissent retourner un résultat sur Wikidata?} 
 Ce problème est autant linguistique de technique. Une personne ou une chose est nommée ou décrite d'une certaine manière dans un catalogue de vente ancien. Il n'y a aucune garantie que cette caractérisation corresponde à ce qui est disponible sur Wikidata: l'orthographe des noms évoluent, tout comme la manière de nommer certains métiers. À ces évolutions graphiques s'ajoutent des évolutions intellectuelles: les titres de noblesse sont un marqueur plus important au \siecle{XIX} français que dans un \siecle{XXI} mondialisé. Une personne n'est que rarement décrite par son titre dans Wikidata.
 
 \subsection{Comment négocier avec le moteur de recherche de Wikidata?} 
-Si les catalogues de vente fonctionnent avec leurs propres catégories mentales, le même peut être dit de Wikidata: certains types de données sont plus souvent référencées que d'autres et Wikidata utilise un vocabulaire qui lui est propre. Par expérience, le moteur de recherche de Wikidata est assez \enquote{rigide}: contrairement à un moteur généraliste, il n'admet pas d'orthographes alternatives, par exemple. Le traitement des données textuelles et tout le processus de normalisation des données dépendent de ces faits: il faut trouver quelles informations sont référencées par Wikidata et comment elles sont référencées, et développer une méthodologie pour obtenir les meilleurs résultats possibles.
+Si les catalogues de vente fonctionnent avec leurs propres catégories mentales, le même peut être dit de Wikidata: certains types de données sont plus souvent référencées que d'autres et Wikidata utilise un vocabulaire qui lui est propre. Par expérience, le moteur de recherche de Wikidata est assez \enquote{rigide}: contrairement à un moteur généraliste, il n'admet pas d'orthographes alternatives, par exemple. Le traitement des données textuelles et tout le processus de normalisation des données dépendent de ces faits: il faut trouver quelles informations sont référencées par Wikidata et comment elles le sont. L'algorithme doit donc s'adapter au moteur de recherche. 
 
-\subsection{Quelles données extraire via \sparql?}
-Dans cette sous-section, nous détaillons les données récupérées via \sparql{} ainsi que les choix scientifiques qui sous-tendent nos décisions.
+\subsection{Une approche prédictive}
+Étant donnée la quantité d'incertitude présentée ci-dessus, l'approche suivie dans l'alignement avec Wikidata est prédictive. L'objectif de l'algorithme de recherches en plein texte sur l'API Wikidata n'est donc pas de trouver la \enquote{bonne} réponse. Il est de construire une chaîne de caractère dont on prédit qu'elle apportera un résultat pertinent. De la même manière, la phase de préparation des données est un processus qui sélectionne et normalise certaines informations dont on suppose qu'elles seront pertinentes dans l'obtention des bons résultats. De la même manière, le premier rôle des tests est de quantifier les prédictions. Ils répondent à la question: étant donné les résultats obtenus lors des tests, quelle est la probabilité que la prochaine chaîne de caractères recherchée retourne un résultat pertinent? Cette approche prédictive implique nécessairement un degré d'incertitude, et donc le développement d'algorithmes flexibles qui cherchent à minimiser le bruit.
+
+\subsection{Présentation générale de l'algorithme}
+À l'aide d'un schéma, on présente l'intégralité de la \textit{pipeline} pour cette étape: préparation des données; lancement des recherches en plein texte sur l'API Wikidata; lancement de requêtes \sparql{} à partir des résultats obtenus et structuration des résultats. 
 
 \section{Préparer et structurer les données}
 Avant de chercher à récupérer un identifiant Wikidata via l'API, un algorithme se charge de traduire et de structurer les données: à partir d'un nom et de son éventuelle description, un dictionnaire qui contient les informations de manière structurée est construit. À partir de ce dictionnaire, un algorithme contenant différentes requêtes est lancé pour récupérer les identifiants Wikidata.
@@ -288,17 +296,19 @@ Souvent, le prénom d'une personne est écrit en abrégé. Partant de ce constat
 	\item Reconstruire un prénom complet à partir de son abréviation, ce qui passe pas un algorithme qui cherche à reconstruire le nom en plusieurs étapes pour obtenir le nom le plus complet possible avec un mimimum d'erreurs.
 \end{itemize}
 
+Ici, l'approche est totalement prédictive: il est impossible d'être certain d'obtenir le bon nom complet à partir de son abréviation; on peut uniquement prédire que le prénom reconstruit sera conforme au vrai prénom (tel qu'il est écrit sur Wikidata) et chercher à maximiser cette certitude.
+
 \subsection{Extraire des informations normalisées à partir d'un nom et de sa description}
 Cette sous-section détaille l'utilisation de tables de conversion pour traduire et normaliser certaines donnes importantes (dates de vie et mort, titres de noblesse et fonctions).
 
 \section{Extraire des identifiants Wikidata}
-Une fois un dictionnaire de données normalisées produites, un algorithme lance des recherches en plein texte sur l'API de Wikidata afin de récupérer des identifiants. L'algorithme lance plusieurs requêtes successivement. L'objectif est de récupérer un identifiant en lançant le moins de requêtes, avec le plus de certitude possible (ce qui implique de quantifier la certitude).
+Une fois un dictionnaire de données normalisées produites, un algorithme lance des recherches en plein texte sur l'API de Wikidata afin de récupérer des identifiants. L'algorithme lance plusieurs requêtes successivement. L'objectif est de récupérer un identifiant en lançant le moins de requêtes, avec le plus de certitude possible.
 
 \subsection{Présentation générale}
 Ici est présenté le fonctionnement général de l'algorithme, qui se comporte différemment en fonction du type de données qu'il a à traiter (personne noble ou non, prénom reconstruit ou non...)
 
 \subsection{Gérer la montée en charge: optimisation et réduction du temps d'exécution}
-Le script est assez compliqué, repose sur une API et traite un grand nombre de données (plus de 82000 entrées). Il prend donc plus d'une dizaine d'heures à s'exécuter et demande des performances matérielles élevées (la première version du script ne fonctionnait plus sur mon ordinateur après avoir traité 5\% du jeu de données). Son optimisation nécessaire est donc décrite dans cette sous-section
+Le script est assez compliqué, repose sur une API et traite un grand nombre de données (plus de 82000 entrées). Il prend donc plus d'une dizaine d'heures à s'exécuter et demande des ressources élevées (la première version du script ne fonctionnait plus sur mon ordinateur après avoir traité 5\% du jeu de données). L'optimisation nécessaire de l'algorithme est décrite dans cette sous-section.
 
 \subsection{Évaluation du script : tests, performance et qualité des données extraites de Wikidata}
 Des tests ont été réalisés pour:
@@ -311,14 +321,10 @@ Ces tests, et leurs résultats, sont présentés ici.
 
 \section{Après l'alignement, l'enrichissement: utiliser \sparql{} pour produire des données structurées}
 \subsection{Produire des données exploitables via \sparql{}}
-La récupération des identifiants Wikidata est la partie la plus complexe dans l'utilisation de Wikidata pour enrichir des données. Après un rappel sur les informations extraites, le processus d'extraction d'informations et de stockage dans un \json{} est détaillé.
+La récupération des identifiants Wikidata est la partie la plus complexe dans l'utilisation de Wikidata pour enrichir des données. Après une présentation des informations requêtées via \sparql{}, le processus d'extraction d'informations et de stockage dans un \json{} est détaillé.
 
-\subsection{Rendre les données exploitables}
 \subsubsection{Lier la \tei{} aux données nouvellement produites}
 Cette courte section détaille la mise à jour des fichiers \tei{} avec les identifiants Wikidata, ce qui permet de faire le lien entre les entrées de catalogues et les données issues de Wikidata.
-
-\subsubsection{Produire des données permettant d'étudier les facteurs déterminant la valeur d'un manuscrit}
-Ici est détaillé le document produit pour calculer des régressions linéaires sur les manuscrits, et chercher à identifier les valeurs déterminant l'évolution des prix.
 
 \section{Des données à la monnaie: premiers résultats de l'étude}
 Sous réserve que l'étude des régressions linéaires ait été fait à temps (ce qui n'est pas garanti), j'aimerais ici présentés les premiers résultats sur les facteurs de l'évolution des prix.
@@ -352,10 +358,6 @@ En plus de perturber nos méthodes, la conception d'interfaces influence la perc
 \chaptermark{La conception d'interfaces}
 Cette section s'intéresse aux rôle des interfaces en humanités numériques.
 
-% À SUPPRIMER ???
-% \subsection{L'interface comme méthode de communication}
-% Les sites internet sont des médias qui cherchent à communiquer un ou des messages à . Si l'application web de \ktb{} a pour but principal de transmettre des informations, elle cherche aussi à traduire des informations, 
-
 \subsection{Pour une approche pragmatique du design d'interfaces dans un contexte d'humanités numériques}
 Le design graphique demande des compétences spécifiques qui ne font pas directement partie des cursus d'humanités numériques. Il ne sert pas seulement à faire des sites qui soient \enquote{beaux}, il joue un rôle essentiel en encadrant la réception des contenus présentés. Cependant, les approches plus \enquote{élaborées} de design d'interfaces demandent des financements et des techniques qui sont souvent hors de portée d'un projet universitaire. Des approches plus \enquote{critiques} du design ont également été développées dans les humanités numériques\footcite{drucker_visualisation_2020}. Ces approches ont tendance à être difficiles à mettre en œuvre; leur portée critique peut aller à l'encontre de l'utilité des interfaces, en faisant de l'interface l'objet principal d'intérêt, aux dépends des contenus présentés. 
 
@@ -388,33 +390,6 @@ Ici, on développe une analyse du corpus de catalogues et des manuscrits qui y s
 
 \subsection{La visualisation comme interprétation}
 Les représentations graphiques ne font pas que montrer des phénomènes. Leur rôle est moins analytique que démonstratif: elles ne révèlent pas une information qui serait cachée dans les données, mais interprètent celles-ci conformément à une problématique de recherche\footcite[p. 78]{drucker_visualisation_2020}. Représenter un jeu de données, c'est donc le lire, l'interpréter en fonction de certaines questions scientifiques. Ce processus interprétatif est donc partiel (on ne dit pas tout ce qui est dans un jeu de données, mais seulement ce qui est pertinent dans un certain contexte); il est aussi influencé par les propriétés graphiques des visualisations. Cette sous-section s'intéresse donc, à partir d'exemples concrets, à la manière dont les propriétés graphiques (choix de formes et de couleurs) ainsi que le pré-traitement des données et d'autres décisions techniques (représentation des prix en francs courants ou constants) influencent la lecture et la perception du corpus.
-
-% \part{Après la \tei{}: l'application web \textit{Katabase}, interface de diffusion des données}
-% \chapter{Nouvelles présentations du corpus: l'interface web Katabase}
-% \chaptermark{Nouvelles présentations du corpus}
-% Ici, on s'intéresse à la manière dont le site web de Katabase permet de proposer une visualisation différente du corpus:
-% \begin{itemize}
-%  \item création de différentes manières de naviguer dans le corpus et mise en lien entre le corpus et le projet Katabase
-%  \item création d'un algorithme de recherche et de réconciliation des manuscrits, qui recoupe les différentes ventes afin d'identifier si un manuscrit a été vendu plusieurs fois
-%  \item visualisations de données et développement de graphiques interactifs sur la page d'index des catalogues et pour chaque catalogue
-% \end{itemize}
-
-%Les deux premières parties ont été réalisées par Alexandre Bartz. Elles ne concernent pas le cœur du projet. J'y reviens cependant pour mettre en avant que la création d'une interface web implique l'éloignement du document originel. Le site internet marque avant tout un éloignement intellectuel avec les documents: le catalogue n'y est plus l'unité intellectuelle dominante, alors qu'il restait l'un des critères structurants des fichiers \tei{} (un fichier représentant un catalogue). Sur le site web, on peut accéder directement aux éléments vendus, sans avoir à passer par les catalogues. L'éloignement du document originel est aussi technique, puisqu'on abandonne totalement la \tei{} et les formats sémantiques au profit de formats de présentation (\html{}), tout en s'appuyant largement sur des formats \enquote{techniques} et pratiques (le \json, qui est simplement un moyen de rendre des données rapidement accessibles).
-
-
-%%%%%%%%%% à supprimer %%%%%%%%%%%
-% Dans cette partie, je m'intéresserai plus spécifiquement aux problématiques techniques et scientifiques liées à la visualisation de données, qui ont constitué une des missions centrales de mon stage:
-% \begin{itemize}
-%  \item Qu'est-ce que l'on cherche à montrer avec ces visualisations ?
-%  	\item Comment intégrer ces visualisations de manière \enquote{élégante} et efficace au site ? Par exemple, 7 types de graphiques sont produits pour l'index des catalogues. Il faut donc trouver un moyen de tous les présenter, sans pour autant alourdir excessivement la page. La visualisation doit également être pensée en concertation avec le reste du design du site web (largement mis à jour pendant mon stage), et s'intégrer à sa charte graphique.
-% \item Comment construire ces visualisations ? Comment faciliter la lecture d'informations complexes ? Quel impact les visualisations ont-elles sur la perception des informations ? Pour ces problématiques techniques, je pense (entres autres) m'appuyer sur le mémoire de Ségolène Albouy\footcite{albouy_mediation_2019}.
-% \end{itemize}
-
-% \chapter{Visualisation et interfaces: un problème pour les humanités numériques ?}
-% \chaptermark{Visualisation et interfaces}
-% Ce chapitre de conclusion, plus théorique, revient sur les débats actuels concernant le lien entre interfaces graphiques, visualisation de données et humanités numériques. En s'appuyant (entre autres) sur les théories de Johanna Drucker\footcite{drucker_visualisation_2020} et Anthony Masure\footcite{masure_design_2017}, il s'attache à réintégrer les questions \enquote{visuelles} propres aux humanités numériques à un contexte plus large. Le chapitre revient sur les origines des interfaces graphiques (et donc sur les objectifs implicites qui structurent nos interactions avec les machines) ; il cherche à remettre la visualisation dans les humanités numériques en lien avec une tendance globale à la visualisation -- tendance qui vient du monde de l'entreprise, ce qui n'est pas anodin. Du fait de la quantité de significations implicites sous-jacentes à la construction d'interfaces, il est, je pense, nécessaire d'avoir une approche théorique et critique du rapport des humanités numériques aux problématiques de design et aux \enquote{dispositifs}\footcite{agamben_what_2009} que sont nos outils de travail.
-
-
 
 
 %%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHIE %%%%%%%%%%%%%%%%%%%%%%
