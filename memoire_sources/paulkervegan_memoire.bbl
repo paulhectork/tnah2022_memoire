@@ -97,6 +97,150 @@
       \endverb
       \keyw{,visualisation}
     \endentry
+    \entry{bleeker_texts_2021}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=1e094e3c8d40f38324e7fea46fa166ab}{%
+           family={Bleeker},
+           familyi={B\bibinitperiod},
+           given={Elli},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=9528d30817cf9547ce303b8f2d5a5a70}{%
+           family={Haentjens\bibnamedelima Dekker},
+           familyi={H\bibinitperiod\bibinitdelim D\bibinitperiod},
+           given={Ronald},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=78b3e4f94cc6a9a901386747e4d59b06}{%
+           family={Buitendijk},
+           familyi={B\bibinitperiod},
+           given={Bram},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{1e11adfd85e70a444c7f6e365e0da59f}
+      \strng{fullhash}{1e11adfd85e70a444c7f6e365e0da59f}
+      \strng{bibnamehash}{1e11adfd85e70a444c7f6e365e0da59f}
+      \strng{authorbibnamehash}{1e11adfd85e70a444c7f6e365e0da59f}
+      \strng{authornamehash}{1e11adfd85e70a444c7f6e365e0da59f}
+      \strng{authorfullhash}{1e11adfd85e70a444c7f6e365e0da59f}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the Text Encoding Initiative}
+      \field{title}{Texts as Hypergraphs: An Intuitive Representation of Interpretations of Text}
+      \field{urlday}{10}
+      \field{urlmonth}{7}
+      \field{urlyear}{2022}
+      \field{volume}{14}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{doi}
+      \verb https://doi.org/10.4000/jtei.3919
+      \endverb
+      \verb{urlraw}
+      \verb https://journals.openedition.org/jtei/3919
+      \endverb
+      \verb{url}
+      \verb https://journals.openedition.org/jtei/3919
+      \endverb
+      \keyw{,text}
+    \endentry
+    \entry{burnard_what_2019}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=277f5a773aab2b436af3bd283c432331}{%
+           family={Burnard},
+           familyi={B\bibinitperiod},
+           given={Lou},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{277f5a773aab2b436af3bd283c432331}
+      \strng{fullhash}{277f5a773aab2b436af3bd283c432331}
+      \strng{bibnamehash}{277f5a773aab2b436af3bd283c432331}
+      \strng{authorbibnamehash}{277f5a773aab2b436af3bd283c432331}
+      \strng{authornamehash}{277f5a773aab2b436af3bd283c432331}
+      \strng{authorfullhash}{277f5a773aab2b436af3bd283c432331}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the Text Encoding Initiative}
+      \field{title}{What is {TEI} conformance, and why should you care?}
+      \field{urlday}{10}
+      \field{urlmonth}{7}
+      \field{urlyear}{2022}
+      \field{volume}{12}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{doi}
+      \verb https://doi.org/10.4000/jtei.1777
+      \endverb
+      \verb{urlraw}
+      \verb https://journals.openedition.org/jtei/1777
+      \endverb
+      \verb{url}
+      \verb https://journals.openedition.org/jtei/1777
+      \endverb
+      \keyw{,text}
+    \endentry
+    \entry{burnard_search_2021}{article}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=277f5a773aab2b436af3bd283c432331}{%
+           family={Burnard},
+           familyi={B\bibinitperiod},
+           given={Lou},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=843e31b2bcf7ff6fe7b9bf0450e9cc81}{%
+           family={Schöch},
+           familyi={S\bibinitperiod},
+           given={Christian},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=481bf6e7cfccac1c6e1c0c3940c315d3}{%
+           family={Odebrecht},
+           familyi={O\bibinitperiod},
+           given={Carolin},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{6a29b5ff515cdd6c622622e6a8cd49c3}
+      \strng{fullhash}{6a29b5ff515cdd6c622622e6a8cd49c3}
+      \strng{bibnamehash}{6a29b5ff515cdd6c622622e6a8cd49c3}
+      \strng{authorbibnamehash}{6a29b5ff515cdd6c622622e6a8cd49c3}
+      \strng{authornamehash}{6a29b5ff515cdd6c622622e6a8cd49c3}
+      \strng{authorfullhash}{6a29b5ff515cdd6c622622e6a8cd49c3}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Journal of the Text Encoding Initiative}
+      \field{title}{In search of comity: {TEI} for distant reading}
+      \field{urlday}{12}
+      \field{urlmonth}{7}
+      \field{urlyear}{2022}
+      \field{volume}{14}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{doi}
+      \verb https://doi.org/10.4000/jtei.3500
+      \endverb
+      \verb{urlraw}
+      \verb https://journals.openedition.org/jtei/3500
+      \endverb
+      \verb{url}
+      \verb https://journals.openedition.org/jtei/3500
+      \endverb
+      \keyw{,text}
+    \endentry
     \entry{christensen_segmonto_2022}{inproceedings}{}
       \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=924d6687f037178387f3d71baf1c72f5}{%
@@ -323,6 +467,7 @@
       \strng{authorbibnamehash}{19260dbbe635aee5f8a6812d16a87608}
       \strng{authornamehash}{19260dbbe635aee5f8a6812d16a87608}
       \strng{authorfullhash}{5e105d1e14b6533e50a8602c2040ff99}
+      \field{extraname}{1}
       \field{sortinit}{G}
       \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
       \field{labelnamesource}{author}
@@ -346,6 +491,65 @@
       \verb https://hal.archives-ouvertes.fr/hal-02898929/
       \endverb
       \keyw{,katabase}
+    \endentry
+    \entry{gabay_segmonto_2021}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=7fe1ec35c644906499707ac25bc7780b}{%
+           family={Gabay},
+           familyi={G\bibinitperiod},
+           given={Simon},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=16d4f02e5493261103bfb3611317d21d}{%
+           family={Camps},
+           familyi={C\bibinitperiod},
+           given={Jean-Baptiste},
+           giveni={J\bibinithyphendelim B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=865eef5eb27967d9e0c01708cbad832e}{%
+           family={Pinche},
+           familyi={P\bibinitperiod},
+           given={Ariane},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d48bf71e7a1f56d04892a46765d32dd3}{%
+           family={Jahan},
+           familyi={J\bibinitperiod},
+           given={Claire},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {Lausanne}%
+      }
+      \strng{namehash}{19260dbbe635aee5f8a6812d16a87608}
+      \strng{fullhash}{dccce71b2a2c4037e39f8d921ac6f93f}
+      \strng{bibnamehash}{19260dbbe635aee5f8a6812d16a87608}
+      \strng{authorbibnamehash}{19260dbbe635aee5f8a6812d16a87608}
+      \strng{authornamehash}{19260dbbe635aee5f8a6812d16a87608}
+      \strng{authorfullhash}{dccce71b2a2c4037e39f8d921ac6f93f}
+      \field{extraname}{2}
+      \field{sortinit}{G}
+      \field{sortinithash}{62eb2aa29549e4fdbd3cb154ec5711cb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{1st International Workshop on Computational Paleography ({IWCP}@{ICDAR} 2021)}
+      \field{month}{9}
+      \field{title}{{SegmOnto}: common vocabulary and practices for analysing the layout of manuscripts (and more)}
+      \field{urlday}{29}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://hal.archives-ouvertes.fr/hal-03336528
+      \endverb
+      \verb{url}
+      \verb https://hal.archives-ouvertes.fr/hal-03336528
+      \endverb
+      \keyw{,text}
     \endentry
     \entry{hentschel_visual_2014}{book}{}
       \name{author}{1}{}{%
@@ -602,6 +806,52 @@
       \field{dateera}{ce}
       \true{nocite}
       \keyw{,visualisation}
+    \endentry
+    \entry{de_maupeou_les_2013}{article}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=8ccd9152f31bb04998b0c7e494df253c}{%
+           family={Maupeou},
+           familyi={M\bibinitperiod},
+           given={Félicie\bibnamedelima Faizand},
+           giveni={F\bibinitperiod\bibinitdelim F\bibinitperiod},
+           givenun=0,
+           prefix={de},
+           prefixi={d\bibinitperiod},
+           prefixun=0}}%
+        {{un=0,uniquepart=base,hash=023c2e1cc7764831b0bab7b8f4cfb326}{%
+           family={Saint-Raymond},
+           familyi={S\bibinithyphendelim R\bibinitperiod},
+           given={Léa},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{4ac95d6a0d7c5f81b92d91d987dc29cd}
+      \strng{fullhash}{4ac95d6a0d7c5f81b92d91d987dc29cd}
+      \strng{bibnamehash}{4ac95d6a0d7c5f81b92d91d987dc29cd}
+      \strng{authorbibnamehash}{4ac95d6a0d7c5f81b92d91d987dc29cd}
+      \strng{authornamehash}{4ac95d6a0d7c5f81b92d91d987dc29cd}
+      \strng{authorfullhash}{4ac95d6a0d7c5f81b92d91d987dc29cd}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Artl@s Bulletin}
+      \field{title}{Les ``marchands de tableaux” dans le Bottin du commerce : une approche globale du marché de l’art à Paris entre 1815 et 1955}
+      \field{urlday}{20}
+      \field{urlmonth}{6}
+      \field{urlyear}{1997}
+      \field{volume}{2}
+      \field{year}{2013}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://hal.archives-ouvertes.fr/hal-02986371
+      \endverb
+      \verb{url}
+      \verb https://hal.archives-ouvertes.fr/hal-02986371
+      \endverb
+      \keyw{,econometrie}
     \endentry
     \entry{orain_laboratoire_2021}{inproceedings}{}
       \name{author}{1}{}{%
@@ -990,6 +1240,109 @@
       \endverb
       \verb{url}
       \verb http://books.openedition.org/obp/3397
+      \endverb
+      \keyw{,text}
+    \endentry
+    \entry{saint-raymond_revisiting_2019}{article}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=023c2e1cc7764831b0bab7b8f4cfb326}{%
+           family={Saint-Raymond},
+           familyi={S\bibinithyphendelim R\bibinitperiod},
+           given={Léa},
+           giveni={L\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{023c2e1cc7764831b0bab7b8f4cfb326}
+      \strng{fullhash}{023c2e1cc7764831b0bab7b8f4cfb326}
+      \strng{bibnamehash}{023c2e1cc7764831b0bab7b8f4cfb326}
+      \strng{authorbibnamehash}{023c2e1cc7764831b0bab7b8f4cfb326}
+      \strng{authornamehash}{023c2e1cc7764831b0bab7b8f4cfb326}
+      \strng{authorfullhash}{023c2e1cc7764831b0bab7b8f4cfb326}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Arts}
+      \field{number}{3}
+      \field{title}{Revisiting Harrison and Cynthia White’s Academic vs. Dealer-Critic System}
+      \field{urlday}{15}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{volume}{8}
+      \field{year}{2019}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{doi}
+      \verb https://doi.org/10.3390/arts8030096
+      \endverb
+      \verb{urlraw}
+      \verb https://mdpi-res.com/d_attachment/arts/arts-08-00096/article_deploy/arts-08-00096-v2.pdf?version=1564630122
+      \endverb
+      \verb{url}
+      \verb https://mdpi-res.com/d_attachment/arts/arts-08-00096/article_deploy/arts-08-00096-v2.pdf?version=1564630122
+      \endverb
+      \keyw{,econometrie}
+    \endentry
+    \entry{stokes_escriptorium_2021}{article}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=df5c68c50d314fc9e0da5e2edebff8f5}{%
+           family={Stokes},
+           familyi={S\bibinitperiod},
+           given={Peter\bibnamedelima A.},
+           giveni={P\bibinitperiod\bibinitdelim A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=77c03197328a537f9c8626447cee396b}{%
+           family={Kiessling},
+           familyi={K\bibinitperiod},
+           given={Benjamin},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=09ea845b6a7b6bfc728cda12ec98be25}{%
+           family={Stökl\bibnamedelimb Ben\bibnamedelima Ezra},
+           familyi={S\bibinitperiod\bibinitdelim B\bibinitperiod\bibinitdelim E\bibinitperiod},
+           given={Daniel},
+           giveni={D\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=a29c644caee3912d89cab4b276b89b91}{%
+           family={Tissot},
+           familyi={T\bibinitperiod},
+           given={Robin},
+           giveni={R\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=d58a2bfa248b7f9cef26fe5266ec904a}{%
+           family={Gargem},
+           familyi={G\bibinitperiod},
+           given={Hassane},
+           giveni={H\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{1806899ef3ac44a399cef95adfb35a20}
+      \strng{fullhash}{290097bae6055464bcd87ce2a273b00c}
+      \strng{bibnamehash}{1806899ef3ac44a399cef95adfb35a20}
+      \strng{authorbibnamehash}{1806899ef3ac44a399cef95adfb35a20}
+      \strng{authornamehash}{1806899ef3ac44a399cef95adfb35a20}
+      \strng{authorfullhash}{290097bae6055464bcd87ce2a273b00c}
+      \field{sortinit}{S}
+      \field{sortinithash}{c319cff79d99c853d775f88277d4e45f}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2327-2996}
+      \field{journaltitle}{Classics@ Journal}
+      \field{title}{The {eScriptorium} {VRE} for Manuscript Cultures}
+      \field{urlday}{14}
+      \field{urlmonth}{7}
+      \field{urlyear}{2022}
+      \field{volume}{18}
+      \field{year}{2021}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://classics-at.chs.harvard.edu/classics18-stokes-kiessling-stokl-ben-ezra-tissot-gargem/
+      \endverb
+      \verb{url}
+      \verb https://classics-at.chs.harvard.edu/classics18-stokes-kiessling-stokl-ben-ezra-tissot-gargem/
       \endverb
       \keyw{,text}
     \endentry

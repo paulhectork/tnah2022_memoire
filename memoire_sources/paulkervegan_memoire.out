@@ -18,8 +18,8 @@
 \BOOKMARK [2][-]{subsection.3.1.1}{Pourquoi chercher à normaliser le corpus?}{section.3.1}% 18
 \BOOKMARK [2][-]{subsection.3.1.2}{Comment normaliser le corpus tout en préservant sa valeur documentaire?}{section.3.1}% 19
 \BOOKMARK [1][-]{section.3.2}{Faire\040sens\040du\040corpus:\040extraction\040d'informations\040et\040fouille\040de\040texte}{chapter.3}% 20
-\BOOKMARK [2][-]{subsection.3.2.1}{Extraire\040des\040informations\040au\040niveau\040des\040catalogues}{section.3.2}% 21
-\BOOKMARK [2][-]{subsection.3.2.2}{Extraire des informations au niveau des entrées}{section.3.2}% 22
+\BOOKMARK [2][-]{subsection.3.2.1}{Extraire des informations au niveau des entrées}{section.3.2}% 21
+\BOOKMARK [2][-]{subsection.3.2.2}{Extraire\040des\040informations\040au\040niveau\040des\040catalogues}{section.3.2}% 22
 \BOOKMARK [2][-]{subsection.3.2.3}{Vers une approche économique du corpus: la conversion automatique des prix en francs constants}{section.3.2}% 23
 \BOOKMARK [0][-]{chapter.4}{Vers une étude des facteurs déterminant le prix des documents: alignement des entrées du catalogue avec Wikidata et exploitation de données normalisées}{part.2}% 24
 \BOOKMARK [1][-]{section.4.1}{Questions\040introductives:\040pourquoi\040et\040comment\040s'aligner\040avec\040Wikidata\040?}{chapter.4}% 25
@@ -39,27 +39,30 @@
 \BOOKMARK [2][-]{subsection.4.3.2}{Gérer la montée en charge: optimisation et réduction du temps d'exécution}{section.4.3}% 39
 \BOOKMARK [2][-]{subsection.4.3.3}{Évaluation du script : tests, performance et qualité des données extraites de Wikidata}{section.4.3}% 40
 \BOOKMARK [1][-]{section.4.4}{Après l'alignement, l'enrichissement: utiliser SPARQL pour produire des données structurées}{chapter.4}% 41
-\BOOKMARK [2][-]{subsection.4.4.1}{Produire des données exploitables via SPARQL}{section.4.4}% 42
-\BOOKMARK [1][-]{section.4.5}{Des données à la monnaie: premiers résultats de l'étude}{chapter.4}% 43
-\BOOKMARK [-1][-]{part.3}{III Après la TEI: l'application web Katabase, interface de diffusion des données}{}% 44
-\BOOKMARK [0][-]{chapter.5}{Design d'interface dans un projet d'humanités numériques: l'application web Katabase}{part.3}% 45
-\BOOKMARK [1][-]{section.5.1}{Le design d'interfaces: une reconfiguration des méthodes de recherche et une transformation du corpus}{chapter.5}% 46
-\BOOKMARK [2][-]{subsection.5.1.1}{Le design comme inversion des méthodes}{section.5.1}% 47
-\BOOKMARK [2][-]{subsection.5.1.2}{Interface\040et\040document}{section.5.1}% 48
-\BOOKMARK [1][-]{section.5.2}{La conception d'interface, un problème pour les humanités numériques?}{chapter.5}% 49
-\BOOKMARK [2][-]{subsection.5.2.1}{Pour une approche pragmatique du design d'interfaces dans un contexte d'humanités numériques}{section.5.2}% 50
-\BOOKMARK [2][-]{subsection.5.2.2}{Rejeter\040les\040interfaces?}{section.5.2}% 51
-\BOOKMARK [0][-]{chapter.6}{Donner à voir un corpus textuel}{part.3}% 52
-\BOOKMARK [1][-]{section.6.1}{Visualisation,\040design\040et\040sciences:\040des\040relations\040complexes}{chapter.6}% 53
-\BOOKMARK [2][-]{subsection.6.1.1}{L'utilisation\040de\040supports\040visuels\040dans\040les\040sciences:\040une\040longue\040histoire}{section.6.1}% 54
-\BOOKMARK [2][-]{subsection.6.1.2}{Une vision objective? Visualisation et prétention à l'objectivité}{section.6.1}% 55
-\BOOKMARK [2][-]{subsection.6.1.3}{La tendance visuelle des humanités numériques}{section.6.1}% 56
-\BOOKMARK [1][-]{section.6.2}{Interpréter le corpus de manuscrits}{chapter.6}% 57
-\BOOKMARK [2][-]{subsection.6.2.1}{La\040visualisation\040comme\040objet\040de\040connaissance}{section.6.2}% 58
-\BOOKMARK [2][-]{subsection.6.2.2}{La visualisation comme interprétation}{section.6.2}% 59
-\BOOKMARK [0][-]{chapter*.6}{Bibliographie}{part.3}% 60
-\BOOKMARK [1][-]{section*.7}{Projet\040MSS\040/\040Katabase}{chapter*.6}% 61
-\BOOKMARK [1][-]{section*.8}{Édition numérique, traitement automatisé et analyse de texte}{chapter*.6}% 62
-\BOOKMARK [1][-]{section*.9}{Visualisation\040et\040design\040d'interfaces}{chapter*.6}% 63
-\BOOKMARK [1][-]{section*.10}{Économétrie et statistiques}{chapter*.6}% 64
-\BOOKMARK [0][-]{chapter*.11}{Table des matières}{part.3}% 65
+\BOOKMARK [2][-]{subsection.4.4.1}{Présentation générale}{section.4.4}% 42
+\BOOKMARK [2][-]{subsection.4.4.2}{Développer un comportement uniforme pour produire des données exploitables à partir un corpus hétérogène}{section.4.4}% 43
+\BOOKMARK [2][-]{subsection.4.4.3}{Minimiser\040la\040perte:\040optimisation\040et\040gestion\040des\040erreurs}{section.4.4}% 44
+\BOOKMARK [2][-]{subsection.4.4.4}{Lier la TEI aux données nouvellement produites}{section.4.4}% 45
+\BOOKMARK [1][-]{section.4.5}{Des données à la monnaie: premiers résultats de l'étude}{chapter.4}% 46
+\BOOKMARK [-1][-]{part.3}{III Après la TEI: l'application web Katabase, interface de diffusion des données}{}% 47
+\BOOKMARK [0][-]{chapter.5}{Design d'interfaces dans un projet d'humanités numériques: l'application web Katabase}{part.3}% 48
+\BOOKMARK [1][-]{section.5.1}{Le design d'interfaces: une reconfiguration des méthodes de recherche et une transformation du corpus}{chapter.5}% 49
+\BOOKMARK [2][-]{subsection.5.1.1}{Le design comme inversion des méthodes}{section.5.1}% 50
+\BOOKMARK [2][-]{subsection.5.1.2}{Interface\040et\040document}{section.5.1}% 51
+\BOOKMARK [1][-]{section.5.2}{La conception d'interfaces, un problème pour les humanités numériques?}{chapter.5}% 52
+\BOOKMARK [2][-]{subsection.5.2.1}{Pour une approche pragmatique du design d'interfaces dans un contexte d'humanités numériques}{section.5.2}% 53
+\BOOKMARK [2][-]{subsection.5.2.2}{Rejeter\040les\040interfaces?}{section.5.2}% 54
+\BOOKMARK [0][-]{chapter.6}{Donner à voir un corpus textuel}{part.3}% 55
+\BOOKMARK [1][-]{section.6.1}{Visualisation,\040design\040et\040sciences:\040des\040relations\040complexes}{chapter.6}% 56
+\BOOKMARK [2][-]{subsection.6.1.1}{L'utilisation\040de\040supports\040visuels\040dans\040les\040sciences:\040une\040longue\040histoire}{section.6.1}% 57
+\BOOKMARK [2][-]{subsection.6.1.2}{Une vision objective? Visualisation et prétention à l'objectivité}{section.6.1}% 58
+\BOOKMARK [2][-]{subsection.6.1.3}{La tendance visuelle des humanités numériques}{section.6.1}% 59
+\BOOKMARK [1][-]{section.6.2}{Interpréter le corpus de manuscrits}{chapter.6}% 60
+\BOOKMARK [2][-]{subsection.6.2.1}{La\040visualisation\040comme\040objet\040de\040connaissance}{section.6.2}% 61
+\BOOKMARK [2][-]{subsection.6.2.2}{La visualisation comme interprétation}{section.6.2}% 62
+\BOOKMARK [0][-]{chapter*.5}{Bibliographie}{part.3}% 63
+\BOOKMARK [1][-]{section*.6}{Projet\040MSS\040/\040Katabase}{chapter*.5}% 64
+\BOOKMARK [1][-]{section*.7}{Édition numérique, traitement automatisé et analyse de texte}{chapter*.5}% 65
+\BOOKMARK [1][-]{section*.8}{Visualisation\040et\040design\040d'interfaces}{chapter*.5}% 66
+\BOOKMARK [1][-]{section*.9}{Marché de l'art, économétrie et statistiques}{chapter*.5}% 67
+\BOOKMARK [0][-]{chapter*.10}{Table des matières}{part.3}% 68
