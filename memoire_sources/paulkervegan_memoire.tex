@@ -14,7 +14,11 @@
 
 % code et couleurs
 \usepackage{minted}
+\usemintedstyle{pastie}
 \usepackage{tikz}
+
+% images
+\usepackage{subcaption}
 
 % mise en page ENC
 \usepackage[margin=2.5cm]{geometry}
@@ -83,12 +87,14 @@
 
 % commandes perso: autres que les abbréviations
 \newcommand{\scl}[1]{%
+	% #1 : le siècle en chiffres romains
 	#1%
 	\ifthenelse{\equal{#1}{I}}{\up{er}}{\up{ème}}%
 	~s.%
 }
 
 % commandes perso: abréviations
+% technologies en mono, sigles et sites web en italique
 \newcommand{\api}{\texttt{API}}
 \newcommand{\alto}{\texttt{Alto}}
 \newcommand{\escr}{\textit{eScriptorium}}
@@ -100,11 +106,24 @@
 \newcommand{\mssktb}{\mss{} / \ktb{}}
 \newcommand{\py}{\texttt{Python}}
 \newcommand{\rgx}{\textit{expressions régulières}}
+\newcommand{\rdf}{\texttt{RDF}}
 \newcommand{\sparql}{\texttt{SPARQL}}
 \newcommand{\tei}{\texttt{TEI}}
+
+\newcommand{\titem}{\texttt{item}}
+\newcommand{\tname}{\texttt{name}}
+\newcommand{\tnum}{\texttt{num}}
+\newcommand{\ttrait}{\texttt{trait}}
+\newcommand{\tp}{\texttt{p}}
+\newcommand{\tdesc}{\texttt{desc}}
+\newcommand{\tdate}{\texttt{date}}
+\newcommand{\tmeasure}{\texttt{measure}}
+\newcommand{\tnote}{\texttt{note}}
+
 \newcommand{\xml}{\texttt{XML}}
 \newcommand{\xmltei}{\texttt{XML-TEI}}
 \newcommand{\xsl}{\texttt{XSL}}
+\newcommand{\wkd}{\textit{Wikidata}}
 
 % modèle: https://www.overleaf.com/project/61a6185ee83481070ab68d99
 % liste des mémoires: https://docs.google.com/spreadsheets/d/1CZRaEX4BMqHNtqr97Dhg9UV9bPTt_4XS_IgPL5A-ZbU/edit
@@ -212,6 +231,7 @@ Après une étape d'océrisation via \escr{}, le texte extrait des PDF peut êtr
 
 L'édition numérique en \xmltei{} des catalogues implique une certaine perte d'informations: l'intégralité des significations contenues dans les catalogues imprimés ne peut être traduite en \tei{} (la police, ou la qualité du papier, peuvent être documentés mais ne peuvent pas être reproduites). Ce genre de perte d'information a lieu, à différents degrés, dans la plupart des éditions \tei{}: ce format n'est pas un substitut des documents originels. Dans le projet \mssktb{}, d'autres informations sont perdues: l'édition numérique n'est pas censée être une représentation exhaustive des catalogues. La \tei{} n'est pas utilisée comme un format de conservation, mais comme un format de traitement qui sera enrichi dans les différentes étapes. Afin de mesurer ce qui est conservé et ce qui est perdu du document originel, l'édition \tei{} sera analysée à la lumière de la \enquote{roue du texte} du philologue Patrick Sahle\footcite[p. 11]{sahle_digital_2016} qui modélise les significations plurielles d'un texte.
 
+John Frow + Susan Pearce ?
 
 
 %%%%%%%%%%%%%%%%%%%%%%% DEUXIEME PARTIE %%%%%%%%%%%%%%%%%%%%%%
@@ -242,47 +262,107 @@ Un second processus d'extraction produit des données pour chaque catalogue de v
 En même temps que ces processus d'extraction d'informations, un script de conversion des monnaies (françaises et étrangères) en francs constants 1900 a été élaboré. En annulant l'effet de l'inflation, les francs constant permettent d'étudier l'évolution réelle des prix.
 
 
-\chapter{Vers une étude des facteurs déterminant le prix des documents: alignement des entrées du catalogue avec Wikidata et exploitation de données normalisées}
+\chapter{Vers une étude des facteurs déterminant le prix des documents: alignement des entrées du catalogue avec \wkd{} et exploitation de données normalisées}
 \chaptermark{Vers une étude...}
-Ce chapitre est construit autour d'une question de recherche: comment produire des informations exploitables pour une étude économétrique à partir d'un corpus textuel semi-structuré? Un des objectifs du projet est de faire l'étude des facteurs déterminant le prix d'un manuscrit. Pour faire cette étude, il faut obtenir, pour chaque entrée du catalogue, un certain nombre d'informations normalisées. Le travail d'extraction de données présentes dans les catalogues a déjà été fait par de précédent.e.s stagiaires. Ces données sont principalement quantitatives: prix des manuscrits, dimensions et nombre de pages, date de création. Il est nécessaire de compléter les informations par des données qualitatives et d'enrichir les données disponibles avec des sources extérieures. Pour ce faire, il a été choisi d'aligner le nom des auteur.rice.s des manuscrits avec des identifiants Wikidata; dès lors que l'on a un identifiant Wikidata, il est possible de récupérer automatiquement des informations sur les personnes via \sparql. Le choix de travailler uniquement sur les noms, et non sur la description des documents, a deux motivations:
+Ce chapitre est construit autour d'une question de recherche: comment produire des informations exploitables pour une étude économétrique à partir d'un corpus textuel semi-structuré? Un des objectifs du projet est de faire l'étude des facteurs déterminant le prix d'un manuscrit. Pour faire cette étude, il faut obtenir, pour chaque entrée du catalogue, un certain nombre d'informations normalisées. Le travail d'extraction de données présentes dans les catalogues a déjà été fait par de précédent.e.s stagiaires. Ces données sont principalement quantitatives: prix des manuscrits, dimensions et nombre de pages, date de création. Il est nécessaire de compléter les informations par des données qualitatives et d'enrichir les données disponibles avec des sources extérieures. Pour ce faire, il a été choisi d'aligner le nom des auteur.rice.s des manuscrits avec des identifiants \wkd{}; dès lors que l'on a un identifiant \wkd{}, il est possible de récupérer automatiquement des informations sur les personnes via \sparql. Le choix de travailler uniquement sur les noms, et non sur la description des documents, a deux motivations:
 \begin{itemize}
-	\item Les noms de personnes (et la manière dont elles sont décrites) constituent la partie la plus normalisée des documents. La description des manuscrits est plutôt en \enquote{texte libre}. Dans la continuité avec le reste du projet, nous sommes resté dans une approche \enquote{basse technologie}, qui consiste à s'appuyer majoritairement sur des solutions techniquement simples. C'est pourquoi nous avons préférer traiter les noms avec des tables de correspondance\footnote{C'est à dire, des tables qui permettent de normaliser la manière dont les informations figurent dans les catalogues, et donc de remplacer des termes \enquote{vernaculaires} par leurs équivalents utilisés par Wikidata} et des \rgx{}, plutôt que de faire du TAL sur la description des documents.
+	\item Les noms de personnes (et la manière dont elles sont décrites) constituent la partie la plus normalisée des documents. La description des manuscrits est plutôt en \enquote{texte libre}. Dans la continuité avec le reste du projet, nous sommes resté dans une approche \enquote{basse technologie}, qui consiste à s'appuyer majoritairement sur des solutions techniquement simples. C'est pourquoi nous avons préférer traiter les noms avec des tables de correspondance\footnote{C'est à dire, des tables qui permettent de normaliser la manière dont les informations figurent dans les catalogues, et donc de remplacer des termes \enquote{vernaculaires} par leurs équivalents utilisés par \wkd{}} et des \rgx{}, plutôt que de faire du TAL sur la description des documents.
 	\item Toutes les informations \enquote{simples} (données quantitatives facilement normalisables: dates etc.) ont déjà été extraites des descriptions des manuscrits.
 \end{itemize}
 
 Ce travail d'enrichissement a été fait en deux temps. 
 
-La première étape, et la plus difficile, est l'alignement avec Wikidata. Cela demande d'extraire un ensemble d'informations à partir du nom de la personne et de la description de celle-ci. Parmi les informations extraites: nom, prénom, titre de noblesse, occupation, dates de vie et de mort. À partir de ces informations, stockées dans un dictionnaire, un algorithme construit successivement différentes chaînes de caractères pour lancer des recherchers en plein texte sur l'\api{} de Wikidata. L'objectif est que le premier résultat recherché sur Wikidata soit correct. Sur un jeu de test, le score F1 \footnote{Le score F1, ou \textit{F-score}, est la moyenne harmonique de la précision (vrais positifs par rapport au total de résultats obtenus) et du rappel (nombre de résultats positifs par rapport au total de résultats positifs).\footcite{noauthor_precision_2022}} obtenu est de 68\%. Un relecture \enquote{manuelle} des résultats est donc nécessaire.
+La première étape, et la plus difficile, est l'alignement avec \wkd{}. Cela demande d'extraire un ensemble d'informations à partir du nom de la personne et de la description de celle-ci. Parmi les informations extraites: nom, prénom, titre de noblesse, occupation, dates de vie et de mort. À partir de ces informations, stockées dans un dictionnaire, un algorithme construit successivement différentes chaînes de caractères pour lancer des recherchers en plein texte sur l'\api{} de \wkd{}. L'objectif est que le premier résultat recherché sur \wkd{} soit correct. Sur un jeu de test, le score F1 \footnote{Le score F1, ou \textit{F-score}, est la moyenne harmonique de la précision (vrais positifs par rapport au total de résultats obtenus) et du rappel (nombre de résultats positifs par rapport au total de résultats positifs).\cite{noauthor_precision_2022}} obtenu est de 68\%. Un relecture \enquote{manuelle} des résultats est donc nécessaire.
 
-La deuxième étape, nettement plus simple, consiste à lancer des requêtes Wikidata sur les identifiants récupérés afin de récupérer des informations sur les auteur.rice.s des manuscrits (cette partie du travail est encore en cours) pour enrichir nos données.
+La deuxième étape, nettement plus simple, consiste à lancer des requêtes \wkd{} sur les identifiants récupérés afin de récupérer des informations sur les auteur.rice.s des manuscrits (cette partie du travail est encore en cours) pour enrichir nos données.
 
-Une fois ce travail effectué, l'enrichissement des données à proprement parler est possible: les fichiers \tei{} sont mis à jour pour ajouter les identifiants Wikidata. Ainsi, il est possible de faire le lien entre les entrées de catalogues dans des fichiers \xml{} et les données issues de requêtes \sparql{}, stockées dans un \json.
+Une fois ce travail effectué, l'enrichissement des données à proprement parler est possible: les fichiers \tei{} sont mis à jour pour ajouter les identifiants \wkd{}. Ainsi, il est possible de faire le lien entre les entrées de catalogues dans des fichiers \xml{} et les données issues de requêtes \sparql{}, stockées dans un \json.
 
 
-\section{Questions introductives: pourquoi et comment s'aligner avec Wikidata ?}
+\section{Questions introductives: pourquoi et comment s'aligner avec \wkd{} ?}
 \chaptermark{Questions introductives}
-Cette section, introductive, répond à des questions évidentes mais essentielles: elles permettent de mettre au clair l'intérêt et les (multiples) difficultés dans l'alignement avec Wikidata.
+Cette section, introductive, répond à des questions évidentes mais essentielles: elles permettent de mettre au clair l'intérêt et les (multiples) difficultés dans l'alignement avec \wkd{}.
 
-\subsection{Pourquoi s'aligner avec des identifiants Wikidata?} 
-Nos données sont déjà complètes, une pipeline entière existe déjà. Cependant, il peut être difficile de déterminer ce qui fait le prix d'un manuscrit. On aborde les manuscrits avec nos propres catégories intellectuelles du \scl{XXI}, et notre connaissance de l'histoire de l'époque. Il n'est pas non plus possible de reconstruire d'une manière exacte le regard qu'un public du \scl{XIX} aurait sur ces manuscrits -- ce qui permettait de revenir à une perception antérieure de la valeur. Il faut donc chercher à contourner ces biais en produisant des données aussi objectives que possibles. Ainsi, un maximum de variables sont à notre disposition pour calculer des régressions linéaires (qui permettent de prédire l'impact d'une variable sur l'évolution des prix).
+\subsection{Pourquoi s'aligner avec des identifiants \wkd{}?} 
+% Nos données sont déjà complètes, une pipeline entière existe déjà. Cependant, il peut être difficile de déterminer ce qui fait le prix d'un manuscrit. On aborde les manuscrits avec nos propres catégories intellectuelles du \scl{XXI}, et notre connaissance de l'histoire de l'époque. Il n'est pas non plus possible de reconstruire d'une manière exacte le regard qu'un public du \scl{XIX} aurait sur ces manuscrits -- ce qui permettait de revenir à une perception antérieure de la valeur. Il faut donc chercher à contourner ces biais en produisant des données aussi objectives que possibles. Ainsi, un maximum de variables sont à notre disposition pour calculer des régressions linéaires (qui permettent de prédire l'impact d'une variable sur l'évolution des prix).
+
+L'alignement avec \wkd{} a pour objectif principal de mieux comprendre les déterminants du prix des manuscrits sur le marché du \scl{XIX}. Mais pourquoi passer par un alignement avec \wkd{}? 
+
+Pour étudier les déterminants du prix d'un manuscrit, il faut établir la relation entre la variable dont la valeur est étudiée (le prix d'un manuscrit) et un ensemble d'autres facteurs (qui a écrit un manuscrit, quelles sont ses dimensions, de quand date le document...). En d'autres termes, il faut étudier le comportement d'une variable en fonction d'autres variables. En économétrie, cette opération s'appelle le calcul de régressions linéaires. La variable étudiée (le prix) est dite la variable expliquée; les facteurs déterminant la valeur de cette variable sont dites \enquote{variables explicatives}\footcite{noauthor_regression_2022}. Cependant, cette opération est loin d'être anodine: il faut d'abord identifier les variables pertinentes, et ensuite trouver un moyen de les quantifier. Deux difficultés se présentent pour alors.
+
+Premièrement, il faut pouvoir quantifier les variables expliquées pour calculer des régressions linéaires. Il est possible de leur assigner une valeur numéraire (ce qui est aisé pour les informations quantitatives des catalogues: la date de l'écriture d'un manuscrit, ses les dimensions). Une autre possibilité est de quantifier la présence ou non d'une variable: mention d'un.e destinataire ou du contenu d'un manuscrit. Cependant, ces approches quantitatives ne permettent pas de quantifier des informations complexes, comme la célébrité des auteur.ice.s, ou encore si un manuscrit porte sur un évènement historique ou biographique important (le manuscrit d'un texte célèbre, par exemple, pourrait avoir une valeur particulières). Ces informations sont parfois être présentes dans les catalogues; elles peuvent aussi être connues des lecteur.ice.s d'aujourd'hui et des acheteurs et acheteuses de l'époque. Il n'existe cependant pas de méthodes faciles pour détecter ou quantifier la célébrité d'une personne, ou l'importance d'un sujet.
+
+Une deuxième difficulté découle justement de la part d'implicite qu'il y a dans les catalogues. Les descriptions des items vendus sont brèves, et comprendre ce qui fait la valeur d'un manuscrit demande aux acheteur.euse.s d'avoir des références culturelles et historiques: celles-ci permettent d'identifier l'auteur.ice ou le sujet, et donc pour comprendre la valeur d'un manuscrit. Dans le cadre du projet \mssktb{}, les entrées de catalogues sont traitées par une machine qui, en toute logique, ne dispose pas de ces références. La compréhension qualitative des entrées de catalogues n'est donc pas compatible avec l'approche par lecture distante du projet. Pour éviter de perdre ces informations qualitatives essentielles, il est donc nécessaire de trouver un moyen de quantifier le qualitatif.
+
+En bref, la question est: comment faire la différence entre une lettre de La Rochefoucauld (\ref{fig:rochefoucauld}), vendue 200 francs, et la deuxième (\ref{fig:villars}), vendue à 30 francs? Le problème est un problème de lecture. Une observation de la description des lettres par un être humain comme par une machine peuvent identifier des éléments semblables dans le texte: les deux lettres sont écrites par des ducs; l'une est une \enquote{Très-belle lettre} (\ref{fig:rochefoucauld}), l'autre est une \enquote{Lettre intéressante} (\ref{fig:villars})\footnote{Ce sont des informations qui se retrouvent souvent, et il est donc possible d'écrire un programme qui les relève automatiquement}. Bien que les lettres partagent des attributs, il y a une forte différence de prix entre les deux manuscrits. Un.e lecteur.ice peut trouver une raison à cette différence de prix: La Rochefoucauld et Madeleine de Scudéry n'ont pas le même statut que le duc de Villars. Un regard humain peut donc interpréter un prix et déterminer une valeur en s'appuyant sur ses connaissances. La lecture est qualitative et s'appuie sur de l'implicite, ce qui n'est pas possible pour une machine: formellement, rien ne distingue un nom d'un autre; lorsqu'un programme \enquote{lit} un texte, il ne peut pas s'appuyer sur ses connaissances pour déterminer ce qu'un nom signifie, ce à quoi il fait référence.
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{0.8\textwidth}
+		\includegraphics[width=\textwidth]{img/cat_000372_e24.png}
+		\caption{Une lettre écrite par La Rochefoucauld vendue à 200 francs.}
+		\label{fig:rochefoucauld}
+	\end{subfigure}
+	\begin{subfigure}{0.8\textwidth}
+		\includegraphics[width=\textwidth]{img/cat_000382_e2158.png}
+		\caption{Une lettre écrite par Louis-Hector Villars vendue à 30 francs.}
+		\label{fig:villars}
+	\end{subfigure}
+	\caption{Deux exemples de lettres}
+\end{figure}
+
+Pour analyser efficacement la variable \enquote{prix}, il faut pourtant pouvoir, dans une certaine mesure, comprendre les informations implicites et qualitatives contenues dans les catalogues. Le parti pris a donc été de construire le socle de connaissance qui manque à une machine, en s'alignant avec \wkd{} et en s'en servant pour enrichir nos données. Le choix a été fait de ne s'aligner avec \wkd{} que pour certaines parties des entrées de catalogue. Pour rappel, voici leur structure:
+
+\inputminted[linenos, breaklines, tabsize=4]{xml}{code/tei_item.xml}
+
+Les entrées de catalogue contiennent beaucoup d'informations qualitatives, qui pourraient avoir une influence sur le prix du manuscrit: ici par exemple, la description du contenu de la lettre dans le \tnote{}; il est également souvent fait mention du ou de la destinataire. Cependant, l'alignement avec \wkd{} n'a pas été fait avec l'intégralité des entrées. C'est seulement le contenu du \tname{} qui a été aligné avec \wkd{}, à l'aide des informations contenues dans le \ttrait{}. Le \tdesc{} a déjà fait l'objet d'un grand travail de normalisation et d'extraction d'informations; un alignement avec des sources externes n'aurait donc pas une très grande plus-value. L'élément \tnote{} contient souvent des informations intéressantes, puisque c'est là qu'est décrit le contenu d'un manuscrit. Cependant, cet élément n'est pas toujours présent; son contenu est souvent écrit en langage naturel, non structuré, et contient des informations trop variées pour développer un traitement uniforme. Il est donc difficile de tirer parti de cet élément. Le \tname{} et son \ttrait{} sont les éléments les plus régulièrement présents; les informations qu'ils contiennent sont toujours les mêmes (nom d'une personne ou thème d'un manuscrit dans le \tname{}, description du \tname{} dans le \ttrait{}); enfin, ces deux éléments n'ont pas du tout été transformés dans le reste de la chaîne de traitement. Ils portent donc des informations qualitatives centrales pour produire des données exploitables dans une étude économétrique.
+
+Le parti a donc été d'aligner les noms contenus dans les balises \tname{} à l'aide des descriptions contenues dans les \ttrait{}; à partir de cet alignement avec \wkd{} a été constituée une base de données. Cela permet d'approximer une lecture \enquote{humaine} des items en vente: pour chaque auteur.ice, un certain nombre d'informations auront été récupérées pour mieux identifier la personne (ses occupations, son origine, ses dates de vie...). L'analyse du corpus s'appuit alors sur un bagage de connaissances qui permet d'appréhender par lecture distante l'importance d'une personne. Il devient alors envisageable de voir dans quelle mesure la mention d'une personne impacte le prix d'un manuscrit, et quels sont les facteurs biographiques déterminant dans l'établissement de la valeur. Pour revenir à l'exemple de La Rochefoucauld: à défaut de permettre de savoir qui il est, un alignement avec \wkd{} permet d'identifier son statut et sa place dans la culture française, en récupérant le nombre de ses publications ou encore les institutions dont il est membre.
 
 \subsection{Quelles données rechercher via \sparql?}
-Dans cette sous-section, nous détaillons les données récupérées via \sparql{} ainsi que les choix scientifiques qui sous-tendent nos décisions.
+Après avoir expliqué pourquoi développer des méthodes d'enrichissement automatique, une seconde question se pose: quelles sont les données à récupérer? Cette question n'est pas anodine du fait de la diversité du corpus. Le titre donné à un manuscrit dans un catalogue et inscrit dans le \tname{} est souvent celui d'une personne, mais ce n'est pas toujours le cas. Il arrive également qu'un manuscrit soit nommé d'après un évènement (la Révolution française), un lieu ou une province (Italie, Poitou), ou encore une typologie de document (des chartes). Se concentrer uniquement sur des personnes amènerait donc à des pertes d'informations, et il faut récupérer des informations pertinentes pour les différents types de \tname{} du corpus.
 
-\subsection{Comment traduire des descriptions textuelles datant du XIX\up{ème}~s. en chaînes de caractères qui puissent retourner un résultat sur Wikidata?} 
-Ce problème est autant linguistique de technique. Une personne ou une chose est nommée ou décrite d'une certaine manière dans un catalogue de vente ancien. Il n'y a aucune garantie que cette caractérisation corresponde à ce qui est disponible sur Wikidata: l'orthographe des noms évoluent, tout comme la manière de nommer certains métiers. À ces évolutions graphiques s'ajoutent des évolutions intellectuelles: les titres de noblesse sont un marqueur plus important au \scl{XIX} français que dans un \scl{XXI} mondialisé. Une personne n'est que rarement décrite par son titre dans Wikidata. Il faudra donc mettre en place un processus de traduction, depuis le langage naturel en français du \scl{XIX} en anglais adapté aux termes utilisés dans Wikidata.
+Le problème de la diversité du corpus est renforcé par le langage utilisé pour récupérer des données: le \sparql{}. Il a l'avantage de permettre de récupérer des données propres sur des bases de données en ligne; cependant, l'information y est organisée de manière très spécifique, ce qui demande de faire des requêtes précises. \sparql{} est un langage de requêtes (c'est-à-dire, dont le but est d'interagir avec une base de données) pour des jeux de données au format \rdf{}. Ce format -- dit sémantique -- est organisé en \enquote{triplets} sujet -- prédicat -- objet, où:
 
-\subsection{Comment négocier avec le moteur de recherche de Wikidata?} 
-Si les catalogues de vente fonctionnent avec leurs propres catégories mentales, le même peut être dit de Wikidata: certains types de données sont plus souvent référencées que d'autres et Wikidata utilise un vocabulaire qui lui est propre. Par expérience, le moteur de recherche de Wikidata est assez \enquote{rigide}: contrairement à un moteur généraliste, il n'admet pas d'orthographes alternatives, par exemple. Le traitement des données textuelles et tout le processus de normalisation des données dépendent de ces faits: il faut trouver quelles informations sont référencées par Wikidata et comment elles le sont. L'algorithme doit donc s'adapter au moteur de recherche. 
+\begin{itemize}
+	\item le sujet est la ressource principale
+	\item le prédicat est une propriété de sa ressource, qui caractérise une relation avec une autre ressource, l'objet
+	\item l'objet est une ressource secondaire: c'est la valeur d'un prédicat.
+\end{itemize}
+
+Le principe des triplets est mieux exprimé sous forme graphique:
+
+%\begin{figure}[h!]
+%	\tikz{
+%		\node[draw,rectangle,rounded corners=3pt,text centered,text width=4cm]
+%			(S) at (0,0)%
+%			{Sujet \\ La ressource principale \\ \textit{Natalia Gontcharova}}
+%		\node[draw,rectangle,rounded corners=3pt,text centered,text width=4cm]%
+%			(P) at (0, 1)%
+%			{Prédicat \\ La relation à l'objet \\ \textit{a peint}}
+%		\node[draw,rectangle,rounded corners=3pt,text centered,text width=4cm]%
+%			(O) at (0, 2)%
+%			{Objet \\ Une ressource secondaire \\ \textit{Les porteuses}}
+%	}
+%	\caption{Exemple de relation sujet -- prédicat -- object}
+%\end{figure}
+
+
+
+\subsection{Comment traduire des descriptions textuelles datant du XIX\up{ème}~s. en chaînes de caractères qui puissent retourner un résultat sur \wkd{}?} 
+Ce problème est autant linguistique de technique. Une personne ou une chose est nommée ou décrite d'une certaine manière dans un catalogue de vente ancien. Il n'y a aucune garantie que cette caractérisation corresponde à ce qui est disponible sur \wkd{}: l'orthographe des noms évoluent, tout comme la manière de nommer certains métiers. À ces évolutions graphiques s'ajoutent des évolutions intellectuelles: les titres de noblesse sont un marqueur plus important au \scl{XIX} français que dans un \scl{XXI} mondialisé. Une personne n'est que rarement décrite par son titre dans \wkd{}. Il faudra donc mettre en place un processus de traduction, depuis le langage naturel en français du \scl{XIX} en anglais adapté aux termes utilisés dans \wkd{}.
+
+\subsection{Comment négocier avec le moteur de recherche de \wkd{}?} 
+Si les catalogues de vente fonctionnent avec leurs propres catégories mentales, le même peut être dit de \wkd{}: certains types de données sont plus souvent référencées que d'autres et \wkd{} utilise un vocabulaire qui lui est propre. Par expérience, le moteur de recherche de \wkd{} est assez \enquote{rigide}: contrairement à un moteur généraliste, il n'admet pas d'orthographes alternatives, par exemple. Le traitement des données textuelles et tout le processus de normalisation des données dépendent de ces faits: il faut trouver quelles informations sont référencées par \wkd{} et comment elles le sont. L'algorithme doit donc s'adapter au moteur de recherche. 
 
 \subsection{Une approche prédictive}
-Étant donnée la quantité d'incertitudes présentée ci-dessus, l'approche suivie dans l'alignement avec Wikidata est prédictive. L'objectif de l'algorithme de recherches en plein texte sur l'\api{} Wikidata n'est donc pas de trouver la \enquote{bonne} réponse. Il est de construire une chaîne de caractère dont on prédit qu'elle apportera un résultat pertinent. De la même manière, la phase de préparation des données est un processus qui sélectionne et normalise certaines informations dont on suppose qu'elles seront pertinentes dans l'obtention des bons résultats. De la même manière, le premier rôle des tests est de quantifier les prédictions. Ils répondent à la question: étant donné les résultats obtenus lors des tests, quelle est la probabilité que la prochaine chaîne de caractères recherchée retourne un résultat pertinent? Cette approche prédictive implique nécessairement un degré d'incertitude, et donc le développement d'algorithmes flexibles qui cherchent à minimiser le bruit.
+Étant donnée la quantité d'incertitudes présentée ci-dessus, l'approche suivie dans l'alignement avec \wkd{} est prédictive. L'objectif de l'algorithme de recherches en plein texte sur l'\api{} \wkd{} n'est donc pas de trouver la \enquote{bonne} réponse. Il est de construire une chaîne de caractère dont on prédit qu'elle apportera un résultat pertinent. De la même manière, la phase de préparation des données est un processus qui sélectionne et normalise certaines informations dont on suppose qu'elles seront pertinentes dans l'obtention des bons résultats. De la même manière, le premier rôle des tests est de quantifier les prédictions. Ils répondent à la question: étant donné les résultats obtenus lors des tests, quelle est la probabilité que la prochaine chaîne de caractères recherchée retourne un résultat pertinent? Cette approche prédictive implique nécessairement un degré d'incertitude, et donc le développement d'algorithmes flexibles qui cherchent à minimiser le bruit.
 
 \subsection{Présentation générale de l'algorithme}
-À l'aide d'un schéma, on présente l'intégralité de la \textit{pipeline} pour cette étape: préparation des données; lancement des recherches en plein texte sur l'\api{} Wikidata; lancement de requêtes \sparql{} à partir des résultats obtenus et structuration des résultats. 
+À l'aide d'un schéma, on présente l'intégralité de la \textit{pipeline} pour cette étape: préparation des données; lancement des recherches en plein texte sur l'\api{} \wkd{}; lancement de requêtes \sparql{} à partir des résultats obtenus et structuration des résultats. 
 
 \section{Préparer et structurer les données}
-Avant de chercher à récupérer un identifiant Wikidata via l'\api{}, un algorithme se charge de traduire et de structurer les données: à partir d'un nom et de son éventuelle description, un dictionnaire qui contient les informations de manière structurée est construit. À partir de ce dictionnaire, un algorithme contenant différentes requêtes est lancé pour récupérer les identifiants Wikidata.
+Avant de chercher à récupérer un identifiant \wkd{} via l'\api{}, un algorithme se charge de traduire et de structurer les données: à partir d'un nom et de son éventuelle description, un dictionnaire qui contient les informations de manière structurée est construit. À partir de ce dictionnaire, un algorithme contenant différentes requêtes est lancé pour récupérer les identifiants \wkd{}.
 
 \subsection{Présentation générale}
 Ici, on présente la pipeline de l'algorithme (à l'aide d'un schéma), les données fournies en entrée et le résultat produit en sortie. Les sections suivantes détaillent quelques points d'intérêts.
@@ -297,13 +377,13 @@ Souvent, le prénom d'une personne est écrit en abrégé. Partant de ce constat
 	\item Reconstruire un prénom complet à partir de son abréviation, ce qui passe pas un algorithme qui cherche à reconstruire le nom en plusieurs étapes pour obtenir le nom le plus complet possible avec un mimimum d'erreurs.
 \end{itemize}
 
-Ici, l'approche est totalement prédictive: il est impossible d'être certain d'obtenir le bon nom complet à partir de son abréviation; on peut uniquement prédire que le prénom reconstruit sera conforme au vrai prénom (tel qu'il est écrit sur Wikidata) et chercher à maximiser cette certitude.
+Ici, l'approche est totalement prédictive: il est impossible d'être certain d'obtenir le bon nom complet à partir de son abréviation; on peut uniquement prédire que le prénom reconstruit sera conforme au vrai prénom (tel qu'il est écrit sur \wkd{}) et chercher à maximiser cette certitude.
 
 \subsection{Extraire des informations normalisées à partir d'un nom et de sa description}
 Cette sous-section détaille l'utilisation de tables de conversion pour traduire et normaliser certaines donnes importantes (dates de vie et mort, titres de noblesse et fonctions).
 
-\section{Extraire des identifiants Wikidata}
-Une fois un dictionnaire de données normalisées produites, un algorithme lance des recherches en plein texte sur l'\api{} de Wikidata afin de récupérer des identifiants. L'algorithme lance plusieurs requêtes successivement. L'objectif est de récupérer un identifiant en lançant le moins de requêtes, avec le plus de certitude possible.
+\section{Extraire des identifiants \wkd{}}
+Une fois un dictionnaire de données normalisées produites, un algorithme lance des recherches en plein texte sur l'\api{} de \wkd{} afin de récupérer des identifiants. L'algorithme lance plusieurs requêtes successivement. L'objectif est de récupérer un identifiant en lançant le moins de requêtes, avec le plus de certitude possible.
 
 \subsection{Présentation générale}
 Ici est présenté le fonctionnement général de l'algorithme, qui se comporte différemment en fonction du type de données qu'il a à traiter (personne noble ou non, prénom reconstruit ou non...).
@@ -311,7 +391,7 @@ Ici est présenté le fonctionnement général de l'algorithme, qui se comporte 
 \subsection{Gérer la montée en charge: optimisation et réduction du temps d'exécution}
 Le script est assez compliqué, repose sur une \api{} et traite un grand nombre de données (plus de 82000 entrées). Il prend donc plus d'une dizaine d'heures à s'exécuter et demande des ressources élevées (la première version du script ne fonctionnait plus sur mon ordinateur après avoir traité 5\% du jeu de données). L'optimisation nécessaire de l'algorithme est décrite dans cette sous-section.
 
-\subsection{Évaluation du script : tests, performance et qualité des données extraites de Wikidata}
+\subsection{Évaluation du script : tests, performance et qualité des données extraites de \wkd{}}
 Des tests ont été réalisés pour:
 \begin{itemize}
 	\item isoler l'impact de chaque paramètre (élément du dictionnaire) dans l'obtention des bons résultats
@@ -321,7 +401,7 @@ Des tests ont été réalisés pour:
 Ces tests, et leurs résultats, sont présentés ici.
 
 \section{Après l'alignement, l'enrichissement: utiliser \sparql{} pour produire des données structurées}
-La récupération des identifiants Wikidata est la partie la plus complexe dans l'utilisation de Wikidata pour enrichir des données. Après une présentation des informations requêtées via \sparql{}, le processus d'extraction d'informations et de stockage dans un \json{} est détaillé.
+La récupération des identifiants \wkd{} est la partie la plus complexe dans l'utilisation de \wkd{} pour enrichir des données. Après une présentation des informations requêtées via \sparql{}, le processus d'extraction d'informations et de stockage dans un \json{} est détaillé.
 
 \subsection{Présentation générale}
 Comme pour les autres étapes, on présente ici, à l'aide d'un schéma, la structure générale de l'algorithme de requêtes.
@@ -337,7 +417,7 @@ Ici est détaillée
 Comme des quantités massives de requêtes sont lancées, et que de très nombreuses informations sont demandées, des erreurs peuvent avoir lieu, et notamment des erreurs de \textit{timeout} (le temps d'exécution dépasse la durée autorisée). La gestion de ces erreurs est décrite ici.
 
 \subsection{Lier la \tei{} aux données nouvellement produites}
-Cette courte section détaille la mise à jour des fichiers \tei{} avec les identifiants Wikidata, ce qui permet de faire le lien entre les entrées de catalogues et les données issues de Wikidata.
+Cette courte section détaille la mise à jour des fichiers \tei{} avec les identifiants \wkd{}, ce qui permet de faire le lien entre les entrées de catalogues et les données issues de \wkd{}.
 
 \section{Des données à la monnaie: premiers résultats de l'étude}
 Sous réserve que l'étude des régressions linéaires ait été fait à temps (ce qui n'est pas garanti), j'aimerais ici présentés les premiers résultats sur les facteurs de l'évolution des prix.

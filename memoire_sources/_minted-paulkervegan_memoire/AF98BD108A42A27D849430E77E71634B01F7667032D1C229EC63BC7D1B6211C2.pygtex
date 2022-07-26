@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nt}{\PYGZlt{}item} \PYG{n+na}{n=}\PYG{l+s}{\PYGZdq{}287\PYGZdq{}} \PYG{n+na}{xml:id=}\PYG{l+s}{\PYGZdq{}CAT\PYGZus{}000126\PYGZus{}e287\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}
+	\PYG{n+nt}{\PYGZlt{}num} \PYG{n+na}{type=}\PYG{l+s}{\PYGZdq{}lot\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}287\PYG{n+nt}{\PYGZlt{}/num\PYGZgt{}}
+	\PYG{n+nt}{\PYGZlt{}name} \PYG{n+na}{type=}\PYG{l+s}{\PYGZdq{}author\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}Tascher de la Pagerie (Marie\PYGZhy{}Euphémie\PYGZhy{}Désirée)\PYG{n+nt}{\PYGZlt{}/name\PYGZgt{}}
+	\PYG{n+nt}{\PYGZlt{}trait\PYGZgt{}}
+		\PYG{n+nt}{\PYGZlt{}p\PYGZgt{}}fille de Joseph Tascher qui passa à Saint\PYGZhy{}Domingue, et de Mlle de la Chevalerie; elle épousa M. de Renaudin, puis le marquis François de Beauharnais et contribua beaucoup à la fortune de la future impératrice Joséphine.\PYG{n+nt}{\PYGZlt{}/p\PYGZgt{}}
+	\PYG{n+nt}{\PYGZlt{}/trait\PYGZgt{}}
+	\PYG{n+nt}{\PYGZlt{}desc} \PYG{n+na}{xml:id=}\PYG{l+s}{\PYGZdq{}CAT\PYGZus{}000126\PYGZus{}e287\PYGZus{}d1\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}
+		Pièce originale; 
+		(\PYG{n+nt}{\PYGZlt{}date} \PYG{n+na}{when=}\PYG{l+s}{\PYGZdq{}1780\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}1780\PYG{n+nt}{\PYGZlt{}/date\PYGZgt{}}), 
+		\PYG{n+nt}{\PYGZlt{}measure} \PYG{n+na}{type=}\PYG{l+s}{\PYGZdq{}length\PYGZdq{}} \PYG{n+na}{unit=}\PYG{l+s}{\PYGZdq{}p\PYGZdq{}} \PYG{n+na}{n=}\PYG{l+s}{\PYGZdq{}4\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}4 p.\PYG{n+nt}{\PYGZlt{}/measure\PYGZgt{}} 
+		\PYG{n+nt}{\PYGZlt{}measure} \PYG{n+na}{type=}\PYG{l+s}{\PYGZdq{}format\PYGZdq{}} \PYG{n+na}{unit=}\PYG{l+s}{\PYGZdq{}f\PYGZdq{}} \PYG{n+na}{ana=}\PYG{l+s}{\PYGZdq{}\PYGZsh{}document\PYGZus{}format\PYGZus{}4\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}in\PYGZhy{}4.\PYG{n+nt}{\PYGZlt{}/measure\PYGZgt{}}
+	\PYG{n+nt}{\PYGZlt{}/desc\PYGZgt{}}
+	\PYG{n+nt}{\PYGZlt{}measure} \PYG{n+na}{commodity=}\PYG{l+s}{\PYGZdq{}currency\PYGZdq{}} \PYG{n+na}{unit=}\PYG{l+s}{\PYGZdq{}FRF\PYGZdq{}} \PYG{n+na}{quantity=}\PYG{l+s}{\PYGZdq{}15\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}15\PYG{n+nt}{\PYGZlt{}/measure\PYGZgt{}}
+	\PYG{n+nt}{\PYGZlt{}note\PYGZgt{}}Plaidoirie pour le dit Renaudin contre sa femme qu\PYGZsq{}on accusait d\PYGZsq{}avoir usé de l\PYGZsq{}influence de son parent, M. de Beauharnais, pour se faire épouser\PYG{n+nt}{\PYGZlt{}/note\PYGZgt{}}
+\PYG{n+nt}{\PYGZlt{}/item\PYGZgt{}}
+\end{Verbatim}

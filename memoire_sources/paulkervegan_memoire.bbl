@@ -948,6 +948,27 @@
       \endverb
       \keyw{,econometrie}
     \endentry
+    \entry{noauthor_regression_2022}{online}{}
+      \field{sortinit}{R}
+      \field{sortinithash}{b9c68a358aea118dfa887b6e902414a7}
+      \field{labeltitlesource}{title}
+      \field{title}{Régression linéaire}
+      \field{titleaddon}{Wikipedia. L'encyclopédie libre}
+      \field{urlday}{10}
+      \field{urlmonth}{7}
+      \field{urlyear}{2022}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://fr.wikipedia.org/wiki/R%C3%A9gression_lin%C3%A9aire
+      \endverb
+      \verb{url}
+      \verb https://fr.wikipedia.org/wiki/R%C3%A9gression_lin%C3%A9aire
+      \endverb
+      \keyw{,econometrie}
+    \endentry
     \entry{renon_design_2015}{incollection}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=48a61f6e62730f445fcdb488ca42ea50}{%

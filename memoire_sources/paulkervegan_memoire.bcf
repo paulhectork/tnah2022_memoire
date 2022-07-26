@@ -2198,16 +2198,17 @@
     <bcf:citekey order="2">christensen_segmonto_2022</bcf:citekey>
     <bcf:citekey order="3">sahle_digital_2016</bcf:citekey>
     <bcf:citekey order="4">noauthor_precision_2022</bcf:citekey>
-    <bcf:citekey order="5">sahle_digital_2016</bcf:citekey>
-    <bcf:citekey order="6">drucker_visualisation_2020</bcf:citekey>
-    <bcf:citekey order="7">masure_design_2017</bcf:citekey>
-    <bcf:citekey order="8">hentschel_visual_2014</bcf:citekey>
-    <bcf:citekey order="9">renon_design_2016</bcf:citekey>
-    <bcf:citekey order="10">hentschel_visual_2014</bcf:citekey>
-    <bcf:citekey order="11">renon_design_2015</bcf:citekey>
-    <bcf:citekey order="12">orain_laboratoire_2021</bcf:citekey>
-    <bcf:citekey order="13">hentschel_visual_2014</bcf:citekey>
-    <bcf:citekey order="14">drucker_visualisation_2020</bcf:citekey>
+    <bcf:citekey order="5">noauthor_regression_2022</bcf:citekey>
+    <bcf:citekey order="6">sahle_digital_2016</bcf:citekey>
+    <bcf:citekey order="7">drucker_visualisation_2020</bcf:citekey>
+    <bcf:citekey order="8">masure_design_2017</bcf:citekey>
+    <bcf:citekey order="9">hentschel_visual_2014</bcf:citekey>
+    <bcf:citekey order="10">renon_design_2016</bcf:citekey>
+    <bcf:citekey order="11">hentschel_visual_2014</bcf:citekey>
+    <bcf:citekey order="12">renon_design_2015</bcf:citekey>
+    <bcf:citekey order="13">orain_laboratoire_2021</bcf:citekey>
+    <bcf:citekey order="14">hentschel_visual_2014</bcf:citekey>
+    <bcf:citekey order="15">drucker_visualisation_2020</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="nyt">
