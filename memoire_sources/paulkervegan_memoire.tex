@@ -12,10 +12,35 @@
 \usepackage{lmodern}
 \usepackage{graphicx}
 
-% code et couleurs
+% code, graphiques et couleurs
 \usepackage{minted}
 \usemintedstyle{pastie}
 \usepackage{tikz}
+
+\definecolor{palepink}{rgb}{0.98, 0.85, 0.87}
+\definecolor{plum}{rgb}{0.56, 0.27, 0.52}
+\definecolor{lilac}{rgb}{0.8, 0.8, 1.0}
+
+\tikzstyle{rectnode} = [%
+	draw,%
+	rectangle,%
+	rounded corners=3pt,%
+	minimum height=1cm,%
+	fill=lilac,%
+	draw=plum,%
+	text centered,%
+	text width=4cm%
+]
+\tikzstyle{arrow} = [%
+	thick,%
+	->,%
+	>=stealth,%
+	color=plum%	
+]
+\tikzstyle{line} = [%
+	thick,%
+	color=plum%	
+]
 
 % images
 \usepackage{subcaption}
@@ -320,33 +345,60 @@ Les entrées de catalogue contiennent beaucoup d'informations qualitatives, qui 
 Le parti a donc été d'aligner les noms contenus dans les balises \tname{} à l'aide des descriptions contenues dans les \ttrait{}; à partir de cet alignement avec \wkd{} a été constituée une base de données. Cela permet d'approximer une lecture \enquote{humaine} des items en vente: pour chaque auteur.ice, un certain nombre d'informations auront été récupérées pour mieux identifier la personne (ses occupations, son origine, ses dates de vie...). L'analyse du corpus s'appuit alors sur un bagage de connaissances qui permet d'appréhender par lecture distante l'importance d'une personne. Il devient alors envisageable de voir dans quelle mesure la mention d'une personne impacte le prix d'un manuscrit, et quels sont les facteurs biographiques déterminant dans l'établissement de la valeur. Pour revenir à l'exemple de La Rochefoucauld: à défaut de permettre de savoir qui il est, un alignement avec \wkd{} permet d'identifier son statut et sa place dans la culture française, en récupérant le nombre de ses publications ou encore les institutions dont il est membre.
 
 \subsection{Quelles données rechercher via \sparql?}
-Après avoir expliqué pourquoi développer des méthodes d'enrichissement automatique, une seconde question se pose: quelles sont les données à récupérer? Cette question n'est pas anodine du fait de la diversité du corpus. Le titre donné à un manuscrit dans un catalogue et inscrit dans le \tname{} est souvent celui d'une personne, mais ce n'est pas toujours le cas. Il arrive également qu'un manuscrit soit nommé d'après un évènement (la Révolution française), un lieu ou une province (Italie, Poitou), ou encore une typologie de document (des chartes). Se concentrer uniquement sur des personnes amènerait donc à des pertes d'informations, et il faut récupérer des informations pertinentes pour les différents types de \tname{} du corpus.
+Après avoir expliqué pourquoi développer des méthodes d'enrichissement automatique, une seconde question se pose: quelles sont les données à récupérer? Cette question n'est pas anodine du fait de la diversité du corpus. Le titre donné à un manuscrit dans un catalogue et inscrit dans le \tname{} est souvent celui d'une personne, mais ce n'est pas toujours le cas. Il arrive également qu'un manuscrit soit nommé d'après un évènement (la Révolution française), un lieu ou une province (Italie, Poitou), ou encore une typologie de document (des chartes).
 
-Le problème de la diversité du corpus est renforcé par le langage utilisé pour récupérer des données: le \sparql{}. Il a l'avantage de permettre de récupérer des données propres sur des bases de données en ligne; cependant, l'information y est organisée de manière très spécifique, ce qui demande de faire des requêtes précises. \sparql{} est un langage de requêtes (c'est-à-dire, dont le but est d'interagir avec une base de données) pour des jeux de données au format \rdf{}. Ce format -- dit sémantique -- est organisé en \enquote{triplets} sujet -- prédicat -- objet, où:
+Au total, les entités avec lesquelles les entrées de manuscrits ont été alignées peuvent se classer en de nombreuses catégories. Parmi elles se trouvent:
+\begin{itemize}
+	\item les personnes humaines; cette catégorie est la plus fréquente (12090 occurrences).
+	\item des noms de familles (3180 entités)
+	\item des communes Françaises (586 occurrences)
+	\item des peintures et des sculptures (respectivement 520 et 236 entités)\footnote{Un graphique présentant l'ensemble de ces catégories se trouve en annexes (\ref{appendix:wikidata_instances}).}
+\end{itemize}
+
+Cette variété peut s'expliquer en partie par le taux d'erreur dans l'alignement avec Wikidata. Cependant, toutes ces \enquote{erreurs} ne correspondent pas forcément à des résultats qui ne sont pas pertinents. Par exemple, l'algorithme peut aligner un.e écrivain.e avec un de ces romans, ou une personne avec un portrait d'elle. Dans ces cas, des informations peuvent toujours être récupérées. Construire des requêtes \sparql{} en se concentrant uniquement sur des personnes amènerait donc à des pertes d'informations, et il faut récupérer des informations pertinentes pour les différents types de \tname{} du corpus.
+
+Le problème de la diversité du corpus et de la variété des identifiants récupérés est renforcé par le langage utilisé pour récupérer des données: le \sparql{}. Il a l'avantage de permettre de récupérer des données propres sur des bases de données en ligne; cependant, l'information y est organisée de manière très spécifique, ce qui demande de faire des requêtes précises. \sparql{} est un langage de requêtes (c'est-à-dire, dont le but est d'interagir avec une base de données) pour des jeux de données au format \rdf{}. Ce format -- dit sémantique -- est organisé en \enquote{triplets} sujet--prédicat--objet, où:
 
 \begin{itemize}
-	\item le sujet est la ressource principale
-	\item le prédicat est une propriété de sa ressource, qui caractérise une relation avec une autre ressource, l'objet
+	\item le sujet est la ressource principale.
+	\item le prédicat est une propriété de sa ressource, qui caractérise une relation avec une autre ressource, l'objet.
 	\item l'objet est une ressource secondaire: c'est la valeur d'un prédicat.
 \end{itemize}
 
 Le principe des triplets est mieux exprimé sous forme graphique:
 
-%\begin{figure}[h!]
-%	\tikz{
-%		\node[draw,rectangle,rounded corners=3pt,text centered,text width=4cm]
-%			(S) at (0,0)%
-%			{Sujet \\ La ressource principale \\ \textit{Natalia Gontcharova}}
-%		\node[draw,rectangle,rounded corners=3pt,text centered,text width=4cm]%
-%			(P) at (0, 1)%
-%			{Prédicat \\ La relation à l'objet \\ \textit{a peint}}
-%		\node[draw,rectangle,rounded corners=3pt,text centered,text width=4cm]%
-%			(O) at (0, 2)%
-%			{Objet \\ Une ressource secondaire \\ \textit{Les porteuses}}
-%	}
-%	\caption{Exemple de relation sujet -- prédicat -- object}
-%\end{figure}
+\begin{figure}[!h]
+	\centering
+	\tikz{
+		\node%
+			[rectnode] %
+			(S) at (0,0) %
+			{\textbf{Sujet} \small \\ La ressource principale \\ \textit{Natalia Gontcharova}};
+		\node%
+			[rectnode] %
+			(P) at (5, 0) %
+			{\textbf{Prédicat} \small \\ La relation à l'objet \\ \textit{a peint}};
+		\node%
+			[rectnode] %
+			(O) at (10, 0) %
+			{\textbf{Objet} \small \\ Une ressource secondaire \\ \enquote{\textit{Les porteuses}}};
+			
+		\draw[arrow] (S) -- (P);
+		\draw[arrow] (P) -- (O);
+	}
+	\caption{Exemple de relation sujet -- prédicat -- object}
+\end{figure}
 
+Deux particularités supplémentaires définissent les formats sémantiques:
+\begin{itemize}
+	\item Toutes les \enquote{ressources} peuvent être tour à tour sujet ou objet. L'exemple du dessus, par exemple, aurait pu être réécrit sous la forme: \enquote{Les porteuses} a été peint par Natalia Gontcharova. Dans ce cas, Natalia Gontcharova est l'objet et \textit{Les porteuses} est le sujet. Par conséquent, une base de données \rdf{} est une base de donnée en graphes; elle peut être représentée sous la forme d'un réseau de ressources qui entretiennent des relations bilatérales entre elles. Il n'y a pas de hiérarchie entre les informations, contrairement à une base de données \xml{} classique.
+	\item L'ensemble des ressources et des prédicats d'une base de donnée en graphe sont définis et disposent d'un identifiant unique. Les prédicats, plus particulièrement, sont définis selon une ontologie particulière.
+\end{itemize}
+
+Le deuxième point complexifie la définition des données à récupérer via \sparql{}: les prédicats sont décrits en grande précision; par conséquent, une information analogue peut être représentée par différents prédicats dans différentes situations. Par exemple, la création d'un texte et la création d'une peinture ne correspondent pas au même prédicat. Pour que les données soient utilisables, il faut être très spécifique quant aux informations recherchées. 
+
+
+LA ON DÉCRIT QUELLES SONT LES INFORMATIONS RÉCUPÉRÉES AU FINAL, EN PLUS OU MOINS GRAND DÉTAILQ
 
 
 \subsection{Comment traduire des descriptions textuelles datant du XIX\up{ème}~s. en chaînes de caractères qui puissent retourner un résultat sur \wkd{}?} 
@@ -500,7 +552,17 @@ Les représentations graphiques ne font pas que montrer des phénomènes. Leur r
 
 
 %%%%%%%%%%%%%%%%%%%%%% TOCS %%%%%%%%%%%%%%%%%%%%%%
-% \listoffigures
+\listoffigures
 % \listoftables
 \tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%% ANNEXES	 %%%%%%%%%%%%%%%%
+\appendix
+\chapter{Graphiques}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{annexes/fig_wikidata_instances.png}
+	\caption Occurrences des différentes catégories auxquelles appartiennent les entités \wkd{} liées avec les entrées de catalogues
+	\label{appendix:wikidata_instances}
+\end{figure}
 \end{document}

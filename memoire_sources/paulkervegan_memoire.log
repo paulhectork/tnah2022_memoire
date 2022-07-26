@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.12.6)  26 JUL 2022 21:13
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.12.6)  27 JUL 2022 00:28
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1502,12 +1502,12 @@ Package: glossary-tree 2020/02/13 v4.45 (NLCT)
 \openout8 = `paulkervegan_memoire.glo'.
 
 Package glossaries Info: Writing glossary file paulkervegan_memoire.glo on inpu
-t line 83.
+t line 108.
 \glo@acronym@file=\write9
 \openout9 = `paulkervegan_memoire.acn'.
 
 Package glossaries Info: Writing glossary file paulkervegan_memoire.acn on inpu
-t line 83.
+t line 108.
 runsystem(which pygmentize && touch paulkervegan_memoire.aex)...executed.
 
 runsystem(rm paulkervegan_memoire.aex)...executed.
@@ -1518,47 +1518,36 @@ Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'french'.
 
 (./paulkervegan_memoire.aux)
-Runaway argument?
-{\addvspace {10 
-! File ended while scanning use of \@writefile.
-<inserted text> 
-                \par 
-l.133 \begin{document}
-                      
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
-
 \openout1 = `paulkervegan_memoire.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 133.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 158.
+LaTeX Font Info:    ... okay on input line 158.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 158.
+LaTeX Font Info:    ... okay on input line 158.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 158.
+LaTeX Font Info:    ... okay on input line 158.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 158.
+LaTeX Font Info:    ... okay on input line 158.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 158.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 1
-33.
+58.
+
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 133.
-LaTeX Font Info:    ... okay on input line 133.
-LaTeX Info: Redefining \dots on input line 133.
-LaTeX Info: Redefining \up on input line 133.
+LaTeX Font Info:    ... okay on input line 158.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 158.
+LaTeX Font Info:    ... okay on input line 158.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 158.
+LaTeX Font Info:    ... okay on input line 158.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 158.
+LaTeX Font Info:    ... okay on input line 158.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 158.
+LaTeX Font Info:    ... okay on input line 158.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 158.
+LaTeX Font Info:    ... okay on input line 158.
+LaTeX Info: Redefining \dots on input line 158.
+LaTeX Info: Redefining \up on input line 158.
 
 ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
@@ -1626,10 +1615,10 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'paulkervegan_memoire.bbl' found.
 
 (./paulkervegan_memoire.bbl)
-Package biblatex Info: Reference section=0 on input line 133.
-Package biblatex Info: Reference segment=0 on input line 133.
+Package biblatex Info: Reference section=0 on input line 158.
+Package biblatex Info: Reference segment=0 on input line 158.
 \AtBeginShipoutBox=\box120
-Package hyperref Info: Link coloring OFF on input line 133.
+Package hyperref Info: Link coloring OFF on input line 158.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -1642,9 +1631,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count518
 )
-LaTeX Info: Redefining \ref on input line 133.
-LaTeX Info: Redefining \pageref on input line 133.
-LaTeX Info: Redefining \nameref on input line 133.
+LaTeX Info: Redefining \ref on input line 158.
+LaTeX Info: Redefining \pageref on input line 158.
+LaTeX Info: Redefining \nameref on input line 158.
 
 (./paulkervegan_memoire.out) (./paulkervegan_memoire.out)
 \@outlinefile=\write10
@@ -1666,60 +1655,60 @@ LaTeX Info: Redefining \nameref on input line 133.
 
 ] [2]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <24.88> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 189.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 214.
  [3
 
 ] [4]
 Chapitre 1.
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-99.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 2
+24.
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-99.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 2
+24.
 
 (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-199.
+224.
 
 (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-199.
+224.
 
 (/usr/share/texmf/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 199.
+(Font)              <12> on input line 224.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 199.
+(Font)              <8> on input line 224.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 199.
+(Font)              <6> on input line 224.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 199.
+(Font)              <10> on input line 224.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 199.
+(Font)              <7> on input line 224.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 199.
+(Font)              <5> on input line 224.
  [5
 
 ] [6]
 Chapitre 2.
 Missing character: There is no   in font [lmroman10-regular]:mapping=tex-text;!
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 218.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 243.
 [7
 
 ]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <17.28> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 225.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 250.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 226.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 251.
  [8] [9
 
 ] [10]
@@ -1738,22 +1727,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [13
 
 ]
-[14]
-
-LaTeX Warning: Reference `fig:rochefoucauld' on page 15 undefined on input line
- 297.
-
-
-LaTeX Warning: Reference `fig:villars' on page 15 undefined on input line 297.
-
-
-LaTeX Warning: Reference `fig:rochefoucauld' on page 15 undefined on input line
- 297.
-
-
-LaTeX Warning: Reference `fig:villars' on page 15 undefined on input line 297.
-
-[15]
+[14] [15]
 File: img/cat_000372_e24.png Graphic file (type bmp)
 <img/cat_000372_e24.png>
 File: img/cat_000382_e2158.png Graphic file (type bmp)
@@ -1762,75 +1736,81 @@ File: img/cat_000382_e2158.png Graphic file (type bmp)
 (./_minted-paulkervegan_memoire/pastie.pygstyle)
 (./_minted-paulkervegan_memoire/AF98BD108A42A27D849430E77E71634B01F7667032D1C22
 9EC63BC7D1B6211C2.pygtex [16]) [17]
-Underfull \vbox (badness 5908) has occurred while \output is active []
 
- [18]
-[19]
-Overfull \hbox (5.37799pt too wide) in paragraph at lines 376--377
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[18]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [19]
+[20]
+Overfull \hbox (5.37799pt too wide) in paragraph at lines 428--429
 \TU/lmr/m/n/12 d’abréviations (nom simple ou composé, nom entièrement ou partie
 llement abrégé)
  []
 
-[20]
-Overfull \hbox (21.47437pt too wide) in paragraph at lines 403--403
+[21]
+Overfull \hbox (21.47437pt too wide) in paragraph at lines 455--455
 []\TU/lmr/bx/n/17.28 Après l’alignement, l’enrichissement : utiliser \TU/lmtt/b
 /n/17.28 SPARQL
  []
 
+[22] [23] [24
 
-Overfull \hbox (228.21854pt too wide) has occurred while \output is active
-\TU/lmr/m/sl/12 4.4.  APRÈS L’ALIGNEMENT, L’ENRICHISSEMENT : UTILISER \TU/lmtt/
-m/sl/12 SPARQL \TU/lmr/m/sl/12 POUR PRODUIRE DES DONNÉES STRUCTURÉES \TU/lmr/m/
-n/12 21
- []
-
-[21] [22] [23
-
-] [24]
+] [25] [26]
 Chapitre 5.
-[25
+[27
 
 ]
 Underfull \vbox (badness 2856) has occurred while \output is active []
 
- [26]
+ [28]
 Overfull \hbox (94.55064pt too wide) has occurred while \output is active
 \TU/lmr/m/sl/12 5.2.  LA CONCEPTION D’INTERFACES, UN PROBLÈME POUR LES HUMANITÉ
-S NUMÉRIQUES ? \TU/lmr/m/n/12 27
+S NUMÉRIQUES ? \TU/lmr/m/n/12 29
  []
 
-[27] [28
+[29] [30
 
 ]
 Chapitre 6.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [29]
-[30]
+ [31]
+[32]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [31]
-[32
+ [33]
+[34
 
 ]
-Overfull \hbox (2.06366pt too wide) in paragraph at lines 494--494
+Overfull \hbox (2.06366pt too wide) in paragraph at lines 546--546
 [][][]\TU/lmr/m/sc/12 Gabay []\TU/lmr/m/n/12 (Simon), []\TU/lmr/m/sc/12 Rondeau
  du Noyer []\TU/lmr/m/n/12 (Lucie), []\TU/lmr/m/sc/12 Gille Levenson []\TU/lmr/
 m/n/12 (Matthias), []\TU/lmr/m/sc/12 Petkovic
  []
 
 
-Overfull \hbox (22.54753pt too wide) in paragraph at lines 494--494
+Overfull \hbox (22.54753pt too wide) in paragraph at lines 546--546
 [][][]\TU/lmr/m/sc/12 Khemakhem []\TU/lmr/m/n/12 (Mohamed), []\TU/lmr/m/sc/12 R
 omary []\TU/lmr/m/n/12 (Laurent), []\TU/lmr/m/sc/12 Gabay []\TU/lmr/m/n/12 (Sim
 on), []\TU/lmr/m/sc/12 Bohbot []\TU/lmr/m/n/12 (Hervé), []\TU/lmr/m/sc/12 Front
 ini
  []
 
-[33]
+[35]
 Missing character: There is no   in font [lmroman12-regular]:mapping=tex-text;!
- [34] [35] [36] (./paulkervegan_memoire.toc
+ [36] [37] [38] (./paulkervegan_memoire.lof)
+\tf@lof=\write11
+\openout11 = `paulkervegan_memoire.lof'.
+
+ [39
+
+] [40
+
+]
+(./paulkervegan_memoire.toc
 Overfull \hbox (0.73424pt too wide) in paragraph at lines 8--8
 [][]\TU/lmr/bx/n/14.4 I Du document numérisé au \TU/lmtt/b/n/14.4 XML-TEI \TU/l
 mr/bx/n/14.4 : nature du corpus, struc- 
@@ -1842,61 +1822,47 @@ Overfull \hbox (15.35019pt too wide) in paragraph at lines 36--36
 tions : 
  []
 
-[37
+[41] [42])
+\tf@toc=\write12
+\openout12 = `paulkervegan_memoire.toc'.
 
-] [38])
-\tf@toc=\write11
-\openout11 = `paulkervegan_memoire.toc'.
+ [43] [44
 
-
+]
+Annexe A.
+File: annexes/fig_wikidata_instances.png Graphic file (type bmp)
+<annexes/fig_wikidata_instances.png>
 
 Package glossaries Warning: No \printglossary or \printglossaries found. 
 (Remove \makeglossaries if you don't want any glossaries.) 
 This document will not have a glossary.
 
-[39
+[45
 runsystem(makeindex -s paulkervegan_memoire.ist -t paulkervegan_memoire.glg -o 
 paulkervegan_memoire.gls paulkervegan_memoire.glo)...executed.
 
 runsystem(makeindex -s paulkervegan_memoire.ist -t paulkervegan_memoire.alg -o 
 paulkervegan_memoire.acr paulkervegan_memoire.acn)...executed.
 
-]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 506.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 506.
+] [46]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 568.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 568.
  (./paulkervegan_memoire.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 506.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 506.
-
-
-Package rerunfilecheck Warning: File `paulkervegan_memoire.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `paulkervegan_memoire.out':
-(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
-(rerunfilecheck)             After:  8ABF4705CD211E28FF89D894B626239F;7490.
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package biblatex Warning: Please rerun LaTeX.
-(biblatex)                Page breaks have changed.
-
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 568.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 568.
+Package rerunfilecheck Info: File `paulkervegan_memoire.out' has not changed.
+(rerunfilecheck)             Checksum: 60BA5D0C9BD7CB6BEBD107E611F9E681;7611.
 Package logreq Info: Writing requests to 'paulkervegan_memoire.run.xml'.
 \openout1 = `paulkervegan_memoire.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 41330 strings out of 479819
- 816550 string characters out of 5895846
- 1625876 words of memory out of 5000000
- 57720 multiletter control sequences out of 15000+600000
+ 41504 strings out of 479819
+ 819639 string characters out of 5895846
+ 1628157 words of memory out of 5000000
+ 57890 multiletter control sequences out of 15000+600000
  557764 words of font info for 77 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 60i,9n,77p,1827b,6269s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,9n,77p,1827b,6268s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on paulkervegan_memoire.pdf (43 pages).
+Output written on paulkervegan_memoire.pdf (50 pages).
