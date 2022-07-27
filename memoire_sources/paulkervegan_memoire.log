@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.12.6)  27 JUL 2022 14:24
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.12.6)  27 JUL 2022 14:26
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1732,8 +1732,20 @@ File: img/cat_000372_e24.png Graphic file (type bmp)
 <img/cat_000372_e24.png>
 File: img/cat_000382_e2158.png Graphic file (type bmp)
 <img/cat_000382_e2158.png>
+runsystem(pygmentize -S default -f latex -P commandprefix=PYG > _minted-paulker
+vegan_memoire/default-pyg-prefix.pygstyle)...executed.
+
  (./_minted-paulkervegan_memoire/default-pyg-prefix.pygstyle)
+runsystem(pygmentize -S pastie -f latex -P commandprefix=PYGpastie > _minted-pa
+ulkervegan_memoire/pastie.pygstyle)...executed.
+
+
 (./_minted-paulkervegan_memoire/pastie.pygstyle)
+runsystem(pygmentize -l xml -f latex -P commandprefix=PYG -F tokenmerge -o _min
+ted-paulkervegan_memoire/AF98BD108A42A27D849430E77E71634B01F7667032D1C229EC63BC
+7D1B6211C2.pygtex code/tei_item.xml)...executed.
+
+
 (./_minted-paulkervegan_memoire/AF98BD108A42A27D849430E77E71634B01F7667032D1C22
 9EC63BC7D1B6211C2.pygtex [16]) [17] [18] [19]
 Underfull \vbox (badness 10000) has occurred while \output is active []
