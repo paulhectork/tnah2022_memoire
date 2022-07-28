@@ -96,6 +96,7 @@
 \addbibresource{bibliographie/katabase.bib}
 \addbibresource{bibliographie/ecostat.bib}
 \addbibresource{bibliographie/textprocessing.bib}
+\addbibresource{bibliographie/web.bib}
 \defbibnote{intro}{Cette bibliographie contient tous les ressources utilisées pour l'écriture de ce mémoire.}
 
 \DeclareSourcemap{%
@@ -116,7 +117,11 @@
  		\perdatasource{bibliographie/ecostat.bib}
  		\step[fieldset=keywords, fieldvalue={,econometrie}, append]
  	}
- }
+ 	\map[overwrite]{%
+ 		\perdatasource{bibliographie/web.bib}
+ 		\step[fieldset=keywords, fieldvalue={,web}, append]
+ 	}
+  }
 }
 
 
@@ -139,10 +144,37 @@
 }
 
 
-% définition des acronymes
+% glossaire et acronmymes
 \usepackage[automake, acronym, toc]{glossaries}
-\makeglossaries
 \setacronymstyle{short-long}
+\makeglossaries
+\newglossaryentry{apig}{
+	name=API,
+	description={Une interface de programmation d'application (\textit{Application Programming Interface} en anglais) est un protocole qui pemret à un programme de communiquer avec un autre programme. Ce protocole documenté, correspond à un ensemble d'opérations permettant à un programme \enquote{consommateur} d'utiliser des fonctionnalités d'un programme \enquote{fournisseur}, comme par exemple de récupérer ou d'envoyer des données au fournisseur.}
+}
+\newglossaryentry{api}{
+	type=\acronymtype,
+	name=API,
+	description={Application Programming Interface},
+	first={Interface de programmation d'application (API), \glsadd{apig}},
+	see=[Glossaire:]{apig}
+}
+\newglossaryentry{dictionnaire}{
+	name=Dictionnaire,
+	description={Un dictionnaire est un format de données structuré en python qui associe à une donnée -- dite clé -- une ou plusieurs données nommées valeurs.}
+}
+\newglossaryentry{score F1}{
+	name={Score F1},
+	description={Le score F1, ou \textit{F-score}, est la moyenne harmonique de la précision (vrais positifs par rapport au total de résultats obtenus) et du rappel (nombre de résultats positifs par rapport au total de résultats positifs).\cite{noauthor_precision_2022, noauthor_f-score_2022}. Le score F1 a l'avantage de prendre en compte les vrais et les faux positifs. Ce score, dont la valeur est contenue entre 0 et 1, permet de mesurer l'exactitude d'un algorithme d'apprentissage machine, ou d'un moteur de recherche.}
+}
+\newglossaryentry{SPARQL}{
+	name=SPARQL,
+	description={SPARQL est un language de requête qui permet d'interagir avec une base de données au format RDF. \enquote{SPARQL exprime des requêtes sur des sources de données diverses [...]. SPARQL rend possible la requête de données en graphes [...], avec des données conjointes et disjointes. SPARQL permet également l'agrégation de données, les sous-requêtes, la négation, la création de données à l'aide d'expression, le test de données et la contrainte des requêtes. Les résultats de requêtes sparql peuvent être des jeux de résultats ou des graphes RDF.}\footnote{\enquote{SPARQL can be used to express queries across diverse data sources [...]. SPARQL contains capabilities for querying [...] graph patterns along with their conjunctions and disjunctions. SPARQL also supports aggregation, subqueries, negation, creating values by expressions, extensible value testing, and constraining queries by source RDF graph. The results of SPARQL queries can be result sets or RDF graphs.}\cite{harris_sparql_2013} (traduction de l'auteur).}}
+}
+\newglossaryentry{python}{
+	name=Python,
+	description={Python est un language de programmation impérative (c'est-à-dire, basé sur la production et la transformation de données par une suite d'instructions) créé en 1991. Il est particulièrement utilisé dans le domaine du traitement de données et des humanités numériques. C'est le langage le plus utilisé dans le projet \mssktb{}}
+}
 % modèle: \newacronym{dom}{\textsc{dom}}{\emph{Document Object Model}}
 % modèle bis: \newglossaryentry{meta}{name=métadonnée,description={donnée servant à définir ou décrire une autre donné quel que soit son support}}
 
@@ -156,7 +188,7 @@
 
 % commandes perso: abréviations
 % technologies en mono, sigles et sites web en italique
-\newcommand{\api}{\texttt{API}}
+\newcommand{\api}{\texttt{\gls{api}}}
 \newcommand{\alto}{\texttt{Alto}}
 \newcommand{\escr}{\textit{eScriptorium}}
 \newcommand{\html}{\texttt{HTML}}
@@ -165,10 +197,10 @@
 \newcommand{\ktb}{\textit{Katabase}}
 \newcommand{\mss}{\textit{MSS}}
 \newcommand{\mssktb}{\mss{} / \ktb{}}
-\newcommand{\py}{\texttt{Python}}
+\newcommand{\py}{\texttt{\gls{python}}}
 \newcommand{\rgx}{\textit{expressions régulières}}
 \newcommand{\rdf}{\texttt{RDF}}
-\newcommand{\sparql}{\texttt{SPARQL}}
+\newcommand{\sparql}{\texttt{\gls{SPARQL}}}
 \newcommand{\tei}{\texttt{TEI}}
 
 \newcommand{\titem}{\texttt{item}}
@@ -231,6 +263,7 @@
 \frontmatter
 \chapter*{Résumé}
 \addcontentsline{toc}{chapter}{Résumé}
+
 
 \mainmatter
 \chapter*{Introduction}
@@ -333,7 +366,7 @@ Ce chapitre est construit autour d'une question de recherche: comment produire d
 
 Ce travail d'enrichissement a été fait en deux temps. 
 
-La première étape, et la plus difficile, est l'alignement avec \wkd{}. Cela demande d'extraire un ensemble d'informations à partir du nom de la personne et de la description de celle-ci. Parmi les informations extraites: nom, prénom, titre de noblesse, occupation, dates de vie et de mort. À partir de ces informations, stockées dans un dictionnaire, un algorithme construit successivement différentes chaînes de caractères pour lancer des recherchers en plein texte sur l'\api{} de \wkd{}. L'objectif est que le premier résultat recherché sur \wkd{} soit correct. Sur un jeu de test, le score F1 \footnote{Le score F1, ou \textit{F-score}, est la moyenne harmonique de la précision (vrais positifs par rapport au total de résultats obtenus) et du rappel (nombre de résultats positifs par rapport au total de résultats positifs).\cite{noauthor_precision_2022}} obtenu est de 68\%. Un relecture \enquote{manuelle} des résultats est donc nécessaire.
+La première étape, et la plus difficile, est l'alignement avec \wkd{}. Cela demande d'extraire un ensemble d'informations à partir du nom de la personne et de la description de celle-ci. Parmi les informations extraites: nom, prénom, titre de noblesse, occupation, dates de vie et de mort. À partir de ces informations, stockées dans un dictionnaire, un algorithme construit successivement différentes chaînes de caractères pour lancer des recherchers en plein texte sur l'\api{} de \wkd{}. L'objectif est que le premier résultat recherché sur \wkd{} soit correct. Sur un jeu de test, le \gls{score F1} obtenu est de 68\%. Un relecture \enquote{manuelle} des résultats est donc nécessaire.
 
 La deuxième étape, nettement plus simple, consiste à lancer des requêtes \wkd{} sur les identifiants récupérés afin de récupérer des informations sur les auteur.ice.s des manuscrits (cette partie du travail est encore en cours) pour enrichir nos données.
 
@@ -341,7 +374,7 @@ Une fois ce travail effectué, l'enrichissement des données à proprement parle
 
 
 \section{Questions introductives: pourquoi et comment s'aligner avec \wkd{} ?}
-\chaptermark{Questions introductives}
+\sectionmark{Questions introductives}
 Cette section, introductive, répond à des questions évidentes mais essentielles: elles permettent de mettre au clair l'intérêt et les (multiples) difficultés dans l'alignement avec \wkd{}.
 
 \subsection{Pourquoi s'aligner avec des identifiants \wkd{}?} 
@@ -382,11 +415,17 @@ Le parti pris a donc été d'aligner avec des identifiants \wkd{} les noms conte
 
 
 \subsection{Présentation générale de l'algorithme}
-À l'aide d'un schéma, on présente l'intégralité de la \textit{pipeline} pour cette étape: préparation des données; lancement des recherches en plein texte sur l'\api{} \wkd{}; lancement de requêtes \sparql{} à partir des résultats obtenus et structuration des résultats.
+Construire un jeu de données issu de \sparql{} à partir de la manière dont une personne est nommée et décrite au \scl{XIX} n'est pas une opération anodine. La chaîne de traitement est donc assez complexe, comme le montre le schéma \ref{fig:wkdmain}. Cette chaîne de traitement peut être séparée en deux étapes.
 
-\begin{figure}[!h]
+Premièrement, il s'agit d'aligner les entrées de catalogue avec des identifiants \wkd{}. Ceux-ci sont liés à des \enquote{entités} \wkd{}: des personnes, lieux et évènements décrits dans \wkd{} par un certain nombre de propriétés (date de naissance, lieu de résidences...). Cette première étape repose avant tout sur l'extraction et la traduction des données depuis les éléments \tname{} \ttrait{}. Ce processus d'extraction permet de récupérer toutes les données pertinentes pour chaque entrée de catalogue et de les stocker dans un \gls{dictionnaire} structuré. Comme on le verra, la nature \enquote{semi-structurée} des entrées (ainsi qu'une bonne connaissance du corpus) permet de développer une approche \enquote{low-tech} du processus d'extraction et de traduction: il est possible qu'un ordinateur repère les éléments signifiants dans le texte grâce à sa structure, sans avoir à recourir à des méthodes d'apprentissage machine. Une fois les données du \tname{} et du \ttrait{} structurées en dictionnaire, elles sont utilisées pour lancer plusieurs recherches en plein texte sur le moteur de recherche de \wkd{}. Ces recherches sont faites automatiquement grâce à l'\api{} de \wkd{}. Pour maximiser les chances d'obtenir un identifiant valide, un algorithme a été conçu pour lancer plusieurs recherches à partir de chaque dictionnaire. La première recherche met bout-à-bout toutes les valeurs disponibles dans le dictionnaire. Ensuite, en fonction des paramètres de recherche disponibles dans le dictionnaire, différentes autres recherches sont lancées. Cet algorithme a été élaboré en menant de nombreux tests pour maximiser le taux de réussite, calculé sous la forme d'un \gls{score F1}.
+
+Si l'étape d'alignement avec \wkd{} est la plus complexe, elle n'est qu'une étape préparatoire vers la constitution du jeu de données. En fait, récupérer les identifiants permet de mener l'enrichissement en tant que tel: lancer une requête \sparql{} sur tous ces identifiants permet de récupérer pour chacun des données de la base de donnée de \wkd{} et donc de construire le jeu de données définitif. Pour cette étape, le processus est plus simple: les identifiants récupérés à la fin de l'étape précédente sont dédoublonnés (pour éviter de lancer plusieurs fois la même requête), ensuite une requête \sparql{} est initalisée et lancée chacun des identifiants. Les résultats sont traduits depuis les formats \json{} ou \xml{} retournés par \sparql{} sous forme de \json{} plus simple, et donc plus aisément manipulable. Ensuite, ces données sont enregistrées dans un fichier. Pour finir, les identifiants \wkd{} sont réinjectés aux catalogues \tei{}, afin de pouvoir faire le lien entre les catalogues et les jeux de données récupérés.
+
+Cette chaîne de traitement étant lancée sur plus de 80000 entrées de catalogues, le temps d'exécution est très long; dans sa version initiale, le script demandait des performances particulièrement élevées, et ne fonctionnait pas sur un ordinateur \enquote{simple}. La chaîne de traitement a donc été reprise en plusieurs points afin d'être optimisée et de fonctionner plus vite en étant moins coûteuse en ressources.
+
+\begin{figure}[!p]
 	\centering
-	\tikz[node distance=1cm, scale=0.9, transform shape]{
+	\tikz[node distance=1cm, scale=0.85, transform shape]{
 		\node[db] %
 			(db1) at (-5,0)%
 			{Source: tableur contenant les \tname{} et \titem{}};
@@ -417,7 +456,7 @@ Le parti pris a donc été d'aligner avec des identifiants \wkd{} les noms conte
 		
 		\node[db]%
 			(logs) at (5,-11.5)%
-			{Optimisation: enregistrement des entrées de catalogues déjà et requêtes déjà traitées};
+			{Optimisation: enregistrement des entrées de catalogues et requêtes déjà traitées};
 		\node[transf]%
 			(api) at (0,-13)%
 			{Alogrithme de requêtes sur l'API \wkd{} pour récupérer des identifiants};
@@ -429,19 +468,77 @@ Le parti pris a donc été d'aligner avec des identifiants \wkd{} les noms conte
 			(idset) at (0,-17.5)%
 			{Liste d'identifiants \wkd{} à partir de laquelle est constitué le jeu de données};
 		\node[transf]
-			(sparql) at (0,-20)
+			(sparql) at (0,-20.5)
 			{Requêtes \sparql{}};
+		\node[base]%
+			(end) at (0, -23)%
+			{Conversion des résultats en \json{} et enregistrement};
 		\node[db]%
-			(sparqldata) at (0,-23)%
-			{Jeu de données issues de \sparql{} enregistré en \json{}};
+			(sparqldata) at (5,-23)%
+			{Jeu de données issues de \sparql{} au format \json{}};
+		\node[transf]%
+			(tei) at (0,-25.5)%
+			{Réinjection des identifiants \wkd{} dans les fichiers \tei{}};
 		\draw[arrow] (api) -- (idset);
 		\draw[arrow] (idset) -- (sparql);
-		\draw[arrow] (sparql) -- (sparqldata);
+		\draw[arrow] (sparql) -- (end);
+		\draw[arrow] (end) -- (sparqldata);
+		\draw[arrow] (end) -- (tei);
 	}
 	\caption Présentation générale de l'algorithme d'enrichissement de données via \wkd{}
 	\label{fig:wkdmain}
 \end{figure}
 
+\subsection{Comment traduire des descriptions textuelles datant du XIX\up{ème}~s. en chaînes de caractères qui puissent retourner un résultat sur \wkd{}?} 
+Ce problème est autant linguistique de technique. Une personne ou une chose est nommée ou décrite d'une certaine manière dans un catalogue de vente ancien. Il n'y a aucune garantie que cette caractérisation corresponde à ce qui est disponible sur \wkd{}: l'orthographe des noms évoluent, tout comme la manière de nommer certains métiers. À ces évolutions graphiques s'ajoutent des évolutions intellectuelles: les titres de noblesse sont un marqueur plus important au \scl{XIX} français que dans un \scl{XXI} mondialisé. Une personne n'est que rarement décrite par son titre dans \wkd{}. Il faudra donc mettre en place un processus de traduction, depuis le langage naturel en français du \scl{XIX} en anglais adapté aux termes utilisés dans \wkd{}.
+
+\subsection{Comment négocier avec le moteur de recherche de \wkd{}?} 
+Si les catalogues de vente fonctionnent avec leurs propres catégories mentales, le même peut être dit de \wkd{}: certains types de données sont plus souvent référencées que d'autres et \wkd{} utilise un vocabulaire qui lui est propre. Par expérience, le moteur de recherche de \wkd{} est assez \enquote{rigide}: contrairement à un moteur généraliste, il n'admet pas d'orthographes alternatives, par exemple. Le traitement des données textuelles et tout le processus de normalisation des données dépendent de ces faits: il faut trouver quelles informations sont référencées par \wkd{} et comment elles le sont. L'algorithme doit donc s'adapter au moteur de recherche. 
+
+\subsection{Une approche prédictive}
+Étant donnée la quantité d'incertitudes présentée ci-dessus, l'approche suivie dans l'alignement avec \wkd{} est prédictive. L'objectif de l'algorithme de recherches en plein texte sur l'\api{} \wkd{} n'est donc pas de trouver la \enquote{bonne} réponse. Il est de construire une chaîne de caractère dont on prédit qu'elle apportera un résultat pertinent. De la même manière, la phase de préparation des données est un processus qui sélectionne et normalise certaines informations dont on suppose qu'elles seront pertinentes dans l'obtention des bons résultats. De la même manière, le premier rôle des tests est de quantifier les prédictions. Ils répondent à la question: étant donné les résultats obtenus lors des tests, quelle est la probabilité que la prochaine chaîne de caractères recherchée retourne un résultat pertinent? Cette approche prédictive implique nécessairement un degré d'incertitude, et donc le développement d'algorithmes flexibles qui cherchent à minimiser le bruit. 
+
+\section{Préparer et structurer les données}
+Avant de chercher à récupérer un identifiant \wkd{} via l'\api{}, un algorithme se charge de traduire et de structurer les données: à partir d'un nom et de son éventuelle description, un dictionnaire qui contient les informations de manière structurée est construit. À partir de ce dictionnaire, un algorithme contenant différentes requêtes est lancé pour récupérer les identifiants \wkd{}.
+
+\subsection{Présentation générale}
+Ici, on présente la pipeline de l'algorithme (à l'aide d'un schéma), les données fournies en entrée et le résultat produit en sortie. Les sections suivantes détaillent quelques points d'intérêts.
+
+\subsection{Identifier le type de nom}
+Les éléments \texttt{tei:name} contiennent le titre donné à l'item vendu. Si c'est souvent le nom de l'auteur.ice du document, ce n'est pas toujours le cas (il y a aussi des noms de lieux, d'évènements), et il y a plusieurs types de noms de personnes: un nom peut être écrit en suivant différentes structures, ce qui appelle à différents types de traitements.
+
+\subsection{Reconstruire un prénom complet à partir de son abréviation}
+Souvent, le prénom d'une personne est écrit en abrégé. Partant de ce constat, un algorithme a été construit pour:
+\begin{itemize}
+	\item Repérer lorsqu'un prénom est abrégé, en prenant en compte différents types d'abréviations (nom simple ou composé, nom entièrement ou partiellement abrégé) et des possibles fautes dans les catalogues (un point est oublié à la fin d'une abréviation, par exemple).
+	\item Reconstruire un prénom complet à partir de son abréviation, ce qui passe pas un algorithme qui cherche à reconstruire le nom en plusieurs étapes pour obtenir le nom le plus complet possible avec un mimimum d'erreurs.
+\end{itemize}
+
+Ici, l'approche est totalement prédictive: il est impossible d'être certain d'obtenir le bon nom complet à partir de son abréviation; on peut uniquement prédire que le prénom reconstruit sera conforme au vrai prénom (tel qu'il est écrit sur \wkd{}) et chercher à maximiser cette certitude.
+
+\subsection{Extraire des informations normalisées à partir d'un nom et de sa description}
+Cette sous-section détaille l'utilisation de tables de conversion pour traduire et normaliser certaines donnes importantes (dates de vie et mort, titres de noblesse et fonctions).
+
+\section{Extraire des identifiants \wkd{}}
+Une fois un dictionnaire de données normalisées produites, un algorithme lance des recherches en plein texte sur l'\api{} de \wkd{} afin de récupérer des identifiants. L'algorithme lance plusieurs requêtes successivement. L'objectif est de récupérer un identifiant en lançant le moins de requêtes, avec le plus de certitude possible.
+
+\subsection{Présentation générale}
+Ici est présenté le fonctionnement général de l'algorithme, qui se comporte différemment en fonction du type de données qu'il a à traiter (personne noble ou non, prénom reconstruit ou non...).
+
+\subsection{Gérer la montée en charge: optimisation et réduction du temps d'exécution}
+Le script est assez compliqué, repose sur une \api{} et traite un grand nombre de données (plus de 82000 entrées). Il prend donc plus d'une dizaine d'heures à s'exécuter et demande des ressources élevées (la première version du script ne fonctionnait plus sur mon ordinateur après avoir traité 5\% du jeu de données). L'optimisation nécessaire de l'algorithme est décrite dans cette sous-section.
+
+\subsection{Évaluation du script : tests, performance et qualité des données extraites de \wkd{}}
+Des tests ont été réalisés pour:
+\begin{itemize}
+	\item isoler l'impact de chaque paramètre (élément du dictionnaire) dans l'obtention des bons résultats
+	\item évaluer la qualité de l'algorithme final
+	\item mesurer la performance de celui-ci.
+\end{itemize}
+Ces tests, et leurs résultats, sont présentés ici.
+
+\section{Après l'alignement, l'enrichissement: utiliser \sparql{} pour produire des données structurées}
+La récupération des identifiants \wkd{} est la partie la plus complexe dans l'utilisation de \wkd{} pour enrichir des données. Après une présentation des informations requêtées via \sparql{}, le processus d'extraction d'informations et de stockage dans un \json{} est détaillé.
 
 \subsection{Quelles données rechercher via \sparql?}
 Après avoir expliqué pourquoi développer des méthodes d'enrichissement automatique, une seconde question se pose: quelles sont les données à récupérer? Cette question n'est pas anodine du fait de la diversité du corpus. Le titre donné à un manuscrit dans un catalogue et inscrit dans le \tname{} est souvent celui d'une personne, mais ce n'est pas toujours le cas. Il arrive également qu'un manuscrit soit nommé d'après un évènement (la Révolution française), un lieu ou une province (Italie, Poitou), ou encore une typologie de document (des chartes).
@@ -460,18 +557,18 @@ Le principe des triplets \rdf{} est mieux exprimé sous forme graphique (\ref{fi
 	\centering
 	\tikz{
 		\node%
-			[base] %
-			(S) at (0,0) %
-			{\textbf{Sujet} \small \\ La ressource principale \\ \textit{Natalia Gontcharova}};
+		[base] %
+		(S) at (0,0) %
+		{\textbf{Sujet} \small \\ La ressource principale \\ \textit{Natalia Gontcharova}};
 		\node%
-			[transf] %
-			(P) at (5, 0) %
-			{\textbf{Prédicat} \small \\ La relation à l'objet \\ \textit{a peint}};
+		[transf] %
+		(P) at (5, 0) %
+		{\textbf{Prédicat} \small \\ La relation à l'objet \\ \textit{a peint}};
 		\node%
-			[base] %
-			(O) at (10, 0) %
-			{\textbf{Objet} \small \\ Une ressource secondaire \\ \enquote{\textit{Les porteuses}}};
-			
+		[base] %
+		(O) at (10, 0) %
+		{\textbf{Objet} \small \\ Une ressource secondaire \\ \enquote{\textit{Les porteuses}}};
+		
 		\draw[arrow] (S) -- (P);
 		\draw[arrow] (P) -- (O);
 	}
@@ -530,58 +627,6 @@ Un nombre assez conséquent de données ont donc été requêtées avec \sparql{
 \end{itemize}
 
 Comme on l'a dit, l'objectif principal de l'alignement avec \wkd{} est de produire des données pour calculer des régressions linéaires, ce qui permettrait d'étudier les déterminants du prix d'un manuscrit sur le marché du \scl{XIX}. Cette récupération d'informations en masse ouvre d'autres possibilités. Entre autres, de nombreuses données géographiques ont sont récupérées (lieu de naissance, de mort, d'enterrement). Il est ensuite possible  de récupérer les coordonnées de ces lieux, afin de construire une cartographie des auteur.ice de manuscrits circulant sur le marché parisien du \scl{XIX} parisien. Cette possibilité n'est pas anodine, puisqu'elle permettrait de mettre en relation la \enquote{parisianité} avec la construction du canon littéraire à Paris. Il serait également possible d'étudier la circulation des productions culturelles, et leur rayon d'influence. En croisant les données géoréférencées avec des données chronologiques (dates de naissance et de mort...), ces questions peuvent également être étudiées de façon historique: comment l'influence de l'origine géographique sur la réception d'une œuvre évolue au fil des siècles? Répondre à ces questions n'a pas été possible dans le cadre de mon stage; cependant, grâce à l'enrichissement de données via \sparql{}, il de telles études deviennent possibles, et les données pour mener ces analyses sont au moins en partie déjà disponibles. Produire des informations normalisées et exploitables pour la recherche implique donc de produire des données réutilisables, qui doivent être réutilisables avec d'autres problématiques de recherches.
-
-
-\subsection{Comment traduire des descriptions textuelles datant du XIX\up{ème}~s. en chaînes de caractères qui puissent retourner un résultat sur \wkd{}?} 
-Ce problème est autant linguistique de technique. Une personne ou une chose est nommée ou décrite d'une certaine manière dans un catalogue de vente ancien. Il n'y a aucune garantie que cette caractérisation corresponde à ce qui est disponible sur \wkd{}: l'orthographe des noms évoluent, tout comme la manière de nommer certains métiers. À ces évolutions graphiques s'ajoutent des évolutions intellectuelles: les titres de noblesse sont un marqueur plus important au \scl{XIX} français que dans un \scl{XXI} mondialisé. Une personne n'est que rarement décrite par son titre dans \wkd{}. Il faudra donc mettre en place un processus de traduction, depuis le langage naturel en français du \scl{XIX} en anglais adapté aux termes utilisés dans \wkd{}.
-
-\subsection{Comment négocier avec le moteur de recherche de \wkd{}?} 
-Si les catalogues de vente fonctionnent avec leurs propres catégories mentales, le même peut être dit de \wkd{}: certains types de données sont plus souvent référencées que d'autres et \wkd{} utilise un vocabulaire qui lui est propre. Par expérience, le moteur de recherche de \wkd{} est assez \enquote{rigide}: contrairement à un moteur généraliste, il n'admet pas d'orthographes alternatives, par exemple. Le traitement des données textuelles et tout le processus de normalisation des données dépendent de ces faits: il faut trouver quelles informations sont référencées par \wkd{} et comment elles le sont. L'algorithme doit donc s'adapter au moteur de recherche. 
-
-\subsection{Une approche prédictive}
-Étant donnée la quantité d'incertitudes présentée ci-dessus, l'approche suivie dans l'alignement avec \wkd{} est prédictive. L'objectif de l'algorithme de recherches en plein texte sur l'\api{} \wkd{} n'est donc pas de trouver la \enquote{bonne} réponse. Il est de construire une chaîne de caractère dont on prédit qu'elle apportera un résultat pertinent. De la même manière, la phase de préparation des données est un processus qui sélectionne et normalise certaines informations dont on suppose qu'elles seront pertinentes dans l'obtention des bons résultats. De la même manière, le premier rôle des tests est de quantifier les prédictions. Ils répondent à la question: étant donné les résultats obtenus lors des tests, quelle est la probabilité que la prochaine chaîne de caractères recherchée retourne un résultat pertinent? Cette approche prédictive implique nécessairement un degré d'incertitude, et donc le développement d'algorithmes flexibles qui cherchent à minimiser le bruit. 
-
-\section{Préparer et structurer les données}
-Avant de chercher à récupérer un identifiant \wkd{} via l'\api{}, un algorithme se charge de traduire et de structurer les données: à partir d'un nom et de son éventuelle description, un dictionnaire qui contient les informations de manière structurée est construit. À partir de ce dictionnaire, un algorithme contenant différentes requêtes est lancé pour récupérer les identifiants \wkd{}.
-
-\subsection{Présentation générale}
-Ici, on présente la pipeline de l'algorithme (à l'aide d'un schéma), les données fournies en entrée et le résultat produit en sortie. Les sections suivantes détaillent quelques points d'intérêts.
-
-\subsection{Identifier le type de nom}
-Les éléments \texttt{tei:name} contiennent le titre donné à l'item vendu. Si c'est souvent le nom de l'auteur.ice du document, ce n'est pas toujours le cas (il y a aussi des noms de lieux, d'évènements), et il y a plusieurs types de noms de personnes: un nom peut être écrit en suivant différentes structures, ce qui appelle à différents types de traitements.
-
-\subsection{Reconstruire un prénom complet à partir de son abréviation}
-Souvent, le prénom d'une personne est écrit en abrégé. Partant de ce constat, un algorithme a été construit pour:
-\begin{itemize}
-	\item Repérer lorsqu'un prénom est abrégé, en prenant en compte différents types d'abréviations (nom simple ou composé, nom entièrement ou partiellement abrégé) et des possibles fautes dans les catalogues (un point est oublié à la fin d'une abréviation, par exemple).
-	\item Reconstruire un prénom complet à partir de son abréviation, ce qui passe pas un algorithme qui cherche à reconstruire le nom en plusieurs étapes pour obtenir le nom le plus complet possible avec un mimimum d'erreurs.
-\end{itemize}
-
-Ici, l'approche est totalement prédictive: il est impossible d'être certain d'obtenir le bon nom complet à partir de son abréviation; on peut uniquement prédire que le prénom reconstruit sera conforme au vrai prénom (tel qu'il est écrit sur \wkd{}) et chercher à maximiser cette certitude.
-
-\subsection{Extraire des informations normalisées à partir d'un nom et de sa description}
-Cette sous-section détaille l'utilisation de tables de conversion pour traduire et normaliser certaines donnes importantes (dates de vie et mort, titres de noblesse et fonctions).
-
-\section{Extraire des identifiants \wkd{}}
-Une fois un dictionnaire de données normalisées produites, un algorithme lance des recherches en plein texte sur l'\api{} de \wkd{} afin de récupérer des identifiants. L'algorithme lance plusieurs requêtes successivement. L'objectif est de récupérer un identifiant en lançant le moins de requêtes, avec le plus de certitude possible.
-
-\subsection{Présentation générale}
-Ici est présenté le fonctionnement général de l'algorithme, qui se comporte différemment en fonction du type de données qu'il a à traiter (personne noble ou non, prénom reconstruit ou non...).
-
-\subsection{Gérer la montée en charge: optimisation et réduction du temps d'exécution}
-Le script est assez compliqué, repose sur une \api{} et traite un grand nombre de données (plus de 82000 entrées). Il prend donc plus d'une dizaine d'heures à s'exécuter et demande des ressources élevées (la première version du script ne fonctionnait plus sur mon ordinateur après avoir traité 5\% du jeu de données). L'optimisation nécessaire de l'algorithme est décrite dans cette sous-section.
-
-\subsection{Évaluation du script : tests, performance et qualité des données extraites de \wkd{}}
-Des tests ont été réalisés pour:
-\begin{itemize}
-	\item isoler l'impact de chaque paramètre (élément du dictionnaire) dans l'obtention des bons résultats
-	\item évaluer la qualité de l'algorithme final
-	\item mesurer la performance de celui-ci.
-\end{itemize}
-Ces tests, et leurs résultats, sont présentés ici.
-
-\section{Après l'alignement, l'enrichissement: utiliser \sparql{} pour produire des données structurées}
-La récupération des identifiants \wkd{} est la partie la plus complexe dans l'utilisation de \wkd{} pour enrichir des données. Après une présentation des informations requêtées via \sparql{}, le processus d'extraction d'informations et de stockage dans un \json{} est détaillé.
 
 \subsection{Présentation générale}
 Comme pour les autres étapes, on présente ici, à l'aide d'un schéma, la structure générale de l'algorithme de requêtes.
@@ -673,13 +718,13 @@ Les représentations graphiques ne font pas que montrer des phénomènes. Leur r
 \addcontentsline{toc}{chapter}{Bibliographie}
 \printbibliography[heading=subbibintoc,keyword={katabase},title={Projet \mssktb{}}]
 \printbibliography[heading=subbibintoc,keyword={text},title={Édition numérique, traitement automatisé et analyse de texte}]
+\printbibliography[heading=subbibintoc, keyword={web}, title={Technologies du web}]
 \printbibliography[heading=subbibintoc,keyword={visualisation},title={Visualisation et design d'interfaces}]
 \printbibliography[heading=subbibintoc,keyword={econometrie},title={Marché de l'art, économétrie et statistiques}]
 
 
-
-
 %%%%%%%%%%%%%%%%%%%%%% TOCS %%%%%%%%%%%%%%%%%%%%%%
+\printglossaries
 \listoffigures
 % \listoftables
 \tableofcontents

@@ -1,5 +1,7 @@
 This is makeindex, version 2.15 [TeX Live 2019] (kpathsea + Thai support).
 Scanning style file ./paulkervegan_memoire.ist.............................done (29 attributes redefined, 0 ignored).
-Scanning input file paulkervegan_memoire.glo...done (0 entries accepted, 0 rejected).
-Nothing written in paulkervegan_memoire.gls.
+Scanning input file paulkervegan_memoire.glo....done (28 entries accepted, 0 rejected).
+Sorting entries....done (122 comparisons).
+Generating output file paulkervegan_memoire.gls....done (19 lines written, 0 warnings).
+Output written in paulkervegan_memoire.gls.
 Transcript written in paulkervegan_memoire.glg.

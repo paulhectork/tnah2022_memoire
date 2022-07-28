@@ -369,6 +369,27 @@
       \true{nocite}
       \keyw{,visualisation}
     \endentry
+    \entry{noauthor_f-score_2022}{online}{}
+      \field{sortinit}{F}
+      \field{sortinithash}{fb0c0faa89eb6abae8213bf60e6799ea}
+      \field{labeltitlesource}{title}
+      \field{title}{F-score}
+      \field{titleaddon}{Wikipedia. L'encyclopédie libre}
+      \field{urlday}{12}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://en.wikipedia.org/wiki/F-score
+      \endverb
+      \verb{url}
+      \verb https://en.wikipedia.org/wiki/F-score
+      \endverb
+      \keyw{,econometrie}
+    \endentry
     \entry{gabay_selling_2020}{inproceedings}{}
       \name{author}{3}{}{%
         {{un=0,uniquepart=base,hash=7fe1ec35c644906499707ac25bc7780b}{%
@@ -551,6 +572,54 @@
       \endverb
       \keyw{,text}
     \endentry
+    \entry{harris_sparql_2013}{online}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=dad88e15878a9c1b972860de786ecb0f}{%
+           family={Harris},
+           familyi={H\bibinitperiod},
+           given={Steve},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=b0f2e76dd842dc9052f49422b3cc10e6}{%
+           family={Seaborne},
+           familyi={S\bibinitperiod},
+           given={Andy},
+           giveni={A\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=be64499247ac1c766030e23529596f0e}{%
+           family={Prud'hommeaux},
+           familyi={P\bibinitperiod},
+           given={Eric},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{9caf0a87957bf3995b2f6d51c7b6b125}
+      \strng{fullhash}{9caf0a87957bf3995b2f6d51c7b6b125}
+      \strng{bibnamehash}{9caf0a87957bf3995b2f6d51c7b6b125}
+      \strng{authorbibnamehash}{9caf0a87957bf3995b2f6d51c7b6b125}
+      \strng{authornamehash}{9caf0a87957bf3995b2f6d51c7b6b125}
+      \strng{authorfullhash}{9caf0a87957bf3995b2f6d51c7b6b125}
+      \field{sortinit}{H}
+      \field{sortinithash}{6db6145dae8dc9e1271a8d556090b50a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{SPARQL} 1.1 Query Language. W3C Recommendation 21 March 2013}
+      \field{titleaddon}{W3C}
+      \field{urlday}{10}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{year}{2013}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb http://www.w3.org/TR/2013/REC-sparql11-query-20130321/
+      \endverb
+      \verb{url}
+      \verb http://www.w3.org/TR/2013/REC-sparql11-query-20130321/
+      \endverb
+      \keyw{,web}
+    \endentry
     \entry{hentschel_visual_2014}{book}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=4ac0c15896d38c353e810015718f887a}{%
@@ -583,6 +652,27 @@
       \field{dateera}{ce}
       \true{nocite}
       \keyw{,visualisation}
+    \endentry
+    \entry{noauthor_interface_2022}{online}{}
+      \field{sortinit}{I}
+      \field{sortinithash}{9417e9a1288a9371e2691d999083ed39}
+      \field{labeltitlesource}{title}
+      \field{title}{Interface de programmation}
+      \field{titleaddon}{Wikipedia. L'encyclopédie libre}
+      \field{urlday}{27}
+      \field{urlmonth}{7}
+      \field{urlyear}{2022}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://fr.wikipedia.org/wiki/Interface_de_programmation
+      \endverb
+      \verb{url}
+      \verb https://fr.wikipedia.org/wiki/Interface_de_programmation
+      \endverb
+      \keyw{,web}
     \endentry
     \entry{janes_du_2021}{thesis}{}
       \name{author}{1}{}{%
