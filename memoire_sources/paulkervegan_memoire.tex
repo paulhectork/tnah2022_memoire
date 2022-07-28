@@ -16,17 +16,53 @@
 \usepackage{minted}
 \usemintedstyle{pastie}
 \usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
 
+% thx https://latexcolor.com/
 \definecolor{palepink}{rgb}{0.98, 0.85, 0.87}
-\definecolor{plum}{rgb}{0.56, 0.27, 0.52}
+\definecolor{plum}{rgb}{0.44, 0.11, 0.11}
 \definecolor{lilac}{rgb}{0.8, 0.8, 1.0}
+\definecolor{peachpuff}{rgb}{1.0, 0.85, 0.73}
+\definecolor{lightpink}{rgb}{1.0, 0.71, 0.76}
+\definecolor{pearl}{rgb}{0.94, 0.92, 0.84}
 
-\tikzstyle{rectnode} = [%
+% db interaction: db
+% main step (start, stop...): main
+% transfo/relation: transf
+\tikzstyle{base} = [%
 	draw,%
 	rectangle,%
 	rounded corners=3pt,%
 	minimum height=1cm,%
 	fill=lilac,%
+	draw=plum,%
+	text centered,%
+	text width=4cm%
+]
+\tikzstyle{db} = [%
+	cylinder,%
+	shape border rotate=90,%
+	aspect=0.25,%
+	fill=peachpuff,%
+	draw=plum,%
+	text centered,%
+	text width=4cm%
+]
+\tikzstyle{transf} = [%
+	trapezium,%
+	trapezium left angle=70,%
+	trapezium right angle=110,%
+	minimum height=1cm,%
+	fill=lightpink,%
+	draw=plum,%
+	text centered,%
+	text width=3cm%
+]
+\tikzstyle{choice} = [%
+	diamond,%
+	minimum width=2cm,%
+	aspect=2,%
+	fill=pearl,%
 	draw=plum,%
 	text centered,%
 	text width=4cm%
@@ -344,6 +380,69 @@ Les entrées de catalogue contiennent beaucoup d'informations qualitatives, qui 
 
 Le parti pris a donc été d'aligner avec des identifiants \wkd{} les noms contenus dans les balises \tname{} à l'aide des descriptions contenues dans les \ttrait{}; à partir de cet alignement a été constituée une base de données. Cela permet d'approximer une lecture \enquote{humaine} des items en vente: pour chaque auteur.ice, un certain nombre d'informations auront été récupérées pour mieux identifier la personne (ses occupations, son origine, ses dates de vie...). L'analyse du corpus s'appuit alors sur un bagage de connaissances qui permet d'appréhender par lecture distante l'importance d'une personne. Il devient alors envisageable de voir dans quelle mesure la mention d'une personne impacte le prix d'un manuscrit, et quels sont les facteurs biographiques déterminant dans l'établissement de la valeur. Pour revenir à l'exemple de La Rochefoucauld: à défaut de permettre de savoir qui il est, un alignement avec \wkd{} permet d'identifier son statut et sa place dans la culture française, en récupérant le nombre de ses publications ou encore les institutions dont il est membre.
 
+
+\subsection{Présentation générale de l'algorithme}
+À l'aide d'un schéma, on présente l'intégralité de la \textit{pipeline} pour cette étape: préparation des données; lancement des recherches en plein texte sur l'\api{} \wkd{}; lancement de requêtes \sparql{} à partir des résultats obtenus et structuration des résultats.
+
+\begin{figure}[!h]
+	\centering
+	\tikz[node distance=1cm, scale=0.9, transform shape]{
+		\node[db] %
+			(db1) at (-5,0)%
+			{Source: tableur contenant les \tname{} et \titem{}};
+		\node[base]%
+			(start) at (0,0)%
+			{Lancement de l'algorithme sur toutes les entrées du tableur};
+		\draw[arrow] (db1) -- (start);
+		
+		\node[choice]%
+			(detect) at (0,-3.5)%
+			{Détection du type de \tname{} pour établir %
+				la méthode d'extraction des données};
+		\draw[arrow] (start) -- (detect);
+		
+		\node[transf]%
+			(name) at (-4,-6.5)%
+			{Extraction et normalisation d'informations nominatives du \tname{}};
+		\node[transf]%
+			(trait) at (4,-6.5)%
+			{Extraction et normalisation d'informations biographiques du \ttrait{}};
+		\node[base]%
+			(dict) at (0,-9.5)%
+			{Constitution d'un dictionnaire structuré pour aligner les \tname{} avec des entités \wkd{}};
+		\draw[arrow] (detect) -- (name);
+		\draw[arrow] (detect) -- (trait);
+		\draw[arrow] (name) -- (dict);
+		\draw[arrow] (trait) -- (dict);
+		
+		\node[db]%
+			(logs) at (5,-11.5)%
+			{Optimisation: enregistrement des entrées de catalogues déjà et requêtes déjà traitées};
+		\node[transf]%
+			(api) at (0,-13)%
+			{Alogrithme de requêtes sur l'API \wkd{} pour récupérer des identifiants};
+		\draw[arrow] (dict) -- (logs);
+		\draw[arrow] (api) -- (logs);
+		\draw[arrow] (dict) -- (api);
+		
+		\node[db]%
+			(idset) at (0,-17.5)%
+			{Liste d'identifiants \wkd{} à partir de laquelle est constitué le jeu de données};
+		\node[transf]
+			(sparql) at (0,-20)
+			{Requêtes \sparql{}};
+		\node[db]%
+			(sparqldata) at (0,-23)%
+			{Jeu de données issues de \sparql{} enregistré en \json{}};
+		\draw[arrow] (api) -- (idset);
+		\draw[arrow] (idset) -- (sparql);
+		\draw[arrow] (sparql) -- (sparqldata);
+	}
+	\caption Présentation générale de l'algorithme d'enrichissement de données via \wkd{}
+	\label{fig:wkdmain}
+\end{figure}
+
+
 \subsection{Quelles données rechercher via \sparql?}
 Après avoir expliqué pourquoi développer des méthodes d'enrichissement automatique, une seconde question se pose: quelles sont les données à récupérer? Cette question n'est pas anodine du fait de la diversité du corpus. Le titre donné à un manuscrit dans un catalogue et inscrit dans le \tname{} est souvent celui d'une personne, mais ce n'est pas toujours le cas. Il arrive également qu'un manuscrit soit nommé d'après un évènement (la Révolution française), un lieu ou une province (Italie, Poitou), ou encore une typologie de document (des chartes).
 
@@ -361,15 +460,15 @@ Le principe des triplets \rdf{} est mieux exprimé sous forme graphique (\ref{fi
 	\centering
 	\tikz{
 		\node%
-			[rectnode] %
+			[base] %
 			(S) at (0,0) %
 			{\textbf{Sujet} \small \\ La ressource principale \\ \textit{Natalia Gontcharova}};
 		\node%
-			[rectnode] %
+			[transf] %
 			(P) at (5, 0) %
 			{\textbf{Prédicat} \small \\ La relation à l'objet \\ \textit{a peint}};
 		\node%
-			[rectnode] %
+			[base] %
 			(O) at (10, 0) %
 			{\textbf{Objet} \small \\ Une ressource secondaire \\ \enquote{\textit{Les porteuses}}};
 			
@@ -440,10 +539,7 @@ Ce problème est autant linguistique de technique. Une personne ou une chose est
 Si les catalogues de vente fonctionnent avec leurs propres catégories mentales, le même peut être dit de \wkd{}: certains types de données sont plus souvent référencées que d'autres et \wkd{} utilise un vocabulaire qui lui est propre. Par expérience, le moteur de recherche de \wkd{} est assez \enquote{rigide}: contrairement à un moteur généraliste, il n'admet pas d'orthographes alternatives, par exemple. Le traitement des données textuelles et tout le processus de normalisation des données dépendent de ces faits: il faut trouver quelles informations sont référencées par \wkd{} et comment elles le sont. L'algorithme doit donc s'adapter au moteur de recherche. 
 
 \subsection{Une approche prédictive}
-Étant donnée la quantité d'incertitudes présentée ci-dessus, l'approche suivie dans l'alignement avec \wkd{} est prédictive. L'objectif de l'algorithme de recherches en plein texte sur l'\api{} \wkd{} n'est donc pas de trouver la \enquote{bonne} réponse. Il est de construire une chaîne de caractère dont on prédit qu'elle apportera un résultat pertinent. De la même manière, la phase de préparation des données est un processus qui sélectionne et normalise certaines informations dont on suppose qu'elles seront pertinentes dans l'obtention des bons résultats. De la même manière, le premier rôle des tests est de quantifier les prédictions. Ils répondent à la question: étant donné les résultats obtenus lors des tests, quelle est la probabilité que la prochaine chaîne de caractères recherchée retourne un résultat pertinent? Cette approche prédictive implique nécessairement un degré d'incertitude, et donc le développement d'algorithmes flexibles qui cherchent à minimiser le bruit.
-
-\subsection{Présentation générale de l'algorithme}
-À l'aide d'un schéma, on présente l'intégralité de la \textit{pipeline} pour cette étape: préparation des données; lancement des recherches en plein texte sur l'\api{} \wkd{}; lancement de requêtes \sparql{} à partir des résultats obtenus et structuration des résultats. 
+Étant donnée la quantité d'incertitudes présentée ci-dessus, l'approche suivie dans l'alignement avec \wkd{} est prédictive. L'objectif de l'algorithme de recherches en plein texte sur l'\api{} \wkd{} n'est donc pas de trouver la \enquote{bonne} réponse. Il est de construire une chaîne de caractère dont on prédit qu'elle apportera un résultat pertinent. De la même manière, la phase de préparation des données est un processus qui sélectionne et normalise certaines informations dont on suppose qu'elles seront pertinentes dans l'obtention des bons résultats. De la même manière, le premier rôle des tests est de quantifier les prédictions. Ils répondent à la question: étant donné les résultats obtenus lors des tests, quelle est la probabilité que la prochaine chaîne de caractères recherchée retourne un résultat pertinent? Cette approche prédictive implique nécessairement un degré d'incertitude, et donc le développement d'algorithmes flexibles qui cherchent à minimiser le bruit. 
 
 \section{Préparer et structurer les données}
 Avant de chercher à récupérer un identifiant \wkd{} via l'\api{}, un algorithme se charge de traduire et de structurer les données: à partir d'un nom et de son éventuelle description, un dictionnaire qui contient les informations de manière structurée est construit. À partir de ce dictionnaire, un algorithme contenant différentes requêtes est lancé pour récupérer les identifiants \wkd{}.
