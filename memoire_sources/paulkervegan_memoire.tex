@@ -461,6 +461,7 @@ Si l'étape d'alignement avec \wkd{} est la plus complexe, elle n'est qu'une ét
 
 Cette chaîne de traitement étant lancée sur plus de 80000 entrées de catalogues, le temps d'exécution est très long et même des petites améliorations de performance peuvent avoir un grand impact; dans sa version initiale, le script demandait des performances particulièrement élevées, et ne fonctionnait pas sur un ordinateur aux capacités limitées. La chaîne de traitement a donc été reprise en plusieurs points afin d'être optimisée, de fonctionner plus vite en étant moins coûteuse en ressources.
 
+\widepage
 \begin{figure}[!p]
 	\centering
 	\tikz[node distance=1cm, scale=0.85, transform shape]{
@@ -474,8 +475,7 @@ Cette chaîne de traitement étant lancée sur plus de 80000 entrées de catalog
 		
 		\node[choice]%
 			(detect) at (0,-3.5)%
-			{Détection du type de \tname{} pour établir %
-				la méthode d'extraction des données};
+			{Étape 1 -- extraction de donnée des \tname{} et \ttrait{}};
 		\draw[arrow] (start) -- (detect);
 		
 		\node[transf]%
@@ -493,11 +493,11 @@ Cette chaîne de traitement étant lancée sur plus de 80000 entrées de catalog
 		\draw[arrow] (trait) -- (dict);
 		
 		\node[db]%
-			(logs) at (5,-13)%
+			(logs) at (6,-13)%
 			{Optimisation: enregistrement des entrées de catalogues et requêtes déjà traitées};
 		\node[transf]%
 			(api) at (0,-13)%
-			{Alogrithme de requêtes sur l'API \wkd{} pour récupérer des identifiants};
+			{Étape 2 -- Alogrithme de requêtes sur l'API \wkd{} pour récupérer des identifiants};
 		\draw[arrow] (api) -- (logs);
 		\draw[arrow] (dict) -- (api);
 		
@@ -506,7 +506,7 @@ Cette chaîne de traitement étant lancée sur plus de 80000 entrées de catalog
 			{Liste d'identifiants \wkd{} à partir de laquelle est constitué le jeu de données};
 		\node[transf]
 			(sparql) at (0,-20.5)
-			{Requêtes \sparql{}};
+			{Étape 3 -- Requêtes \sparql{}};
 		\node[base]%
 			(end) at (0, -23)%
 			{Conversion des résultats en \json{} et enregistrement};
@@ -529,6 +529,7 @@ Cette chaîne de traitement étant lancée sur plus de 80000 entrées de catalog
 	\caption{\\Présentation générale de l'algorithme d'enrichissement de données à l'aide de \wkd{}}
 	\label{fig:wkdmain}
 \end{figure}
+\restoregeometry
 
 \subsection{Comment traduire des descriptions textuelles datant du XIX\up{ème}~s. en chaînes de caractères qui puissent retourner un résultat sur \wkd{}?} 
 Dans la réalisation de cet algorithme, la principale difficulté porte sur la récupération d'identifiants \wkd{} à l'aide de recherches en plein texte. Le script prend en entrée un nom et sa description -- tels qu'elles figurent dans des catalogues datant majoritairement du \scl{XIX}. La difficulté, au delà de la détection et de l'extraction d'informations, est de traduire ces informations pour qu'elles permettent de trouver des résultats pertinents sur \wkd{}. Ce problème est autant linguistique de technique. Une personne ou une chose est nommée ou décrite d'une certaine manière dans un catalogue de vente ancien. Il n'y a aucune garantie que cette caractérisation corresponde à celle faite par \wkd{}: l'orthographe des noms évoluent, tout comme la manière de nommer certains métiers. À ces évolutions orthographiques s'ajoutent des évolutions intellectuelles: les titres de noblesse sont un marqueur plus important au \scl{XIX} français que dans un \scl{XXI} mondialisé. Une personne n'est que rarement décrite par son titre dans \wkd{}. 
@@ -746,7 +747,7 @@ Comme cela a été dit auparavant, le nom attribué à ces clés n'est pas syst�
 			{Lecture des données et lancement de l'algorithme};
 		\node[base]%
 			(tname) at (-3,0)%
-			{Étape 2 -- Extraction de données du \tname{}};
+			{Étape 1 -- Extraction de données du \tname{}};
 		\node[transf]%
 			(rebuild) at (7,-4)%
 			{Extraction du prénom et reconstruction d'un prénom complet à partir de sa version abrégée};

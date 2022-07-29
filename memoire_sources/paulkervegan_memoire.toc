@@ -65,7 +65,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{Étape 3 -- constitution d'un jeu de données à l'aide de \texttt {\gls {SPARQL}}{}}{19}{section*.9}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.3}Comment traduire des descriptions textuelles datant du XIX\up {ème}~s. en chaînes de caractères qui puissent retourner un résultat sur \textit {Wikidata}{}?}{19}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.3}Comment traduire des descriptions textuelles datant du XIX\up {ème}~s. en chaînes de caractères qui puissent retourner un résultat sur \textit {Wikidata}{}?}{21}{subsection.4.1.3}%
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{Le problème de la traduction des noms}{21}{section*.11}%
 \defcounter {refsection}{0}\relax 
@@ -73,43 +73,43 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.1.4}Comment négocier avec le moteur de recherche de \textit {Wikidata}{}?}{25}{subsection.4.1.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.5}Une approche prédictive}{27}{subsection.4.1.5}%
+\contentsline {subsection}{\numberline {4.1.5}Une approche prédictive}{28}{subsection.4.1.5}%
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.2}Préparer et structurer les données}{29}{section.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.1}Présentation générale}{29}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.1}Présentation générale}{30}{subsection.4.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Les formats d'entrée et de sortie}{29}{section*.21}%
+\contentsline {subsubsection}{Les formats d'entrée et de sortie}{30}{section*.21}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{Présentation de l'algorithme d'extraction d'informations}{30}{section*.24}%
+\contentsline {subsubsection}{Présentation de l'algorithme d'extraction d'informations}{31}{section*.24}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.2}Identifier le type de nom}{33}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.2}Identifier le type de nom}{34}{subsection.4.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.3}Reconstruire un prénom complet à partir de son abréviation}{33}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.3}Reconstruire un prénom complet à partir de son abréviation}{34}{subsection.4.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.4}Extraire des informations normalisées à partir d'un nom et de sa description}{33}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.4}Extraire des informations normalisées à partir d'un nom et de sa description}{34}{subsection.4.2.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Extraire des identifiants \textit {Wikidata}{}}{33}{section.4.3}%
+\contentsline {section}{\numberline {4.3}Extraire des identifiants \textit {Wikidata}{}}{34}{section.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.1}Présentation générale}{34}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.1}Présentation générale}{35}{subsection.4.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.2}Gérer la montée en charge: optimisation et réduction du temps d'exécution}{34}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.2}Gérer la montée en charge: optimisation et réduction du temps d'exécution}{35}{subsection.4.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.3}Évaluation du script : tests, performance et qualité des données extraites de \textit {Wikidata}{}}{34}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.3}Évaluation du script : tests, performance et qualité des données extraites de \textit {Wikidata}{}}{35}{subsection.4.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.4}Après l'alignement, l'enrichissement: utiliser \texttt {\gls {SPARQL}}{} pour produire des données structurées}{34}{section.4.4}%
+\contentsline {section}{\numberline {4.4}Après l'alignement, l'enrichissement: utiliser \texttt {\gls {SPARQL}}{} pour produire des données structurées}{35}{section.4.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.1}Quelles données rechercher via \texttt {\gls {SPARQL}}?}{34}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.1}Quelles données rechercher via \texttt {\gls {SPARQL}}?}{35}{subsection.4.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.2}Présentation générale}{38}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.2}Présentation générale}{39}{subsection.4.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.3}Développer un comportement uniforme pour produire des données exploitables à partir un corpus hétérogène}{38}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.3}Développer un comportement uniforme pour produire des données exploitables à partir un corpus hétérogène}{39}{subsection.4.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.4}Minimiser la perte: optimisation et gestion des erreurs}{39}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.4}Minimiser la perte: optimisation et gestion des erreurs}{40}{subsection.4.4.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.5}Lier la \texttt {TEI}{} aux données nouvellement produites}{39}{subsection.4.4.5}%
+\contentsline {subsection}{\numberline {4.4.5}Lier la \texttt {TEI}{} aux données nouvellement produites}{40}{subsection.4.4.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.5}Des données à la monnaie: premiers résultats de l'étude}{39}{section.4.5}%
+\contentsline {section}{\numberline {4.5}Des données à la monnaie: premiers résultats de l'étude}{40}{section.4.5}%
 \defcounter {refsection}{0}\relax 
 \contentsline {part}{III\hspace {1em}Après la \texttt {TEI}{}: l'application web \textit {Katabase}{}, interface de diffusion des données}{41}{part.3}%
 \defcounter {refsection}{0}\relax 

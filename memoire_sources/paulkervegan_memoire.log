@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.12.6)  30 JUL 2022 00:58
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.12.6)  30 JUL 2022 01:04
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1752,115 +1752,140 @@ Underfull \vbox (badness 1019) detected at line 439
 [16]
 Package hyperref Info: bookmark level for unknown listing defaults to 0 on inpu
 t line 440.
- [17] [18]
+ [17] [18] [19]
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: xetex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: twoside 
+* h-part:(L,W,R)=(28.45274pt, 540.60239pt, 28.45274pt)
+* v-part:(T,H,B)=(101.40665pt, 591.5302pt, 152.11pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=540.60239pt
+* \textheight=591.5302pt
+* \oddsidemargin=-43.81725pt
+* \evensidemargin=-43.81725pt
+* \topmargin=-2.73714pt
+* \headheight=12.0pt
+* \headsep=19.8738pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=88.0pt
+* \marginparsep=7.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidetrue
+* \@mparswitchtrue
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Warning: Float too large for page by 26.50769pt on input line 531.
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+LaTeX Warning: Float too large for page by 137.76057pt on input line 531.
 
- [19]
 [20]
 \openout3 = `paulkervegan_memoire.pyg'.
 
+ [21
 
+
+]
 (./_minted-paulkervegan_memoire/DE8E9638560DA0C5B11F5EB8E6D2833CE52001A2CC770A4
 089BAE9AFDA1ABAEB.pygtex)
 \openout3 = `paulkervegan_memoire.pyg'.
 
 
 (./_minted-paulkervegan_memoire/666F1A6FF301D5CB882507AD15806358E52001A2CC770A4
-089BAE9AFDA1ABAEB.pygtex)
-Underfull \vbox (badness 1648) detected at line 564
- []
-
-[21]
+089BAE9AFDA1ABAEB.pygtex) [22]
 \openout3 = `paulkervegan_memoire.pyg'.
 
 
-Underfull \vbox (badness 3803) has occurred while \output is active []
-
- [22]
 (./_minted-paulkervegan_memoire/7B3EA1419E0BB5012034EDD394C14758E52001A2CC770A4
 089BAE9AFDA1ABAEB.pygtex)
 
-Package caption Warning: \label without proper reference on input line 605.
+Package caption Warning: \label without proper reference on input line 606.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `code:bio1' on page 23 undefined on input line 593.
+LaTeX Warning: Reference `code:bio1' on page 23 undefined on input line 594.
 
 \openout3 = `paulkervegan_memoire.pyg'.
 
-
+[23]
 (./_minted-paulkervegan_memoire/675439BF1DF6CF6F34CA1EF11289C328E52001A2CC770A4
-089BAE9AFDA1ABAEB.pygtex) [23]
-\openout3 = `paulkervegan_memoire.pyg'.
-
-
-(./_minted-paulkervegan_memoire/3F02E97BEFA2054AE1C3754769204F4BE52001A2CC770A4
 089BAE9AFDA1ABAEB.pygtex) [24]
 \openout3 = `paulkervegan_memoire.pyg'.
 
 
-(./_minted-paulkervegan_memoire/920ACB4D240974E51B8C884DD00984C6E52001A2CC770A4
+(./_minted-paulkervegan_memoire/3F02E97BEFA2054AE1C3754769204F4BE52001A2CC770A4
 089BAE9AFDA1ABAEB.pygtex)
+\openout3 = `paulkervegan_memoire.pyg'.
 
-Package caption Warning: \label without proper reference on input line 663.
+
+(./_minted-paulkervegan_memoire/920ACB4D240974E51B8C884DD00984C6E52001A2CC770A4
+089BAE9AFDA1ABAEB.pygtex) [25]
+
+Package caption Warning: \label without proper reference on input line 664.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `code:search1' on page 25 undefined on input line 648.
+LaTeX Warning: Reference `code:search1' on page 26 undefined on input line 649.
 
 
-[25]
+[26]
 
-Package caption Warning: \label without proper reference on input line 663.
+Package caption Warning: \label without proper reference on input line 664.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `code:search1' on page 26 undefined on input line 650.
+LaTeX Warning: Reference `code:search1' on page 27 undefined on input line 651.
 
 
 \openout3 = `paulkervegan_memoire.pyg'.
 
 
-Underfull \vbox (badness 2922) has occurred while \output is active []
-
- [26]
 (./_minted-paulkervegan_memoire/1ECB93BD43B565DA0C191C0D423237B3E52001A2CC770A4
 089BAE9AFDA1ABAEB.pygtex)
 
-Package caption Warning: \label without proper reference on input line 663.
+Package caption Warning: \label without proper reference on input line 664.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `code:search1' on page 27 undefined on input line 667.
+LaTeX Warning: Reference `code:search1' on page 27 undefined on input line 668.
 
-
-
-Package caption Warning: \label without proper reference on input line 678.
-See the caption package documentation for explanation.
-
-
-LaTeX Warning: Reference `code:predic' on page 27 undefined on input line 672.
 
 [27]
+
+Package caption Warning: \label without proper reference on input line 679.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `code:predic' on page 28 undefined on input line 673.
+
 \openout3 = `paulkervegan_memoire.pyg'.
 
 
 (./_minted-paulkervegan_memoire/F46971F6042B3C434C2C5161BE12B448E52001A2CC770A4
-089BAE9AFDA1ABAEB.pygtex) [28] [29]
+089BAE9AFDA1ABAEB.pygtex) [28]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [29]
 \openout3 = `paulkervegan_memoire.pyg'.
 
 
 (./_minted-paulkervegan_memoire/0A070C66C1E82257E3CBBF865D1C466EE52001A2CC770A4
-089BAE9AFDA1ABAEB.pygtex)
+089BAE9AFDA1ABAEB.pygtex) [30]
 \openout3 = `paulkervegan_memoire.pyg'.
 
 
 (./_minted-paulkervegan_memoire/7F1DEFCEFADCDF6A9DAD710072CBA109A0D456621503C3F
-B17CB65F8469EE6ED.pygtex) [30]
+B17CB65F8469EE6ED.pygtex) [31]
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: xetex
 * paper: a4paper
@@ -1895,17 +1920,17 @@ B17CB65F8469EE6ED.pygtex) [30]
 
 
 
-Package caption Warning: \label without proper reference on input line 894.
+Package caption Warning: \label without proper reference on input line 895.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:extractparenthesis' on page 31 undefined on input
- line 790.
+LaTeX Warning: Reference `fig:extractparenthesis' on page 32 undefined on input
+ line 791.
 
 
-LaTeX Warning: Float too large for page by 54.81668pt on input line 845.
+LaTeX Warning: Float too large for page by 54.81668pt on input line 846.
 
-[31]
+[32]
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: xetex
 * paper: a4paper
@@ -1940,10 +1965,10 @@ LaTeX Warning: Float too large for page by 54.81668pt on input line 845.
 
 
 
-LaTeX Warning: Float too large for page by 76.36052pt on input line 896.
+LaTeX Warning: Float too large for page by 76.36052pt on input line 897.
 
-[32]
-Overfull \hbox (5.37799pt too wide) in paragraph at lines 905--906
+[33]
+Overfull \hbox (5.37799pt too wide) in paragraph at lines 906--907
 \TU/lmr/m/n/12 d’abréviations (nom simple ou composé, nom entièrement ou partie
 llement abrégé)
  []
@@ -1951,26 +1976,26 @@ llement abrégé)
 
 Underfull \vbox (badness 1675) has occurred while \output is active []
 
- [33
+ [34
 
 
 
 
 ]
-Overfull \hbox (21.47437pt too wide) in paragraph at lines 932--932
+Overfull \hbox (21.47437pt too wide) in paragraph at lines 933--933
 []\TU/lmr/bx/n/17.28 Après l’alignement, l’enrichissement : utiliser [][]\TU/lm
 tt/b/n/17.28 SPARQL[]
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 932.
+(hyperref)                removing `\gls' on input line 933.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 935.
+(hyperref)                removing `\gls' on input line 936.
 
-[34]
+
 Overfull \hbox (228.21854pt too wide) has occurred while \output is active
 \TU/lmr/m/sl/12 4.4.  APRÈS L’ALIGNEMENT, L’ENRICHISSEMENT : UTILISER [][]\TU/l
 mtt/m/sl/12 SPARQL[] \TU/lmr/m/sl/12 POUR PRODUIRE DES DONNÉES STRUCTURÉES \TU/
@@ -1978,9 +2003,6 @@ lmr/m/n/12 35
  []
 
 [35] [36]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 Overfull \hbox (228.21854pt too wide) has occurred while \output is active
 \TU/lmr/m/sl/12 4.4.  APRÈS L’ALIGNEMENT, L’ENRICHISSEMENT : UTILISER [][]\TU/l
 mtt/m/sl/12 SPARQL[] \TU/lmr/m/sl/12 POUR PRODUIRE DES DONNÉES STRUCTURÉES \TU/
@@ -1988,12 +2010,21 @@ lmr/m/n/12 37
  []
 
 [37]
-Underfull \vbox (badness 5105) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [38]
-[39] [40
+Underfull \vbox (badness 5105) has occurred while \output is active []
 
-] [41] [42]
+
+Overfull \hbox (228.21854pt too wide) has occurred while \output is active
+\TU/lmr/m/sl/12 4.4.  APRÈS L’ALIGNEMENT, L’ENRICHISSEMENT : UTILISER [][]\TU/l
+mtt/m/sl/12 SPARQL[] \TU/lmr/m/sl/12 POUR PRODUIRE DES DONNÉES STRUCTURÉES \TU/
+lmr/m/n/12 39
+ []
+
+[39] [40] [41
+
+] [42]
 Chapitre 5.
 [43
 
@@ -2021,14 +2052,14 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 [50
 
 ]
-Overfull \hbox (2.06366pt too wide) in paragraph at lines 1111--1111
+Overfull \hbox (2.06366pt too wide) in paragraph at lines 1112--1112
 [][][]\TU/lmr/m/sc/12 Gabay []\TU/lmr/m/n/12 (Simon), []\TU/lmr/m/sc/12 Rondeau
  du Noyer []\TU/lmr/m/n/12 (Lucie), []\TU/lmr/m/sc/12 Gille Levenson []\TU/lmr/
 m/n/12 (Matthias), []\TU/lmr/m/sc/12 Petkovic
  []
 
 
-Overfull \hbox (22.54753pt too wide) in paragraph at lines 1111--1111
+Overfull \hbox (22.54753pt too wide) in paragraph at lines 1112--1112
 [][][]\TU/lmr/m/sc/12 Khemakhem []\TU/lmr/m/n/12 (Mohamed), []\TU/lmr/m/sc/12 R
 omary []\TU/lmr/m/n/12 (Laurent), []\TU/lmr/m/sc/12 Gabay []\TU/lmr/m/n/12 (Sim
 on), []\TU/lmr/m/sc/12 Bohbot []\TU/lmr/m/n/12 (Hervé), []\TU/lmr/m/sc/12 Front
@@ -2038,14 +2069,14 @@ ini
 [51]
 Missing character: There is no   in font [lmroman12-regular]:mapping=tex-text;!
 
-Overfull \hbox (4.34827pt too wide) in paragraph at lines 1112--1112
+Overfull \hbox (4.34827pt too wide) in paragraph at lines 1113--1113
 [][]\TU/lmr/m/it/12 Expression régulière\TU/lmr/m/n/12 , Wikipedia. L’encyclopé
 die libre, 2022, \TU/lmr/m/sc/12 url \TU/lmr/m/n/12 : []$[][][][][] [] [] [] []
 [] [] [][][][][][][][][] []
  []
 
 [52]
-Overfull \hbox (5.21626pt too wide) in paragraph at lines 1113--1113
+Overfull \hbox (5.21626pt too wide) in paragraph at lines 1114--1114
 [][]\TU/lmr/m/it/12 Moteur de recherche\TU/lmr/m/n/12 , Wikipedia. L’encyclopéd
 ie libre, 2022, \TU/lmr/m/sc/12 url \TU/lmr/m/n/12 : []$[][][][][] [] [] [] [][
 ] [] [][][][][][][][][] []
@@ -2096,11 +2127,11 @@ runsystem(makeindex -s paulkervegan_memoire.ist -t paulkervegan_memoire.alg -o
 paulkervegan_memoire.acr paulkervegan_memoire.acn)...executed.
 
 ] [66]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1133.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1133.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1134.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1134.
  (./paulkervegan_memoire.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1133.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1133.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1134.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1134.
 
 Package rerunfilecheck Info: File `paulkervegan_memoire.out' has not changed.
 (rerunfilecheck)             Checksum: 06B7A227027C7ADE782A39E711C3466C;7798.
@@ -2116,8 +2147,8 @@ Package logreq Info: Writing requests to 'paulkervegan_memoire.run.xml'.
  ) 
 Here is how much of TeX's memory you used:
  43079 strings out of 479819
- 856528 string characters out of 5895846
- 1674046 words of memory out of 5000000
+ 856523 string characters out of 5895846
+ 1667046 words of memory out of 5000000
  59418 multiletter control sequences out of 15000+600000
  557780 words of font info for 79 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
