@@ -13,8 +13,11 @@
 \usepackage{graphicx}
 
 % code, graphiques et couleurs
-\usepackage{minted}
+\usepackage[newfloat]{minted}
+\newenvironment{code}{\captionsetup{type=listing}}{}
+\SetupFloatingEnvironment{listing}{name=Code source}
 \usemintedstyle{pastie}
+\setminted{linenos, breaklines, tabsize=4, bgcolor=nadeshikopink}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric}
 
@@ -25,6 +28,10 @@
 \definecolor{peachpuff}{rgb}{1.0, 0.85, 0.73}
 \definecolor{lightpink}{rgb}{1.0, 0.71, 0.76}
 \definecolor{pearl}{rgb}{0.94, 0.92, 0.84}
+\definecolor{lightmauve}{rgb}{0.86, 0.82, 1.0}
+\definecolor{cherryblossompink}{rgb}{1.0, 0.72, 0.77} 	
+\definecolor{nadeshikopink}{rgb}{0.96, 0.68, 0.78}
+\definecolor{pastelviolet}{rgb}{0.8, 0.6, 0.79}
 
 % db interaction: db
 % main step (start, stop...): main
@@ -62,7 +69,7 @@
 	diamond,%
 	minimum width=2cm,%
 	aspect=2,%
-	fill=pearl,%
+	fill=pastelviolet,%
 	draw=plum,%
 	text centered,%
 	text width=4cm%
@@ -147,32 +154,38 @@
 % glossaire et acronmymes
 \usepackage[automake, acronym, toc]{glossaries}
 \setacronymstyle{short-long}
+\renewcommand{\glsnamefont}[1]{\makefirstuc{#1}}  % capitalize 1st letter in \printglossaries
 \makeglossaries
 \newglossaryentry{apig}{
-	name=API,
+	name={API},
 	description={Une interface de programmation d'application (\textit{Application Programming Interface} en anglais) est un protocole qui pemret à un programme de communiquer avec un autre programme. Ce protocole documenté, correspond à un ensemble d'opérations permettant à un programme \enquote{consommateur} d'utiliser des fonctionnalités d'un programme \enquote{fournisseur}, comme par exemple de récupérer ou d'envoyer des données au fournisseur.}
 }
 \newglossaryentry{api}{
 	type=\acronymtype,
-	name=API,
+	name={API},
 	description={Application Programming Interface},
 	first={Interface de programmation d'application (API), \glsadd{apig}},
 	see=[Glossaire:]{apig}
 }
 \newglossaryentry{dictionnaire}{
-	name=Dictionnaire,
+	name={dictionnaire},
 	description={Un dictionnaire est un format de données structuré en python qui associe à une donnée -- dite clé -- une ou plusieurs données nommées valeurs.}
 }
+\newglossaryentry{expression régulière}{
+	name={expression régulière},
+	plural={expressions régulières},
+	description={Une expression régulière, ou expression rationnelle est une chaîne de caractère, écrite selon une syntaxe précise, qui permet de détecter des motifs dans du texte. Les expressions régulières s'appuient sur la classification des caractères en classes (minuscules, majuscules, chiffres, espaces), sur des structures alternatives (un caractère ou un autre) et exclusives (un caractère n'ayant pas certaines propriétés) pour repérer des motifs. Par exemple, \enquote{2022} correspond au motif: \texttt{\textbackslash{}d{4}}, soit \enquote{quatre chiffres à la suite}. Une adresse mail est également un motif: \texttt{[\^~(@|\textbackslash{}s)]+@[\^~(@|\textbackslash{}s)]+}, soit \enquote{plusieurs caractères qui ne sont ni un espace une arobase, suivi d'une arobase, suivi de plusieurs caractères qui n'est ni un espace ni une arobase}.}
+}
 \newglossaryentry{score F1}{
-	name={Score F1},
+	name={score F1},
 	description={Le score F1, ou \textit{F-score}, est la moyenne harmonique de la précision (vrais positifs par rapport au total de résultats obtenus) et du rappel (nombre de résultats positifs par rapport au total de résultats positifs).\cite{noauthor_precision_2022, noauthor_f-score_2022}. Le score F1 a l'avantage de prendre en compte les vrais et les faux positifs. Ce score, dont la valeur est contenue entre 0 et 1, permet de mesurer l'exactitude d'un algorithme d'apprentissage machine, ou d'un moteur de recherche.}
 }
 \newglossaryentry{SPARQL}{
-	name=SPARQL,
+	name={SPARQL},
 	description={SPARQL est un language de requête qui permet d'interagir avec une base de données au format RDF. \enquote{SPARQL exprime des requêtes sur des sources de données diverses [...]. SPARQL rend possible la requête de données en graphes [...], avec des données conjointes et disjointes. SPARQL permet également l'agrégation de données, les sous-requêtes, la négation, la création de données à l'aide d'expression, le test de données et la contrainte des requêtes. Les résultats de requêtes sparql peuvent être des jeux de résultats ou des graphes RDF.}\footnote{\enquote{SPARQL can be used to express queries across diverse data sources [...]. SPARQL contains capabilities for querying [...] graph patterns along with their conjunctions and disjunctions. SPARQL also supports aggregation, subqueries, negation, creating values by expressions, extensible value testing, and constraining queries by source RDF graph. The results of SPARQL queries can be result sets or RDF graphs.}\cite{harris_sparql_2013} (traduction de l'auteur).}}
 }
 \newglossaryentry{python}{
-	name=Python,
+	name={python},
 	description={Python est un language de programmation impérative (c'est-à-dire, basé sur la production et la transformation de données par une suite d'instructions) créé en 1991. Il est particulièrement utilisé dans le domaine du traitement de données et des humanités numériques. C'est le langage le plus utilisé dans le projet \mssktb{}}
 }
 % modèle: \newacronym{dom}{\textsc{dom}}{\emph{Document Object Model}}
@@ -198,7 +211,8 @@
 \newcommand{\mss}{\textit{MSS}}
 \newcommand{\mssktb}{\mss{} / \ktb{}}
 \newcommand{\py}{\texttt{\gls{python}}}
-\newcommand{\rgx}{\textit{expressions régulières}}
+\newcommand{\rgxsg}{\gls{expression régulière}}
+\newcommand{\rgxpl}{\glspl{expression régulière}}
 \newcommand{\rdf}{\texttt{RDF}}
 \newcommand{\sparql}{\texttt{\gls{SPARQL}}}
 \newcommand{\tei}{\texttt{TEI}}
@@ -360,7 +374,7 @@ En même temps que ces processus d'extraction d'informations, un script de conve
 \chaptermark{Vers une étude...}
 Ce chapitre est construit autour d'une question de recherche: comment produire des informations exploitables pour une étude économétrique à partir d'un corpus textuel semi-structuré? Un des objectifs du projet est de faire l'étude des facteurs déterminant le prix d'un manuscrit. Pour faire cette étude, il faut obtenir, pour chaque entrée du catalogue, un certain nombre d'informations normalisées. Le travail d'extraction de données présentes dans les catalogues a déjà été fait par de précédent.e.s stagiaires. Ces données sont principalement quantitatives: prix des manuscrits, dimensions et nombre de pages, date de création. Il est nécessaire de compléter les informations par des données qualitatives et d'enrichir les données disponibles avec des sources extérieures. Pour ce faire, il a été choisi d'aligner le nom des auteur.ice.s des manuscrits avec des identifiants \wkd{}; dès lors que l'on a un identifiant \wkd{}, il est possible de récupérer automatiquement des informations sur les personnes via \sparql. Le choix de travailler uniquement sur les noms, et non sur la description des documents, a deux motivations:
 \begin{itemize}
-	\item Les noms de personnes (et la manière dont elles sont décrites) constituent la partie la plus normalisée des documents. La description des manuscrits est plutôt en \enquote{texte libre}. Dans la continuité avec le reste du projet, nous sommes resté dans une approche \enquote{basse technologie}, qui consiste à s'appuyer majoritairement sur des solutions techniquement simples. C'est pourquoi nous avons préférer traiter les noms avec des tables de correspondance\footnote{C'est à dire, des tables qui permettent de normaliser la manière dont les informations figurent dans les catalogues, et donc de remplacer des termes \enquote{vernaculaires} par leurs équivalents utilisés par \wkd{}} et des \rgx{}, plutôt que de faire du TAL sur la description des documents.
+	\item Les noms de personnes (et la manière dont elles sont décrites) constituent la partie la plus normalisée des documents. La description des manuscrits est plutôt en \enquote{texte libre}. Dans la continuité avec le reste du projet, nous sommes resté dans une approche \enquote{basse technologie}, qui consiste à s'appuyer majoritairement sur des solutions techniquement simples. C'est pourquoi nous avons préférer traiter les noms avec des tables de correspondance\footnote{C'est à dire, des tables qui permettent de normaliser la manière dont les informations figurent dans les catalogues, et donc de remplacer des termes \enquote{vernaculaires} par leurs équivalents utilisés par \wkd{}} et des \rgxpl{}, plutôt que de faire du TAL sur la description des documents.
 	\item Toutes les informations \enquote{simples} (données quantitatives facilement normalisables: dates etc.) ont déjà été extraites des descriptions des manuscrits.
 \end{itemize}
 
@@ -405,9 +419,14 @@ En bref, la question est: comment faire la différence entre une lettre de La Ro
 	\caption{Deux exemples de lettres}
 \end{figure}
 
-Pour analyser efficacement la variable \enquote{prix}, il faut pourtant pouvoir, dans une certaine mesure, comprendre les informations implicites et qualitatives contenues dans les catalogues. Le parti pris a donc été de construire le socle de connaissance qui manque à une machine, en s'alignant avec \wkd{} et en s'en servant pour enrichir nos données. Le choix a été fait de ne s'aligner avec \wkd{} que pour certaines parties des entrées de catalogue. Pour rappel, voici leur structure:
+Pour analyser efficacement la variable \enquote{prix}, il faut pourtant pouvoir, dans une certaine mesure, comprendre les informations implicites et qualitatives contenues dans les catalogues. Le parti pris a donc été de construire le socle de connaissance qui manque à une machine, en s'alignant avec \wkd{} et en s'en servant pour enrichir nos données. Le choix a été fait de ne s'aligner avec \wkd{} que pour certaines parties des entrées de catalogue. Pour rappel, voici leur structure (\ref{code:tei_item}):
 
-\inputminted[linenos, breaklines, tabsize=4]{xml}{code/tei_item.xml}
+\begin{code}
+	\inputminted[linenos, breaklines, tabsize=4]{xml}{code/tei_item.xml}
+	\caption{Représentation \xmltei{} d'une entrée de catalogue}
+	\label{code:tei_item}
+\end{code}
+
 
 Les entrées de catalogue contiennent beaucoup d'informations qualitatives, qui pourraient avoir une influence sur le prix du manuscrit: ici par exemple, la description du contenu de la lettre dans le \tnote{}; il est également souvent fait mention du ou de la destinataire. Cependant, l'alignement avec \wkd{} n'a pas été fait avec l'intégralité des entrées. C'est seulement le contenu du \tname{} qui a été aligné avec \wkd{}, à l'aide des informations contenues dans le \ttrait{}. Le \tdesc{} a déjà fait l'objet d'un grand travail de normalisation et d'extraction d'informations; un alignement avec des sources externes n'aurait donc pas une très grande plus-value. L'élément \tnote{} contient souvent des informations intéressantes, puisque c'est là qu'est décrit le contenu d'un manuscrit. Cependant, cet élément n'est pas toujours présent; son contenu est souvent écrit en langage naturel, non structuré, et contient des informations trop variées pour développer un traitement uniforme. Il est donc difficile de tirer parti de cet élément. Le \tname{} et son \ttrait{} sont les éléments les plus régulièrement présents; les informations qu'ils contiennent sont toujours les mêmes (nom d'une personne ou thème d'un manuscrit dans le \tname{}, description du \tname{} dans le \ttrait{}); enfin, ces deux éléments n'ont pas du tout été transformés dans le reste de la chaîne de traitement. Ils portent donc des informations qualitatives centrales pour produire des données exploitables dans une étude économétrique.
 
@@ -417,11 +436,11 @@ Le parti pris a donc été d'aligner avec des identifiants \wkd{} les noms conte
 \subsection{Présentation générale de l'algorithme}
 Construire un jeu de données issu de \sparql{} à partir de la manière dont une personne est nommée et décrite au \scl{XIX} n'est pas une opération anodine. La chaîne de traitement est donc assez complexe, comme le montre le schéma \ref{fig:wkdmain}. Cette chaîne de traitement peut être séparée en deux étapes.
 
-Premièrement, il s'agit d'aligner les entrées de catalogue avec des identifiants \wkd{}. Ceux-ci sont liés à des \enquote{entités} \wkd{}: des personnes, lieux et évènements décrits dans \wkd{} par un certain nombre de propriétés (date de naissance, lieu de résidences...). Cette première étape repose avant tout sur l'extraction et la traduction des données depuis les éléments \tname{} \ttrait{}. Ce processus d'extraction permet de récupérer toutes les données pertinentes pour chaque entrée de catalogue et de les stocker dans un \gls{dictionnaire} structuré. Comme on le verra, la nature \enquote{semi-structurée} des entrées (ainsi qu'une bonne connaissance du corpus) permet de développer une approche \enquote{low-tech} du processus d'extraction et de traduction: il est possible qu'un ordinateur repère les éléments signifiants dans le texte grâce à sa structure, sans avoir à recourir à des méthodes d'apprentissage machine. Une fois les données du \tname{} et du \ttrait{} structurées en dictionnaire, elles sont utilisées pour lancer plusieurs recherches en plein texte sur le moteur de recherche de \wkd{}. Ces recherches sont faites automatiquement grâce à l'\api{} de \wkd{}. Pour maximiser les chances d'obtenir un identifiant valide, un algorithme a été conçu pour lancer plusieurs recherches à partir de chaque dictionnaire. La première recherche met bout-à-bout toutes les valeurs disponibles dans le dictionnaire. Ensuite, en fonction des paramètres de recherche disponibles dans le dictionnaire, différentes autres recherches sont lancées. Cet algorithme a été élaboré en menant de nombreux tests pour maximiser le taux de réussite, calculé sous la forme d'un \gls{score F1}.
+Premièrement, il s'agit d'aligner les entrées de catalogue avec des identifiants \wkd{}. Ceux-ci sont liés à des \enquote{entités} \wkd{}: des personnes, lieux et évènements décrits dans \wkd{} par un certain nombre de propriétés (date de naissance, lieu de résidences...). Cette première étape repose avant tout sur l'extraction et la traduction des données depuis les éléments \tname{} et \ttrait{}. Ce processus d'extraction permet de récupérer toutes les données pertinentes pour chaque entrée de catalogue et de les stocker dans un \gls{dictionnaire} structuré. Une fois les données du \tname{} et du \ttrait{} structurées en dictionnaire, elles sont utilisées pour lancer plusieurs recherches en plein texte sur le moteur de recherche de \wkd{}. Ces recherches sont faites automatiquement grâce à l'\api{} de \wkd{}. Pour maximiser les chances d'obtenir un identifiant valide, un algorithme a été conçu pour lancer plusieurs recherches à partir de chaque dictionnaire. La première recherche met bout-à-bout toutes les valeurs disponibles dans le dictionnaire. Ensuite, en fonction des paramètres de recherche disponibles dans le dictionnaire, différentes autres recherches sont lancées. Cet algorithme a été élaboré en menant de nombreux tests pour maximiser le taux de réussite, calculé sous la forme d'un \gls{score F1}. Comme on le verra, la nature \enquote{semi-structurée} des entrées (ainsi qu'une bonne connaissance du corpus) permet de d'automatiser le processus d'extraction et de traduction des données par détection de motifs, sans avoir à passer par l'apprentissage machine: étant donné que les mêmes types d'informations sont toujours présentes et que les entrées suivent des modèles relativement proches, il est possible de s'appuyer sur la structure des entrées pour identifier  les informations pertinentes. L'extraction de données repose donc sur de la détection de motifs à l'aide d'\rgxpl{}: des récurrences sont repérées dans le texte et utilisées pour distinguer différentes informations (nom, prénom, titre de noblesse...).
 
-Si l'étape d'alignement avec \wkd{} est la plus complexe, elle n'est qu'une étape préparatoire vers la constitution du jeu de données. En fait, récupérer les identifiants permet de mener l'enrichissement en tant que tel: lancer une requête \sparql{} sur tous ces identifiants permet de récupérer pour chacun des données de la base de donnée de \wkd{} et donc de construire le jeu de données définitif. Pour cette étape, le processus est plus simple: les identifiants récupérés à la fin de l'étape précédente sont dédoublonnés (pour éviter de lancer plusieurs fois la même requête), ensuite une requête \sparql{} est initalisée et lancée chacun des identifiants. Les résultats sont traduits depuis les formats \json{} ou \xml{} retournés par \sparql{} sous forme de \json{} plus simple, et donc plus aisément manipulable. Ensuite, ces données sont enregistrées dans un fichier. Pour finir, les identifiants \wkd{} sont réinjectés aux catalogues \tei{}, afin de pouvoir faire le lien entre les catalogues et les jeux de données récupérés.
+Si l'étape d'alignement avec \wkd{} est la plus complexe, elle n'est qu'une étape préparatoire vers la constitution du jeu de données. En fait, récupérer les identifiants est seulement ce qui rend possible l'enrichissement en tant que tel: en lançant une requête \sparql{} sur tous ces identifiants, il est possible, pour chaque entité représentée par l'identifiant, de récupérer des informations depuis \wkd{} et donc de construire le jeu de données définitif. Pour cette étape, le processus est plus simple: les identifiants récupérés à la fin de l'étape précédente sont dédoublonnés (pour éviter de lancer plusieurs fois la même requête); ensuite une requête \sparql{} est initalisée et lancée chacun des identifiants. Les résultats sont traduits depuis les formats \json{} ou \xml{} retournés par \sparql{} sous forme de \json{} plus simple, et donc plus aisément manipulable. Le jeu de données est enregistré dans un fichier. Pour finir, les identifiants \wkd{} sont réinjectés aux catalogues \tei{}, afin de pouvoir faire le lien entre les catalogues et le jeu de données qui a été construit.
 
-Cette chaîne de traitement étant lancée sur plus de 80000 entrées de catalogues, le temps d'exécution est très long; dans sa version initiale, le script demandait des performances particulièrement élevées, et ne fonctionnait pas sur un ordinateur \enquote{simple}. La chaîne de traitement a donc été reprise en plusieurs points afin d'être optimisée et de fonctionner plus vite en étant moins coûteuse en ressources.
+Cette chaîne de traitement étant lancée sur plus de 80000 entrées de catalogues, le temps d'exécution est très long et même des petites améliorations de performance peuvent avoir un grand impact; dans sa version initiale, le script demandait des performances particulièrement élevées, et ne fonctionnait pas sur un ordinateur aux capacités limitées. La chaîne de traitement a donc été reprise en plusieurs points afin d'être optimisée, de fonctionner plus vite en étant moins coûteuse en ressources.
 
 \begin{figure}[!p]
 	\centering
@@ -485,14 +504,126 @@ Cette chaîne de traitement étant lancée sur plus de 80000 entrées de catalog
 		\draw[arrow] (end) -- (sparqldata);
 		\draw[arrow] (end) -- (tei);
 	}
-	\caption Présentation générale de l'algorithme d'enrichissement de données via \wkd{}
+	\caption \\Présentation générale de l'algorithme d'enrichissement de données à l'aide de \wkd{}
 	\label{fig:wkdmain}
 \end{figure}
 
 \subsection{Comment traduire des descriptions textuelles datant du XIX\up{ème}~s. en chaînes de caractères qui puissent retourner un résultat sur \wkd{}?} 
-Ce problème est autant linguistique de technique. Une personne ou une chose est nommée ou décrite d'une certaine manière dans un catalogue de vente ancien. Il n'y a aucune garantie que cette caractérisation corresponde à ce qui est disponible sur \wkd{}: l'orthographe des noms évoluent, tout comme la manière de nommer certains métiers. À ces évolutions graphiques s'ajoutent des évolutions intellectuelles: les titres de noblesse sont un marqueur plus important au \scl{XIX} français que dans un \scl{XXI} mondialisé. Une personne n'est que rarement décrite par son titre dans \wkd{}. Il faudra donc mettre en place un processus de traduction, depuis le langage naturel en français du \scl{XIX} en anglais adapté aux termes utilisés dans \wkd{}.
+Dans la réalisation de cet algorithme, la principale difficulté porte sur la récupération d'identifiants \wkd{} à l'aide de recherches en plein texte. Le script prend en entrée un nom et sa description -- tels qu'elles figurent dans des catalogues datant majoritairement du \scl{XIX}. La difficulté, au delà de la détection et de l'extraction d'informations, est de traduire ces informations pour qu'elles permettent de trouver des résultats pertinents sur \wkd{}. Ce problème est autant linguistique de technique. Une personne ou une chose est nommée ou décrite d'une certaine manière dans un catalogue de vente ancien. Il n'y a aucune garantie que cette caractérisation corresponde à celle faite par \wkd{}: l'orthographe des noms évoluent, tout comme la manière de nommer certains métiers. À ces évolutions orthographiques s'ajoutent des évolutions intellectuelles: les titres de noblesse sont un marqueur plus important au \scl{XIX} français que dans un \scl{XXI} mondialisé. Une personne n'est que rarement décrite par son titre dans \wkd{}. 
+
+\subsubsection{Le problème de la traduction des noms}
+Il existe bien sûr des cas simples, comme l'exemple \ref{code:name1}: en extrayant le contenu du \tname et en traduisant le \enquote{roi} issu du \ttrait{}, la chaîne de caractère obtenue est \enquote{Henri IV king}. En recherchant cette chaîne de caractère sur \wkd{}, \href{https://www.wikidata.org/w/index.php?search=Henri+IV+king\&title=Special:Search\&profile=advanced\&fulltext=1\&ns0=1\&ns120=1}{le premier résultat obtenu est correct}. Cependant, de nombreux cas sont plus complexes, surtout lorsque l'auteur.ice du manuscrit est moins célèbre. L'exemple \ref{code:name2} est éclairant: dans le catalogue, la personne est nomée \enquote{Bruno Daru}; sur \wkd{}, le nom de la personne est \enquote{Pierre Daru}, et son nom complet {Pierre Antoine Noël Bruno Daru}. Si la recherche en plein texte est faite avec les mêmes paramètres que pour l'exemple précédent (nom de la personne et titre de noblesse), \href{https://www.wikidata.org/w/index.php?search=bruno+daru+count&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{le premier résultat obtenu} n'est pas le bon: c'est un renvoi à un article de \textit{l'Encyclopedia Britannica} datant de 1911. C'est en cherchant seulement le nom est le prénom que \wkd{} retourne \href{https://www.wikidata.org/w/index.php?search=bruno+daru&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{un résultat pertinent}. Il est intéressant de retenir deux choses de cet exemple: dans les catalogues, le prénom d'une personne correspond en fait souvent à son deuxième ou troisième prénom; ensuite, le titre de noblesse est un critère plus fréquemment mentionné dans les catalogues que dans \wkd{}. Cela s'explique assez aisément: le \scl{XIX} connaît une alternance de régimes politiques (royauté, empire, république) où la noblesse n'a pas encore perdu son pouvoir. La probabilité qu'un titre de noblesse soit mentionné sur \wkd{} diminue lorsqu'un titre est peu important; dans les catalogues, cependant, même les titres les moins importants sont régulièrement mentionnés. Par conséquent, seuls les titres les plus importants seront extraits pour lancer une recherche sur l'\api{} de \wkd{}.
+
+\begin{code}
+	\begin{minted}{xml}
+<item n="134" xml:id="CAT_000233_e134">
+	<!-- ... -->
+	<name type="author">Henri IV</name>
+	<trait>
+		<p>roi de France.</p>
+	</trait>
+	<!-- ... -->
+</item>
+	\end{minted}
+	\caption{Un cas simple: Henri IV roi de France}
+	\label{code:name1}
+\end{code}
+
+\begin{code}
+	\begin{minted}{xml}
+<item n="98" xml:id="CAT_000082_e98">
+	<!-- ... -->
+	<name type="author">Daru (Bruno, comte)</name>
+	<trait>
+		<p>célèbre ministre de Napoléon Ier, historien de Venise, de l'Acad. fr., né à Montpellier</p>
+	</trait>
+	<!-- ... -->
+</item>
+	\end{minted}
+	\caption{Un cas plus complexe: Pierre Antoine Noël Bruno Daru}
+	\label{code:name2}
+\end{code}
+
+Dans le cas de noms de personnes étrangères, la situation peut être plus complexe encore. L'exemple \ref{code:name3} combine différentes difficultés.
+\begin{itemize}
+	\item D'abord, la personne est étrangère; dans les catalogues, les noms sont systématiquement françisés -- \enquote{Albert-Venceslas-Eusèbe} dans le catalogue, \enquote{Albrecht Wenzel Eusebius} en langue originelle. Se pose donc la question de si le nom doit être traduit, et si oui comment? 
+	\item Ensuite, comme l'indique la présence de \enquote{dit} dans le \tname{}, il est mentionné un nom de naissance (\enquote{de Waldstein}) et un nom d'usage (\enquote{Wallenstein}). Idéalement, il faudrait choisir entre l'un ou l'autre, plutôt que de rechercher \enquote{Waldstein Wallenstein} sur \wkd{}, ce qui risque d'augmenter le bruit. 
+\end{itemize}
+
+Notre approche s'appuyant sur la structure du texte, le deuxième point peut être réglé: le nom d'usage est écrit au début, et le nom de naissance entre parenthèses (c'est également le cas des noms de personnes nobles, par exemple). Il est donc possible de choisir l'un ou l'autre nom. Le premier point est plus problématique: si la traduction du nom serait envisageable en théorie, celle-ci est difficilement compatible avec une approche basée sur la détection de motifs dans le texte: le prénom est repérable comme étant un motif (trois noms séparés par des tirets); cependant, il est impossible de le traduire automatiquement (ce qui demanderait de connaître la langue dans laquelle un prénom doit être traduit). C'est ici que les informations contenues dans le \ttrait{} prennent leur importance: lorsqu'il y a des défaillances dans les informations nominatives, des données biographiques permettent de diminuer le risque d'erreurs. Dans cet exemple, recherche \enquote{Albert-Venceslas-Eusèbe Waldstein} ne \href{https://www.wikidata.org/w/index.php?search=Albert-Venceslas-Eus%C3%A8be+de+Waldstein&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{retourne aucun résultat}, de même que rechercher \href{https://www.wikidata.org/w/index.php?search=Albert-Venceslas-Eus%C3%A8be+Wallenstein&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{Albert-Venceslas-Eusèbe Wallenstein}. Cependant, le bon résultat est obtenu en recherchant \href{https://www.wikidata.org/w/index.php?search=Wallenstein+1634&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{\enquote{Wallenstein 1634}}. Une difficulté supplémentaire vient avec ce type de cas: différents paramètres de recherche (nom, prénom...) ont un impact différent dans l'obtention du bon résultat en fonction des personnes sur qui la requête est faite. Dans ce cas, rechercher le nom d'usage et la date de naissance retourne un résultat valide, ce qui n'est pas toujours le cas. Pour contourner ce problème, trois solutions ont été mises en place: d'abord, ce types de requêtes a été fait \enquote{à la main}, de façon non-automatique, pour de nombreuses entrées différentes afin de déterminer la meilleure combinaison de caractères; ensuite, des tests qui permettent de mesurer l'influence de chaque paramètre de recherche dans l'obtention du résultat; enfin, l'algorithme final lance successivement différentes requêtes avec différents paramètres afin de maximiser la probabilité d'obtenir un résultat valide. Nous reviendrons plus en détail sur les deux derniers points.
+
+\begin{code}
+	\begin{minted}{xml}
+<item n="5518" xml:id="CAT_000401_e5518">
+	<!-- ... -->
+	<name type="author">Wallenstein (Albert-Venceslas-Eusèbe de Waldstein  dit)</name>
+	<trait>
+		<p>duc de Friedland, célèbre général de la guerre de Trente ans. Assassiné en 1634.</p>
+	</trait>
+	<!-- ... -->
+</item>
+	\end{minted}
+	\caption{Le problème des noms de personnes étrangères}
+	\label{code:name3}
+\end{code}
+
+\subsubsection{L'extraction d'informations biographiques: une autre difficultés}
+Cependant, le problème ne s'arrête pas qu'aux noms. Dans un exemple; précédent, le titre de noblesse influençait l'obtention d'un résultat valide. De nombreuses autres informations biographiques pourraient, au premier abord, permettre d'obtenir le bon résultat. C'est souvent le cas, puisque extraire le métier ou la fonction d'une personne permet de supprimer les faux positifs retournés par l'\api{}. C'est par exemple le cas dans l'exemple \ref{code:bio1}. En cherchant uniquement le nom et le prénom (\enquote{Hans Bulow}), le premier résultat retourné renvoie \href{https://www.wikidata.org/w/index.php?search=hans+bulow&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{à un journaliste suédois}. Extraire le mot \enquote{pianiste} \ttrait{} et le traduit en anglais permet d'obtenir \href{https://www.wikidata.org/w/index.php?search=hans+bulow+pianist&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{le bon résultat}.
+
+\begin{code}
+	\begin{minted}{xml}
+		<item n="136" xml:id="CAT_000189_e136">
+		<!-- .. -->
+		<name type="author">Bulow (Hans)</name>
+		<trait>
+		<p>le célèbre pianiste.</p>
+		</trait>
+		</item>
+	\end{minted}
+	\label{code:bio1}
+	\caption{Un exemple où l'extraction du métier permet l'obtention du bon résultat}
+\end{code}
+
+L'extraction d'informations biographiques et leur utilisation dans des requêtes est donc pertinent. Cependant, extraire trop d'informations conduit à lancer des requêtes qui ne renvoient aucun résultat. Dans les exemples \ref{code:bio2} et \ref{code:bio3}, extraire et traduire des fonctions conduit à lancer les requêtes \href{https://www.wikidata.org/w/index.php?search=John+Okey+colonel&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{\enquote{John Okey colonel}} et \href{https://www.wikidata.org/w/index.php?search=Jean+Bouhier+president&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{\enquote{Jean Bouhier president}} qui ne retournent aucun résultat, ou des résultats qui ne sont pas valides. Cependant, dans les deux cas, si une requête est lancée sans la fonction, un résultat correct est obtenu. Les raisons pour lesquelles des résultats erronés sont retournés ne sont cependant pas les mêmes, et il est intéressant de mieux observer les requêtes lancées et les résultats obtenus. Dans le premier cas, le terme mis en avant dans le \ttrait{} (\enquote{colonel}) n'est pas celui avec lequel la personne est décrite sur \wkd{} (où John Okey est décrit comme étant un homme politique). Cela met en avant un problème relatif au changement de regard sur des personnalités: dans un contexte, la personne est décrite comme une figure militaire, dans l'autre comme une figure politique. Le deuxième cas est plus technique. Il y a en fait une erreur dans la requête qui ne retourne pas de résultat (\enquote{Jean Bouhier president}): un.e président.e de parlement n'est en général pas décrite comme \enquote{président}. Cependant, en extrayant des données uniquement par détection de motifs, il est possible de repérer et traduire un terme générique comme \enquote{président}. Extraire le complément \enquote{Parlement de Dijon} du \ttrait{} n'est cependant pas possible (cela impliquerait d'étudier la grammaire de la phrase, pour mettre en avant la relation entre \enquote{président} et \enquote{Parlement de Dijon}). Au vu de la taille et de la variété du jeu de données, il est impossible de traiter au cas par cas des entrées, ou préciser la détection de motif avec suffisamment de précision pour pouvoir résoudre ce genre de difficultés. 
+
+De situations comme les exemples \ref{code:bio2} et \ref{code:bio3}, il faut donc retenir que l'extraction d'informations vient nécessairement avec un risque d'erreur. Le parti pris a donc été de ne pas repérer les métiers et autres termes très spécifiques, comme les grades militaires et les titres de noblesse peu élevés: ils ne retournent pas de résultats sur le moteur de recherche. Ensuite, plus des requêtes sont précises, plus elles risquent de retourner du silence (c'est-à-dire, de ne pas donner de réponse); cependant, si un résultat est obtenu, il est plus probable que ce résultat soit correct. Une fois l'extraction d'informations faite, l'algorithme d'extraction d'identifiants sur l'\api{} \wkd{} a donc été conçu en suivant un principe soustractif: les premières recherches sont faites avec un maximum de paramètres; si aucun résultat n'est obtenu, des paramètres sont enlevés pour que l'\api{} retourne un plus grand nombre de résultats. Enfin, ces deux exemples montrent qu'il n'est pas possible d'extraire et de traduire des informations sans prendre en compte ce qui sera pertinent pour le moteur de recherche de \wkd{}. Il ne s'agit donc pas seulement d'extraire des informations, mais aussi de s'adapter avec ce moteur de recherche pour augmenter la probabilité d'obtenir un résultat valide.
+
+\begin{code}
+	\begin{minted}{xml}
+<item n="152" xml:id="CAT_000189_e152">
+	<!-- ... -->
+	<name type="author">Okey (John)</name>
+	<trait>
+		<p>colonel anglais, un des lieutenants de Cromwell.</p>
+	</trait>
+	<!-- ... -->
+</item>
+	\end{minted}
+	\caption{Quand l'extraction d'un métier conduit à des requêtes trop spécifiques}
+	\label{code:bio2}
+\end{code}
+
+\begin{code}
+	\begin{minted}{xml}
+<item n="5430" xml:id="CAT_000401_e5430">
+	<!-- ... -->
+	<name type="author">Bouhier (Jean)</name>
+	<trait>
+		<p>président au Parlement de Dijon, membre de l'Académie française.</p>
+	</trait>
+	<!-- ... -->
+</item>
+	\end{minted}
+	\caption{Le cas des métiers dont l'extraction est problématique}
+	\label{code:bio3}
+\end{code}
+
+% Il faudra donc mettre en place un processus de traduction, depuis le langage naturel en français du \scl{XIX} en anglais adapté aux termes utilisés dans \wkd{}.
 
 \subsection{Comment négocier avec le moteur de recherche de \wkd{}?} 
+trucs à dire: comment fonctionne le moteur de recherche ? / des exemples pour dire ce qui marche et ce qui marche pas comme termes / quelles décisions ont du coup été prises
+
+
 Si les catalogues de vente fonctionnent avec leurs propres catégories mentales, le même peut être dit de \wkd{}: certains types de données sont plus souvent référencées que d'autres et \wkd{} utilise un vocabulaire qui lui est propre. Par expérience, le moteur de recherche de \wkd{} est assez \enquote{rigide}: contrairement à un moteur généraliste, il n'admet pas d'orthographes alternatives, par exemple. Le traitement des données textuelles et tout le processus de normalisation des données dépendent de ces faits: il faut trouver quelles informations sont référencées par \wkd{} et comment elles le sont. L'algorithme doit donc s'adapter au moteur de recherche. 
 
 \subsection{Une approche prédictive}
