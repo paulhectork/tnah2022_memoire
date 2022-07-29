@@ -98,60 +98,86 @@
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.1}{\ignorespaces Représentation \texttt  {XML-TEI}{} d'une entrée de catalogue\relax }}{17}{listing.caption.6}\protected@file@percent }
 \newlabel{code:tei_item}{{4.1}{17}{Représentation \xmltei {} d'une entrée de catalogue\relax }{listing.caption.6}{}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Présentation générale de l'algorithme}{18}{subsection.4.1.2}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Étape 1 -- Extraction et structuration de données}{18}{section*.7}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Étape 2 -- récupération d'identifiants \textit  {Wikidata}{} via des recherches en plein texte à l'aide d'une \texttt  {\gls {api}}{}}{18}{section*.8}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Étape 3 -- constitution d'un jeu de données à l'aide de \texttt  {\gls {SPARQL}}{}}{19}{section*.9}\protected@file@percent }
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}Comment traduire des descriptions textuelles datant du XIX\up  {ème}~s. en chaînes de caractères qui puissent retourner un résultat sur \textit  {Wikidata}{}?}{19}{subsection.4.1.3}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Le problème de la traduction des noms}{19}{section*.8}\protected@file@percent }
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces  \relax }}{20}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:wkdmain}{{4.2}{20}{\\\relax }{figure.caption.7}{}}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.2}{\ignorespaces Un cas simple: Henri IV roi de France\relax }}{21}{listing.caption.9}\protected@file@percent }
-\newlabel{code:name1}{{4.2}{21}{Un cas simple: Henri IV roi de France\relax }{listing.caption.9}{}}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.3}{\ignorespaces Un cas plus complexe: Pierre Antoine Noël Bruno Daru\relax }}{21}{listing.caption.10}\protected@file@percent }
-\newlabel{code:name2}{{4.3}{21}{Un cas plus complexe: Pierre Antoine Noël Bruno Daru\relax }{listing.caption.10}{}}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.4}{\ignorespaces Le problème des noms de personnes étrangères\relax }}{22}{listing.caption.11}\protected@file@percent }
-\newlabel{code:name3}{{4.4}{22}{Le problème des noms de personnes étrangères\relax }{listing.caption.11}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{L'extraction d'informations biographiques: une autre difficultés}{23}{section*.12}\protected@file@percent }
-\newlabel{code:bio1}{{\caption@xref {code:bio1}{ on input line 583}}{23}{L'extraction d'informations biographiques: une autre difficultés}{listing.caption.13}{}}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.5}{\ignorespaces Un exemple où l'extraction du métier permet l'obtention du bon résultat\relax }}{23}{listing.caption.13}\protected@file@percent }
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.6}{\ignorespaces Quand l'extraction d'un métier conduit à des requêtes trop spécifiques\relax }}{24}{listing.caption.14}\protected@file@percent }
-\newlabel{code:bio2}{{4.6}{24}{Quand l'extraction d'un métier conduit à des requêtes trop spécifiques\relax }{listing.caption.14}{}}
-\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.7}{\ignorespaces Le cas des métiers dont l'extraction est problématique\relax }}{24}{listing.caption.15}\protected@file@percent }
-\newlabel{code:bio3}{{4.7}{25}{Le cas des métiers dont l'extraction est problématique\relax }{listing.caption.15}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces  Présentation générale de l'algorithme d'enrichissement de données à l'aide de \textit  {Wikidata}{}\relax }}{20}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:wkdmain}{{4.2}{20}{\\Présentation générale de l'algorithme d'enrichissement de données à l'aide de \wkd {}\relax }{figure.caption.10}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Le problème de la traduction des noms}{21}{section*.11}\protected@file@percent }
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.2}{\ignorespaces Un cas simple: Henri IV roi de France\relax }}{21}{listing.caption.12}\protected@file@percent }
+\newlabel{code:name1}{{4.2}{21}{Un cas simple: Henri IV roi de France\relax }{listing.caption.12}{}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.3}{\ignorespaces Un cas plus complexe: Pierre Antoine Noël Bruno Daru\relax }}{22}{listing.caption.13}\protected@file@percent }
+\newlabel{code:name2}{{4.3}{22}{Un cas plus complexe: Pierre Antoine Noël Bruno Daru\relax }{listing.caption.13}{}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.4}{\ignorespaces Le problème des noms de personnes étrangères\relax }}{23}{listing.caption.14}\protected@file@percent }
+\newlabel{code:name3}{{4.4}{23}{Le problème des noms de personnes étrangères\relax }{listing.caption.14}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{L'extraction d'informations biographiques: une autre difficulté}{23}{section*.15}\protected@file@percent }
+\newlabel{code:bio1}{{\caption@xref {code:bio1}{ on input line 605}}{23}{L'extraction d'informations biographiques: une autre difficulté}{listing.caption.16}{}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.5}{\ignorespaces Un exemple où l'extraction du métier permet l'obtention du bon résultat\relax }}{23}{listing.caption.16}\protected@file@percent }
+\abx@aux@cite{noauthor_moteur_2022}
+\abx@aux@segm{0}{0}{noauthor_moteur_2022}
+\abx@aux@cite{mikolov_distributed_2013}
+\abx@aux@segm{0}{0}{mikolov_distributed_2013}
+\abx@aux@cite{covington_deep_2016}
+\abx@aux@segm{0}{0}{covington_deep_2016}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.6}{\ignorespaces Quand l'extraction d'un métier conduit à des requêtes trop spécifiques\relax }}{25}{listing.caption.17}\protected@file@percent }
+\newlabel{code:bio2}{{4.6}{25}{Quand l'extraction d'un métier conduit à des requêtes trop spécifiques\relax }{listing.caption.17}{}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.7}{\ignorespaces Le cas des métiers dont l'extraction est problématique\relax }}{25}{listing.caption.18}\protected@file@percent }
+\newlabel{code:bio3}{{4.7}{25}{Le cas des métiers dont l'extraction est problématique\relax }{listing.caption.18}{}}
 \@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.4}Comment négocier avec le moteur de recherche de \textit  {Wikidata}{}?}{25}{subsection.4.1.4}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.5}Une approche prédictive}{25}{subsection.4.1.5}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.2}Préparer et structurer les données}{25}{section.4.2}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Présentation générale}{26}{subsection.4.2.1}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Identifier le type de nom}{26}{subsection.4.2.2}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}Reconstruire un prénom complet à partir de son abréviation}{26}{subsection.4.2.3}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.4}Extraire des informations normalisées à partir d'un nom et de sa description}{26}{subsection.4.2.4}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.3}Extraire des identifiants \textit  {Wikidata}{}}{26}{section.4.3}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Présentation générale}{27}{subsection.4.3.1}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Gérer la montée en charge: optimisation et réduction du temps d'exécution}{27}{subsection.4.3.2}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Évaluation du script : tests, performance et qualité des données extraites de \textit  {Wikidata}{}}{27}{subsection.4.3.3}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.4}Après l'alignement, l'enrichissement: utiliser \texttt  {\gls {SPARQL}}{} pour produire des données structurées}{27}{section.4.4}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Quelles données rechercher via \texttt  {\gls {SPARQL}}?}{27}{subsection.4.4.1}\protected@file@percent }
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Exemple de relation sujet -- prédicat -- object\relax }}{28}{figure.caption.16}\protected@file@percent }
-\newlabel{fig:triplet}{{4.3}{28}{Exemple de relation sujet -- prédicat -- object\relax }{figure.caption.16}{}}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Présentation générale}{31}{subsection.4.4.2}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}Développer un comportement uniforme pour produire des données exploitables à partir un corpus hétérogène}{31}{subsection.4.4.3}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.4}Minimiser la perte: optimisation et gestion des erreurs}{32}{subsection.4.4.4}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.5}Lier la \texttt  {TEI}{} aux données nouvellement produites}{32}{subsection.4.4.5}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.5}Des données à la monnaie: premiers résultats de l'étude}{32}{section.4.5}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {part}{III\hspace  {1em}Après la \texttt  {TEI}{}: l'application web \textit  {Katabase}{}, interface de diffusion des données}{33}{part.3}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {5}Design d'interfaces dans un projet d'humanités numériques: l'application web \textit  {Katabase}{}}{35}{chapter.5}\protected@file@percent }
+\abx@aux@fnpage{7}{26}
+\abx@aux@fnpage{8}{26}
+\abx@aux@fnpage{9}{26}
+\newlabel{code:search1}{{\caption@xref {code:search1}{ on input line 663}}{27}{Comment négocier avec le moteur de recherche de \wkd {}?}{listing.caption.19}{}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.8}{\ignorespaces Le problème de l'approximation et de la traduction: Lasource, conventionnel\relax }}{27}{listing.caption.19}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.5}Une approche prédictive}{27}{subsection.4.1.5}\protected@file@percent }
+\newlabel{code:predic}{{\caption@xref {code:predic}{ on input line 678}}{28}{Une approche prédictive}{listing.caption.20}{}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.9}{\ignorespaces Peut-on identifier les différents éléments d'une phrase par détection de motifs?\relax }}{28}{listing.caption.20}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.2}Préparer et structurer les données}{29}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Présentation générale}{29}{subsection.4.2.1}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Les formats d'entrée et de sortie}{29}{section*.21}\protected@file@percent }
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.10}{\ignorespaces L'entrée \texttt  {XML-TEI}{} à partir de laquelle des données sont extraites\relax }}{30}{listing.caption.22}\protected@file@percent }
+\newlabel{code:prepin}{{4.10}{30}{L'entrée \xmltei {} à partir de laquelle des données sont extraites\relax }{listing.caption.22}{}}
+\@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\contentsline {listing}{\numberline {4.11}{\ignorespaces La sortie \texttt  {JSON}{} correspondante\relax }}{30}{listing.caption.23}\protected@file@percent }
+\newlabel{code:prepout}{{4.11}{30}{La sortie \json {} correspondante\relax }{listing.caption.23}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsubsection}{Présentation de l'algorithme d'extraction d'informations}{30}{section*.24}\protected@file@percent }
+\newlabel{fig:extractmain}{{\caption@xref {fig:extractmain}{ on input line 843}}{31}{Présentation de l'algorithme d'extraction d'informations}{figure.caption.25}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Processus d'extraction d'informations du \texttt  {name}{} et \texttt  {item}{}\relax }}{31}{figure.caption.25}\protected@file@percent }
+\newlabel{fig:extractparenthesis}{{\caption@xref {fig:extractparenthesis}{ on input line 894}}{32}{Présentation de l'algorithme d'extraction d'informations}{figure.caption.26}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Extraction d'informations d'un \texttt  {name}{} contenant des parenthèses\relax }}{32}{figure.caption.26}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Identifier le type de nom}{33}{subsection.4.2.2}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.3}Reconstruire un prénom complet à partir de son abréviation}{33}{subsection.4.2.3}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.4}Extraire des informations normalisées à partir d'un nom et de sa description}{33}{subsection.4.2.4}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.3}Extraire des identifiants \textit  {Wikidata}{}}{33}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Présentation générale}{34}{subsection.4.3.1}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.2}Gérer la montée en charge: optimisation et réduction du temps d'exécution}{34}{subsection.4.3.2}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.3}Évaluation du script : tests, performance et qualité des données extraites de \textit  {Wikidata}{}}{34}{subsection.4.3.3}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.4}Après l'alignement, l'enrichissement: utiliser \texttt  {\gls {SPARQL}}{} pour produire des données structurées}{34}{section.4.4}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Quelles données rechercher via \texttt  {\gls {SPARQL}}?}{34}{subsection.4.4.1}\protected@file@percent }
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Exemple de relation sujet -- prédicat -- object\relax }}{35}{figure.caption.27}\protected@file@percent }
+\newlabel{fig:triplet}{{4.5}{35}{Exemple de relation sujet -- prédicat -- object\relax }{figure.caption.27}{}}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Présentation générale}{38}{subsection.4.4.2}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}Développer un comportement uniforme pour produire des données exploitables à partir un corpus hétérogène}{38}{subsection.4.4.3}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.4}Minimiser la perte: optimisation et gestion des erreurs}{39}{subsection.4.4.4}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.5}Lier la \texttt  {TEI}{} aux données nouvellement produites}{39}{subsection.4.4.5}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {4.5}Des données à la monnaie: premiers résultats de l'étude}{39}{section.4.5}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {part}{III\hspace  {1em}Après la \texttt  {TEI}{}: l'application web \textit  {Katabase}{}, interface de diffusion des données}{41}{part.3}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {5}Design d'interfaces dans un projet d'humanités numériques: l'application web \textit  {Katabase}{}}{43}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.1}Le design d'interfaces: une reconfiguration des méthodes de recherche et une transformation du corpus}{35}{section.5.1}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Le design comme inversion des méthodes}{35}{subsection.5.1.1}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.1}Le design d'interfaces: une reconfiguration des méthodes de recherche et une transformation du corpus}{43}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Le design comme inversion des méthodes}{43}{subsection.5.1.1}\protected@file@percent }
 \abx@aux@cite{sahle_digital_2016}
 \abx@aux@segm{0}{0}{sahle_digital_2016}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Interface et document}{36}{subsection.5.1.2}\protected@file@percent }
-\abx@aux@fnpage{7}{36}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}Interface et document}{44}{subsection.5.1.2}\protected@file@percent }
+\abx@aux@fnpage{10}{44}
 \abx@aux@cite{drucker_visualisation_2020}
 \abx@aux@segm{0}{0}{drucker_visualisation_2020}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.2}La conception d'interfaces, un problème pour les humanités numériques?}{37}{section.5.2}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Pour une approche pragmatique du design d'interfaces dans un contexte d'humanités numériques}{37}{subsection.5.2.1}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Rejeter les interfaces?}{37}{subsection.5.2.2}\protected@file@percent }
-\abx@aux@fnpage{8}{37}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {5.2}La conception d'interfaces, un problème pour les humanités numériques?}{45}{section.5.2}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Pour une approche pragmatique du design d'interfaces dans un contexte d'humanités numériques}{45}{subsection.5.2.1}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Rejeter les interfaces?}{45}{subsection.5.2.2}\protected@file@percent }
+\abx@aux@fnpage{11}{45}
 \abx@aux@cite{masure_design_2017}
 \abx@aux@segm{0}{0}{masure_design_2017}
 \abx@aux@cite{hentschel_visual_2014}
@@ -160,94 +186,105 @@
 \abx@aux@segm{0}{0}{renon_design_2016}
 \abx@aux@cite{hentschel_visual_2014}
 \abx@aux@segm{0}{0}{hentschel_visual_2014}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {6}Donner à voir un corpus textuel}{39}{chapter.6}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {6}Donner à voir un corpus textuel}{47}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {6.1}Visualisation, design et sciences: des relations complexes}{39}{section.6.1}\protected@file@percent }
-\abx@aux@fnpage{9}{39}
-\abx@aux@fnpage{10}{39}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {6.1}Visualisation, design et sciences: des relations complexes}{47}{section.6.1}\protected@file@percent }
+\abx@aux@fnpage{12}{47}
+\abx@aux@fnpage{13}{47}
 \abx@aux@cite{renon_design_2015}
 \abx@aux@segm{0}{0}{renon_design_2015}
 \abx@aux@cite{orain_laboratoire_2021}
 \abx@aux@segm{0}{0}{orain_laboratoire_2021}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}L'utilisation de supports visuels dans les sciences: une longue histoire}{40}{subsection.6.1.1}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}Une vision objective? Visualisation et prétention à l'objectivité}{40}{subsection.6.1.2}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.3}La tendance visuelle des humanités numériques}{40}{subsection.6.1.3}\protected@file@percent }
-\abx@aux@fnpage{11}{40}
-\abx@aux@fnpage{12}{40}
-\abx@aux@fnpage{13}{40}
-\abx@aux@fnpage{14}{40}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.1}L'utilisation de supports visuels dans les sciences: une longue histoire}{48}{subsection.6.1.1}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.2}Une vision objective? Visualisation et prétention à l'objectivité}{48}{subsection.6.1.2}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.1.3}La tendance visuelle des humanités numériques}{48}{subsection.6.1.3}\protected@file@percent }
+\abx@aux@fnpage{14}{48}
+\abx@aux@fnpage{15}{48}
+\abx@aux@fnpage{16}{48}
+\abx@aux@fnpage{17}{48}
 \abx@aux@cite{hentschel_visual_2014}
 \abx@aux@segm{0}{0}{hentschel_visual_2014}
 \abx@aux@cite{drucker_visualisation_2020}
 \abx@aux@segm{0}{0}{drucker_visualisation_2020}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {6.2}Interpréter le corpus de manuscrits}{41}{section.6.2}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}La visualisation comme objet de connaissance}{41}{subsection.6.2.1}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}La visualisation comme interprétation}{41}{subsection.6.2.2}\protected@file@percent }
-\abx@aux@fnpage{15}{41}
-\abx@aux@fnpage{16}{41}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{Bibliographie}{43}{chapter*.17}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{Projet \textit  {MSS}{} / \textit  {Katabase}{}{}}{43}{section*.18}\protected@file@percent }
-\abx@aux@page{17}{43}
-\abx@aux@page{18}{43}
-\abx@aux@page{19}{43}
-\abx@aux@page{20}{43}
-\abx@aux@page{21}{43}
-\abx@aux@page{22}{43}
-\abx@aux@page{23}{43}
-\abx@aux@page{24}{44}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{Édition numérique, traitement automatisé et analyse de texte}{44}{section*.19}\protected@file@percent }
-\abx@aux@page{25}{44}
-\abx@aux@page{26}{44}
-\abx@aux@page{27}{44}
-\abx@aux@page{28}{44}
-\abx@aux@page{29}{44}
-\abx@aux@page{30}{44}
-\abx@aux@page{31}{44}
-\abx@aux@page{32}{44}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{Technologies du web}{45}{section*.20}\protected@file@percent }
-\abx@aux@page{33}{45}
-\abx@aux@page{34}{45}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{Visualisation et design d'interfaces}{45}{section*.21}\protected@file@percent }
-\abx@aux@page{35}{45}
-\abx@aux@page{36}{45}
-\abx@aux@page{37}{45}
-\abx@aux@page{38}{45}
-\abx@aux@page{39}{45}
-\abx@aux@page{40}{45}
-\abx@aux@page{41}{45}
-\abx@aux@page{42}{45}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{Marché de l'art, économétrie et statistiques}{46}{section*.22}\protected@file@percent }
-\abx@aux@page{43}{46}
-\abx@aux@page{44}{46}
-\abx@aux@page{45}{46}
-\abx@aux@page{46}{46}
-\abx@aux@page{47}{46}
-\abx@aux@page{48}{46}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{\numberline {6.2}Interpréter le corpus de manuscrits}{49}{section.6.2}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.1}La visualisation comme objet de connaissance}{49}{subsection.6.2.1}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {subsection}{\numberline {6.2.2}La visualisation comme interprétation}{49}{subsection.6.2.2}\protected@file@percent }
+\abx@aux@fnpage{18}{49}
+\abx@aux@fnpage{19}{49}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{Bibliographie}{51}{chapter*.28}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{Projet \textit  {MSS}{} / \textit  {Katabase}{}{}}{51}{section*.29}\protected@file@percent }
+\abx@aux@page{20}{51}
+\abx@aux@page{21}{51}
+\abx@aux@page{22}{51}
+\abx@aux@page{23}{51}
+\abx@aux@page{24}{51}
+\abx@aux@page{25}{51}
+\abx@aux@page{26}{51}
+\abx@aux@page{27}{52}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{Édition numérique, traitement automatisé et analyse de texte}{52}{section*.30}\protected@file@percent }
+\abx@aux@page{28}{52}
+\abx@aux@page{29}{52}
+\abx@aux@page{30}{52}
+\abx@aux@page{31}{52}
+\abx@aux@page{32}{52}
+\abx@aux@page{33}{52}
+\abx@aux@page{34}{52}
+\abx@aux@page{35}{52}
+\abx@aux@page{36}{53}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{Technologies du web}{53}{section*.31}\protected@file@percent }
+\abx@aux@page{37}{53}
+\abx@aux@page{38}{53}
+\abx@aux@page{39}{53}
+\abx@aux@page{40}{53}
+\abx@aux@page{41}{53}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{Visualisation et design d'interfaces}{53}{section*.32}\protected@file@percent }
+\abx@aux@page{42}{53}
+\abx@aux@page{43}{53}
+\abx@aux@page{44}{53}
+\abx@aux@page{45}{53}
+\abx@aux@page{46}{53}
+\abx@aux@page{47}{54}
+\abx@aux@page{48}{54}
+\abx@aux@page{49}{54}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {section}{Marché de l'art, économétrie et statistiques}{54}{section*.33}\protected@file@percent }
+\abx@aux@page{50}{54}
+\abx@aux@page{51}{54}
+\abx@aux@page{52}{54}
+\abx@aux@page{53}{54}
+\abx@aux@page{54}{54}
+\abx@aux@page{55}{54}
+\abx@aux@cite{noauthor_expression_2022}
+\abx@aux@segm{0}{0}{noauthor_expression_2022}
 \abx@aux@cite{noauthor_precision_2022}
 \abx@aux@segm{0}{0}{noauthor_precision_2022}
 \abx@aux@cite{noauthor_f-score_2022}
 \abx@aux@segm{0}{0}{noauthor_f-score_2022}
 \abx@aux@cite{harris_sparql_2013}
 \abx@aux@segm{0}{0}{harris_sparql_2013}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{Glossaire}{47}{section*.23}\protected@file@percent }
-\abx@aux@page{49}{47}
-\abx@aux@page{50}{47}
-\abx@aux@fnpage{51}{48}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{Acronymes}{49}{section*.25}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{Table des figures}{51}{chapter*.27}\protected@file@percent }
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{Table des matières}{53}{chapter*.28}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{Glossaire}{55}{section*.34}\protected@file@percent }
+\abx@aux@fnpage{56}{55}
+\abx@aux@fnpage{57}{55}
+\abx@aux@fnpage{58}{55}
+\abx@aux@fnpage{59}{56}
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{Acronymes}{57}{section*.36}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{Table des figures}{59}{chapter*.38}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{Table des matières}{61}{chapter*.39}\protected@file@percent }
 \gdef\minted@oldcachelist{,
   default-pyg-prefix.pygstyle,
-  pastie.pygstyle,
+  manni.pygstyle,
   AF98BD108A42A27D849430E77E71634B01F7667032D1C229EC63BC7D1B6211C2.pygtex,
   DE8E9638560DA0C5B11F5EB8E6D2833CE52001A2CC770A4089BAE9AFDA1ABAEB.pygtex,
   666F1A6FF301D5CB882507AD15806358E52001A2CC770A4089BAE9AFDA1ABAEB.pygtex,
   7B3EA1419E0BB5012034EDD394C14758E52001A2CC770A4089BAE9AFDA1ABAEB.pygtex,
   675439BF1DF6CF6F34CA1EF11289C328E52001A2CC770A4089BAE9AFDA1ABAEB.pygtex,
   3F02E97BEFA2054AE1C3754769204F4BE52001A2CC770A4089BAE9AFDA1ABAEB.pygtex,
-  920ACB4D240974E51B8C884DD00984C6E52001A2CC770A4089BAE9AFDA1ABAEB.pygtex}
+  920ACB4D240974E51B8C884DD00984C6E52001A2CC770A4089BAE9AFDA1ABAEB.pygtex,
+  1ECB93BD43B565DA0C191C0D423237B3E52001A2CC770A4089BAE9AFDA1ABAEB.pygtex,
+  F46971F6042B3C434C2C5161BE12B448E52001A2CC770A4089BAE9AFDA1ABAEB.pygtex,
+  0A070C66C1E82257E3CBBF865D1C466EE52001A2CC770A4089BAE9AFDA1ABAEB.pygtex,
+  7F1DEFCEFADCDF6A9DAD710072CBA109A0D456621503C3FB17CB65F8469EE6ED.pygtex}
 \abx@aux@refcontextdefaultsdone
 \abx@aux@defaultrefcontext{0}{corbieres_du_2020}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{gabay_selling_2020}{nyt/global//global/global}
@@ -261,12 +298,16 @@
 \abx@aux@defaultrefcontext{0}{burnard_what_2019}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{burnard_search_2021}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{christensen_segmonto_2022}{nyt/global//global/global}
+\abx@aux@defaultrefcontext{0}{noauthor_expression_2022}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{gabay_segmonto_2021}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{sahle_digital_2016}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{sahle_what_2016}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{stokes_escriptorium_2021}{nyt/global//global/global}
+\abx@aux@defaultrefcontext{0}{covington_deep_2016}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{harris_sparql_2013}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{noauthor_interface_2022}{nyt/global//global/global}
+\abx@aux@defaultrefcontext{0}{mikolov_distributed_2013}{nyt/global//global/global}
+\abx@aux@defaultrefcontext{0}{noauthor_moteur_2022}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{agamben_quest-ce_2006}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{albouy_mediation_2019}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{drucker_visualisation_2020}{nyt/global//global/global}
@@ -281,9 +322,9 @@
 \abx@aux@defaultrefcontext{0}{noauthor_precision_2022}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{noauthor_regression_2022}{nyt/global//global/global}
 \abx@aux@defaultrefcontext{0}{saint-raymond_revisiting_2019}{nyt/global//global/global}
-\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {A}Graphiques}{57}{appendix.A}\protected@file@percent }
+\@writefile{toc}{\defcounter {refsection}{0}\relax }\@writefile{toc}{\contentsline {chapter}{\numberline {A}Graphiques}{65}{appendix.A}\protected@file@percent }
 \@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\defcounter {refsection}{0}\relax }\@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{lol}{\defcounter {refsection}{0}\relax }\@writefile{lol}{\addvspace {10\p@ }}
-\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {A.1}{\ignorespaces O\relax }}{58}{figure.caption.29}\protected@file@percent }
-\newlabel{appendix:wikidata_instances}{{A.1}{58}{O\relax }{figure.caption.29}{}}
+\@writefile{lof}{\defcounter {refsection}{0}\relax }\@writefile{lof}{\contentsline {figure}{\numberline {A.1}{\ignorespaces O\relax }}{66}{figure.caption.40}\protected@file@percent }
+\newlabel{appendix:wikidata_instances}{{A.1}{66}{O\relax }{figure.caption.40}{}}

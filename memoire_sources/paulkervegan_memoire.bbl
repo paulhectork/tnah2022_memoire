@@ -334,6 +334,57 @@
       \endverb
       \keyw{,katabase}
     \endentry
+    \entry{covington_deep_2016}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{un=0,uniquepart=base,hash=0169f2fa7857fb3f84d58bffdd4ab3f6}{%
+           family={Covington},
+           familyi={C\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=46b2323af4a505d3970aa48d3d4707a4}{%
+           family={Adams},
+           familyi={A\bibinitperiod},
+           given={Jay},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e22891f610cd2a9adf9ee61196fa96cb}{%
+           family={Sargin},
+           familyi={S\bibinitperiod},
+           given={Erme},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{location}{1}{%
+        {New York}%
+      }
+      \strng{namehash}{16ff70f52cc2c3ccf9d1f73f78ebc45d}
+      \strng{fullhash}{16ff70f52cc2c3ccf9d1f73f78ebc45d}
+      \strng{bibnamehash}{16ff70f52cc2c3ccf9d1f73f78ebc45d}
+      \strng{authorbibnamehash}{16ff70f52cc2c3ccf9d1f73f78ebc45d}
+      \strng{authornamehash}{16ff70f52cc2c3ccf9d1f73f78ebc45d}
+      \strng{authorfullhash}{16ff70f52cc2c3ccf9d1f73f78ebc45d}
+      \field{sortinit}{C}
+      \field{sortinithash}{4c244ceae61406cdc0cc2ce1cb1ff703}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 10th {ACM} Conference on Recommender Systems}
+      \field{title}{Deep Neural Networks for {YouTube} Recommendations}
+      \field{urlday}{10}
+      \field{urlmonth}{6}
+      \field{urlyear}{2022}
+      \field{year}{2016}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://research.google/pubs/pub45530/
+      \endverb
+      \verb{url}
+      \verb https://research.google/pubs/pub45530/
+      \endverb
+      \keyw{,web}
+    \endentry
     \entry{drucker_visualisation_2020}{book}{}
       \name{author}{1}{}{%
         {{un=0,uniquepart=base,hash=1cfaef74f23558d563be1ef6740cc386}{%
@@ -368,6 +419,27 @@
       \field{dateera}{ce}
       \true{nocite}
       \keyw{,visualisation}
+    \endentry
+    \entry{noauthor_expression_2022}{online}{}
+      \field{sortinit}{E}
+      \field{sortinithash}{c554bd1a0b76ea92b9f105fe36d9c7b0}
+      \field{labeltitlesource}{title}
+      \field{title}{Expression régulière}
+      \field{titleaddon}{Wikipedia. L'encyclopédie libre}
+      \field{urlday}{10}
+      \field{urlmonth}{7}
+      \field{urlyear}{2022}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://fr.wikipedia.org/wiki/Expression_r%C3%A9guli%C3%A8re
+      \endverb
+      \verb{url}
+      \verb https://fr.wikipedia.org/wiki/Expression_r%C3%A9guli%C3%A8re
+      \endverb
+      \keyw{,text}
     \endentry
     \entry{noauthor_f-score_2022}{online}{}
       \field{sortinit}{F}
@@ -942,6 +1014,91 @@
       \verb https://hal.archives-ouvertes.fr/hal-02986371
       \endverb
       \keyw{,econometrie}
+    \endentry
+    \entry{mikolov_distributed_2013}{article}{}
+      \name{author}{5}{}{%
+        {{un=0,uniquepart=base,hash=a2d359b12ca2fadf0b40136a73f021bb}{%
+           family={Mikolov},
+           familyi={M\bibinitperiod},
+           given={Tomas},
+           giveni={T\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=8d569d1d5b8b5a7836017a98b430f959}{%
+           family={Sutskever},
+           familyi={S\bibinitperiod},
+           given={Ilya},
+           giveni={I\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=ee3f7d7b96add98106db907e189d6c13}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Kai},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=3d11e6f2a0d0a1183b2cf62996525afc}{%
+           family={Corrado},
+           familyi={C\bibinitperiod},
+           given={Greg},
+           giveni={G\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4aecfb0cc2e1e3b7899129fa2a94e2b8}{%
+           family={Dean},
+           familyi={D\bibinitperiod},
+           given={Jeffrey},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{d4849f6d57e38d9b9846cfb360e45131}
+      \strng{fullhash}{de32714a52f717caeb5f99165092caf6}
+      \strng{bibnamehash}{d4849f6d57e38d9b9846cfb360e45131}
+      \strng{authorbibnamehash}{d4849f6d57e38d9b9846cfb360e45131}
+      \strng{authornamehash}{d4849f6d57e38d9b9846cfb360e45131}
+      \strng{authorfullhash}{de32714a52f717caeb5f99165092caf6}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{{CoRR}}
+      \field{title}{Distributed Representations of Words and Phrases and their Compositionality}
+      \field{urlday}{15}
+      \field{urlmonth}{7}
+      \field{urlyear}{2020}
+      \field{volume}{abs/1310.4546}
+      \field{year}{2013}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{doi}
+      \verb https://doi.org/10.48550/arXiv.1310.4546
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/1310.4546
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1310.4546
+      \endverb
+      \keyw{,web}
+    \endentry
+    \entry{noauthor_moteur_2022}{online}{}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labeltitlesource}{title}
+      \field{title}{Moteur de recherche}
+      \field{titleaddon}{Wikipedia. L'encyclopédie libre}
+      \field{urlday}{17}
+      \field{urlmonth}{7}
+      \field{urlyear}{2022}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://fr.wikipedia.org/wiki/Moteur_de_recherche
+      \endverb
+      \verb{url}
+      \verb https://fr.wikipedia.org/wiki/Moteur_de_recherche
+      \endverb
+      \keyw{,web}
     \endentry
     \entry{orain_laboratoire_2021}{inproceedings}{}
       \name{author}{1}{}{%
