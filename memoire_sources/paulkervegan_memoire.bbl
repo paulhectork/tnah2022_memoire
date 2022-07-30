@@ -1015,19 +1015,13 @@
       \endverb
       \keyw{,econometrie}
     \endentry
-    \entry{mikolov_distributed_2013}{article}{}
-      \name{author}{5}{}{%
+    \entry{mikolov_efficient_2013}{article}{}
+      \name{author}{4}{}{%
         {{un=0,uniquepart=base,hash=a2d359b12ca2fadf0b40136a73f021bb}{%
            family={Mikolov},
            familyi={M\bibinitperiod},
            given={Tomas},
            giveni={T\bibinitperiod},
-           givenun=0}}%
-        {{un=0,uniquepart=base,hash=8d569d1d5b8b5a7836017a98b430f959}{%
-           family={Sutskever},
-           familyi={S\bibinitperiod},
-           given={Ilya},
-           giveni={I\bibinitperiod},
            givenun=0}}%
         {{un=0,uniquepart=base,hash=ee3f7d7b96add98106db907e189d6c13}{%
            family={Chen},
@@ -1049,35 +1043,35 @@
            givenun=0}}%
       }
       \strng{namehash}{d4849f6d57e38d9b9846cfb360e45131}
-      \strng{fullhash}{de32714a52f717caeb5f99165092caf6}
+      \strng{fullhash}{f24c60896b6daa69474b40efb61f4e88}
       \strng{bibnamehash}{d4849f6d57e38d9b9846cfb360e45131}
       \strng{authorbibnamehash}{d4849f6d57e38d9b9846cfb360e45131}
       \strng{authornamehash}{d4849f6d57e38d9b9846cfb360e45131}
-      \strng{authorfullhash}{de32714a52f717caeb5f99165092caf6}
+      \strng{authorfullhash}{f24c60896b6daa69474b40efb61f4e88}
       \field{sortinit}{M}
       \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{{CoRR}}
-      \field{title}{Distributed Representations of Words and Phrases and their Compositionality}
-      \field{urlday}{15}
+      \field{abstract}{We propose two novel model architectures for computing continuous vector representations of words from very large data sets. The quality of these representations is measured in a word similarity task, and the results are compared to the previously best performing techniques based on different types of neural networks. We observe large improvements in accuracy at much lower computational cost, i.e. it takes less than a day to learn high quality word vectors from a 1.6 billion words data set. Furthermore, we show that these vectors provide state-of-the-art performance on our test set for measuring syntactic and semantic word similarities.}
+      \field{note}{Publisher: {arXiv} Version Number: 3}
+      \field{title}{Efficient Estimation of Word Representations in Vector Space}
+      \field{urlday}{29}
       \field{urlmonth}{7}
-      \field{urlyear}{2020}
-      \field{volume}{abs/1310.4546}
+      \field{urlyear}{2022}
       \field{year}{2013}
       \field{dateera}{ce}
       \field{urldateera}{ce}
       \true{nocite}
       \verb{doi}
-      \verb https://doi.org/10.48550/arXiv.1310.4546
+      \verb 10.48550/ARXIV.1301.3781
       \endverb
       \verb{urlraw}
-      \verb http://arxiv.org/abs/1310.4546
+      \verb https://arxiv.org/abs/1301.3781
       \endverb
       \verb{url}
-      \verb http://arxiv.org/abs/1310.4546
+      \verb https://arxiv.org/abs/1301.3781
       \endverb
-      \keyw{,web}
+      \keyw{Computation and Language (cs.{CL}),{FOS}: Computer and information sciences,web}
     \endentry
     \entry{noauthor_moteur_2022}{online}{}
       \field{sortinit}{M}

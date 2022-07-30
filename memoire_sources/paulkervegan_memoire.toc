@@ -83,84 +83,86 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsubsection}{Présentation de l'algorithme d'extraction d'informations}{31}{section*.24}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.2}Identifier le type de nom}{34}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.2}Identifier le type de nom}{35}{subsection.4.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.3}Reconstruire un prénom complet à partir de son abréviation}{34}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.3}Reconstruire un prénom complet à partir de son abréviation}{35}{subsection.4.2.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.4}Extraire des informations normalisées à partir d'un nom et de sa description}{34}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.4}Extraire des informations normalisées à partir d'un nom et de sa description}{35}{subsection.4.2.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Extraire des identifiants \textit {Wikidata}{}}{34}{section.4.3}%
+\contentsline {section}{\numberline {4.3}Extraire des identifiants \textit {Wikidata}{}}{35}{section.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.1}Présentation générale}{35}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.1}Présentation générale}{36}{subsection.4.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.2}Gérer la montée en charge: optimisation et réduction du temps d'exécution}{35}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.2}Gérer la montée en charge: optimisation et réduction du temps d'exécution}{36}{subsection.4.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3.3}Évaluation du script : tests, performance et qualité des données extraites de \textit {Wikidata}{}}{35}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.3}Évaluation du script : tests, performance et qualité des données extraites de \textit {Wikidata}{}}{36}{subsection.4.3.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.4}Après l'alignement, l'enrichissement: utiliser \texttt {\gls {SPARQL}}{} pour produire des données structurées}{35}{section.4.4}%
+\contentsline {section}{\numberline {4.4}Après l'alignement, l'enrichissement: utiliser \texttt {\gls {SPARQL}}{} pour produire des données structurées}{36}{section.4.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.1}Quelles données rechercher via \texttt {\gls {SPARQL}}?}{35}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.1}Quelles données rechercher via \texttt {\gls {SPARQL}}?}{36}{subsection.4.4.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.2}Présentation générale}{39}{subsection.4.4.2}%
+\contentsline {subsection}{\numberline {4.4.2}Présentation générale}{40}{subsection.4.4.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.3}Développer un comportement uniforme pour produire des données exploitables à partir un corpus hétérogène}{39}{subsection.4.4.3}%
+\contentsline {subsection}{\numberline {4.4.3}Développer un comportement uniforme pour produire des données exploitables à partir un corpus hétérogène}{40}{subsection.4.4.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.4}Minimiser la perte: optimisation et gestion des erreurs}{40}{subsection.4.4.4}%
+\contentsline {subsection}{\numberline {4.4.4}Minimiser la perte: optimisation et gestion des erreurs}{41}{subsection.4.4.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.4.5}Lier la \texttt {TEI}{} aux données nouvellement produites}{40}{subsection.4.4.5}%
+\contentsline {subsection}{\numberline {4.4.5}Lier la \texttt {TEI}{} aux données nouvellement produites}{41}{subsection.4.4.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.5}Des données à la monnaie: premiers résultats de l'étude}{40}{section.4.5}%
+\contentsline {section}{\numberline {4.5}Des données à la monnaie: premiers résultats de l'étude}{41}{section.4.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {part}{III\hspace {1em}Après la \texttt {TEI}{}: l'application web \textit {Katabase}{}, interface de diffusion des données}{41}{part.3}%
+\contentsline {part}{III\hspace {1em}Après la \texttt {TEI}{}: l'application web \textit {Katabase}{}, interface de diffusion des données}{43}{part.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Design d'interfaces dans un projet d'humanités numériques: l'application web \textit {Katabase}{}}{43}{chapter.5}%
+\contentsline {chapter}{\numberline {5}Design d'interfaces dans un projet d'humanités numériques: l'application web \textit {Katabase}{}}{45}{chapter.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Le design d'interfaces: une reconfiguration des méthodes de recherche et une transformation du corpus}{43}{section.5.1}%
+\contentsline {section}{\numberline {5.1}Le design d'interfaces: une reconfiguration des méthodes de recherche et une transformation du corpus}{45}{section.5.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1.1}Le design comme inversion des méthodes}{43}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.1}Le design comme inversion des méthodes}{45}{subsection.5.1.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.1.2}Interface et document}{44}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.2}Interface et document}{46}{subsection.5.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}La conception d'interfaces, un problème pour les humanités numériques?}{45}{section.5.2}%
+\contentsline {section}{\numberline {5.2}La conception d'interfaces, un problème pour les humanités numériques?}{47}{section.5.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.1}Pour une approche pragmatique du design d'interfaces dans un contexte d'humanités numériques}{45}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.1}Pour une approche pragmatique du design d'interfaces dans un contexte d'humanités numériques}{47}{subsection.5.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.2.2}Rejeter les interfaces?}{45}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.2}Rejeter les interfaces?}{47}{subsection.5.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Donner à voir un corpus textuel}{47}{chapter.6}%
+\contentsline {chapter}{\numberline {6}Donner à voir un corpus textuel}{49}{chapter.6}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Visualisation, design et sciences: des relations complexes}{47}{section.6.1}%
+\contentsline {section}{\numberline {6.1}Visualisation, design et sciences: des relations complexes}{49}{section.6.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.1}L'utilisation de supports visuels dans les sciences: une longue histoire}{48}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.1}L'utilisation de supports visuels dans les sciences: une longue histoire}{50}{subsection.6.1.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.2}Une vision objective? Visualisation et prétention à l'objectivité}{48}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.2}Une vision objective? Visualisation et prétention à l'objectivité}{50}{subsection.6.1.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.1.3}La tendance visuelle des humanités numériques}{48}{subsection.6.1.3}%
+\contentsline {subsection}{\numberline {6.1.3}La tendance visuelle des humanités numériques}{50}{subsection.6.1.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Interpréter le corpus de manuscrits}{49}{section.6.2}%
+\contentsline {section}{\numberline {6.2}Interpréter le corpus de manuscrits}{51}{section.6.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.1}La visualisation comme objet de connaissance}{49}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.1}La visualisation comme objet de connaissance}{51}{subsection.6.2.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {6.2.2}La visualisation comme interprétation}{49}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.2}La visualisation comme interprétation}{51}{subsection.6.2.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Bibliographie}{51}{chapter*.28}%
+\contentsline {chapter}{Bibliographie}{53}{chapter*.28}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Projet \textit {MSS}{} / \textit {Katabase}{}{}}{51}{section*.29}%
+\contentsline {section}{Projet \textit {MSS}{} / \textit {Katabase}{}{}}{53}{section*.29}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Édition numérique, traitement automatisé et analyse de texte}{52}{section*.30}%
+\contentsline {section}{Édition numérique, traitement automatisé et analyse de texte}{54}{section*.30}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Technologies du web}{53}{section*.31}%
+\contentsline {section}{Technologies du web}{55}{section*.31}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Visualisation et design d'interfaces}{53}{section*.32}%
+\contentsline {section}{Visualisation et design d'interfaces}{55}{section*.32}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{Marché de l'art, économétrie et statistiques}{54}{section*.33}%
+\contentsline {section}{Marché de l'art, économétrie et statistiques}{56}{section*.33}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Glossaire}{55}{section*.34}%
+\contentsline {chapter}{Glossaire}{57}{section*.34}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Acronymes}{57}{section*.36}%
+\contentsline {chapter}{Acronymes}{59}{section*.36}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Table des figures}{59}{chapter*.38}%
+\contentsline {chapter}{Table des figures}{61}{chapter*.38}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{Table des matières}{61}{chapter*.39}%
+\contentsline {chapter}{Table des matières}{63}{chapter*.39}%
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Graphiques}{65}{appendix.A}%
+\contentsline {chapter}{\numberline {A}Graphiques}{67}{appendix.A}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {B}Code source et données encodées}{69}{appendix.B}%

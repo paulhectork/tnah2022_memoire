@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.12.6)  30 JUL 2022 01:04
+This is XeTeX, Version 3.14159265-2.6-0.999991 (TeX Live 2019/Debian) (preloaded format=xelatex 2021.12.6)  30 JUL 2022 15:23
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1527,37 +1527,40 @@ Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'french'.
 
-(./paulkervegan_memoire.aux)
+(./paulkervegan_memoire.aux
+
+LaTeX Warning: Label `' multiply defined.
+
+)
 \openout1 = `paulkervegan_memoire.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 254.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 260.
+LaTeX Font Info:    ... okay on input line 260.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 260.
+LaTeX Font Info:    ... okay on input line 260.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 260.
+LaTeX Font Info:    ... okay on input line 260.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 260.
+LaTeX Font Info:    ... okay on input line 260.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 260.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 2
-54.
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+60.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 254.
-LaTeX Font Info:    ... okay on input line 254.
-LaTeX Info: Redefining \dots on input line 254.
-LaTeX Info: Redefining \up on input line 254.
+LaTeX Font Info:    ... okay on input line 260.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 260.
+LaTeX Font Info:    ... okay on input line 260.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 260.
+LaTeX Font Info:    ... okay on input line 260.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 260.
+LaTeX Font Info:    ... okay on input line 260.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 260.
+LaTeX Font Info:    ... okay on input line 260.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 260.
+LaTeX Font Info:    ... okay on input line 260.
+LaTeX Info: Redefining \dots on input line 260.
+LaTeX Info: Redefining \up on input line 260.
 
 ABD: EveryShipout initializing macros
 Package caption Info: Begin \AtBeginDocument code.
@@ -1625,10 +1628,10 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'paulkervegan_memoire.bbl' found.
 
 (./paulkervegan_memoire.bbl)
-Package biblatex Info: Reference section=0 on input line 254.
-Package biblatex Info: Reference segment=0 on input line 254.
+Package biblatex Info: Reference section=0 on input line 260.
+Package biblatex Info: Reference segment=0 on input line 260.
 \AtBeginShipoutBox=\box120
-Package hyperref Info: Link coloring OFF on input line 254.
+Package hyperref Info: Link coloring OFF on input line 260.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
@@ -1641,9 +1644,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count519
 )
-LaTeX Info: Redefining \ref on input line 254.
-LaTeX Info: Redefining \pageref on input line 254.
-LaTeX Info: Redefining \nameref on input line 254.
+LaTeX Info: Redefining \ref on input line 260.
+LaTeX Info: Redefining \pageref on input line 260.
+LaTeX Info: Redefining \nameref on input line 260.
 
 (./paulkervegan_memoire.out) (./paulkervegan_memoire.out)
 \@outlinefile=\write10
@@ -1665,60 +1668,60 @@ LaTeX Info: Redefining \nameref on input line 254.
 
 ] [2]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <24.88> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 311.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 317.
  [3
 
 ] [4]
 Chapitre 1.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3
-21.
+27.
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
-21.
+27.
 
 (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-321.
+327.
 
 (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-321.
+327.
 
 (/usr/share/texmf/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 321.
+(Font)              <12> on input line 327.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 321.
+(Font)              <8> on input line 327.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 321.
+(Font)              <6> on input line 327.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 321.
+(Font)              <10> on input line 327.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 321.
+(Font)              <7> on input line 327.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 321.
+(Font)              <5> on input line 327.
  [5
 
 ] [6]
 Chapitre 2.
 Missing character: There is no   in font [lmroman10-regular]:mapping=tex-text;!
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 340.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 346.
 [7
 
 ]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <17.28> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 347.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 353.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 348.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 354.
  [8] [9
 
 ] [10]
@@ -1746,12 +1749,12 @@ File: img/cat_000382_e2158.png Graphic file (type bmp)
 (./_minted-paulkervegan_memoire/manni.pygstyle)
 (./_minted-paulkervegan_memoire/AF98BD108A42A27D849430E77E71634B01F7667032D1C22
 9EC63BC7D1B6211C2.pygtex)
-Underfull \vbox (badness 1019) detected at line 439
+Underfull \vbox (badness 1019) detected at line 445
  []
 
 [16]
 Package hyperref Info: bookmark level for unknown listing defaults to 0 on inpu
-t line 440.
+t line 446.
  [17] [18] [19]
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: xetex
@@ -1787,7 +1790,7 @@ t line 440.
 
 
 
-LaTeX Warning: Float too large for page by 137.76057pt on input line 531.
+LaTeX Warning: Float too large for page by 137.76057pt on input line 537.
 
 [20]
 \openout3 = `paulkervegan_memoire.pyg'.
@@ -1809,16 +1812,16 @@ LaTeX Warning: Float too large for page by 137.76057pt on input line 531.
 (./_minted-paulkervegan_memoire/7B3EA1419E0BB5012034EDD394C14758E52001A2CC770A4
 089BAE9AFDA1ABAEB.pygtex)
 
-Package caption Warning: \label without proper reference on input line 606.
+Package caption Warning: \label without proper reference on input line 612.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `code:bio1' on page 23 undefined on input line 594.
+LaTeX Warning: Reference `code:bio1' on page 23 undefined on input line 600.
 
 \openout3 = `paulkervegan_memoire.pyg'.
 
 [23]
-(./_minted-paulkervegan_memoire/675439BF1DF6CF6F34CA1EF11289C328E52001A2CC770A4
+(./_minted-paulkervegan_memoire/0B6BB5E1ECD8E7D7D4C63603CF4C71DEE52001A2CC770A4
 089BAE9AFDA1ABAEB.pygtex) [24]
 \openout3 = `paulkervegan_memoire.pyg'.
 
@@ -1831,20 +1834,20 @@ LaTeX Warning: Reference `code:bio1' on page 23 undefined on input line 594.
 (./_minted-paulkervegan_memoire/920ACB4D240974E51B8C884DD00984C6E52001A2CC770A4
 089BAE9AFDA1ABAEB.pygtex) [25]
 
-Package caption Warning: \label without proper reference on input line 664.
+Package caption Warning: \label without proper reference on input line 670.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `code:search1' on page 26 undefined on input line 649.
+LaTeX Warning: Reference `code:search1' on page 26 undefined on input line 655.
 
 
 [26]
 
-Package caption Warning: \label without proper reference on input line 664.
+Package caption Warning: \label without proper reference on input line 670.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `code:search1' on page 27 undefined on input line 651.
+LaTeX Warning: Reference `code:search1' on page 27 undefined on input line 657.
 
 
 \openout3 = `paulkervegan_memoire.pyg'.
@@ -1853,20 +1856,20 @@ LaTeX Warning: Reference `code:search1' on page 27 undefined on input line 651.
 (./_minted-paulkervegan_memoire/1ECB93BD43B565DA0C191C0D423237B3E52001A2CC770A4
 089BAE9AFDA1ABAEB.pygtex)
 
-Package caption Warning: \label without proper reference on input line 664.
+Package caption Warning: \label without proper reference on input line 670.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `code:search1' on page 27 undefined on input line 668.
+LaTeX Warning: Reference `code:search1' on page 27 undefined on input line 674.
 
 
 [27]
 
-Package caption Warning: \label without proper reference on input line 679.
+Package caption Warning: \label without proper reference on input line 685.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `code:predic' on page 28 undefined on input line 673.
+LaTeX Warning: Reference `code:predic' on page 28 undefined on input line 679.
 
 \openout3 = `paulkervegan_memoire.pyg'.
 
@@ -1880,57 +1883,69 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 (./_minted-paulkervegan_memoire/0A070C66C1E82257E3CBBF865D1C466EE52001A2CC770A4
-089BAE9AFDA1ABAEB.pygtex) [30]
+089BAE9AFDA1ABAEB.pygtex)
+Overfull \vbox (10.13348pt too high) detected at line 721
+ []
+
+[30]
 \openout3 = `paulkervegan_memoire.pyg'.
 
 
 (./_minted-paulkervegan_memoire/7F1DEFCEFADCDF6A9DAD710072CBA109A0D456621503C3F
-B17CB65F8469EE6ED.pygtex) [31]
-*geometry* verbose mode - [ newgeometry ] result:
-* driver: xetex
-* paper: a4paper
-* layout: <same size as paper>
-* layoutoffset:(h,v)=(0.0pt,0.0pt)
-* modes: twoside 
-* h-part:(L,W,R)=(28.45274pt, 540.60239pt, 28.45274pt)
-* v-part:(T,H,B)=(101.40665pt, 591.5302pt, 152.11pt)
-* \paperwidth=597.50787pt
-* \paperheight=845.04684pt
-* \textwidth=540.60239pt
-* \textheight=591.5302pt
-* \oddsidemargin=-43.81725pt
-* \evensidemargin=-43.81725pt
-* \topmargin=-2.73714pt
-* \headheight=12.0pt
-* \headsep=19.8738pt
-* \topskip=12.0pt
-* \footskip=30.0pt
-* \marginparwidth=88.0pt
-* \marginparsep=7.0pt
-* \columnsep=10.0pt
-* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
-* \hoffset=0.0pt
-* \voffset=0.0pt
-* \mag=1000
-* \@twocolumnfalse
-* \@twosidetrue
-* \@mparswitchtrue
-* \@reversemarginfalse
-* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+B17CB65F8469EE6ED.pygtex)
 
-
-
-Package caption Warning: \label without proper reference on input line 895.
+Package caption Warning: \label without proper reference on input line 853.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `fig:extractparenthesis' on page 32 undefined on input
- line 791.
+LaTeX Warning: Reference `fig:extractmain' on page 31 undefined on input line 7
+43.
 
 
-LaTeX Warning: Float too large for page by 54.81668pt on input line 846.
+Package caption Warning: \label without proper reference on input line 904.
+See the caption package documentation for explanation.
 
-[32]
+
+LaTeX Warning: Reference `fig:extractparenthesis' on page 31 undefined on input
+ line 743.
+
+
+Package caption Warning: \label without proper reference on input line 1501.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `appendix:convprov' on page 31 undefined on input line
+ 745.
+
+
+Package caption Warning: \label without proper reference on input line 1334.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `appendix:convdpt' on page 31 undefined on input line 
+745.
+
+
+Package caption Warning: \label without proper reference on input line 1457.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `appendix:convcolonie' on page 31 undefined on input l
+ine 745.
+
+
+LaTeX Warning: Citation '\ref {appendix:convpays}' on page 31 undefined on inpu
+t line 745.
+
+
+Package caption Warning: \label without proper reference on input line 1524.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `appendix:convevt' on page 31 undefined on input line 
+745.
+
+[31] [32]
 *geometry* verbose mode - [ newgeometry ] result:
 * driver: xetex
 * paper: a4paper
@@ -1965,10 +1980,55 @@ LaTeX Warning: Float too large for page by 54.81668pt on input line 846.
 
 
 
-LaTeX Warning: Float too large for page by 76.36052pt on input line 897.
+Package caption Warning: \label without proper reference on input line 904.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `fig:extractparenthesis' on page 33 undefined on input
+ line 800.
+
+
+LaTeX Warning: Float too large for page by 54.81668pt on input line 855.
 
 [33]
-Overfull \hbox (5.37799pt too wide) in paragraph at lines 906--907
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: xetex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: twoside 
+* h-part:(L,W,R)=(28.45274pt, 540.60239pt, 28.45274pt)
+* v-part:(T,H,B)=(101.40665pt, 591.5302pt, 152.11pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=540.60239pt
+* \textheight=591.5302pt
+* \oddsidemargin=-43.81725pt
+* \evensidemargin=-43.81725pt
+* \topmargin=-2.73714pt
+* \headheight=12.0pt
+* \headsep=19.8738pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=88.0pt
+* \marginparsep=7.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidetrue
+* \@mparswitchtrue
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+
+
+LaTeX Warning: Float too large for page by 76.36052pt on input line 906.
+
+[34]
+Overfull \hbox (5.37799pt too wide) in paragraph at lines 915--916
 \TU/lmr/m/n/12 d’abréviations (nom simple ou composé, nom entièrement ou partie
 llement abrégé)
  []
@@ -1976,44 +2036,34 @@ llement abrégé)
 
 Underfull \vbox (badness 1675) has occurred while \output is active []
 
- [34
+ [35
 
 
 
 
 ]
-Overfull \hbox (21.47437pt too wide) in paragraph at lines 933--933
+Overfull \hbox (21.47437pt too wide) in paragraph at lines 942--942
 []\TU/lmr/bx/n/17.28 Après l’alignement, l’enrichissement : utiliser [][]\TU/lm
 tt/b/n/17.28 SPARQL[]
  []
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 933.
+(hyperref)                removing `\gls' on input line 942.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\gls' on input line 936.
+(hyperref)                removing `\gls' on input line 945.
 
-
-Overfull \hbox (228.21854pt too wide) has occurred while \output is active
-\TU/lmr/m/sl/12 4.4.  APRÈS L’ALIGNEMENT, L’ENRICHISSEMENT : UTILISER [][]\TU/l
-mtt/m/sl/12 SPARQL[] \TU/lmr/m/sl/12 POUR PRODUIRE DES DONNÉES STRUCTURÉES \TU/
-lmr/m/n/12 35
- []
-
-[35] [36]
+[36]
 Overfull \hbox (228.21854pt too wide) has occurred while \output is active
 \TU/lmr/m/sl/12 4.4.  APRÈS L’ALIGNEMENT, L’ENRICHISSEMENT : UTILISER [][]\TU/l
 mtt/m/sl/12 SPARQL[] \TU/lmr/m/sl/12 POUR PRODUIRE DES DONNÉES STRUCTURÉES \TU/
 lmr/m/n/12 37
  []
 
-[37]
+[37] [38]
 Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [38]
-Underfull \vbox (badness 5105) has occurred while \output is active []
 
 
 Overfull \hbox (228.21854pt too wide) has occurred while \output is active
@@ -2022,80 +2072,84 @@ mtt/m/sl/12 SPARQL[] \TU/lmr/m/sl/12 POUR PRODUIRE DES DONNÉES STRUCTURÉES \TU
 lmr/m/n/12 39
  []
 
-[39] [40] [41
+[39]
+Underfull \vbox (badness 5105) has occurred while \output is active []
 
-] [42]
+ [40]
+[41] [42
+
+] [43] [44]
 Chapitre 5.
-[43
+[45
 
 ]
 Underfull \vbox (badness 2856) has occurred while \output is active []
 
- [44]
+ [46]
 Overfull \hbox (94.55064pt too wide) has occurred while \output is active
 \TU/lmr/m/sl/12 5.2.  LA CONCEPTION D’INTERFACES, UN PROBLÈME POUR LES HUMANITÉ
-S NUMÉRIQUES ? \TU/lmr/m/n/12 45
+S NUMÉRIQUES ? \TU/lmr/m/n/12 47
  []
 
-[45] [46
+[47] [48
 
 ]
 Chapitre 6.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [47]
-[48]
+ [49]
+[50]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [49]
-[50
+ [51]
+[52
 
 ]
-Overfull \hbox (2.06366pt too wide) in paragraph at lines 1112--1112
+Overfull \hbox (2.06366pt too wide) in paragraph at lines 1121--1121
 [][][]\TU/lmr/m/sc/12 Gabay []\TU/lmr/m/n/12 (Simon), []\TU/lmr/m/sc/12 Rondeau
  du Noyer []\TU/lmr/m/n/12 (Lucie), []\TU/lmr/m/sc/12 Gille Levenson []\TU/lmr/
 m/n/12 (Matthias), []\TU/lmr/m/sc/12 Petkovic
  []
 
 
-Overfull \hbox (22.54753pt too wide) in paragraph at lines 1112--1112
+Overfull \hbox (22.54753pt too wide) in paragraph at lines 1121--1121
 [][][]\TU/lmr/m/sc/12 Khemakhem []\TU/lmr/m/n/12 (Mohamed), []\TU/lmr/m/sc/12 R
 omary []\TU/lmr/m/n/12 (Laurent), []\TU/lmr/m/sc/12 Gabay []\TU/lmr/m/n/12 (Sim
 on), []\TU/lmr/m/sc/12 Bohbot []\TU/lmr/m/n/12 (Hervé), []\TU/lmr/m/sc/12 Front
 ini
  []
 
-[51]
+[53]
 Missing character: There is no   in font [lmroman12-regular]:mapping=tex-text;!
 
-Overfull \hbox (4.34827pt too wide) in paragraph at lines 1113--1113
+Overfull \hbox (4.34827pt too wide) in paragraph at lines 1122--1122
 [][]\TU/lmr/m/it/12 Expression régulière\TU/lmr/m/n/12 , Wikipedia. L’encyclopé
 die libre, 2022, \TU/lmr/m/sc/12 url \TU/lmr/m/n/12 : []$[][][][][] [] [] [] []
 [] [] [][][][][][][][][] []
  []
 
-[52]
-Overfull \hbox (5.21626pt too wide) in paragraph at lines 1114--1114
+[54]
+Overfull \hbox (5.21626pt too wide) in paragraph at lines 1123--1123
 [][]\TU/lmr/m/it/12 Moteur de recherche\TU/lmr/m/n/12 , Wikipedia. L’encyclopéd
 ie libre, 2022, \TU/lmr/m/sc/12 url \TU/lmr/m/n/12 : []$[][][][][] [] [] [] [][
 ] [] [][][][][][][][][] []
  []
 
-[53] (./paulkervegan_memoire.gls [54] [55
+[55] (./paulkervegan_memoire.gls [56] [57
 
 
 ]) (./paulkervegan_memoire.acr
-[56]) [57
+[58]) [59
 
 
-] [58
+] [60
 
 ] (./paulkervegan_memoire.lof)
 \tf@lof=\write11
 \openout11 = `paulkervegan_memoire.lof'.
 
- [59] [60
+ [61] [62
 
 ]
 (./paulkervegan_memoire.toc
@@ -2110,48 +2164,148 @@ Overfull \hbox (15.35019pt too wide) in paragraph at lines 36--36
 tions : 
  []
 
-[61] [62] [63])
+[63] [64] [65])
 \tf@toc=\write12
 \openout12 = `paulkervegan_memoire.toc'.
 
- [64]
+ [66]
 Annexe A.
 File: annexes/fig_wikidata_instances.png Graphic file (type bmp)
 <annexes/fig_wikidata_instances.png>
-[65
+[67
 
+] [68]
+Annexe B.
+\openout3 = `paulkervegan_memoire.pyg'.
+
+
+(./_minted-paulkervegan_memoire/1E33D34024F797412EB7DFB80D253054A0D456621503C3F
+B17CB65F8469EE6ED.pygtex)
+Overfull \vbox (1.92125pt too high) detected at line 1191
+ []
+
+[69
+
+]
+\openout3 = `paulkervegan_memoire.pyg'.
+
+
+(./_minted-paulkervegan_memoire/7455674EA63E0ECA88020CCD13350300A0D456621503C3F
+B17CB65F8469EE6ED.pygtex)
+Overfull \vbox (3.96138pt too high) detected at line 1333
+ []
+
+[70]
+Underfull \vbox (badness 10000) detected at line 1333
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1333
+ []
+
+[71]
+Underfull \vbox (badness 10000) detected at line 1333
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1333
+ []
+
+[72]
+Underfull \vbox (badness 10000) detected at line 1333
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1333
+ []
+
+[73]
+\openout3 = `paulkervegan_memoire.pyg'.
+
+
+(./_minted-paulkervegan_memoire/AEFB9080FD2821DA4E657871CF8E4AA5A0D456621503C3F
+B17CB65F8469EE6ED.pygtex) [74]
+\openout3 = `paulkervegan_memoire.pyg'.
+
+
+(./_minted-paulkervegan_memoire/A080DE8D9BF6A7F7F074F6FE38512ACBA0D456621503C3F
+B17CB65F8469EE6ED.pygtex)
+Overfull \vbox (3.9614pt too high) detected at line 1456
+ []
+
+[75]
+Underfull \vbox (badness 10000) detected at line 1456
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 1456
+ []
+
+[76]
+\openout3 = `paulkervegan_memoire.pyg'.
+
+
+(./_minted-paulkervegan_memoire/21E7E077B1F63BDD1833B29FB34499E5A0D456621503C3F
+B17CB65F8469EE6ED.pygtex)
+Overfull \vbox (3.96138pt too high) detected at line 1500
+ []
+
+[77]
+\openout3 = `paulkervegan_memoire.pyg'.
+
+
+(./_minted-paulkervegan_memoire/4FCB47E43E57E42A4DA0831E3779029AA0D456621503C3F
+B17CB65F8469EE6ED.pygtex)
+\openout3 = `paulkervegan_memoire.pyg'.
+
+
+(./_minted-paulkervegan_memoire/D41D8CD98F00B204E9800998ECF8427EA0D456621503C3F
+B17CB65F8469EE6ED.pygtex)
+\openout3 = `paulkervegan_memoire.pyg'.
+
+
+(./_minted-paulkervegan_memoire/D41D8CD98F00B204E9800998ECF8427EA0D456621503C3F
+B17CB65F8469EE6ED.pygtex) [78
 runsystem(makeindex -s paulkervegan_memoire.ist -t paulkervegan_memoire.glg -o 
 paulkervegan_memoire.gls paulkervegan_memoire.glo)...executed.
 
 runsystem(makeindex -s paulkervegan_memoire.ist -t paulkervegan_memoire.alg -o 
 paulkervegan_memoire.acr paulkervegan_memoire.acn)...executed.
 
-] [66]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1134.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1134.
+]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1551.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1551.
  (./paulkervegan_memoire.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1134.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1134.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 1551.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1551.
 
 Package rerunfilecheck Info: File `paulkervegan_memoire.out' has not changed.
-(rerunfilecheck)             Checksum: 06B7A227027C7ADE782A39E711C3466C;7798.
+(rerunfilecheck)             Checksum: 7C631AA037DAA5C215A831EDD4B96838;7874.
 
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: There were multiply-defined labels.
+
 runsystem(rm paulkervegan_memoire.pyg)...executed.
+
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                paulkervegan_memoire
+(biblatex)                and rerun LaTeX afterwards.
 
 Package logreq Info: Writing requests to 'paulkervegan_memoire.run.xml'.
 \openout1 = `paulkervegan_memoire.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 43079 strings out of 479819
- 856523 string characters out of 5895846
- 1667046 words of memory out of 5000000
- 59418 multiletter control sequences out of 15000+600000
- 557780 words of font info for 79 fonts, out of 8000000 for 9000
+ 43158 strings out of 479819
+ 861077 string characters out of 5895846
+ 1675412 words of memory out of 5000000
+ 59472 multiletter control sequences out of 15000+600000
+ 557788 words of font info for 80 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 60i,10n,77p,3254b,6289s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,10n,77p,3291b,6289s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on paulkervegan_memoire.pdf (70 pages).
+Output written on paulkervegan_memoire.pdf (82 pages).

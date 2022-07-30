@@ -13,16 +13,18 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Présentation générale de l'algorithme d'enrichissement de données à l'aide de \textit {Wikidata}{}\relax }}{20}{figure.caption.10}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Processus d'extraction d'informations du \texttt {name}{} et \texttt {item}{}\relax }}{32}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Processus d'extraction d'informations du \texttt {name}{} et \texttt {item}{}\relax }}{33}{figure.caption.25}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Extraction d'informations d'un \texttt {name}{} contenant des parenthèses\relax }}{33}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Extraction d'informations d'un \texttt {name}{} contenant des parenthèses\relax }}{34}{figure.caption.26}%
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Exemple de relation sujet -- prédicat -- object\relax }}{36}{figure.caption.27}%
-\defcounter {refsection}{0}\relax 
-\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Exemple de relation sujet -- prédicat -- object\relax }}{37}{figure.caption.27}%
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {A.1}{\ignorespaces O\relax }}{66}{figure.caption.40}%
+\addvspace {10\p@ }
+\defcounter {refsection}{0}\relax 
+\contentsline {figure}{\numberline {A.1}{\ignorespaces O\relax }}{68}{figure.caption.40}%
+\defcounter {refsection}{0}\relax 
+\addvspace {10\p@ }

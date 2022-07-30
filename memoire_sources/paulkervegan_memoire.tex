@@ -186,6 +186,10 @@
 	plural={expressions régulières},
 	description={Une expression régulière, ou expression rationnelle est une chaîne de caractère, écrite selon une syntaxe précise, qui permet de détecter des motifs dans du texte\footcite{noauthor_expression_2022}. Les expressions régulières s'appuient sur la classification des caractères en classes (minuscules, majuscules, chiffres, espaces), sur des structures alternatives (un caractère ou un autre) et exclusives (un caractère n'ayant pas certaines propriétés) pour repérer des motifs. Par exemple, \enquote{2022} correspond au motif: \texttt{\textbackslash{}d{4}}, soit \enquote{quatre chiffres à la suite}. Une adresse mail est également un motif: \texttt{[\^~(@|\textbackslash{}s)]+@[\^~(@|\textbackslash{}s)]+}, soit \enquote{plusieurs caractères qui ne sont ni un espace une arobase, suivi d'une arobase, suivi de plusieurs caractères qui n'est ni un espace ni une arobase}.}
 }
+\newglossaryentry{python}{
+	name={python},
+	description={Python est un language de programmation impérative (c'est-à-dire, basé sur la production et la transformation de données par une suite d'instructions) créé en 1991. Il est particulièrement utilisé dans le domaine du traitement de données et des humanités numériques. C'est le langage le plus utilisé dans le projet \mssktb{}}
+}
 \newglossaryentry{score F1}{
 	name={score F1},
 	plural={scores F1},
@@ -195,10 +199,12 @@
 	name={SPARQL},
 	description={SPARQL est un language de requête qui permet d'interagir avec une base de données au format RDF. \enquote{SPARQL exprime des requêtes sur des sources de données diverses [...]. SPARQL rend possible la requête de données en graphes [...], avec des données conjointes et disjointes. SPARQL permet également l'agrégation de données, les sous-requêtes, la négation, la création de données à l'aide d'expression, le test de données et la contrainte des requêtes. Les résultats de requêtes sparql peuvent être des jeux de résultats ou des graphes RDF.}\footnote{\enquote{SPARQL can be used to express queries across diverse data sources [...]. SPARQL contains capabilities for querying [...] graph patterns along with their conjunctions and disjunctions. SPARQL also supports aggregation, subqueries, negation, creating values by expressions, extensible value testing, and constraining queries by source RDF graph. The results of SPARQL queries can be result sets or RDF graphs.}\cite{harris_sparql_2013} (traduction de l'auteur).}}
 }
-\newglossaryentry{python}{
-	name={python},
-	description={Python est un language de programmation impérative (c'est-à-dire, basé sur la production et la transformation de données par une suite d'instructions) créé en 1991. Il est particulièrement utilisé dans le domaine du traitement de données et des humanités numériques. C'est le langage le plus utilisé dans le projet \mssktb{}}
+\newglossaryentry{table de conversion}{
+	name={table de conversion},
+	plural={tables de conversion},
+	description={Une table de conversion est, tout simplement, un dictionnaire qui contient en clés un certain nombre d'informations telles qu'elles figurent dans le texte et, en valeurs, une version normalisée de cette information. Cela permet de détectier des motifs à extraire autant de normaliser les informations.}
 }
+
 % modèle: \newacronym{dom}{\textsc{dom}}{\emph{Document Object Model}}
 % modèle bis: \newglossaryentry{meta}{name=métadonnée,description={donnée servant à définir ou décrire une autre donné quel que soit son support}}
 
@@ -451,7 +457,7 @@ Le parti pris a donc été d'aligner avec des identifiants \wkd{} les noms conte
 Construire un jeu de données issu de \sparql{} à partir de la manière dont une personne est nommée et décrite au \scl{XIX} n'est pas une opération anodine. La chaîne de traitement est donc assez complexe, comme le montre le schéma \ref{fig:wkdmain}. Cette chaîne de traitement peut être séparée en trois étapes.
 
 \subsubsection{Étape 1 -- Extraction et structuration de données}
-Premièrement, il s'agit d'aligner les entrées de catalogue avec des identifiants \wkd{}. Ceux-ci sont liés à des \enquote{entités} \wkd{}: des personnes, lieux et évènements décrits dans \wkd{} par un certain nombre de propriétés (date de naissance, lieu de résidences...). Cette première étape repose avant tout sur l'extraction et la traduction des données depuis les éléments \tname{} et \ttrait{}. Ce processus d'extraction permet de récupérer toutes les données pertinentes pour chaque entrée de catalogue et de les stocker dans un \gls{dictionnaire} structuré. Comme on le verra, la nature \enquote{semi-structurée} des entrées (ainsi qu'une bonne connaissance du corpus) permet de d'automatiser le processus d'extraction et de traduction des données par détection de motifs, sans avoir à passer par l'apprentissage machine: étant donné que les mêmes types d'informations sont toujours présentes et que les entrées suivent des modèles relativement proches, il est possible de s'appuyer sur la structure des entrées pour identifier  les informations pertinentes. L'extraction de données repose donc sur de la détection de motifs à l'aide d'\rgxpl{}: des récurrences sont repérées dans le texte et utilisées pour distinguer différentes informations (nom, prénom, titre de noblesse...). Pour appuyer l'usage d'expressions régulières par une méthode plus \enquote{qualitative} et précise, certains termes particuliers sont extraits et éventuellement traduits à l'aide de tables de conversions (c'est-à-dire de \glspl{dictionnaire} qui associent à un terme dans le texte une version normalisée). 
+Premièrement, il s'agit d'aligner les entrées de catalogue avec des identifiants \wkd{}. Ceux-ci sont liés à des \enquote{entités} \wkd{}: des personnes, lieux et évènements décrits dans \wkd{} par un certain nombre de propriétés (date de naissance, lieu de résidences...). Cette première étape repose avant tout sur l'extraction et la traduction des données depuis les éléments \tname{} et \ttrait{}. Ce processus d'extraction permet de récupérer toutes les données pertinentes pour chaque entrée de catalogue et de les stocker dans un \gls{dictionnaire} structuré. Comme on le verra, la nature \enquote{semi-structurée} des entrées (ainsi qu'une bonne connaissance du corpus) permet de d'automatiser le processus d'extraction et de traduction des données par détection de motifs, sans avoir à passer par l'apprentissage machine: étant donné que les mêmes types d'informations sont toujours présentes et que les entrées suivent des modèles relativement proches, il est possible de s'appuyer sur la structure des entrées pour identifier  les informations pertinentes. L'extraction de données repose donc sur de la détection de motifs à l'aide d'\rgxpl{}: des récurrences sont repérées dans le texte et utilisées pour distinguer différentes informations (nom, prénom, titre de noblesse...). Pour appuyer l'usage d'expressions régulières par une méthode plus \enquote{qualitative} et précise, certains termes particuliers sont extraits et éventuellement traduits à l'aide de \glspl{table de conversion} (c'est-à-dire de \glspl{dictionnaire} qui associent à un terme dans le texte une version normalisée). 
 
 \subsubsection{Étape 2 -- récupération d'identifiants \wkd{} via des recherches en plein texte à l'aide d'une \api{}}
 Une fois les données du \tname{} et du \ttrait{} structurées en dictionnaire, elles sont utilisées pour lancer plusieurs recherches en plein texte sur le moteur de recherche de \wkd{}. Ces recherches sont faites automatiquement grâce à l'\api{} de \wkd{}. Pour maximiser les chances d'obtenir un identifiant valide, un algorithme a été conçu pour lancer plusieurs recherches à partir de chaque dictionnaire. La première recherche met bout-à-bout toutes les valeurs disponibles dans le dictionnaire. Ensuite, en fonction des paramètres de recherche disponibles dans le dictionnaire, différentes autres recherches sont lancées. Cet algorithme a été élaboré en menant de nombreux tests pour maximiser le taux de réussite, calculé sous la forme d'un \gls{score F1}.
@@ -595,13 +601,13 @@ Cependant, le problème ne s'arrête pas qu'aux noms. Dans un exemple; précéde
 
 \begin{code}
 	\begin{minted}{xml}
-		<item n="136" xml:id="CAT_000189_e136">
-		<!-- .. -->
-		<name type="author">Bulow (Hans)</name>
-		<trait>
+<item n="136" xml:id="CAT_000189_e136">
+	<!-- .. -->
+	<name type="author">Bulow (Hans)</name>
+	<trait>
 		<p>le célèbre pianiste.</p>
-		</trait>
-		</item>
+	</trait>
+</item>
 	\end{minted}
 	\label{code:bio1}
 	\caption{Un exemple où l'extraction du métier permet l'obtention du bon résultat}
@@ -646,7 +652,7 @@ De situations comme les exemples \ref{code:bio2} et \ref{code:bio3}, il faut don
 \subsection{Comment négocier avec le moteur de recherche de \wkd{}?}
 Comme cela commence à apparaître, l'extraction d'informations, lorsqu'elle vise à interagir avec des données externes, vient avec des difficultés supplémentaires. Il ne faut pas seulement extraire les informations ; leur extraction et structuration doivent permettre de lancer des recherches en plein texte, et donc de minimiser le bruit (les informations non pertinentes) et le silence (l'absence d'informations) de la part du moteur de recherche. Il faut donc traduire les informations extraites pour qu'elles correspondent au vocabulaire utilisé par \wkd{}. Cette opération n'est pas anodine: si les catalogues de vente fonctionnent avec leurs propres catégories, le même peut être dit de \wkd{}: certains types de données sont plus souvent référencées que d'autres et \wkd{} utilise un vocabulaire qui lui est propre. Pour bien mener ce processus de traduction et de structuration de l'information, il est nécessaire de bien connaître le fonctionnement de ce moteur de recherche pour mieux s'y adapter.
 
-Comme cela a été dit, l'alignement avec \wkd{} passe par l'utilisation de l'\api{} mise en point par l'institution afin de lancer automatiquement des recherches en plein texte; l'objectif est que le premier résultat retourné par le moteur de recherche soit le bon. La première chose à remarquer est que, contrairement à un moteur de recherche généraliste (comme \textit{Google, QWant}...), ce moteur n'est pas compatible avec des requêtes approximatives. L'exemple \ref{code:search1} est pertinent à ce égard\footnote{Dans cet exemple, le prénom, \enquote{M.-D.-A.}, n'est pas pris en compte pour se concentrer sur l'utilisation d'informations biographiques dans le \ttrait{}.}. Dans de nombreuses entrées, comme c'est le cas ici, les fonctions d'une personne ayant participé à la révolution sont présentées de façon précise: Marc David Alba Lasource est décrit comme étant un \enquote{conventionnel girondin}. Cette mention, régulièrement présente dans les catalogues, pourrait être relevée en tant que telle. Cependant, lancer la recherche \enquote{Lasource conventionnel} ne retourne \href{https://www.wikidata.org/w/index.php?search=lasource+conventionnel&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{aucun résultat}. Si la même recherche est lancée sur un moteur de recherche généraliste (ici, \textit{QWant}), la page \textit{Wikipedia} de Lasource fait partie des premiers \href{https://www.qwant.com/?q=lasource+conventionnel}{résultats}\footnote{Le 29/07/2022, c'est le troisième résultat; le premier correspond à une vente aux enchères d'archives du conventionnel. Les moteurs de recherche pouvant être mis à jour régulièrement, il est possible que l'ordre des résultats change}. Cette différence dans les données retournées par les moteurs de recherche a deux explications: un moteur de recherche généraliste recherche les occurrences de mots, non seulement dans le titre de la page, mais aussi dans le corps du texte. Si le mot \enquote{conventionnel} est absent du titre, il est certainement à plusieurs reprises dans une notice biographique type \textit{Wikipedia}. \wkd{} ne contenant que des données, et pas de texte en tant que tel, l'indexation du corps du texte par le moteur de recherche interne à \wkd{} n'est pas possible. Ensuite, la plupart des moteurs de recherche généralistes utilisent des méthodes de traitement du langage afin de simplifier la requête lancée par l'utilisateur.ice: les mots recherchés sont simplifiés, le moteur de recherche associe les termes recherchés avec d'autres termes \enquote{cooccurents}, c'est-à-dire fréquemment utilisés ensemble\footnote{\cite{noauthor_moteur_2022}. Pour des analyses plus détaillées sur la construction d'ensemble de termes coocurrents, voir \cite{mikolov_distributed_2013}; pour un article technique détaillant la classification et la sélection de résultats pertinents par apprentissage profond, voir \cite{covington_deep_2016}}. Dans le cas du moteur de recherche de \wkd{}, la requête de l'utilisateur.ice ne semble pas être retraitée: des signes de ponctuation ou des fautes de frappes influencent l'obtention d'un résultat, de même que l'usage de termes inadaptés.
+Comme cela a été dit, l'alignement avec \wkd{} passe par l'utilisation de l'\api{} mise en point par l'institution afin de lancer automatiquement des recherches en plein texte; l'objectif est que le premier résultat retourné par le moteur de recherche soit le bon. La première chose à remarquer est que, contrairement à un moteur de recherche généraliste (comme \textit{Google, QWant}...), ce moteur n'est pas compatible avec des requêtes approximatives. L'exemple \ref{code:search1} est pertinent à ce égard\footnote{Dans cet exemple, le prénom, \enquote{M.-D.-A.}, n'est pas pris en compte pour se concentrer sur l'utilisation d'informations biographiques dans le \ttrait{}.}. Dans de nombreuses entrées, comme c'est le cas ici, les fonctions d'une personne ayant participé à la révolution sont présentées de façon précise: Marc David Alba Lasource est décrit comme étant un \enquote{conventionnel girondin}. Cette mention, régulièrement présente dans les catalogues, pourrait être relevée en tant que telle. Cependant, lancer la recherche \enquote{Lasource conventionnel} ne retourne \href{https://www.wikidata.org/w/index.php?search=lasource+conventionnel&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{aucun résultat}. Si la même recherche est lancée sur un moteur de recherche généraliste (ici, \textit{QWant}), la page \textit{Wikipedia} de Lasource fait partie des premiers \href{https://www.qwant.com/?q=lasource+conventionnel}{résultats}\footnote{Le 29/07/2022, c'est le troisième résultat; le premier correspond à une vente aux enchères d'archives du conventionnel. Les moteurs de recherche pouvant être mis à jour régulièrement, il est possible que l'ordre des résultats change}. Cette différence dans les données retournées par les moteurs de recherche a deux explications: un moteur de recherche généraliste recherche les occurrences de mots, non seulement dans le titre de la page, mais aussi dans le corps du texte. Si le mot \enquote{conventionnel} est absent du titre, il est certainement à plusieurs reprises dans une notice biographique type \textit{Wikipedia}. \wkd{} ne contenant que des données, et pas de texte en tant que tel, l'indexation du corps du texte par le moteur de recherche interne à \wkd{} n'est pas possible. Ensuite, la plupart des moteurs de recherche généralistes utilisent des méthodes de traitement du langage afin de simplifier la requête lancée par l'utilisateur.ice: les mots recherchés sont simplifiés, le moteur de recherche associe les termes recherchés avec d'autres termes \enquote{cooccurents}, c'est-à-dire fréquemment utilisés ensemble\footnote{\cite{noauthor_moteur_2022}. Pour des analyses plus détaillées sur la construction d'ensemble de termes coocurrents via le développement de vecteurs de mots, voir \cite{mikolov_efficient_2013}; pour un article technique détaillant la classification et la sélection de résultats pertinents par apprentissage profond, voir \cite{covington_deep_2016}}. Dans le cas du moteur de recherche de \wkd{}, la requête de l'utilisateur.ice ne semble pas être retraitée: des signes de ponctuation ou des fautes de frappes influencent l'obtention d'un résultat, de même que l'usage de termes inadaptés.
 
 Pour faire face à la \enquote{rigidité} relative du moteur de recherche de \wkd{}, il est donc nécéssaire de préparer ses données au moment de leur extraction. En prenant le même exemple (\ref{code:search1}), un résultat correct peut être obtenu en remplaçant \enquote{conventionnel} par \enquote{politician}\footnote{\enquote{Personnalité politique}}, pour rechercher sur \wkd{} \href{https://www.wikidata.org/w/index.php?search=lasource+politician&search=lasource+politician&title=Special%3ASearch&go=Go&ns0=1&ns120=1}{\enquote{Lasource politician}}. Ici, la traduction de \enquote{conventionnel} en \enquote{politician} est d'autant plus intéressante que la date de naissance dans le catalogue (1762) ne correspond pas à celle indiquée sur \wkd{} (1763). Dans un cas comme celui-ci, où certaines données sont incorrectes, il est important d'extraire un maximum d'informations pour que, si certaines requêtes ne rapportent pas de résultats, pouvoir en faire d'autres avec différents paramètres.
 
@@ -670,7 +676,7 @@ En conclusion, il faut retenir que le moteur de recherche de \wkd{} n'admet pas 
 \subsection{Une approche prédictive}
 L'alignement avec \wkd{} et l'extraction d'entités n'est donc pas une opération anodine: les données contenues dans les catalogues sont variées, autant par leur structure que par les informations qu'elles contiennent; il peut être difficile à faire la traduction de données du \scl{XIX} en chaînes de caractères pouvant retourner des réponses valides sur \wkd{}; enfin, le l'alignement repose sur une bonne connaissance du moteur de recherche de \wkd{}. 
 
-De plus, la technique utilisée dans l'extraction de données, reposant sur la détection de motifs à l'aide de \glspl{expression régulière} et de tables de conversions, est une technique qui vient avec un certain nombre d'incertitudes. Avec ce genre de techniques, il est impossible de \enquote{comprendre} ce qu'un élément signifie. Dans l'exemple \ref{code:predic}, formellement, rien ne sépare le nom propre de la duchesse (\enquote{Séguier}) du nom de son duché (\enquote{Verneuil}). En s'appuyant sur une connaissance de la structure répétitive des entrées, il est uniquement possible de supposer que le nom entre parenthèses est un nom propre, tandis que le nom hors des parenthèses correspond au nom du duché. En bref, les méthodes de détection de motifs utilisées, peuvent uniquement inférer le sens d'un mot par rapport à sa position dans une phrase. Si cette technique implique une certaine incertitude, elle est cependant particulièrement adaptée à un corpus semi-structuré, comme c'est le cas des catalogues de vente de manuscrits, et à l'opération d'alignement avec \wkd{}. Comme cela est expliqué plus bas, au fond, il n'est pas tellement important de distinguer le sens des différentes informations: ce qui a du sens, c'est que l'extraction et la structuration des informations permet de construire des chaînes de caractères à rechercher sur \wkd{}. Identifier la fonction d'un mot n'est donc ici qu'un moyen -- contrairement à de l'analyse lexicale, où la fonction des mots dans une phrase est signifiante --. En effet, repérer le rôle que tiennent les termes extraits (métier, prénom...) permet de mieux construire la chaîne de caractère recherchée sur \wkd{}, en pouvant filtrer certaines informations (retirer les dates de vie et de mort, par exemple).
+De plus, la technique utilisée dans l'extraction de données, reposant sur la détection de motifs à l'aide de \glspl{expression régulière} et de \glspl{table de conversion}, est une technique qui vient avec un certain nombre d'incertitudes. Avec ce genre de techniques, il est impossible de \enquote{comprendre} ce qu'un élément signifie. Dans l'exemple \ref{code:predic}, formellement, rien ne sépare le nom propre de la duchesse (\enquote{Séguier}) du nom de son duché (\enquote{Verneuil}). En s'appuyant sur une connaissance de la structure répétitive des entrées, il est uniquement possible de supposer que le nom entre parenthèses est un nom propre, tandis que le nom hors des parenthèses correspond au nom du duché. En bref, les méthodes de détection de motifs utilisées, peuvent uniquement inférer le sens d'un mot par rapport à sa position dans une phrase. Si cette technique implique une certaine incertitude, elle est cependant particulièrement adaptée à un corpus semi-structuré, comme c'est le cas des catalogues de vente de manuscrits, et à l'opération d'alignement avec \wkd{}. Comme cela est expliqué plus bas, au fond, il n'est pas tellement important de distinguer le sens des différentes informations: ce qui a du sens, c'est que l'extraction et la structuration des informations permet de construire des chaînes de caractères à rechercher sur \wkd{}. Identifier la fonction d'un mot n'est donc ici qu'un moyen -- contrairement à de l'analyse lexicale, où la fonction des mots dans une phrase est signifiante --. En effet, repérer le rôle que tiennent les termes extraits (métier, prénom...) permet de mieux construire la chaîne de caractère recherchée sur \wkd{}, en pouvant filtrer certaines informations (retirer les dates de vie et de mort, par exemple).
 
 \begin{code}
 	\begin{minted}{xml}
@@ -691,16 +697,16 @@ Avant de chercher à récupérer un identifiant \wkd{} via l'\api{}, un algorith
 \subsubsection{Les formats d'entrée et de sortie}
 Le but de l'extraction de données permet de transformer cette représentation \tei{} (\ref{code:prepin}) -- représentée sous forme d'un \tsv{} pour faciliter la lecture des données -- au \gls{dictionnaire} visible en \ref{code:prepout}. Voici la signifiaction des différentes clés\footnote{Une clé de \gls{dictionnaire} est l'élément à gauche des \enquote{:}; c'est la clé qui permet d'accéder aux éléments signifiants contenus dans le dictionnaire.} du format de sortie:
 \begin{itemize}
-	\item \texttt{fname}: cette clé permet d'accéder au prénom d'une personne (abréviation de \enquote{first name})
-	\item \texttt{lanme}: cette clé permet d'accéder au nom de famille de quelqu'un. C'est cette information qui est centrale aux requêtes (abréviation de \enquote{last name})
-	\item \texttt{nobname\_sts}: cette clé contient un nom de famille noble. Dans ces cas, un titre de noblesse est souvent présent dans les entrées de catalogue (seuls les titres de noblesse les plus importants sont extraits du dictionnaire, ce qui n'est pas le cas ici).  Cette clé est l'abréviation de \enquote{nobility name\_status}
-	\item \texttt{status}: le statut d'une personne, soit son titre de noblesse.
-	\item \texttt{dates}: les dates de naissance ou de mort d'une personne (seules ces dates sont conservées)
-	\item \texttt{function}: la fonction d'une personne, soit, en général, son métier ou son occupation principale.
+	\item \texttt{fname}: cette clé permet d'accéder au prénom d'une personne. Les données contenues dans cette clé viennent du \tname{}. \texttt{fname} est l'abréviation de \enquote{first name}.
+	\item \texttt{lanme}: cette clé permet d'accéder au nom de famille de quelqu'un. C'est cette information, extraite du \tname{}, qui est centrale aux requêtes. \texttt{lname} abréviation de \enquote{last name})
+	\item \texttt{nobname\_sts}: cette clé contient un nom de famille noble. Dans ces cas, un titre de noblesse est présent dans les entrées de catalogue (seuls les titres de noblesse les plus importants sont extraits du dictionnaire, ce qui n'est pas le cas ici). Les informations contenues ici proviennent du \tname{}. Cette clé est l'abréviation de \enquote{nobility name\_status}
+	\item \texttt{status}: le statut d'une personne, soit son titre de noblesse (ici, le titre \enquote{vicomte} n'a pas été extrait car il est rarement présent sur \wkd{}). Les informations contenues ici proviennent en général du \tname{} et parfois du \ttrait{}.
+	\item \texttt{dates}: les dates de naissance ou de mort d'une personne (seules ces dates sont conservées). Ces informations proviennent du \ttrait{}.
+	\item \texttt{function}: la fonction d'une personne, soit, en général, son métier ou son occupation principale. Cette information provient du \ttrait{}.
 	\item \texttt{rebuilt}: un booléen indiquant si un prénom a été reconstruit à partir d'initiales ou non.
 \end{itemize}
 
-Comme cela a été dit auparavant, le nom attribué à ces clés n'est pas systématiquement indicateur des valeurs qui y sont associées: si l'entrée de catalogue correspond à une personne, alors les clés correspondent aux informations qu'elles contiennent. Si l'entrée de catalogue ne correspond pas à une personne, ces clés seront également utilisées (\texttt{lname} pourra être utilisé pour les noms de pays, par exemple). Ce qui est important, c'est la hiérarchie d'importance entre les différentes clés: \texttt{lname} est la clé centrale et contient presque toujours des informations, \texttt{fname} contient des données secondaires. Les autres clés sont rarement utilisées si l'entrée de catalogue ne correspond pas à une personne.
+Comme cela a été dit auparavant, le nom attribué à ces clés n'est pas systématiquement indicateur des valeurs qui y sont associées: si l'entrée de catalogue correspond à une personne, alors les clés correspondent aux informations qu'elles contiennent. Si l'entrée de catalogue ne correspond pas à une personne, ces clés seront également utilisées. Ce qui est important, c'est la hiérarchie d'importance entre les différentes clés: \texttt{lname} est la clé centrale et contient presque toujours des informations, \texttt{fname} contient des données secondaires, \texttt{date} contient des dates. Les autres clés sont rarement utilisées si l'entrée de catalogue ne correspond pas à une personne.
 
 \begin{code}
 	\begin{minted}{xml}
@@ -734,8 +740,11 @@ Comme cela a été dit auparavant, le nom attribué à ces clés n'est pas syst�
 \end{code}
 
 \subsubsection{Présentation de l'algorithme d'extraction d'informations}
+L'algorithme détaillé ci dessous est présenté sous forme graphique dans las figures \ref{fig:extractmain} et \ref{fig:extractparenthesis} (qui contient une sous-partie de l'algorithme pour plus de lisibilité). Cette étape peut être séparée en deux parties différentes: l'extraction d'informations nominatives du \tname{} et la récupération de données biographiques du \ttrait{}.
 
-\widepage{}
+L'extraction d'informations du \tname{} est la plus complexe. La difficulté tient au fait que cette balise peut contenir des informations structurées de façon très différente, ce qui demande de détecter des motifs à différents degrés et à différentes étapes. Dans un premier temps, les prénoms sont extraits. Ils sont identifiés à l'aide de plusieurs \glspl{expression régulière} qui permettent d'identifier des prénoms complets et abrégés, qu'ils soient composés ou non, en prenant en compte les différents types d'abréviations possibles (un prénom composé peut être entièrement abrégé ou seulement un prénoms peut être abrégé) et les différentes typographies (séparer les prénoms avec des traits d'union ou non, par exemple). Dans le cas où un prénom serait abrégé, il est si possible reconstruit: des initiales sont remplacées par un nom complet. Cela permet d'augmenter le taux de bons identifiants \wkd{}, mais vient avec plusieurs difficultés techniques, comme nous le verrons. Une fois ce nom extrait, le type d'information contenue dans le \tname{} doit être identifié: en fonction du type d'information (géographique, historique, nominative...), différents traitements sont mis en place. Cette identification se fait par détection de motifs augmentée de listes contenant du vocabulaire spécifique et de \glspl{table de conversion} et par un processus éliminatoire. Pour commencer, le script identifie si le \tname{} correspond à \enquote{Le même} ou \enquote{La même}. Dans ce cas, l'entrée est la même que la précédente et le dictionnaire produit pour la précédente entrée est réutilisé. Ensuite, il détecte et élimine les entrées qui ne contiennent pas d'informations spécifiques (\enquote{Documents divers}); si c'est le cas, il n'extrait pas d'informations du \tname{}. Les listes et les tables utilisées à cette étape contiennent des informations géographiques (nom d'anciennes provinces françaises\footnote{\ref{appendix:convprov}}, de départements du \scl{XIX}\footnote{\ref{appendix:convdpt}}, d'anciennes colonies\footnote{\ref{appendix:convcolonie}} et de pays\footcite{\ref{appendix:convpays}}) et historiques (contenant des évènements importants\footnote{\ref{appendix:convevt}}). Si une information géographique est repérée, alors des informations normalisées grâce à des tables de conversions sont ajoutées au dictionnaire; sinon, le script cherche à identifier des évènements historiques et, de même, ajoute leur équivalent normalisé au dictionnaire. Par processus d'élimination, si aucune de ces informations n'a été détectée, alors le contenu du \tname{} est le nom d'une personne.
+
+\widepage
 \begin{figure}[!p]
 	\centering
 	\tikz[node distance=1cm, scale=0.70, transform shape]{
@@ -1131,4 +1140,412 @@ Les représentations graphiques ne font pas que montrer des phénomènes. Leur r
 	\caption Occurrences des différentes catégories auxquelles appartiennent les entités \wkd{} liées avec les entrées de catalogues
 	\label{appendix:wikidata_instances}
 \end{figure}
+
+\chapter{Code source et données encodées}
+\begin{code}
+	\begin{minted}{python}
+functions = {
+	"général": "general",
+	"maréchal": "marshal",
+	"lieutenant": "military",
+	"officier": "military",
+	"colonel": "military",
+	"lieutenant-colonel": "military",
+	"commandant": "military",
+	"capitaine": "military",  # "less important" military positions
+	"roi": "king",
+	"empereur": "emperor",
+	"president": "president",
+	"homme politique": "politician",
+	"président de l'assemblée": "politician",
+	"orateur": "politician",
+	"député": "politician",
+	"secrétaire d'état": "politician",
+	"sénateur": "politician",
+	"écrivain": "writer",
+	"auteur": "writer",
+	"romancier": "writer",
+	"acteur": "actor",
+	"actrice": "actress",
+	"cantatrice": "singer",
+	"chanteur": "singer",
+	"chanteuse": "singer",
+	"peintre": "painter",
+	"sculpteur": "sculptor",
+	"statutaire": "sculptor",
+	"compositeur": "composer",
+	"musicien": "musician",
+	"musicienne": "musician",
+	"tragédien": "actor",
+	"chansonnier": "chansonnier",
+	"achitecte": "architect",
+	"journaliste": "journalist",
+	"inventeur": "inventor",
+	"chimiste": "chemist",
+	"connétable": "constable",
+	"archevêque": "archbishop",
+	"évêque": "bishop",
+	"docteur": "physicist",
+	"médecin": "physicist"
+}		
+	\end{minted}
+	\label{appendix:convfunction}
+	\caption{Table de conversion associant un métier à son équivalent normalisé}
+\end{code}
+	
+	
+\begin{code}
+	\begin{minted}{python}
+dpts = [
+	"ain",
+	"aisne",
+	"allier",
+	"basses-alpes",
+	"hautes-alpes",
+	"alpes-maritimes",
+	"annepins",
+	"provence",
+	"ardèche",
+	"ardennes",
+	"arriège",
+	"arno",
+	"aube",
+	"aude",
+	"aveyron",
+	"bouches-de-l'elbe",
+	"bouches-de-l'escaut",
+	"bouches-de-l'yssel",
+	"bpuches-de-la-meuse",
+	"bouches-du-rhin",
+	"bouches-du-rhône",
+	"bouches-du-weser",
+	"calvados",
+	"cantal",
+	"charente",
+	"charente-inférieure",
+	"cher",
+	"corrèze",
+	"corse",
+	"côte-d'or",
+	"côtes-du-nord",
+	"creuse",
+	"deux-nèthes",
+	"deux-sèvres",
+	"doire",
+	"dordogne",
+	"doubs",
+	"drôme",
+	"dyle",
+	"ems-occidental",
+	"ems-oriental",
+	"ems-supérieur",
+	"escaut",
+	"eure",
+	"eure-et-loir",
+	"finistère",
+	"forêts",
+	"gard",
+	"haute-garonne",
+	"gers",
+	"gironde",
+	"hérault",
+	"ille-et-villaine",
+	"indre",
+	"indre-et-loire",
+	"isère",
+	"jemappes",
+	"jura",
+	"landes",
+	"léman",
+	"loire",
+	"loir-et-cher",
+	"haute-loire",
+	"loire-inférieure",
+	"loiret",
+	"lot",
+	"lot-et-garonne",
+	"lozère",
+	"lys",
+	"maine-et-loire",
+	"manche",
+	"marengo",
+	"marne",
+	"haute-marne",
+	"méditerrannée",
+	"mayenne",
+	"meurthe",
+	"meuse",
+	"meuse-inférieure",
+	"mont-blanc",
+	"mont-tonnerre",
+	"montenotte",
+	"morbihan",
+	"meuse",
+	"moselle",
+	"nièvre",
+	"nord",
+	"oise",
+	"ombrone",
+	"orne",
+	"ourte",
+	"paris",
+	"pas-de-calais",
+	"pô",
+	"puy-de-dôme",
+	"hautes-pyrénées",
+	"basses-pyrénées",
+	"pyrénées-orientales",
+	"haut-rhin",
+	"bas-rhin",
+	"rhin-et-moselle",
+	"rhône",
+	"rhône-et-loire",
+	"roer",
+	"rome",
+	"haute-saône",
+	"saône-et-loire",
+	"sambre-et-meuse",
+	"sarre",
+	"sarthe",
+	"seine",
+	"seine-et-marne",
+	"seine-et-oise",
+	"seine-inférieure",
+	"sézia",
+	"simplon",
+	"deux-sèvres",
+	"somme",
+	"stura",
+	"tarn",
+	"tarn-et-garonne",
+	"taro",
+	"trasimène",
+	"var",
+	"vaucluse",
+	"vendée",
+	"vienne",
+	"haute-vienne",
+	"vosges",
+	"yonne",
+	"yssel-supérieur",
+	"zuyderzée"
+]		
+	\end{minted}
+	\label{appendix:convdpt}
+	\caption{Liste de départements du XIXe~s. pour détecter des informations géographiques}
+\end{code}
+
+\begin{code}
+	\begin{minted}{python}
+countries = {
+	"états-unis d'amérique": "united states of america",
+	"etats-unis d'amérique": "united states of america",
+	"états unis d'amérique": "united states of america",
+	"etats unis d'amerique": "united states of america",
+	"états-unis": "united states of america",
+	"etats-unis": "united states of america",
+	"etats unis": "united states of america",
+	"états unis": "united states of america",
+	"italie": "italy",
+	"grèce": "greece",
+	"canada": "canada",
+	"chine": "china",
+	"haïti": "haiti",
+	"tobago": "tobago",
+	"brésil": "brasil",
+	"burkina-faso": "burkina-faso",
+	"cameroun": "cameroun",
+	"tchad": "tchad",
+	"congo": "congo",
+	"gabon": "gabon",
+	"guinée": "guinea",
+	"côte d'ivoire": "ivory coast",
+	"mali": "mali",
+	"mauritanie": "mauritania",
+	"niger": "niger",
+	"sénégal": "senegal",
+	"madagascar": "madagascar",
+	"seychelles": "seychelles",
+	"tanzanie": "tanzania",
+	"zanzibar": "zanzibar",
+	"liban": "lebanon",
+	"syrie": "syria",
+	"inde": "india",
+	"laos": "laos",
+	"viet-nâm": "vietnam"
+}	
+	\end{minted}
+	\label{appendix:convpays}
+	\caption{Table de conversion pour les pays}
+\end{code}
+
+\begin{code}
+	\begin{minted}{python}
+colonies = [
+	"québec",
+	"ontario",
+	"saint-pierre-et-miquelon",
+	"mississippi",
+	"missouri",
+	"louisiane",
+	"anguilla",
+	"antigua",
+	"dominique",
+	"saint-domingue",
+	"guadeloupe",
+	"monsterrat",
+	"saint-martin",
+	"saint-barthélémy",
+	"sainte-lucy",
+	"saint-vincent-et-les-grenadines",
+	"saint-eustache",
+	"saint-christophe",
+	"martinique"
+	"guyane française",
+	"guyane",
+	"maroc",  # unfortunately the morocco referred to in XIXth century france is a french protectorate
+	"algérie",  # same
+	"algérie française",  # same
+	"tunisie",  # same
+	"fezzan",
+	"dahomey",
+	"haute-volta",
+	"oubangui-chari",
+	"congo français",
+	"moyen-congo",
+	"guinée française",
+	"soudan français",
+	"gorée",
+	"tigi",
+	"djibouti",
+	"cheikh saïd",
+	"comores",
+	"fort-dauphin",
+	"îles maurice",
+	"mayotte",
+	"la réunion",
+	"îles éparses",
+	"île amsterdam",
+	"île saint-paul",
+	"archipel crozet",
+	"îles kerguelen",
+	"castellorizo",
+	"grand-liban",
+	"sandjak d'alexandrette",
+	"indes françaises",
+	"pondichéry",
+	"karikal",
+	"yanaon",
+	"mahé",
+	"chanderngor",
+	"tonkin",
+	"annam",
+	"cochinchine",
+	"guangzhou wan",
+	"shanghai",
+	"guangzhou",
+	"tianjin",
+	"hankou",
+	"clipperton",
+	"nouvelle-calédonie",
+	"polynésie française",
+	"vanuatu",
+	"nouvelles-hébrides",
+"wallis et futuna"
+]
+	\end{minted}
+	\label{appendix:convcolonie}
+	\caption{Liste d'anciennes colonies françaises pour la détection de motifs}
+\end{code}
+
+\begin{code}
+	\begin{minted}{python}
+provinces = [
+	"armagnac",
+	"île-de-france",
+	"berry",
+	"orléanais",
+	"normandie",
+	"languedoc",
+	"lyonnais",
+	"dauphiné",
+	"champagne",
+	"aunis",
+	"saintonge",
+	"poitou",
+	"guyenne et gascogne",
+	"bourgogne",
+	"picardie",
+	"anjou",
+	"provence",
+	"angoumois",
+	"bourbonnais",
+	"marche",
+	"bretagne",
+	"maine",
+	"touraine",
+	"limousin",
+	"comté de foix",
+	"auvergne",
+	"béarn",
+	"alsace",
+	"artois",
+	"roussillon",
+	"flandre française et hainaut français",
+	"franche-comté",
+	"lorraine et trois-évêchés",
+	"corse",
+	"nivernais",
+]
+	\end{minted}
+	\label{appendix:convprov}
+	\caption{Liste d'anciennes provinces françaises pour la détection de motifs}
+\end{code}
+
+\begin{code}
+\begin{minted}{python}
+events = {
+	"défense nationale": "government of national defense",
+	"defense nationale": "government of national defense",
+	"révolution française": "french revolution",
+	"revolution francaise": "french revolution",
+	"guerre de trente ans": "thirty years' war 1618 1648",
+	"guerre de cent ans": "hundred years' war 1337 1453",
+	"guerre de sept ans": "seven years war 1756 1763",
+	"guerre": "war",
+	"insurrection": "war",
+	"siège de mayence": "siege of mainz",
+	"siège": "siege",
+	"commune": "commune",
+	"défense": "battle",
+	"révolution": "revolution"
+}
+\end{minted}
+	\label{appendix:convevt}
+	\caption{Table de conversion pour les évènements historiques}
+\end{code}
+
+\begin{code}
+\begin{minted}{python}
+\end{minted}
+\label{}
+\caption{Liste de colonies pour la détection de motifs}
+\end{code}
+
+\begin{code}
+\begin{minted}{python}
+\end{minted}
+\label{}
+\caption{Liste de colonies pour la détection de motifs}
+\end{code}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 \end{document}
