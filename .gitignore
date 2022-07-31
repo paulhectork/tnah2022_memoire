@@ -1,1 +1,24 @@
 _minted-paulkervegan_memoire
+
+## aux files
+**/*.acn
+**/*.acr
+**/*.alg
+**/*.aux
+**/*.bbl
+**/*.bcf
+**/*.blg
+**/*.glg
+**/*.ist
+**/*.lof
+**/*.log
+**/*.lot
+**/*.fls
+**/*.out
+**/*.toc
+**/*.run.xml
+**/*.fmt
+**/*.fot
+**/*.cb
+**/*.cb2
+**/.*.lb
