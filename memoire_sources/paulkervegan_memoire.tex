@@ -12,12 +12,16 @@
 \usepackage{lmodern}
 \usepackage{graphicx}
 
-% code, graphiques et couleurs
+% code
+\usepackage{enumitem}
 \usepackage[newfloat]{minted}
 \newenvironment{code}{\captionsetup{type=listing}}{}
 \SetupFloatingEnvironment{listing}{name=Code source}
 \usemintedstyle{manni}
 \setminted{linenos, breaklines, tabsize=4, bgcolor=peachpuff}
+\usepackage{minted}
+
+% graphiques et couleurs
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric}
 
@@ -441,11 +445,11 @@ En bref, la question est: comment faire la différence entre une lettre de La Ro
 
 Pour analyser efficacement la variable \enquote{prix}, il faut pourtant pouvoir, dans une certaine mesure, comprendre les informations implicites et qualitatives contenues dans les catalogues. Le parti pris a donc été de construire le socle de connaissance qui manque à une machine, en s'alignant avec \wkd{} et en s'en servant pour enrichir nos données. Le choix a été fait de ne s'aligner avec \wkd{} que pour certaines parties des entrées de catalogue. Pour rappel, voici leur structure (\ref{code:tei_item}):
 
-\begin{code}
+\begin{listing}
 	\inputminted[linenos, breaklines, tabsize=4]{xml}{code/tei_item.xml}
 	\caption{Représentation \xmltei{} d'une entrée de catalogue}
 	\label{code:tei_item}
-\end{code}
+\end{listing}
 
 
 Les entrées de catalogue contiennent beaucoup d'informations qualitatives, qui pourraient avoir une influence sur le prix du manuscrit: ici par exemple, la description du contenu de la lettre dans le \tnote{}; il est également souvent fait mention du ou de la destinataire. Cependant, l'alignement avec \wkd{} n'a pas été fait avec l'intégralité des entrées. C'est seulement le contenu du \tname{} qui a été aligné avec \wkd{}, à l'aide des informations contenues dans le \ttrait{}. Le \tdesc{} a déjà fait l'objet d'un grand travail de normalisation et d'extraction d'informations; un alignement avec des sources externes n'aurait donc pas une très grande plus-value. L'élément \tnote{} contient souvent des informations intéressantes, puisque c'est là qu'est décrit le contenu d'un manuscrit. Cependant, cet élément n'est pas toujours présent; son contenu est souvent écrit en langage naturel, non structuré, et contient des informations trop variées pour développer un traitement uniforme. Il est donc difficile de tirer parti de cet élément. Le \tname{} et son \ttrait{} sont les éléments les plus régulièrement présents; les informations qu'ils contiennent sont toujours les mêmes (nom d'une personne ou thème d'un manuscrit dans le \tname{}, description du \tname{} dans le \ttrait{}); enfin, ces deux éléments n'ont pas du tout été transformés dans le reste de la chaîne de traitement. Ils portent donc des informations qualitatives centrales pour produire des données exploitables dans une étude économétrique.
@@ -543,7 +547,7 @@ Dans la réalisation de cet algorithme, la principale difficulté porte sur la r
 \subsubsection{Le problème de la traduction des noms}
 Il existe bien sûr des cas simples, comme l'exemple \ref{code:name1}: en extrayant le contenu du \tname et en traduisant le \enquote{roi} issu du \ttrait{}, la chaîne de caractère obtenue est \enquote{Henri IV king}. En recherchant cette chaîne de caractère sur \wkd{}, \href{https://www.wikidata.org/w/index.php?search=Henri+IV+king\&title=Special:Search\&profile=advanced\&fulltext=1\&ns0=1\&ns120=1}{le premier résultat obtenu est correct}. Cependant, de nombreux cas sont plus complexes, surtout lorsque l'auteur.ice du manuscrit est moins célèbre. L'exemple \ref{code:name2} est éclairant: dans le catalogue, la personne est nomée \enquote{Bruno Daru}; sur \wkd{}, le nom de la personne est \enquote{Pierre Daru}, et son nom complet {Pierre Antoine Noël Bruno Daru}. Si la recherche en plein texte est faite avec les mêmes paramètres que pour l'exemple précédent (nom de la personne et titre de noblesse), \href{https://www.wikidata.org/w/index.php?search=bruno+daru+count&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{le premier résultat obtenu} n'est pas le bon: c'est un renvoi à un article de \textit{l'Encyclopedia Britannica} datant de 1911. C'est en cherchant seulement le nom est le prénom que \wkd{} retourne \href{https://www.wikidata.org/w/index.php?search=bruno+daru&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{un résultat pertinent}. Il est intéressant de retenir deux choses de cet exemple: dans les catalogues, le prénom d'une personne correspond en fait souvent à son deuxième ou troisième prénom; ensuite, le titre de noblesse est un critère plus fréquemment mentionné dans les catalogues que dans \wkd{}. Cela s'explique assez aisément: le \scl{XIX} connaît une alternance de régimes politiques (royauté, empire, république) où la noblesse n'a pas encore perdu son pouvoir. La probabilité qu'un titre de noblesse soit mentionné sur \wkd{} diminue lorsqu'un titre est peu important; dans les catalogues, cependant, même les titres les moins importants sont régulièrement mentionnés. Par conséquent, seuls les titres les plus importants seront extraits pour lancer une recherche sur l'\api{} de \wkd{}.
 
-\begin{code}
+\begin{listing}
 	\begin{minted}{xml}
 <item n="134" xml:id="CAT_000233_e134">
 	<!-- ... -->
@@ -556,9 +560,9 @@ Il existe bien sûr des cas simples, comme l'exemple \ref{code:name1}: en extray
 	\end{minted}
 	\caption{Un cas simple: Henri IV roi de France}
 	\label{code:name1}
-\end{code}
+\end{listing}
 
-\begin{code}
+\begin{listing}
 	\begin{minted}{xml}
 <item n="98" xml:id="CAT_000082_e98">
 	<!-- ... -->
@@ -571,7 +575,7 @@ Il existe bien sûr des cas simples, comme l'exemple \ref{code:name1}: en extray
 	\end{minted}
 	\caption{Un cas plus complexe: Pierre Antoine Noël Bruno Daru}
 	\label{code:name2}
-\end{code}
+\end{listing}
 
 Dans le cas de noms de personnes étrangères, la situation peut être plus complexe encore. L'exemple \ref{code:name3} combine différentes difficultés.
 \begin{itemize}
@@ -581,7 +585,7 @@ Dans le cas de noms de personnes étrangères, la situation peut être plus comp
 
 Notre approche s'appuyant sur la structure du texte, le deuxième point peut être réglé: le nom d'usage est écrit au début, et le nom de naissance entre parenthèses (c'est également le cas des noms de personnes nobles, par exemple). Il est donc possible de choisir l'un ou l'autre nom. Le premier point est plus problématique: si la traduction du nom serait envisageable en théorie, celle-ci est difficilement compatible avec une approche basée sur la détection de motifs dans le texte: le prénom est repérable comme étant un motif (trois noms séparés par des tirets); cependant, il est impossible de le traduire automatiquement (ce qui demanderait de connaître la langue dans laquelle un prénom doit être traduit). C'est ici que les informations contenues dans le \ttrait{} prennent leur importance: lorsqu'il y a des défaillances dans les informations nominatives, des données biographiques permettent de diminuer le risque d'erreurs. Dans cet exemple, recherche \enquote{Albert-Venceslas-Eusèbe Waldstein} ne \href{https://www.wikidata.org/w/index.php?search=Albert-Venceslas-Eus%C3%A8be+de+Waldstein&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{retourne aucun résultat}, de même que rechercher \href{https://www.wikidata.org/w/index.php?search=Albert-Venceslas-Eus%C3%A8be+Wallenstein&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{Albert-Venceslas-Eusèbe Wallenstein}. Cependant, le bon résultat est obtenu en recherchant \href{https://www.wikidata.org/w/index.php?search=Wallenstein+1634&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{\enquote{Wallenstein 1634}}. Une difficulté supplémentaire vient avec ce type de cas: différents paramètres de recherche (nom, prénom...) ont un impact différent dans l'obtention du bon résultat en fonction des personnes sur qui la requête est faite. Dans ce cas, rechercher le nom d'usage et la date de naissance retourne un résultat valide, ce qui n'est pas toujours le cas. Pour contourner ce problème, trois solutions ont été mises en place: d'abord, ce types de requêtes a été fait \enquote{à la main}, de façon non-automatique, pour de nombreuses entrées différentes afin de déterminer la meilleure combinaison de caractères; ensuite, des tests qui permettent de mesurer l'influence de chaque paramètre de recherche dans l'obtention du résultat; enfin, l'algorithme final lance successivement différentes requêtes avec différents paramètres afin de maximiser la probabilité d'obtenir un résultat valide. Nous reviendrons plus en détail sur les deux derniers points.
 
-\begin{code}
+\begin{listing}
 	\begin{minted}{xml}
 <item n="5518" xml:id="CAT_000401_e5518">
 	<!-- ... -->
@@ -594,12 +598,12 @@ Notre approche s'appuyant sur la structure du texte, le deuxième point peut êt
 	\end{minted}
 	\caption{Le problème des noms de personnes étrangères}
 	\label{code:name3}
-\end{code}
+\end{listing}
 
 \subsubsection{L'extraction d'informations biographiques: une autre difficulté}
 Cependant, le problème ne s'arrête pas qu'aux noms. Dans un exemple; précédent, le titre de noblesse influençait l'obtention d'un résultat valide. De nombreuses autres informations biographiques pourraient, au premier abord, permettre d'obtenir le bon résultat. C'est souvent le cas, puisque extraire le métier ou la fonction d'une personne permet de supprimer les faux positifs retournés par l'\api{}. C'est par exemple le cas dans l'exemple \ref{code:bio1}. En cherchant uniquement le nom et le prénom (\enquote{Hans Bulow}), le premier résultat retourné renvoie \href{https://www.wikidata.org/w/index.php?search=hans+bulow&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{à un journaliste suédois}. Extraire le mot \enquote{pianiste} \ttrait{} et le traduit en anglais permet d'obtenir \href{https://www.wikidata.org/w/index.php?search=hans+bulow+pianist&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{le bon résultat}.
 
-\begin{code}
+\begin{listing}
 	\begin{minted}{xml}
 <item n="136" xml:id="CAT_000189_e136">
 	<!-- .. -->
@@ -609,15 +613,15 @@ Cependant, le problème ne s'arrête pas qu'aux noms. Dans un exemple; précéde
 	</trait>
 </item>
 	\end{minted}
-	\label{code:bio1}
 	\caption{Un exemple où l'extraction du métier permet l'obtention du bon résultat}
-\end{code}
+	\label{code:bio1}
+\end{listing}
 
 L'extraction d'informations biographiques et leur utilisation dans des requêtes est donc pertinent. Cependant, extraire trop d'informations conduit à lancer des requêtes qui ne renvoient aucun résultat. Dans les exemples \ref{code:bio2} et \ref{code:bio3}, extraire et traduire des fonctions conduit à lancer les requêtes \href{https://www.wikidata.org/w/index.php?search=John+Okey+colonel&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{\enquote{John Okey colonel}} et \href{https://www.wikidata.org/w/index.php?search=Jean+Bouhier+president&title=Special:Search&profile=advanced&fulltext=1&ns0=1&ns120=1}{\enquote{Jean Bouhier president}} qui ne retournent aucun résultat, ou des résultats qui ne sont pas valides. Cependant, dans les deux cas, si une requête est lancée sans la fonction, un résultat correct est obtenu. Les raisons pour lesquelles des résultats erronés sont retournés ne sont cependant pas les mêmes, et il est intéressant de mieux observer les requêtes lancées et les résultats obtenus. Dans le premier cas, le terme mis en avant dans le \ttrait{} (\enquote{colonel}) n'est pas celui avec lequel la personne est décrite sur \wkd{} (où John Okey est décrit comme étant un homme politique). Cela met en avant un problème relatif au changement de regard sur des personnalités: dans un contexte, la personne est décrite comme une figure militaire, dans l'autre comme une figure politique. Le deuxième cas est plus technique. Il y a en fait une erreur dans la requête qui ne retourne pas de résultat (\enquote{Jean Bouhier president}): un.e président.e de parlement n'est en général pas décrite comme \enquote{président}. Cependant, en extrayant des données uniquement par détection de motifs, il est possible de repérer et traduire un terme générique comme \enquote{président}. Extraire le complément \enquote{Parlement de Dijon} du \ttrait{} n'est cependant pas possible (cela impliquerait d'étudier la grammaire de la phrase, pour mettre en avant la relation entre \enquote{président} et \enquote{Parlement de Dijon}). Au vu de la taille et de la variété du jeu de données, il est impossible de traiter au cas par cas des entrées, ou préciser la détection de motif avec suffisamment de précision pour pouvoir résoudre ce genre de difficultés. 
 
 De situations comme les exemples \ref{code:bio2} et \ref{code:bio3}, il faut donc retenir que l'extraction d'informations vient nécessairement avec un risque d'erreur. Le parti pris a donc été de ne pas repérer les métiers et autres termes très spécifiques, comme les grades militaires et les titres de noblesse peu élevés: ils ne retournent pas de résultats sur le moteur de recherche. Ensuite, plus des requêtes sont précises, plus elles risquent de retourner du silence (c'est-à-dire, de ne pas donner de réponse); cependant, si un résultat est obtenu, il est plus probable que ce résultat soit correct. Une fois l'extraction d'informations faite, l'algorithme d'extraction d'identifiants sur l'\api{} \wkd{} a donc été conçu en suivant un principe soustractif: les premières recherches sont faites avec un maximum de paramètres; si aucun résultat n'est obtenu, des paramètres sont enlevés pour que l'\api{} retourne un plus grand nombre de résultats. Enfin, ces deux exemples montrent qu'il n'est pas possible d'extraire et de traduire des informations sans prendre en compte ce qui sera pertinent pour le moteur de recherche de \wkd{}. Il ne s'agit donc pas seulement d'extraire des informations, mais aussi de s'adapter avec ce moteur de recherche pour augmenter la probabilité d'obtenir un résultat valide.
 
-\begin{code}
+\begin{listing}
 	\begin{minted}{xml}
 <item n="152" xml:id="CAT_000189_e152">
 	<!-- ... -->
@@ -630,9 +634,9 @@ De situations comme les exemples \ref{code:bio2} et \ref{code:bio3}, il faut don
 	\end{minted}
 	\caption{Quand l'extraction d'un métier conduit à des requêtes trop spécifiques}
 	\label{code:bio2}
-\end{code}
+\end{listing}
 
-\begin{code}
+\begin{listing}
 	\begin{minted}{xml}
 <item n="5430" xml:id="CAT_000401_e5430">
 	<!-- ... -->
@@ -645,7 +649,7 @@ De situations comme les exemples \ref{code:bio2} et \ref{code:bio3}, il faut don
 	\end{minted}
 	\caption{Le cas des métiers dont l'extraction est problématique}
 	\label{code:bio3}
-\end{code}
+\end{listing}
 
 % Il faudra donc mettre en place un processus de traduction, depuis le langage naturel en français du \scl{XIX} en anglais adapté aux termes utilisés dans \wkd{}.
 
@@ -656,7 +660,7 @@ Comme cela a été dit, l'alignement avec \wkd{} passe par l'utilisation de l'\a
 
 Pour faire face à la \enquote{rigidité} relative du moteur de recherche de \wkd{}, il est donc nécéssaire de préparer ses données au moment de leur extraction. En prenant le même exemple (\ref{code:search1}), un résultat correct peut être obtenu en remplaçant \enquote{conventionnel} par \enquote{politician}\footnote{\enquote{Personnalité politique}}, pour rechercher sur \wkd{} \href{https://www.wikidata.org/w/index.php?search=lasource+politician&search=lasource+politician&title=Special%3ASearch&go=Go&ns0=1&ns120=1}{\enquote{Lasource politician}}. Ici, la traduction de \enquote{conventionnel} en \enquote{politician} est d'autant plus intéressante que la date de naissance dans le catalogue (1762) ne correspond pas à celle indiquée sur \wkd{} (1763). Dans un cas comme celui-ci, où certaines données sont incorrectes, il est important d'extraire un maximum d'informations pour que, si certaines requêtes ne rapportent pas de résultats, pouvoir en faire d'autres avec différents paramètres.
 
-\begin{code}
+\begin{listing}
 	\begin{minted}{xml}
 <item n="140" xml:id="CAT_000197_e140">
 	<!-- ... -->
@@ -667,9 +671,9 @@ Pour faire face à la \enquote{rigidité} relative du moteur de recherche de \wk
 	<!-- ... -->
 </item>	
 	\end{minted}
-	\label{code:search1}
 	\caption{Le problème de l'approximation et de la traduction: Lasource, conventionnel}
-\end{code}
+	\label{code:search1}
+\end{listing}
 
 En conclusion, il faut retenir que le moteur de recherche de \wkd{} n'admet pas d'erreurs, ni de requêtes partiellement erronées (dans l'exemple \ref{code:search1}, où la date de naissance soit correcte, mais pas la date de mort); il ne prend pas non plus en compte la synonymie, ce qui veut dire qu'il n'améliore pas la requête lancée par un.e utilisateur.ice... Cela signifie que les termes utilisés dans une requête doivent être adaptés à ceux que \wkd{} utilise. Les termes spécifiques utilisés dans les catalogues (\enquote{conventionnel}), mais aussi de nombreux titres militaires et de noblesse peu élevés (\enquote{capitaine}, \enquote{marquis}) sont relativement rarement présents sur \wkd{}. Lorsque les requêtes sont lancées, de tels termes sont donc abandonnés et parfois remplacés par des termes plus génériques: par exemple, \enquote{capitaine} est remplacé par \enquote{military}, traduction anglaise de \enquote{militaire}. De même, des termes principalement en usage dans la langue française, comme \enquote{conventionnel} sont moins efficaces pour lancer des recherches.
 
@@ -678,24 +682,25 @@ L'alignement avec \wkd{} et l'extraction d'entités n'est donc pas une opératio
 
 De plus, la technique utilisée dans l'extraction de données, reposant sur la détection de motifs à l'aide de \glspl{expression régulière} et de \glspl{table de conversion}, est une technique qui vient avec un certain nombre d'incertitudes. Avec ce genre de techniques, il est impossible de \enquote{comprendre} ce qu'un élément signifie. Dans l'exemple \ref{code:predic}, formellement, rien ne sépare le nom propre de la duchesse (\enquote{Séguier}) du nom de son duché (\enquote{Verneuil}). En s'appuyant sur une connaissance de la structure répétitive des entrées, il est uniquement possible de supposer que le nom entre parenthèses est un nom propre, tandis que le nom hors des parenthèses correspond au nom du duché. En bref, les méthodes de détection de motifs utilisées, peuvent uniquement inférer le sens d'un mot par rapport à sa position dans une phrase. Si cette technique implique une certaine incertitude, elle est cependant particulièrement adaptée à un corpus semi-structuré, comme c'est le cas des catalogues de vente de manuscrits, et à l'opération d'alignement avec \wkd{}. Comme cela est expliqué plus bas, au fond, il n'est pas tellement important de distinguer le sens des différentes informations: ce qui a du sens, c'est que l'extraction et la structuration des informations permet de construire des chaînes de caractères à rechercher sur \wkd{}. Identifier la fonction d'un mot n'est donc ici qu'un moyen -- contrairement à de l'analyse lexicale, où la fonction des mots dans une phrase est signifiante --. En effet, repérer le rôle que tiennent les termes extraits (métier, prénom...) permet de mieux construire la chaîne de caractère recherchée sur \wkd{}, en pouvant filtrer certaines informations (retirer les dates de vie et de mort, par exemple).
 
-\begin{code}
+\begin{listing}
 	\begin{minted}{xml}
 <name type="author">Verneuil (Charlotte Séguier duchesse de)</name>
 	\end{minted}
-	\label{code:predic}
 	\caption{Peut-on identifier les différents éléments d'une phrase par détection de motifs?}
-\end{code}
+	\label{code:predic}
+\end{listing}
 
 Étant donnée cette quantité d'incertitudes, l'approche suivie dans l'alignement avec \wkd{} peut être qualifiée de \enquote{prédictive}. Par ce terme, il faut comprendre que il n'y a pas, de certitude totale dans le processus d'extraction et de traduction des données. Il n'est pas possible de récupérer avec une certitude totale le bon identifiant. L'objectif cet algorithme n'est donc pas de trouver la \enquote{bonne} réponse. Il est de construire une chaîne de caractère dont on prédit qu'elle apportera un résultat pertinent. De la même manière, la phase de préparation des données est un processus qui sélectionne et normalise certaines informations dont on considère -- après un long processus de test et d'essais -- qu'elles seront pertinentes dans l'obtention des bons résultats. Enfin, le premier rôle des tests est de quantifier les prédictions. Ils répondent à la question: étant donné les résultats obtenus lors des tests, quelle est la probabilité que la prochaine chaîne de caractères recherchée retourne un résultat pertinent? Cette approche prédictive implique nécessairement un degré d'incertitude, et donc le développement d'algorithmes flexibles qui cherchent à minimiser le bruit. 
 
 Être conscient de la nature prédictive de ce processus et quantifier la qualité des algorithmes à l'aide de tests permet cependant de prendre de meilleures décisions techniques. La lecture distante et la détection de motifs supposent d'avancer \enquote{à l'aveugle}, en s'appuyant sur sa connaissance de la structure du texte pour extraire les bonnes informations. Étant donné qu'il est impossible d'être totalement certain que les bonnes données ont été extraites, l'étape suivante -- le lancement des requêtes sur l'\api{} -- doit malléable et s'adapter aux données disponibles. C'est pourquoi le parti pris a été de concevoir un algorithme qui continue de lancer des requêtes en retirant des paramètres tant qu'un identifiant n'a pas été trouvé.
 
-\section{Préparer et structurer les données}
-Avant de chercher à récupérer un identifiant \wkd{} via l'\api{}, un algorithme se charge de traduire et de structurer les données: à partir d'un nom et de son éventuelle description, un dictionnaire qui contient les informations de manière structurée est construit. Cette étape était initalement censée être une simple extraction d'information: à partir du \tname{} et du \ttrait{}, un ensemble d'informations étaient mises bout à bout afin de former une chaîne de caractères à rechercher sur l'\api{}. Cette étape s'est complexifiée pour devenir un processus d'extraction, de traduction et de structuration. En construisant un \gls{dictionnaire} à partir de texte, il est possible de savoir précisément quelles données sont disponibles pour lancer des requêtes; il est alors possible de faire plusieurs requêtes sur l'\api{} avec différents paramètres, ce qui permet d'augmenter les probabilités d'obtenir un identifiant valide. 
+\section{Un algorithme de détection de motifs pour préparer et structurer les données}
+\sectionmark{Un algorithme de détection de motifs...}
+Avant de chercher à récupérer un identifiant \wkd{} via l'\api{}, un algorithme se charge de traduire et de structurer les données: à partir d'un nom et de son éventuelle description, un dictionnaire qui contient les informations de manière structurée est construit. Cette étape était initialement censée être une simple extraction d'information: à partir du \tname{} et du \ttrait{}, un ensemble d'informations étaient mises bout à bout afin de former une chaîne de caractères à rechercher sur l'\api{}. Le processus s'est complexifié pour intégrer l'extraction, la traduction et la structuration des données. En construisant un \gls{dictionnaire} à partir de texte, il est possible de savoir précisément quelles données sont disponibles pour lancer des requêtes; plusieurs requêtes peuvent alors être lancées sur l'\api{} avec différents paramètres, ce qui permet d'augmenter les probabilités d'obtenir un identifiant valide. 
 
 \subsection{Présentation générale}
 \subsubsection{Les formats d'entrée et de sortie}
-Le but de l'extraction de données permet de transformer cette représentation \tei{} (\ref{code:prepin}) -- représentée sous forme d'un \tsv{} pour faciliter la lecture des données -- au \gls{dictionnaire} visible en \ref{code:prepout}. Voici la signifiaction des différentes clés\footnote{Une clé de \gls{dictionnaire} est l'élément à gauche des \enquote{:}; c'est la clé qui permet d'accéder aux éléments signifiants contenus dans le dictionnaire.} du format de sortie:
+Le but de l'extraction de données permet de transformer la représentation \tei{}  visible en \ref{code:prepin} -- représentée sous forme d'un \tsv{} pour faciliter la lecture des données -- au \gls{dictionnaire} visible en \ref{code:prepout}. Voici la significtion des différentes clés\footnote{Une clé de \gls{dictionnaire} est l'élément à gauche des \enquote{:}; la clé permet d'accéder à la valeur, visible à droite du \enquote{:}, ce qui permet d'associer des valeurs entre elles, et donc de stocker des objets ou de remplacer une clé présente dans un texte par une valeur, par exemple.} du format de sortie:
 \begin{itemize}
 	\item \texttt{fname}: cette clé permet d'accéder au prénom d'une personne. Les données contenues dans cette clé viennent du \tname{}. \texttt{fname} est l'abréviation de \enquote{first name}.
 	\item \texttt{lanme}: cette clé permet d'accéder au nom de famille de quelqu'un. C'est cette information, extraite du \tname{}, qui est centrale aux requêtes. \texttt{lname} abréviation de \enquote{last name})
@@ -706,9 +711,9 @@ Le but de l'extraction de données permet de transformer cette représentation \
 	\item \texttt{rebuilt}: un booléen indiquant si un prénom a été reconstruit à partir d'initiales ou non.
 \end{itemize}
 
-Comme cela a été dit auparavant, le nom attribué à ces clés n'est pas systématiquement indicateur des valeurs qui y sont associées: si l'entrée de catalogue correspond à une personne, alors les clés correspondent aux informations qu'elles contiennent. Si l'entrée de catalogue ne correspond pas à une personne, ces clés seront également utilisées. Ce qui est important, c'est la hiérarchie d'importance entre les différentes clés: \texttt{lname} est la clé centrale et contient presque toujours des informations, \texttt{fname} contient des données secondaires, \texttt{date} contient des dates. Les autres clés sont rarement utilisées si l'entrée de catalogue ne correspond pas à une personne.
+Comme cela a été dit auparavant, le nom attribué à ces clés n'est pas systématiquement indicateur des valeurs qui y sont associées: si l'entrée de catalogue correspond à une personne, alors les clés correspondent aux informations qu'elles contiennent. Si l'entrée de catalogue ne correspond pas à une personne, ces clés seront également utilisées. Ce qui est important, c'est la hiérarchie d'importance entre les différentes clés: \texttt{lname} est la clé centrale et contient presque toujours des informations, \texttt{fname} des données secondaires et \texttt{date} des dates. Les autres clés sont rarement utilisées si l'entrée de catalogue ne correspond pas à une personne.
 
-\begin{code}
+\begin{listing}
 	\begin{minted}{xml}
 <item n="271" xml:id="CAT_000327_e271">
 	<!-- ... -->
@@ -721,9 +726,9 @@ Comme cela a été dit auparavant, le nom attribué à ces clés n'est pas syst�
 	\end{minted}
 	\caption{L'entrée \xmltei{} à partir de laquelle des données sont extraites}
 	\label{code:prepin}
-\end{code}
+\end{listing}
 
-\begin{code}
+\begin{listing}
 	\begin{minted}{python}
 {
 	"fname": "henri ", 
@@ -737,12 +742,16 @@ Comme cela a été dit auparavant, le nom attribué à ces clés n'est pas syst�
 	\end{minted}
 	\caption{La sortie \json{} correspondante}
 	\label{code:prepout}
-\end{code}
+\end{listing}
 
 \subsubsection{Présentation de l'algorithme d'extraction d'informations}
-L'algorithme détaillé ci dessous est présenté sous forme graphique dans las figures \ref{fig:extractmain} et \ref{fig:extractparenthesis} (qui contient une sous-partie de l'algorithme pour plus de lisibilité). Cette étape peut être séparée en deux parties différentes: l'extraction d'informations nominatives du \tname{} et la récupération de données biographiques du \ttrait{}.
+L'algorithme détaillé ci dessous est présenté sous forme graphique dans la figure \ref{fig:extractmain}. Cette étape peut être séparée en deux parties différentes: l'extraction d'informations nominatives du \tname{} et la récupération de données biographiques du \ttrait{}.
 
-L'extraction d'informations du \tname{} est la plus complexe. La difficulté tient au fait que cette balise peut contenir des informations structurées de façon très différente, ce qui demande de détecter des motifs à différents degrés et à différentes étapes. Dans un premier temps, les prénoms sont extraits. Ils sont identifiés à l'aide de plusieurs \glspl{expression régulière} qui permettent d'identifier des prénoms complets et abrégés, qu'ils soient composés ou non, en prenant en compte les différents types d'abréviations possibles (un prénom composé peut être entièrement abrégé ou seulement un prénoms peut être abrégé) et les différentes typographies (séparer les prénoms avec des traits d'union ou non, par exemple). Dans le cas où un prénom serait abrégé, il est si possible reconstruit: des initiales sont remplacées par un nom complet. Cela permet d'augmenter le taux de bons identifiants \wkd{}, mais vient avec plusieurs difficultés techniques, comme nous le verrons. Une fois ce nom extrait, le type d'information contenue dans le \tname{} doit être identifié: en fonction du type d'information (géographique, historique, nominative...), différents traitements sont mis en place. Cette identification se fait par détection de motifs augmentée de listes contenant du vocabulaire spécifique et de \glspl{table de conversion} et par un processus éliminatoire. Pour commencer, le script identifie si le \tname{} correspond à \enquote{Le même} ou \enquote{La même}. Dans ce cas, l'entrée est la même que la précédente et le dictionnaire produit pour la précédente entrée est réutilisé. Ensuite, il détecte et élimine les entrées qui ne contiennent pas d'informations spécifiques (\enquote{Documents divers}); si c'est le cas, il n'extrait pas d'informations du \tname{}. Les listes et les tables utilisées à cette étape contiennent des informations géographiques (nom d'anciennes provinces françaises\footnote{\ref{appendix:convprov}}, de départements du \scl{XIX}\footnote{\ref{appendix:convdpt}}, d'anciennes colonies\footnote{\ref{appendix:convcolonie}} et de pays\footcite{\ref{appendix:convpays}}) et historiques (contenant des évènements importants\footnote{\ref{appendix:convevt}}). Si une information géographique est repérée, alors des informations normalisées grâce à des tables de conversions sont ajoutées au dictionnaire; sinon, le script cherche à identifier des évènements historiques et, de même, ajoute leur équivalent normalisé au dictionnaire. Par processus d'élimination, si aucune de ces informations n'a été détectée, alors le contenu du \tname{} est le nom d'une personne.
+L'extraction d'informations du \tname{} est l'étape plus complexe. La difficulté tient au fait que cette balise peut contenir des informations variées et structurées de façon très différente. Cela demande d'identifier des motifs récurrents et de les repérer dans le texte à différents degrés et à différentes étapes. Dans un premier temps, les prénoms sont systématiquement extraits. Ils sont toujours détectés -- même si la balise ne contient le nom d'une personne: cette extraction permet justement d'identifier le type de données contenues dans le \tname{}. Les prénoms sont repérés à l'aide de plusieurs \glspl{expression régulière} qui permettent d'identifier des prénoms complets et abrégés, qu'ils soient composés ou non. Cette détection prend en compte les différents types d'abréviations possibles (un prénom composé peut être entièrement abrégé; à l'inverse, seulement un des prénoms peut être abrégé) et les différentes typographies (séparer les prénoms avec des traits d'union ou non, par exemple). Dans le cas où un prénom serait abrégé, il est si possible reconstruit: des initiales sont remplacées par un nom complet; ce processus est présenté plus en détail ci-dessous. Cela permet d'augmenter le taux de réussite dans l'alignement avec des identifiants \wkd{}, mais vient avec plusieurs difficultés techniques, comme nous le verrons. Une fois ce nom extrait, le type d'information contenue dans le \tname{} doit être identifié: en fonction du type d'information (géographique, historique, nominative...), différents traitements sont mis en place. Cette identification se fait par détection de motifs augmentée par l'usage de \glspl{table de conversion}\footnote{Pour un exemple de table de conversion, voir \ref{appendix:convfunction}} et de listes contenant du vocabulaire spécifique. Listes et tables étant classées thématiquement, il est possible, par un processus éliminatoire, d'identifier avec certitude le type d'information contenue dans le \tname{}. Le traitement du \tname{} dépend grandement de cette détection: si cette balise contient des éléments géographiques ou historiques, l'extraction d'informations repose en grande partie sur les tables de conversion. S'il s'agit en revanche d'un nom de personne, il est alors nécessaire d'identifier les différents types de données nominatives (prénom, nom de famille, nom de famille noble...) pour bien structurer les données. En effet, c'est de cette structure que dépend la bonne construction du \gls{dictionnaire}, et donc la constitution de requêtes adaptées à l'\api{}. Ce processus d'extraction des données s'appuie majoritairement sur une détection de motifs. Le motif déterminant est la présence ou non dans parenthèses dans le nom. Comme nous le verrons, si un nom contient des parenthèses, les informations sont bien plus structurées que s'il n'en contient pas. Les informations peuvent alors être extraites avec une bien plus grande granularité.
+
+Une fois les informations nominatives extraites du \tname{}, il reste à extraire les données biographiques pertinentes du \ttrait{}. Cette étape, plus simple que la précédente, vaut principalement pour les entrées où c'est l'auteur.ice d'un document qui est mentionné.e dans le \tname{}. Les seules informations extraites concernent les dates de vie et de mort des personnes, ainsi que son métier. Quelques difficultés techniques subsistent cependant: il faut notamment distinguer une date de naissance/décès d'une autre date, afin de diminuer le bruit; de plus, il faut réussir à extraire de façon automatique l'occupation principale d'une personne, lorsque plusieurs personnes sont mentionnées (\enquote{militaire} et \enquote{auteur}, par exemple). La résolution de ces deux problèmes repose sur une bonne connaissance du corpus de catalogues et de la structure des \ttrait{}.
+
+
 
 \widepage
 \begin{figure}[!p]
@@ -794,7 +803,7 @@ L'extraction d'informations du \tname{} est la plus complexe. La difficulté tie
 			{Détection du type de nom: avec/sans parenthèses};
 		\node[transf]%
 			(nopartr) at (-5, -19)%
-			{Nom sans parenthèses: nettoyage simple des données \\ Réinjection du prénom extrait au début dans le \texttt{fname} et du reste dans le \texttt{fname}};	
+			{Nom sans parenthèses: nettoyage simple des données \\ Réinjection du prénom extrait au début dans le \texttt{fname} et du reste dans le \texttt{lname}};	
 		\node[transf]%
 			(partr) at (1, -19)%
 			{Nom avec parenthèses: voir \ref{fig:extractparenthesis} \\ Injection du prénom extrait en entrée du script};
@@ -850,8 +859,8 @@ L'extraction d'informations du \tname{} est la plus complexe. La difficulté tie
 			\draw[arrow] (memetr) -- (-12,-27) -- (end);
 		\end{pgfonlayer}
 	}
-	\label{fig:extractmain}
 	\caption{Processus d'extraction d'informations du \tname{} et \titem{}}
+	\label{fig:extractmain}
 \end{figure}
 \restoregeometry
 
@@ -901,13 +910,57 @@ L'extraction d'informations du \tname{} est la plus complexe. La difficulté tie
 			\draw[dotted] (fname) -- (8,-11) -- (-3.5,-11) -- (y2);
 		\end{pgfonlayer}	
 	}
-	\label{fig:extractparenthesis}
 	\caption{Extraction d'informations d'un \tname{} contenant des parenthèses}
+	\label{fig:extractparenthesis}
 \end{figure}
 \restoregeometry
 
 \subsection{Identifier le type de nom}
-Les éléments \texttt{tei:name} contiennent le titre donné à l'item vendu. Si c'est souvent le nom de l'auteur.ice du document, ce n'est pas toujours le cas (il y a aussi des noms de lieux, d'évènements), et il y a plusieurs types de noms de personnes: un nom peut être écrit en suivant différentes structures, ce qui appelle à différents types de traitements.
+Les éléments \texttt{tei:name} contiennent le titre donné à l'item vendu. Si c'est souvent le nom de l'auteur.ice du document, ce n'est pas toujours le cas. L'extraction d'éléments du \tname{} dépend, comme cela a été dit, de l'identification du \enquote{type} de nom. La décision a été prise de classer tous les \tname{} en cinq catégories.
+
+Les noms génériques: ces éléments ne contiennent pas d'informations précises. Les entités \wkd{} étant spécifiques plutôt que génériques, il n'est pas certain que les entrées puissent être alignées avec \wkd{}; si des entités \wkd{} correspondent  à ces éléments, les informations qu'elles contiennent seront probablement trop génériques pour être utilisables dans un contexte économétrique. Lorsque cela est possible, l'alignement est quand même fait; c'est le cas par exemple pour les \tname{} contenant la mention de chartes. Dans ces cas, un dictionnaire vide est retourné et l'alignement avec \wkd{} n'aura pas lieu. Une exception est faite dans le cas chartes, où un alignement est fait avec l'entité \wkd{} génériques. Dans cette catégorie se trouve par exemple: \mintinline{xml}|<name type="author">DIVERS</name>|. correspondant à cette typologie de documents
+Les noms de type \enquote{Le même} ou \enquote{La même}; lorsqu'il y a cette valeur dans le \tname{}, l'auteur.ice est la même personne que l'auteur.ice de l'entrée de catalogue précédente. Dans ce cas, le dictionnaire de cette entrée est réutilisé. Par exemple, \mintinline{xml}|<name type="author">Le même</name>|.
+
+Les noms géographiques; ces entrées sont détectées à l'aide de tables de conversion et de listes. Celles-ci sont classées thématiquement: liste d'anciennes colonies françaises (\ref{appendix:convcolonie}), de départements français du \scl{XIX}(\ref{appendix:convdpt}), d'anciennes provinces françaises (\ref{appendix:convprov}) et de pays (\ref{appendix:convcountry}). Dans ce cas, un alignement avec une entité \wkd{} est possible; cependant, il n'est pas toujours envisageable de retrouver l'entité précise. En effet, un \tname{} peut contenir une mention d'une donnée géographique, mais également d'autres détails. C'est par exemple le cas dans le quatrième exemple ci-dessous. Il faut alors aligner le \tname{} avec son équivalent générique sur \wkd{} (l'exemple ci-dessous, par exemple, a été aligné uniquement avec l'entité \enquote{Paris}). Dans cette catégorie se trouvent:
+\begin{itemize}
+	\item \mintinline{xml}|<name type="other">AISNE (département de 1')</name>|
+	\item \mintinline{xml}|<name type="author">Bourbonnais. </name>|
+	\item \mintinline{xml}|<name type="author">Paris : Musée royal du Louvre</name>|
+	\item \mintinline{xml}|<name type="author">Garde nationale parisienne en 1792 (brevet|
+\end{itemize}
+\begin{itemize}[label={}]
+	\item \mintinline{xml}|de volontaire de la)</name>|
+\end{itemize}
+
+Les noms correspondant à des évènements historiques. Là encore, une table de conversion est utilisée (\ref{appendix:convevt}). Ici, une difficulté apparaît cependant: du fait de la varité des évènements historiques mentionnés dans les entrées de catalogue, il n'est pas possible d'enregistrer l'ensemble des évènements dans des tables afin de permettre une détection de tous les évènements. Les \tname{} ont donc été analysés pour extraire les évènements les plus importants. Ensuite, comme pour les termes géographiques, il n'est pas possible de donner aux tables de conversion une granularité suffisamment fine pour contenir toutes les données possibles. Des alignements partiels ont donc été faits: le premier exemple ci-dessous a été aligné avec l'entité \wkd{} \enquote{Révolution française}.
+\begin{itemize}
+	\item \mintinline{xml}|<name xmlns="http://www.tei-c.org/ns/1.0" type="other">THÉATRE|
+\end{itemize}
+\begin{itemize}[label={}]
+	\item \mintinline{xml}|RÉVOLUTIONNAIRE</name>|
+\end{itemize}
+\begin{itemize}
+	\item \mintinline{xml}|<name type="author">COMMUNE DE 1871.</name>|
+	\item \mintinline{xml}|<name type="other">Siège de La Rochelle en 1628</name>|
+\end{itemize}
+
+Les noms de personnes. Dans la majorité du corpus, le \tname{} contient des noms de personnes. C'est pour ce type de données que l'extraction des données a été pensée; les informations sont donc extraites avec une granularité plus fine qu'avec le reste du corpus. Les noms de personne ne sont pas simples à traiter: ils peuvent contenir de nombreuses informations: deux noms de famille (usuels et nobles), titres de noblesse, plusieurs prénoms. Ils ont également une structure variée, comme cela apparaît dans les exemples ci-dessous: les noms peuvent être écrits en utilisant des parenthèses ou non; un prénom peut être écrit en entier, comme dans premier exemple, entièrement abrégé (comme dans l'exemple 3) ou encore partiellement abrégé, ce qui est le cas dans le troisième exemple. Ces différences, qui ne posent pas de problème à un regard humain, sont autant de problèmes techniques. En effet, la détection de motifs fonctionne uniquement sur des critères formels, ou structurels. Il faut donc, en s'appuyant sur la structure des documents, réussir à distinguer un prénom d'un nom de famille, un nom de famille d'un autre, ou encore un nom abrégé d'un nom complet.
+\begin{itemize}
+	\item \mintinline{xml}|<name type="author">Humboldt (le baron Alexandre de)</name>|
+	\item \mintinline{xml}|<name type="author">Taccani Tasca (madame la comtesse)</name>|
+	\item \mintinline{xml}|<name type="author">LEGOUVÉ (G. M. J. B.)</name>|
+	\item \mintinline{xml}|<name type="author">LOUIS XVIII</name>|
+	\item \mintinline{xml}|<name type="author">Duras (Emm.-F. de Durfort, duc de)</name>|
+\end{itemize}
+
+
+Pour commencer, le script identifie si le \tname{} correspond à \enquote{Le même} ou \enquote{La même}. Dans ce cas, l'entrée est la même que la précédente et le dictionnaire produit pour la précédente entrée est réutilisé. Ensuite, il détecte et élimine les entrées qui ne contiennent pas d'informations spécifiques (\enquote{Documents divers}); si c'est le cas, il n'extrait pas d'informations du \tname{}. Les listes et les tables utilisées à cette étape contiennent des informations géographiques (nom d'anciennes provinces françaises\footnote{\ref{appendix:convprov}}, de départements du \scl{XIX}\footnote{\ref{appendix:convdpt}}, d'anciennes colonies\footnote{\ref{appendix:convcolonie}} et de pays\footnote{\ref{appendix:convcountry}} ) et historiques (contenant des évènements importants\footnote{\ref{appendix:convevt}}). Si une information géographique est repérée, alors des informations normalisées grâce à des tables de conversions sont ajoutées au dictionnaire; sinon, le script cherche à identifier des évènements historiques et, de même, ajoute leur équivalent normalisé au dictionnaire. Par processus d'élimination, si aucune de ces informations n'a été détectée, alors le contenu du \tname{} est le nom d'une personne.
+
+
+\subsection{Le traitement des noms de personnes}
+Peut-être y intégrer la subsection suivante ?
+\ref{fig:extractparenthesis} (qui contient une sous-partie de l'algorithme pour plus de lisibilité)
+
 
 \subsection{Reconstruire un prénom complet à partir de son abréviation}
 Souvent, le prénom d'une personne est écrit en abrégé. Partant de ce constat, un algorithme a été construit pour:
@@ -920,6 +973,8 @@ Ici, l'approche est totalement prédictive: il est impossible d'être certain d'
 
 \subsection{Extraire des informations normalisées à partir d'un nom et de sa description}
 Cette sous-section détaille l'utilisation de tables de conversion pour traduire et normaliser certaines donnes importantes (dates de vie et mort, titres de noblesse et fonctions).
+
+BIEN PENSER à parler du problème des informations extraites, mais qui ne se rattachent pas à la personne du \tname{} (eg: femme du comte...) => comment, par détection de motifs, est-ce que l'on règle le problème.
 
 \section{Extraire des identifiants \wkd{}}
 Une fois un dictionnaire de données normalisées produites, un algorithme lance des recherches en plein texte sur l'\api{} de \wkd{} afin de récupérer des identifiants. L'algorithme lance plusieurs requêtes successivement. L'objectif est de récupérer un identifiant en lançant le moins de requêtes, avec le plus de certitude possible.
@@ -1137,12 +1192,18 @@ Les représentations graphiques ne font pas que montrer des phénomènes. Leur r
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{annexes/fig_wikidata_instances.png}
-	\caption Occurrences des différentes catégories auxquelles appartiennent les entités \wkd{} liées avec les entrées de catalogues
+	\caption \\Occurrences des différentes catégories auxquelles appartiennent les entités \wkd{} liées avec les entrées de catalogues
 	\label{appendix:wikidata_instances}
 \end{figure}
 
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{annexes/fig_teinametypes.png}
+	\caption Répartition des différents types de \tname{}
+\end{figure}
+
 \chapter{Code source et données encodées}
-\begin{code}
+\begin{listing}
 	\begin{minted}{python}
 functions = {
 	"général": "general",
@@ -1189,12 +1250,12 @@ functions = {
 	"médecin": "physicist"
 }		
 	\end{minted}
-	\label{appendix:convfunction}
 	\caption{Table de conversion associant un métier à son équivalent normalisé}
-\end{code}
+	\label{appendix:convfunction}
+\end{listing}
+
 	
-	
-\begin{code}
+\begin{listing}
 	\begin{minted}{python}
 dpts = [
 	"ain",
@@ -1331,11 +1392,11 @@ dpts = [
 	"zuyderzée"
 ]		
 	\end{minted}
-	\label{appendix:convdpt}
 	\caption{Liste de départements du XIXe~s. pour détecter des informations géographiques}
-\end{code}
+	\label{appendix:convdpt}
+\end{listing}
 
-\begin{code}
+\begin{listing}
 	\begin{minted}{python}
 countries = {
 	"états-unis d'amérique": "united states of america",
@@ -1375,11 +1436,11 @@ countries = {
 	"viet-nâm": "vietnam"
 }	
 	\end{minted}
-	\label{appendix:convpays}
 	\caption{Table de conversion pour les pays}
-\end{code}
+	\label{appendix:convcountry}
+\end{listing}
 
-\begin{code}
+\begin{listing}
 	\begin{minted}{python}
 colonies = [
 	"québec",
@@ -1454,11 +1515,11 @@ colonies = [
 "wallis et futuna"
 ]
 	\end{minted}
-	\label{appendix:convcolonie}
 	\caption{Liste d'anciennes colonies françaises pour la détection de motifs}
-\end{code}
+	\label{appendix:convcolonie}
+\end{listing}
 
-\begin{code}
+\begin{listing}
 	\begin{minted}{python}
 provinces = [
 	"armagnac",
@@ -1498,11 +1559,11 @@ provinces = [
 	"nivernais",
 ]
 	\end{minted}
-	\label{appendix:convprov}
 	\caption{Liste d'anciennes provinces françaises pour la détection de motifs}
-\end{code}
+	\label{appendix:convprov}
+\end{listing}
 
-\begin{code}
+\begin{listing}
 \begin{minted}{python}
 events = {
 	"défense nationale": "government of national defense",
@@ -1521,23 +1582,23 @@ events = {
 	"révolution": "revolution"
 }
 \end{minted}
-	\label{appendix:convevt}
 	\caption{Table de conversion pour les évènements historiques}
-\end{code}
+	\label{appendix:convevt}
+\end{listing}
 
-\begin{code}
+\begin{listing}
 \begin{minted}{python}
 \end{minted}
 \label{}
 \caption{Liste de colonies pour la détection de motifs}
-\end{code}
+\end{listing}
 
-\begin{code}
+\begin{listing}
 \begin{minted}{python}
 \end{minted}
 \label{}
 \caption{Liste de colonies pour la détection de motifs}
-\end{code}
+\end{listing}
 	
 	
 	
