@@ -1,0 +1,477 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% ANNEXES	 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+\chapter{Lien vers tout le code source de la chaîne de traitement \ktb{}}
+L'intégralité du code produit pour le projet \ktb{}, depuis la création des documents \tei{} jusqu'à l'application Web, sont disponibles sur la plateforme d'hébergement de code GitHub.
+\begin{itemize}
+	\item \href{https://github.com/katabase}{Plateforme du projet}
+	\item \href{https://github.com/katabase/1_OutputData}{Première étape: normalisation des documents \tei{}}
+	\item \href{https://github.com/katabase/2_CleanedData}{Deuxième étape: extraction de données et normalisation}
+	\item \href{https://github.com/katabase/3_WikidataEnrichment}{Troisième étape: enrichissement de données à l'aide de \wkd{}}
+	\item \href{https://github.com/katabase/4_TaggedData}{Quatrième étape: création de jeux de données \json{} pour le site web}
+	\item \href{https://github.com/katabase/Application}{Application web \ktb{}}
+\end{itemize}
+
+L'intégralité du code source est disponible sous licence libre (\href{https://www.gnu.org/licenses/gpl-3.0.html}{GNU GPL v3.0}, \href{https://mit-license.org/}{MIT} ou \href{https://creativecommons.org/}{Creative Commons}). Le site web peut également être consulté en ligne à \href{https://katabase.huma-num.fr/}{cette adresse}.
+
+
+\chapter{Graphiques}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{annexes/fig_wikidata_instances.png}
+	\caption \\Occurrences des différentes catégories auxquelles appartiennent les entités \wkd{} liées avec les entrées de catalogues
+	\label{appendix:wikidata_instances}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{annexes/fig_teinametypes.png}
+	\caption{Répartition des différents types de \tname{}}
+	\label{appendix:tnametypes}
+\end{figure}
+
+\chapter{Code source et données encodées}
+\begin{listing}[p]
+	\begin{minted}{python}
+functions = {
+	"général": "general",
+	"maréchal": "marshal",
+	"lieutenant": "military",
+	"officier": "military",
+	"colonel": "military",
+	"lieutenant-colonel": "military",
+	"commandant": "military",
+	"capitaine": "military",  # "less important" military positions
+	"roi": "king",
+	"empereur": "emperor",
+	"president": "president",
+	"homme politique": "politician",
+	"président de l'assemblée": "politician",
+	"orateur": "politician",
+	"député": "politician",
+	"secrétaire d'état": "politician",
+	"sénateur": "politician",
+	"écrivain": "writer",
+	"auteur": "writer",
+	"romancier": "writer",
+	"acteur": "actor",
+	"actrice": "actress",
+	"cantatrice": "singer",
+	"chanteur": "singer",
+	"chanteuse": "singer",
+	"peintre": "painter",
+	"sculpteur": "sculptor",
+	"statutaire": "sculptor",
+	"compositeur": "composer",
+	"musicien": "musician",
+	"musicienne": "musician",
+	"tragédien": "actor",
+	"chansonnier": "chansonnier",
+	"achitecte": "architect",
+	"journaliste": "journalist",
+	"inventeur": "inventor",
+	"chimiste": "chemist",
+	"connétable": "constable",
+	"archevêque": "archbishop",
+	"évêque": "bishop",
+	"docteur": "physicist",
+	"médecin": "physicist"
+}		
+	\end{minted}
+	\caption{Table de conversion associant un métier à son équivalent normalisé}
+	\label{appendix:convfunction}
+\end{listing}
+
+
+\begin{listing}[p]
+	\begin{minted}{python}
+dpts = [
+	"ain",
+	"aisne",
+	"allier",
+	"basses-alpes",
+	"hautes-alpes",
+	"alpes-maritimes",
+	"annepins",
+	"provence",
+	"ardèche",
+	"ardennes",
+	"arriège",
+	"arno",
+	"aube",
+	"aude",
+	"aveyron",
+	"bouches-de-l'elbe",
+	"bouches-de-l'escaut",
+	"bouches-de-l'yssel",
+	"bpuches-de-la-meuse",
+	"bouches-du-rhin",
+	"bouches-du-rhône",
+	"bouches-du-weser",
+	"calvados",
+	"cantal",
+	"charente",
+	"charente-inférieure",
+	"cher",
+	"corrèze",
+	"corse",
+	"côte-d'or",
+	"côtes-du-nord",
+	"creuse",
+	"deux-nèthes",
+	"deux-sèvres",
+	"doire",
+	"dordogne",
+	"doubs",
+	"drôme",
+	"dyle",
+	"ems-occidental",
+	"ems-oriental",
+	"ems-supérieur",
+	"escaut",
+	"eure",
+	"eure-et-loir",
+	"finistère",
+	"forêts",
+	"gard",
+	"haute-garonne",
+	"gers",
+	"gironde",
+	"hérault",
+	"ille-et-villaine",
+	"indre",
+	"indre-et-loire",
+	"isère",
+	"jemappes",
+	"jura",
+	"landes",
+	"léman",
+	"loire",
+	"loir-et-cher",
+	"haute-loire",
+	"loire-inférieure",
+	"loiret",
+	"lot",
+	"lot-et-garonne",
+	"lozère",
+	"lys",
+	"maine-et-loire",
+	"manche",
+	"marengo",
+	"marne",
+	"haute-marne",
+	"méditerrannée",
+	"mayenne",
+	"meurthe",
+	"meuse",
+	"meuse-inférieure",
+	"mont-blanc",
+	"mont-tonnerre",
+	"montenotte",
+	"morbihan",
+	"meuse",
+	"moselle",
+	"nièvre",
+	"nord",
+	"oise",
+	"ombrone",
+	"orne",
+	"ourte",
+	"paris",
+	"pas-de-calais",
+	"pô",
+	"puy-de-dôme",
+	"hautes-pyrénées",
+	"basses-pyrénées",
+	"pyrénées-orientales",
+	"haut-rhin",
+	"bas-rhin",
+	"rhin-et-moselle",
+	"rhône",
+	"rhône-et-loire",
+	"roer",
+	"rome",
+	"haute-saône",
+	"saône-et-loire",
+	"sambre-et-meuse",
+	"sarre",
+	"sarthe",
+	"seine",
+	"seine-et-marne",
+	"seine-et-oise",
+	"seine-inférieure",
+	"sézia",
+	"simplon",
+	"deux-sèvres",
+	"somme",
+	"stura",
+	"tarn",
+	"tarn-et-garonne",
+	"taro",
+	"trasimène",
+	"var",
+	"vaucluse",
+	"vendée",
+	"vienne",
+	"haute-vienne",
+	"vosges",
+	"yonne",
+	"yssel-supérieur",
+"zuyderzée"
+]		
+	\end{minted}
+	\caption{Liste de départements du XIXe~s. pour détecter des informations géographiques}
+	\label{appendix:convdpt}
+\end{listing}
+
+\begin{listing}[p]
+	\begin{minted}{python}
+countries = {
+	"états-unis d'amérique": "united states of america",
+	"etats-unis d'amérique": "united states of america",
+	"états unis d'amérique": "united states of america",
+	"etats unis d'amerique": "united states of america",
+	"états-unis": "united states of america",
+	"etats-unis": "united states of america",
+	"etats unis": "united states of america",
+	"états unis": "united states of america",
+	"italie": "italy",
+	"grèce": "greece",
+	"canada": "canada",
+	"chine": "china",
+	"haïti": "haiti",
+	"tobago": "tobago",
+	"brésil": "brasil",
+	"burkina-faso": "burkina-faso",
+	"cameroun": "cameroun",
+	"tchad": "tchad",
+	"congo": "congo",
+	"gabon": "gabon",
+	"guinée": "guinea",
+	"côte d'ivoire": "ivory coast",
+	"mali": "mali",
+	"mauritanie": "mauritania",
+	"niger": "niger",
+	"sénégal": "senegal",
+	"madagascar": "madagascar",
+	"seychelles": "seychelles",
+	"tanzanie": "tanzania",
+	"zanzibar": "zanzibar",
+	"liban": "lebanon",
+	"syrie": "syria",
+	"inde": "india",
+	"laos": "laos",
+	"viet-nâm": "vietnam"
+}	
+	\end{minted}
+	\caption{Table de conversion pour les pays}
+	\label{appendix:convcountry}
+\end{listing}
+
+\begin{listing}[p]
+	\begin{minted}{python}
+colonies = [
+	"québec",
+	"ontario",
+	"saint-pierre-et-miquelon",
+	"mississippi",
+	"missouri",
+	"louisiane",
+	"anguilla",
+	"antigua",
+	"dominique",
+	"saint-domingue",
+	"guadeloupe",
+	"monsterrat",
+	"saint-martin",
+	"saint-barthélémy",
+	"sainte-lucy",
+	"saint-vincent-et-les-grenadines",
+	"saint-eustache",
+	"saint-christophe",
+	"martinique"
+	"guyane française",
+	"guyane",
+	"maroc",  # unfortunately the morocco referred to in XIXth century france is a french protectorate
+	"algérie",  # same
+	"algérie française",  # same
+	"tunisie",  # same
+	"fezzan",
+	"dahomey",
+	"haute-volta",
+	"oubangui-chari",
+	"congo français",
+	"moyen-congo",
+	"guinée française",
+	"soudan français",
+	"gorée",
+	"tigi",
+	"djibouti",
+	"cheikh saïd",
+	"comores",
+	"fort-dauphin",
+	"îles maurice",
+	"mayotte",
+	"la réunion",
+	"îles éparses",
+	"île amsterdam",
+	"île saint-paul",
+	"archipel crozet",
+	"îles kerguelen",
+	"castellorizo",
+	"grand-liban",
+	"sandjak d'alexandrette",
+	"indes françaises",
+	"pondichéry",
+	"karikal",
+	"yanaon",
+	"mahé",
+	"chanderngor",
+	"tonkin",
+	"annam",
+	"cochinchine",
+	"guangzhou wan",
+	"shanghai",
+	"guangzhou",
+	"tianjin",
+	"hankou",
+	"clipperton",
+	"nouvelle-calédonie",
+	"polynésie française",
+	"vanuatu",
+	"nouvelles-hébrides",
+	"wallis et futuna"
+]
+	\end{minted}
+	\caption{Liste d'anciennes colonies françaises pour la détection de motifs}
+	\label{appendix:convcolonie}
+\end{listing}
+
+\begin{listing}[p]
+	\begin{minted}{python}
+provinces = [
+	"armagnac",
+	"île-de-france",
+	"berry",
+	"orléanais",
+	"normandie",
+	"languedoc",
+	"lyonnais",
+	"dauphiné",
+	"champagne",
+	"aunis",
+	"saintonge",
+	"poitou",
+	"guyenne et gascogne",
+	"bourgogne",
+	"picardie",
+	"anjou",
+	"provence",
+	"angoumois",
+	"bourbonnais",
+	"marche",
+	"bretagne",
+	"maine",
+	"touraine",
+	"limousin",
+	"comté de foix",
+	"auvergne",
+	"béarn",
+	"alsace",
+	"artois",
+	"roussillon",
+	"flandre française et hainaut français",
+	"franche-comté",
+	"lorraine et trois-évêchés",
+	"corse",
+	"nivernais",
+]
+	\end{minted}
+	\caption{Liste d'anciennes provinces françaises pour la détection de motifs}
+	\label{appendix:convprov}
+\end{listing}
+
+\begin{listing}[p]
+	\begin{minted}{python}
+events = {
+	"défense nationale": "government of national defense",
+	"defense nationale": "government of national defense",
+	"révolution française": "french revolution",
+	"revolution francaise": "french revolution",
+	"guerre de trente ans": "thirty years' war 1618 1648",
+	"guerre de cent ans": "hundred years' war 1337 1453",
+	"guerre de sept ans": "seven years war 1756 1763",
+	"guerre": "war",
+	"insurrection": "war",
+	"siège de mayence": "siege of mainz",
+	"siège": "siege",
+	"commune": "commune",
+	"défense": "battle",
+	"révolution": "revolution"
+}
+	\end{minted}
+	\caption{Table de conversion pour les évènements historiques}
+	\label{appendix:convevt}
+\end{listing}
+
+\begin{listing}[p]
+	\begin{minted}{python}
+status = {
+	"empereur": "",
+	"impératrice": "",
+	"géneral": "general",
+	"reine": "queen",
+	"roi": "king",
+	"princesse": "princess",
+	"prince": "prince",
+	"archiduchesse": "",
+	"archiduc": "",
+	"duchesse": "duchess",
+	"duc": "duke",
+	"famille": "family",
+	"seigneur": "",
+	"vicomtesse": "",
+	"victesse": "",
+	"vicomte": "",
+	"victe": "",
+	"comtesse palatine": "countess palatine",
+	"comtesse": "",
+	"ctesse": "",
+	"comte": "",
+	"cte": "",
+	"cardinal": "",
+	"pape": "pope",
+	"lord": "",
+	"chevalier": "",
+	"marquise": "",
+	"marquis": "",
+	"sire": "",
+	"baronnesse": "",
+	"baronne": "",
+	"baron": "",
+	"abbé": "",
+	"madame": "",
+	"mme": "",
+	"monsieur": "",
+	"mr": "",
+	"docteur": "",
+	"maréchale": "",
+	"maréchal": "",
+	"mademoiselle": "",
+	"melle": "",
+	"mlle": "",
+	"sir": ""
+}
+	\end{minted}
+	\caption{Liste de colonies pour la détection de motifs}
+	\label{appendix:convstatus}
+\end{listing}
+
+\begin{listing}
+	\begin{minted}{python}
+	\end{minted}
+	\label{}
+	\caption{Liste de colonies pour la détection de motifs}
+\end{listing}

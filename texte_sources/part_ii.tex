@@ -1,372 +1,7 @@
-% métadonnées
-\author{Paul, Hector KERVEGAN}
-\title{Traitement et exploitation d'un corpus textuel semi-structuré: le cas des catalogues de vente de manuscrits.}
-\date{05.09.2022}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% DEUXIEME PARTIE %%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% encodage, format, langue et police
-\documentclass[a4paper, 12pt, twoside]{book}
-\usepackage[english, french]{babel}
-\usepackage[utf8x]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{fontspec}
-\usepackage{lmodern}
-\usepackage{graphicx}
-
-% code
-\usepackage{enumitem}
-\usepackage[newfloat]{minted}
-\newenvironment{code}{\captionsetup{type=listing}}{}
-\SetupFloatingEnvironment{listing}{name=Code source}
-\usemintedstyle{manni}
-\setminted{linenos, breaklines, tabsize=4, bgcolor=peachpuff}
-\usepackage{minted}
-
-% graphiques et couleurs
-\usepackage{tikz}
-\usetikzlibrary{shapes.geometric}
-
-% thx https://latexcolor.com/
-\definecolor{palepink}{rgb}{0.98, 0.85, 0.87}
-\definecolor{plum}{rgb}{0.44, 0.11, 0.11}
-\definecolor{lilac}{rgb}{0.8, 0.8, 1.0}
-\definecolor{peachpuff}{rgb}{1.0, 0.85, 0.73}
-\definecolor{lightpink}{rgb}{1.0, 0.71, 0.76}
-\definecolor{pearl}{rgb}{0.94, 0.92, 0.84}
-\definecolor{lightmauve}{rgb}{0.86, 0.82, 1.0}
-\definecolor{cherryblossompink}{rgb}{1.0, 0.72, 0.77} 	
-\definecolor{nadeshikopink}{rgb}{0.96, 0.68, 0.78}
-\definecolor{pastelviolet}{rgb}{0.8, 0.6, 0.79}
-
-% db interaction: db
-% main step (start, stop...): main
-% transfo/relation: transf
-\tikzstyle{base} = [%
-	draw,%
-	rectangle,%
-	rounded corners=3pt,%
-	minimum height=1cm,%
-	fill=lilac,%
-	draw=plum,%
-	text centered,%
-	text width=4cm%
-]
-\tikzstyle{db} = [%
-	cylinder,%
-	shape border rotate=90,%
-	aspect=0.25,%
-	fill=pastelviolet,%
-	draw=plum,%
-	text centered,%
-	text width=4cm%
-]
-\tikzstyle{transf} = [%
-	trapezium,%
-	trapezium left angle=70,%
-	trapezium right angle=110,%
-	minimum height=1cm,%
-	fill=lightpink,%
-	draw=plum,%
-	text centered,%
-	text width=3cm%
-]
-\tikzstyle{choice} = [%
-	diamond,%
-	minimum width=2cm,%
-	aspect=2,%
-	fill=peachpuff,%
-	draw=plum,%
-	text centered,%
-	text width=4cm%
-]
-\tikzstyle{arrow} = [%
-	thick,%
-	->,%
-	>=stealth,%
-	color=plum%	
-]
-\tikzstyle{line} = [%
-	thick,%
-	color=plum%	
-]
-\tikzstyle{dotted} = [%
-	thick,%
-	->,%
-	>=stealth,%
-	color=plum,%
-	dash pattern=on 3pt off 4pt on \the\pgflinewidth off 4pt%
-]
-\pgfdeclarelayer{bg}    % declare background layer
-\pgfsetlayers{bg,main}  % set the order of the layers (main is the standard layer)
-
-% images
-\usepackage{subcaption}
-
-% mise en page ENC
-\usepackage[margin=2.5cm]{geometry}
-\usepackage{setspace}
-\onehalfspacing
-\setlength\parindent{1cm}
-
-% bibliographie
-\usepackage[toc]{appendix}
-\usepackage{csquotes}
-\usepackage[backend=biber,sorting=nyt,style=enc]{biblatex}
-\nocite{*}
-\addbibresource{bibliographie/visualisation.bib}
-\addbibresource{bibliographie/katabase.bib}
-\addbibresource{bibliographie/ecostat.bib}
-\addbibresource{bibliographie/textprocessing.bib}
-\addbibresource{bibliographie/web.bib}
-\defbibnote{intro}{Cette bibliographie contient tous les ressources utilisées pour l'écriture de ce mémoire.}
-
-\DeclareSourcemap{%
- \maps[datatype=bibtex]{%
- 	\map[overwrite]{%
- 		\perdatasource{bibliographie/visualisation.bib}
- 		\step[fieldset=keywords, fieldvalue={,visualisation}, append]
- 	}
- 	\map[overwrite]{%
- 		\perdatasource{bibliographie/katabase.bib}
- 		\step[fieldset=keywords, fieldvalue={,katabase}, append]
- 	}
-	\map[overwrite]{%
-		\perdatasource{bibliographie/textprocessing.bib}
-		\step[fieldset=keywords, fieldvalue={,text}, append]
-	}
- 	\map[overwrite]{%
- 		\perdatasource{bibliographie/ecostat.bib}
- 		\step[fieldset=keywords, fieldvalue={,econometrie}, append]
- 	}
- 	\map[overwrite]{%
- 		\perdatasource{bibliographie/web.bib}
- 		\step[fieldset=keywords, fieldvalue={,web}, append]
- 	}
-  }
-}
-
-
-% notes de bas de page, table des matières citations et index
-\usepackage{imakeidx}
-% \makeindex
-% \makeindex[name=lieux,title=Index des noms de lieux]
-\usepackage{tocbibind}
-
-% autres paquets
-\usepackage{ifthen}
- 
-% hyperref
-\usepackage{hyperref}
-\hypersetup{
- pdfauthor={Paul, Hector KERVEGAN}, 
- pdftitle={Traitement et exploitation d'un corpus textuel semi-structuré: le cas des catalogues de vente de manuscrits.}, 
- pdfsubject={Traitement de données textuelles},
- pdfkeywords={catalogues de vente}{mss}{katabase}{reconnaissance optique de caractères}{ocr}{web design}{visualisation de données}{traitement automatisé du language}{web de données}{Python}
-}
-
-
-% glossaire et acronmymes
-\usepackage[automake, acronym, toc]{glossaries}
-\setacronymstyle{short-long}
-\renewcommand{\glsnamefont}[1]{\makefirstuc{#1}}  % capitalize 1st letter in \printglossaries
-\makeglossaries
-\newglossaryentry{apig}{
-	name={API},
-	description={Une interface de programmation d'application (\textit{Application Programming Interface} en anglais) est un protocole qui pemret à un programme de communiquer avec un autre programme. Ce protocole documenté, correspond à un ensemble d'opérations permettant à un programme \enquote{consommateur} d'utiliser des fonctionnalités d'un programme \enquote{fournisseur}, comme par exemple de récupérer ou d'envoyer des données au fournisseur.}
-}
-\newglossaryentry{api}{
-	type=\acronymtype,
-	name={API},
-	description={Application Programming Interface},
-	first={Interface de programmation d'application (API), \glsadd{apig}},
-	see=[Glossaire:]{apig}
-}
-\newglossaryentry{dictionnaire}{
-	name={dictionnaire},
-	plural={dictionnaires},
-	description={Un dictionnaire est un format de données structuré en python qui associe à une donnée -- dite clé -- une ou plusieurs données nommées valeurs.}
-}
-\newglossaryentry{expression régulière}{
-	name={expression régulière},
-	plural={expressions régulières},
-	description={Une expression régulière, ou expression rationnelle est une chaîne de caractère, écrite selon une syntaxe précise, qui permet de détecter des motifs dans du texte\footcite{noauthor_expression_2022}. Les expressions régulières s'appuient sur la classification des caractères en classes (minuscules, majuscules, chiffres, espaces), sur des structures alternatives (un caractère ou un autre) et exclusives (un caractère n'ayant pas certaines propriétés) pour repérer des motifs. Par exemple, \enquote{2022} correspond au motif: \texttt{\textbackslash{}d{4}}, soit \enquote{quatre chiffres à la suite}. Une adresse mail est également un motif: \texttt{[\^~(@|\textbackslash{}s)]+@[\^~(@|\textbackslash{}s)]+}, soit \enquote{plusieurs caractères qui ne sont ni un espace une arobase, suivi d'une arobase, suivi de plusieurs caractères qui n'est ni un espace ni une arobase}.}
-}
-\newglossaryentry{python}{
-	name={python},
-	description={Python est un language de programmation impérative (c'est-à-dire, basé sur la production et la transformation de données par une suite d'instructions) créé en 1991. Il est particulièrement utilisé dans le domaine du traitement de données et des humanités numériques. C'est le langage le plus utilisé dans le projet \mssktb{}}
-}
-\newglossaryentry{score F1}{
-	name={score F1},
-	plural={scores F1},
-	description={Le score F1, ou \textit{F-score}, est la moyenne harmonique de la précision (vrais positifs par rapport au total de résultats obtenus) et du rappel (nombre de résultats positifs par rapport au total de résultats positifs).\footcite{noauthor_precision_2022, noauthor_f-score_2022}. Le score F1 a l'avantage de prendre en compte les vrais et les faux positifs. Ce score, dont la valeur est contenue entre 0 et 1, permet de mesurer l'exactitude d'un algorithme d'apprentissage machine, ou d'un moteur de recherche.}
-}
-\newglossaryentry{SPARQL}{
-	name={SPARQL},
-	description={SPARQL est un language de requête qui permet d'interagir avec une base de données au format RDF. \enquote{SPARQL exprime des requêtes sur des sources de données diverses [...]. SPARQL rend possible la requête de données en graphes [...], avec des données conjointes et disjointes. SPARQL permet également l'agrégation de données, les sous-requêtes, la négation, la création de données à l'aide d'expression, le test de données et la contrainte des requêtes. Les résultats de requêtes sparql peuvent être des jeux de résultats ou des graphes RDF.}\footnote{\enquote{SPARQL can be used to express queries across diverse data sources [...]. SPARQL contains capabilities for querying [...] graph patterns along with their conjunctions and disjunctions. SPARQL also supports aggregation, subqueries, negation, creating values by expressions, extensible value testing, and constraining queries by source RDF graph. The results of SPARQL queries can be result sets or RDF graphs.}\cite{harris_sparql_2013} (traduction de l'auteur).}}
-}
-\newglossaryentry{table de conversion}{
-	name={table de conversion},
-	plural={tables de conversion},
-	description={Une table de conversion est, tout simplement, un dictionnaire qui contient en clés un certain nombre d'informations telles qu'elles figurent dans le texte et, en valeurs, une version normalisée de cette information. Cela permet de détectier des motifs à extraire autant de normaliser les informations.}
-}
-
-% modèle: \newacronym{dom}{\textsc{dom}}{\emph{Document Object Model}}
-% modèle bis: \newglossaryentry{meta}{name=métadonnée,description={donnée servant à définir ou décrire une autre donné quel que soit son support}}
-
-% commandes perso: autres que les abbréviations
-\newcommand{\widepage}{\newgeometry{left=1cm,right=1cm}}  % smaller margins for big graphs; use \restoregeometry after !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-\newcommand{\scl}[1]{%
-	% #1 : le siècle en chiffres romains
-	#1%
-	\ifthenelse{\equal{#1}{I}}{\up{er}}{\up{ème}}%
-	~s.%
-}
-
-% commandes perso: abréviations
-% technologies en mono, sigles et sites web en italique
-\newcommand{\api}{\texttt{\gls{api}}}
-\newcommand{\alto}{\texttt{Alto}}
-\newcommand{\escr}{\textit{eScriptorium}}
-\newcommand{\html}{\texttt{HTML}}
-\newcommand{\js}{\texttt{Javascript}}
-\newcommand{\json}{\texttt{JSON}}
-\newcommand{\ktb}{\textit{Katabase}}
-\newcommand{\mss}{\textit{MSS}}
-\newcommand{\mssktb}{\mss{} / \ktb{}}
-\newcommand{\py}{\texttt{\gls{python}}}
-\newcommand{\rgxsg}{\gls{expression régulière}}
-\newcommand{\rgxpl}{\glspl{expression régulière}}
-\newcommand{\rdf}{\texttt{RDF}}
-\newcommand{\sparql}{\texttt{\gls{SPARQL}}}
-\newcommand{\tei}{\texttt{TEI}}
-\newcommand{\tsv}{\texttt{TSV}}
-
-\newcommand{\titem}{\texttt{item}}
-\newcommand{\tname}{\texttt{name}}
-\newcommand{\tnum}{\texttt{num}}
-\newcommand{\ttrait}{\texttt{trait}}
-\newcommand{\tp}{\texttt{p}}
-\newcommand{\tdesc}{\texttt{desc}}
-\newcommand{\tdate}{\texttt{date}}
-\newcommand{\tmeasure}{\texttt{measure}}
-\newcommand{\tnote}{\texttt{note}}
-
-\newcommand{\xml}{\texttt{XML}}
-\newcommand{\xmltei}{\texttt{XML-TEI}}
-\newcommand{\xsl}{\texttt{XSL}}
-\newcommand{\wkd}{\textit{Wikidata}}
-
-% modèle: https://www.overleaf.com/project/61a6185ee83481070ab68d99
-% liste des mémoires: https://docs.google.com/spreadsheets/d/1CZRaEX4BMqHNtqr97Dhg9UV9bPTt_4XS_IgPL5A-ZbU/edit
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% DÉBUT %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{document}
-	\onehalfspacing
-	
-	\begin{titlepage}
-		\begin{center}		
-			\bigskip
-			
-			\begin{large}
-				ÉCOLE NATIONALE DES CHARTES\\
-			\end{large}
-			
-			\rule{2cm}{0.02cm}
-			
-			\begin{Large}
-				\textbf{Paul, Hector Kervegan}\\
-			\end{Large}
-			
-			\vfill
-			
-			\begin{Huge}
-				\textbf{Traitement, exploitation et analyse d'un corpus semi-structuré: le cas des catalogues de vente de manuscrits}
-			\end{Huge}
-			
-			\vfill
-			
-			\begin{large}
-				Mémoire pour le diplôme de master \\
-				\emph{Technologies numériques appliquées à l'histoire}
-				
-				\bigskip
-				
-				2022
-			\end{large}
-			
-		\end{center}
-	\end{titlepage}
-
-\frontmatter
-\chapter*{Résumé}
-\addcontentsline{toc}{chapter}{Résumé}
-
-
-\mainmatter
-\chapter*{Introduction}
-\addcontentsline{toc}{chapter}{Introduction}
-J'ai choisi de structurer mon mémoire autour de plusieurs questions connexes, qui, à différents degrés, se retrouvent tout au long du développement:
-
-En quoi la nature semi-structurée du corpus permet d'en automatiser le traitement? Comment produire des informations normalisées et exploitables à partir d'un corpus textuel semi-structuré ? En quoi ce traitement et la traduction des documents vers d'autres formats et d'autres médias impacte leur réception ? Quels sont les choix techniques qui influencent cette réception ?
-
-Les deux premières questions, d'orientation plutôt technique, forment la colonne vertébrale pour le mémoire; elles lient deux aspects centraux: la nature du corpus et la manière dont sa structure permet toute la chaîne de traitement. Par \enquote{semi-structuré}, j'entends que, à un niveau distant, toutes les entrées de catalogue suivent la même structure; des séparateurs distinguent les différentes parties, et les informations sont souvent structurées de manière semblable pour chaque manuscrit vendu. Cela permet un traitement de \enquote{basse technologie} (\emph{low-tech}) en évitant d'entraîner de lourds modèles de traitement du langage naturel (ce qui aboutirait à des solutions complexes, difficiles à maintenir et à faire évoluer et relativement opaques dans leur fonctionnement). À l'inverse, un corpus semi-structuré peut être traité en déduisant une \enquote{structure abstraite}, que chaque entrée de catalogue partage. Il est alors possible de mettre en place des solutions techniques plus faciles, pour un résultat de qualité équivalente. Produire des \enquote{informations normalisées et exploitables} implique de traiter le corpus en cherchant des réponses à des questions de recherche précises -- dans le cadre de mon stage, une question centrale a été de chercher à isoler les facteurs déterminant le prix d'un manuscrit.
-
-Les deux dernières questions, au premier abord plus théoriques, me semblent centrales, notamment à la troisième partie de ce mémoire. Numérisation, traitement informatisé et diffusion sur le web ne sont pas des opérations neutres, mais un ensemble de \enquote{traductions} des documents originels. Ces processus comportent une part de choix conscients, qu'il s'agit de mettre en avant. Par exemple, on considère que la majorité des documents vendus ont pour titre l'auteur.ice du document. Cette personne n'est cependant pas toujours mentionnée, et des documents peuvent être nommés d'après un lieu, un évènement ou un thème (la Révolution française, par exemple). Ces \enquote{traductions} des catalogues sont relativement discrètes tout au long de la chaîne de traitement (où le format dominant est la \tei{}, qui garde une relation d'équivalence avec le texte). C'est lors du  passage au site web que ce processus de traduction devient plus évident, et, potentiellement, plus problématique. On y abandonne la référence au document originel (les catalogues numérisés ne sont pas accessibles en ligne par un.e utilisateur.ice), le catalogue n'est plus la manière privilégiée d'accéder aux items vendus... De plus, la construction d'un site web implique la conception d'une interface et, dans notre cas, la production d'une série de visualisations intégrées au site. Le passage au site web remet aussi en cause la hiérarchie habituelle entre ingénierie et recherche: la conception d'un site ne répond pas à une question scientifique, mais elle soulève ses propres questions. Loin d'être anodines, ces problématiques de design déterminent la construction et la réception des savoirs. Il est donc important, je pense, de problématiser ces questions de visualisation et de design.
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%% PREMIÈRE PARTIE %%%%%%%%%%%%%%%%%%%%%%
-\part{Du document numérisé au \xmltei: nature du corpus, structure des documents et méthode de production des données}
-\chapter{Le marché des manuscrits autographes au prisme des catalogues de vente}
-\chaptermark{Le marché des manuscrits autographes}
-Ce chapitre présente l'objet d'étude du projet \mss{} : étudier le marché des manuscrits autographes du \scl{XIX}. parisien à partir de ses catalogues de vente et étudier la construction du canon littéraire au prisme du marché du manuscrit.
-
-\section{Pourquoi étudier le marché des manuscrits autographes?}
-Cette section porte sur l'intérêt scientifique des objets d'étude du projet (marché des manuscrits et étude de la construction du canon).
-
-
-\section{La structure du corpus : périodisation, producteurs des documents et classification}
-Ici est faite une présentation des documents traités dans le cadre du projet MSS. La présentation est à deux niveaux: au niveau du corpus et des catalogues. Ce chapitre s'appuie sur les mémoires effectués par d'ancien.ne.s stagiaires de \ktb{}, qui ont déjà beaucoup analysé la nature et les enjeux du corpus\footcite{rondeau_du_noyer_encoder_2019, corbieres_du_2020, janes_du_2021}.
-
-\subsection{Le corpus de catalogues de vente de manuscrits}
-Ici est présenté le corpus: nature, quantité de documents (et d'entrées individuelles), dates, différentes classifications qui peuvent être faites (revues, catalogues de ventes aux enchères ou à prix fixes...).
-
-\subsection{Structure des catalogues}
-Ici sera présentée la structure des catalogues; la structure de chaque page ne sera détaillée qu'à la partie suivante.
-
-
-\chapter{Production des données: de l'OCR à la \tei{}}
-\chaptermark{Production des données}
-Cette partie s'attache autant à présenter le processus d'océrisation (qui est déjà bien établi et ne constitue pas le cœur de mon stage) que la structure des documents. Alors que le chapitre précédent s'intéresse aux catalogues dans leur ensemble, ici, on étudie le corpus au niveau de la page et de l'entrée individuelle. En effet, l'océrisation repose sur la segmentation, et donc sur l'établissement d'une structure \enquote{abstraite} d'une page (c'est-à-dire, d'un découpage de la page en zones).
-
-\section{Extraire le texte des imprimés}
-\subsection{Comprendre la structure du document pour préparer l'édition numérique}
-
-\subsubsection{Appréhender la structure de la page à l'aide de SegmOnto}
-La structure des catalogues est présentée au niveau de la page. L'ontologie SegmOnto\footcite{christensen_segmonto_2022} est utilisée, autant pour appréhender la structure de la page que pour exprimer cette structure de façon standardisée.
-
-\subsubsection{Description des entrées de catalogue: préparer l'édition \tei{}}
-Ici, la structure des catalogues est présentée au niveau de l'entrée, c'est à dire du lot mis en vente. C'est à autour de la structure des entrées qu'est construite l'édition \xmltei{}. On s'intéresse à la structure des entrées individuelles à deux niveaux:
-\begin{itemize}
-	\item Au niveau intellectuel: quelles sont les différentes parties d'une entrée (titre, description du manuscrit, prix...).
-	\item Au niveau  \enquote{textuel}: quels sont les séparateurs, c'est à dire les éléments dans le texte qui permettent de séparer les pages de catalogue en entrées et les entrées en sous-éléments) correspondant à la structure intellectuelle décrite ci-dessus.
-\end{itemize}
-
-\section{L'encodage des manuscrits en \xmltei{}}
-\subsection{Encoder les catalogues en \tei{}}
-Ici est présentée la représentation \xmltei{} des catalogues de vente.
-
-\subsection{L'encodage en \tei{}: un processus sélectif qui réduit les significations du texte}
-Après une étape d'océrisation via \escr{}, le texte extrait des PDF peut être exporté soit en texte brut, soit en \xml{} \texttt{Page} ou \alto{}. Ces formats s'attachent à garder une relation entre le \xml{} et le document numérisé (les zones de texte sont indiquées, chaque ligne est dans une balise...). Cependant, l'unité intellectuelle centrale à la suite du projet, ce n'est pas la page numérisée, mais l'entrée de catalogue. Un format plus complexe que le \xml{} d'\escr{} est donc nécessaire. Assez logiquement, la suite du projet s'appuie sur une traduction des catalogues en \tei{}. On s'intéresse autant à la structure des documents \xml{} (quelles balises sont utilisées...) qu'à l'intérêt scientifique d'une édition numérique (balisage sémantique, possibilité de normaliser les informations grâce à des attributs).
-
-L'édition numérique en \xmltei{} des catalogues implique une certaine perte d'informations: l'intégralité des significations contenues dans les catalogues imprimés ne peut être traduite en \tei{} (la police, ou la qualité du papier, peuvent être documentés mais ne peuvent pas être reproduites). Ce genre de perte d'information a lieu, à différents degrés, dans la plupart des éditions \tei{}: ce format n'est pas un substitut des documents originels. Dans le projet \mssktb{}, d'autres informations sont perdues: l'édition numérique n'est pas censée être une représentation exhaustive des catalogues. La \tei{} n'est pas utilisée comme un format de conservation, mais comme un format de traitement qui sera enrichi dans les différentes étapes. Afin de mesurer ce qui est conservé et ce qui est perdu du document originel, l'édition \tei{} sera analysée à la lumière de la \enquote{roue du texte} du philologue Patrick Sahle\footcite[p. 11]{sahle_digital_2016} qui modélise les significations plurielles d'un texte.
-
-John Frow + Susan Pearce ?
-
-
-%%%%%%%%%%%%%%%%%%%%%%% DEUXIEME PARTIE %%%%%%%%%%%%%%%%%%%%%%
 \part{Normalisation, enrichissements et extraction d'informations: une chaîne de traitement pour des données semi-structurées}
 
 \chapter{Faire sens d'un corpus complexe: homogénéisation des données et extraction d'informations}
@@ -476,59 +111,59 @@ Cette chaîne de traitement étant lancée sur plus de 80000 entrées de catalog
 	\centering
 	\tikz[node distance=1cm, scale=0.85, transform shape]{
 		\node[db] %
-			(db1) at (-5,0)%
-			{Source: tableur contenant les \tname{} et \titem{}};
+		(db1) at (-5,0)%
+		{Source: tableur contenant les \tname{} et \titem{}};
 		\node[base]%
-			(start) at (0,0)%
-			{Lancement de l'algorithme sur toutes les entrées du tableur};
+		(start) at (0,0)%
+		{Lancement de l'algorithme sur toutes les entrées du tableur};
 		\draw[arrow] (db1) -- (start);
 		
 		\node[choice]%
-			(detect) at (0,-3.5)%
-			{Étape 1 -- extraction de donnée des \tname{} et \ttrait{}};
+		(detect) at (0,-3.5)%
+		{Étape 1 -- extraction de donnée des \tname{} et \ttrait{}};
 		\draw[arrow] (start) -- (detect);
 		
 		\node[transf]%
-			(name) at (-4,-6.5)%
-			{Extraction et normalisation d'informations nominatives du \tname{}};
+		(name) at (-4,-6.5)%
+		{Extraction et normalisation d'informations nominatives du \tname{}};
 		\node[transf]%
-			(trait) at (4,-6.5)%
-			{Extraction et normalisation d'informations biographiques du \ttrait{}};
+		(trait) at (4,-6.5)%
+		{Extraction et normalisation d'informations biographiques du \ttrait{}};
 		\node[base]%
-			(dict) at (0,-9.5)%
-			{Constitution d'un dictionnaire structuré pour aligner les \tname{} avec des entités \wkd{}};
+		(dict) at (0,-9.5)%
+		{Constitution d'un dictionnaire structuré pour aligner les \tname{} avec des entités \wkd{}};
 		\draw[arrow] (detect) -- (name);
 		\draw[arrow] (detect) -- (trait);
 		\draw[arrow] (name) -- (dict);
 		\draw[arrow] (trait) -- (dict);
 		
 		\node[db]%
-			(logs) at (6,-13)%
-			{Optimisation: enregistrement des entrées de catalogues et requêtes déjà traitées};
+		(logs) at (6,-13)%
+		{Optimisation: enregistrement des entrées de catalogues et requêtes déjà traitées};
 		\node[transf]%
-			(api) at (0,-13)%
-			{Étape 2 -- Alogrithme de requêtes sur l'API \wkd{} pour récupérer des identifiants};
+		(api) at (0,-13)%
+		{Étape 2 -- Alogrithme de requêtes sur l'API \wkd{} pour récupérer des identifiants};
 		\draw[arrow] (api) -- (logs);
 		\draw[arrow] (dict) -- (api);
 		
 		\node[db]%
-			(idset) at (0,-17.5)%
-			{Liste d'identifiants \wkd{} à partir de laquelle est constitué le jeu de données};
+		(idset) at (0,-17.5)%
+		{Liste d'identifiants \wkd{} à partir de laquelle est constitué le jeu de données};
 		\node[transf]
-			(sparql) at (0,-20.5)
-			{Étape 3 -- Requêtes \sparql{}};
+		(sparql) at (0,-20.5)
+		{Étape 3 -- Requêtes \sparql{}};
 		\node[base]%
-			(end) at (0, -23)%
-			{Conversion des résultats en \json{} et enregistrement};
+		(end) at (0, -23)%
+		{Conversion des résultats en \json{} et enregistrement};
 		\node[db]%
-			(sparqldata) at (5,-23)%
-			{Jeu de données issues de \sparql{} au format \json{}};
+		(sparqldata) at (5,-23)%
+		{Jeu de données issues de \sparql{} au format \json{}};
 		\node[transf]%
-			(tei) at (0,-25.5)%
-			{Réinjection des identifiants \wkd{} dans les fichiers \tei{}};
+		(tei) at (0,-25.5)%
+		{Réinjection des identifiants \wkd{} dans les fichiers \tei{}};
 		\node[db]%
-			(teidb) at (-5,-25.5)%
-			{Corpus de catalogues en \tei{} augmentés des identifiants \wkd{}};
+		(teidb) at (-5,-25.5)%
+		{Corpus de catalogues en \tei{} augmentés des identifiants \wkd{}};
 		\draw[arrow] (api) -- (idset);
 		\draw[arrow] (idset) -- (sparql);
 		\draw[arrow] (sparql) -- (end);
@@ -684,7 +319,7 @@ De plus, la technique utilisée dans l'extraction de données, reposant sur la d
 
 \begin{listing}
 	\begin{minted}{xml}
-<name type="author">Verneuil (Charlotte Séguier duchesse de)</name>
+		<name type="author">Verneuil (Charlotte Séguier duchesse de)</name>
 	\end{minted}
 	\caption{Peut-on identifier les différents éléments d'une phrase par détection de motifs?}
 	\label{code:predic}
@@ -758,91 +393,91 @@ Une fois les informations nominatives extraites du \tname{}, il reste à extrair
 	\centering
 	\tikz[node distance=1cm, scale=0.70, transform shape]{
 		\node[db]%
-			(input) at (-12,2)%
-			{Données en entrée};
+		(input) at (-12,2)%
+		{Données en entrée};
 		\node[base]%
-			(start) at (-3,2)% 
-			{Lecture des données et lancement de l'algorithme};
+		(start) at (-3,2)% 
+		{Lecture des données et lancement de l'algorithme};
 		\node[base]%
-			(tname) at (-3,0)%
-			{Étape 1 -- Extraction de données du \tname{}};
+		(tname) at (-3,0)%
+		{Étape 1 -- Extraction de données du \tname{}};
 		\node[transf]%
-			(rebuild) at (7,-4)%
-			{Extraction du prénom et reconstruction d'un prénom complet à partir de sa version abrégée};
+		(rebuild) at (7,-4)%
+		{Extraction du prénom et reconstruction d'un prénom complet à partir de sa version abrégée (\ref{fig:abv2full})};
 		\node[choice]%
-			(type) at (-3,-4)%
-			{Détection du type de \tname{}};
+		(type) at (-3,-4)%
+		{Détection du type de \tname{}};
 		\draw[arrow] (input) -- (start);
 		\draw[arrow] (start) -- (tname);
 		\draw[arrow] (tname) -- (type);
 		\draw[arrow] (tname) -- (7,0) -- (rebuild);
 		
 		\node[base]%
-			(meme) at (-12, -8)%
-			{Même personne que l'entrée précédente};
+		(meme) at (-12, -8)%
+		{Même personne que l'entrée précédente};
 		\node[transf]%
-			(memetr) at (-12, -11)%
-			{Réutilisation du dictionnaire de l'entrée précédente; le script passe à l'entrée suivante};
+		(memetr) at (-12, -11)%
+		{Réutilisation du dictionnaire de l'entrée précédente; le script passe à l'entrée suivante};
 		\draw[arrow] (type) -- (meme);
 		\draw[arrow] (meme) -- (memetr);
 		
 		\node[base]%
-			(div) at (-7,-8)%
-			{Pas d'informations (ex: \enquote{Divers})};
+		(div) at (-7,-8)%
+		{Pas d'informations (ex: \enquote{Divers})};
 		\node[transf]
-			(divtr) at (-7,-11)%
-			{Pas d'extraction d'informations};
+		(divtr) at (-7,-11)%
+		{Pas d'extraction d'informations};
 		\draw[arrow] (type) -- (div);
 		\draw[arrow] (div) -- (divtr);
 		
 		\node[base]%
-			(pers) at (-2,-8)%
-			{\tname{} contenant le nom d'une personne};
+		(pers) at (-2,-8)%
+		{\tname{} contenant le nom d'une personne};
 		\node[choice]%
-			(persch) at (-2,-14)%
-			{Détection du type de nom: avec/sans parenthèses};
+		(persch) at (-2,-14)%
+		{Détection du type de nom: avec/sans parenthèses};
 		\node[transf]%
-			(nopartr) at (-5, -19)%
-			{Nom sans parenthèses: nettoyage simple des données \\ Réinjection du prénom extrait au début dans le \texttt{fname} et du reste dans le \texttt{lname}};	
+		(nopartr) at (-5, -19)%
+		{Nom sans parenthèses: nettoyage simple des données \\ Réinjection du prénom extrait au début dans le \texttt{fname} et du reste dans le \texttt{lname}};	
 		\node[transf]%
-			(partr) at (1, -19)%
-			{Nom avec parenthèses: voir \ref{fig:extractparenthesis} \\ Injection du prénom extrait en entrée du script};
+		(partr) at (1, -19)%
+		{Nom avec parenthèses: voir \ref{fig:extractparenthesis} \\ Injection du prénom extrait en entrée du script};
 		\draw[arrow] (type) -- (pers);
 		\draw[arrow] (pers) -- (persch);
 		\draw[arrow] (persch) -- (nopartr);
 		\draw[arrow] (persch) -- (partr);
 		
 		\node[base]%
-			(geo) at (3,-8)%
-			{\tname{} avec informations géographiques};
+		(geo) at (3,-8)%
+		{\tname{} avec informations géographiques};
 		\node[transf]%
-			(geotr) at (3,-11)%
-			{Extraction d'informations à l'aide de tables de correspondance et ajout au \texttt{lname}};
+		(geotr) at (3,-11)%
+		{Extraction d'informations à l'aide de tables de correspondance et ajout au \texttt{lname}};
 		\draw[arrow] (type) -- (geo);
 		\draw[arrow] (geo) -- (geotr);
-				
+		
 		\node[base]%
-			(hist) at (8,-8)%
-			{\tname{} historique};
+		(hist) at (8,-8)%
+		{\tname{} historique};
 		\node[transf]%
-			(histtr) at (8,-11)%
-			{Extraction d'informations à l'aide de tables de correspondance et ajout au \texttt{lname}};
+		(histtr) at (8,-11)%
+		{Extraction d'informations à l'aide de tables de correspondance et ajout au \texttt{lname}};
 		\draw[arrow] (type) -- (hist);
 		\draw[arrow] (hist) -- (histtr);
 		
 		\node[base]%
-			(ttrait) at (-2,-23)%
-			{Étape 2 -- Extraction de données du \ttrait{}};
+		(ttrait) at (-2,-23)%
+		{Étape 2 -- Extraction de données du \ttrait{}};
 		\node[transf]%
-			(date) at (-5,-25)%
-			{Extraction des dates de vie et de mort et ajout au \texttt{date}};
+		(date) at (-5,-25)%
+		{Extraction des dates de vie et de mort et ajout au \texttt{date}};
 		\node[transf]%
-			(func) at (1,-25)%
-			{Extraction et traduction du métier et ajout au \texttt{function}};
+		(func) at (1,-25)%
+		{Extraction et traduction du métier et ajout au \texttt{function}};
 		
 		\node[base]%
-			(end) at (-2,-27)%
-			{Dictionnaire structuré pour lancer les requêtes};
+		(end) at (-2,-27)%
+		{Dictionnaire structuré pour lancer les requêtes};
 		
 		\begin{pgfonlayer}{bg} % \draw on the background of nodes
 			\draw[dotted] (rebuild) -- (7,-6.5) -- (0.75,-6.5) -- (partr);
@@ -861,57 +496,6 @@ Une fois les informations nominatives extraites du \tname{}, il reste à extrair
 	}
 	\caption{Processus d'extraction d'informations du \tname{} et \titem{}}
 	\label{fig:extractmain}
-\end{figure}
-\restoregeometry
-
-\widepage
-\begin{figure}[!p]
-	\centering
-	\tikz[node distance=1cm]{
-		\node[base](start) at (0,0)%
-			{\tname{} contenant des parenthèses};
-		\node[base] (fname) at (8,0)%
-			{Prénoms extraits du \tname{} et éventuellement reconstruits};
-		\node[label={[rotate=-90]below:Réinjection des prénoms déjà extraits}] at (8.75,-4.25) {};
-			
-		\node[choice](nobl) at (0,-3)%
-			{Est-ce que le \tname{} contient un titre de noblesse?};
-		\node[label={OUI}] at (-2.25,-5.25) {};
-		\node[label={NON}] at (2.25, -5.25) {};
- 		
-		\node[transf](y1) at (-4,-8)%
-			{Extraction des données entre parenthèses: titre de noblesse (ajouté au \texttt{status}) et nom de famille personnel ajouté au \texttt{lname}};
-		\node[transf](y2) at (-4,-13)%
-			{Injection des prénoms extraits à l'épape précédente dans le \texttt{fname}};
-		\node[transf](y3) at (-4,-17.5)%
-			{Extraction des données en dehors des parenthèses: le nom de famille noble, ajouté au \texttt{nobname\_sts}};
-		
-		\node[transf](n1) at (4,-8.5)%
-			{Extraction des données entre parenthèses: seconde extraction de prénoms pour réduire le bruit et nettoyage};
-		\node[transf](n2) at (4,-13.5)%
-			{Réinjection des prénoms extraits et combinaison des prénoms extraits pour constituer le \texttt{fname}};
-		\node[transf](n3) at (4,-17.5)%
-			{Extraction du nom de famille hors parenthèses et constitution du \texttt{lname}};
-			
-		\node[base](end) at (0,-21)%
-			{Passage à l'extraction d'informations du \texttt{lname}};
-		
-		\begin{pgfonlayer}{bg} % \draw on the background of nodes
-			\draw[arrow] (start) -- (nobl);
-			\draw[arrow] (nobl) -- (y1);
-			\draw[arrow] (y1) -- (y2);
-			\draw[arrow] (y2) -- (y3);
-			\draw[arrow] (nobl) -- (n1);
-			\draw[arrow] (n1) -- (n2);
-			\draw[arrow] (n2) -- (n3);
-			\draw[arrow] (n3) -- (4,-21) -- (end);
-			\draw[arrow] (y3) -- (-4,-21) -- (end);
-			\draw[dotted,] (fname) -- (8,-13.5) -- (n2);
-			\draw[dotted] (fname) -- (8,-11) -- (-3.5,-11) -- (y2);
-		\end{pgfonlayer}	
-	}
-	\caption{Extraction d'informations d'un \tname{} contenant des parenthèses}
-	\label{fig:extractparenthesis}
 \end{figure}
 \restoregeometry
 
@@ -970,15 +554,256 @@ Ensuite, si un \tname{} n'appartient ni à l'une ni à l'autre catégorie, alors
 
 Par processus d'élimination, si aucune de ces informations n'a été détectée, alors il n'est plus possible de classer le \tname{} dans aucune autre catégorie. Il est alors considéré que le contenu du \tname{} est le nom d'une personne. L'extraction d'informations se fait ici plus complexe \footnote{Pour une représentation graphique de cette étape, voir \ref{fig:extractparenthesis}}, comme nous le verrons: le script traite le nom différemment en fonction de sa structure (présence ou non de parenthèses dans le nom), puis extrait d'éventuels titres de noblesse, noms de famille noble et nom de famille usuel. Enfin, il extrait des prénoms et cherche à reconstruire un prénom complet à partir de son abréviation. Le processus étant éliminatoire, il n'y a bien sûr aucune certitude totale que le contenu du \tname{} soit bel et bien le nom d'une personne; il n'est cependant plus possible de mieux catégoriser les éléments. Cela n'est pas non plus extrêmement important, puisque cet algorithme de classification a un rôle fonctionnel et n'impacte pas la manière dont les identifiants sont récupérés depuis l'\api{} \wkd{}. Il permet principalement d'adopter un fonctionnement modulaire en cherchant à détecter des motifs spécifiques dans les \tname{} en fonction de la catégorie à laquelle ils appartiennent. La détection de motifs étant \enquote{aveugle}, le traitement qui est fait pour cette catégorie peut être mis à profit de différents types de données: les mêmes motifs peuvent être recherchés et extraits de différents types d'entrées.
 
-À l'issue de cette phase de classification, il est possible de mieux connaître les types de \tname{} et leur répartition dans le corpus. Les noms de personnes sont très majoritaires dans les \tname{}: ils représentent 73305 entrées sur un total de 82913, soit 81,52\%. C'est pour ce type de données que l'extraction des données a été pensée; les informations sont donc extraites avec une granularité plus fine qu'avec le reste du corpus. Viennent ensuite les noms de lieux (8693 entrées) et les éléments divers (550). Pour finir se trouvent les évènements historiques (232 entrées) et les éléments vides\footnote{Ces chiffres proviennent d'un calcul réalisé à partir du script développé pour identifier le type d'entrée. Ils ont été produits afin de réaliser une représentation graphique du type d'entrée, visible en annexes (\ref{appendix:tnametypes})}.
+À l'issue de cette phase de classification, il est possible de mieux connaître les types de \tname{} et leur répartition dans le corpus. Les noms de personnes sont très majoritaires dans les \tname{}: ils représentent 80634 entrées sur un total de 82913, soit 97,25\% du corpus. C'est donc pour ce type de données que l'extraction des données a été pensée, ce qui permet  d'extraire des informations avec une granularité plus fine qu'avec le reste du corpus. Viennent ensuite les noms de lieux (1406 entrées) et les éléments divers (550). Pour finir se trouvent les évènements historiques (232 entrées) et les éléments vides, soit 92 entrées\footnote{Ces chiffres proviennent d'un calcul réalisé à partir du script développé pour identifier le type d'entrée. Ils ont été produits afin de réaliser une représentation graphique du type d'entrée, visible en annexes (\ref{appendix:tnametypes})}. Bien que, comme cela a été dit, la classification des \tname{} en différents types soit purement fonctionnelle, ces chiffres permettent d'avoir une meilleure connaissance du corpus, et mieux comprendre à partir de quel type de données se fait l'alignement \wkd{}. Cette classification montre également d'intérêt de la détection de motifs augmentée de tables de correspondances: bien que ce soit une méthode \enquote{légère}, elle peut efficacement, sur un corpus semi-structuré, être à la base d'une extraction précise de données.
 
 
 \subsection{Le traitement des noms de personnes}
-Peut-être y intégrer la subsection suivante ?
+Comme cela a déjà été dit, le processus d'extraction d'informations du \tname{} est relativement simple pour les entrées qui ne contiennent pas de noms de personnes: il s'agit principalement de remplacer des informations non-normalisées par leur équivalent normalisé, à l'aide d'un dictionnaire. Pour les noms de personne cependant, le processus est plus complexe: il demande d'identifier titres de noblesse et différents types de noms; de plus, de nombreux prénoms sont abrégés pour gagner de la place dans les catalogues. Pour augmenter le taux de réussite de l'alignement avec \wkd{}, une méthode a été développée pour reconstruire un nom complet à partir de son abréviation. Après avoir présenté les différentes étapes de l'extraction d'informations nominatives, cette partie détaillera ce processus de reconstruction du prénom. Dans ces deux étapes, la nature semi-structurée des documents est centrale, puisqu'elle permet d'identifier avec une grande précision les différentes informations.
+
+\subsubsection{Trouver des solutions adaptées à différents types de noms}
+Pour extraire des informations d'un \tname{} et dans leur un statut ou d'une signification spécifique, il est nécessaire d'identifier ce qui distingue un prénom d'un nom de famille ou d'un titre de noblesse. Une première difficulté apparaît vite: formellement, il n'y a pas nécessairement de différence entre ces informations. Dans l'exemple \ref{code:prepin}, le \tname{} correspond à:
+
+\begin{listing}[h!]
+	\centering
+	\begin{minted}{xml}
+<name type="author">Turenne (Henri de la Tour d'Auvergne vicomte de)</name>
+	\end{minted}
+	\caption{Le \tname{} de l'exemple \ref{code:prepin}}
+	\label{code:prepin_teiname}
+\end{listing}
+
+Les informations à extraire de cet élément sont visibles dans la figure \ref{code:prepin_teiname_part}. Si chaque mot est pris individuellement, il est difficile de les distinguer l'un de l'autre. Le nom de famille noble, le prénom et le nom de famille usuels débutent tous par une majuscule. Il est ici impossible de trouver un motif distinctif pour un nom de famille ou pour un prénom. Cela est d'autant plus vrai qu'un nom peut être composé; ici, le nom de famille usuel est composé de deux mots débutant par une majuscule et séparés par un \enquote{d'}. Étant donné la taille du corpus, il n'est pas non plus possible d'utiliser des tables de conversions pour identifier ce qui est un nom ou un prénom, comme cela a été fait pour les lieux et les évènements géographiques. La seule information qui peut être traitée à l'aide d'une table de conversion est le titre de noblesse, puisque ces titres existent en nombre limité. Par conséquent, aucun élément à l'intérieur des termes à relever ne permet de les identifier. Là où ils peuvent cependant être distingués, c'est au niveau de leur place relative au sein de la phrase. Pour reprendre l'exemple \ref{code:prepin_teiname_part}, le nom de famille noble se retrouve hors de la parenthèse, au tout début de la phrase; les autres informations sont dans la parenthèse, où le prénom est suivi du nom de famille et du titre. S'il n'est pas possible d'identifier la valeur d'un nom à partir de ses caractéristiques propres, il est donc possible de la déduire de sa position dans la phrase. C'est ici qu'une bonne compréhension de la structure des \tname{} devient essentielle.
+
+\begin{figure}[h!]
+	\centering
+	\tikz{
+		\node[baseoutline,%
+			draw=nadeshikopink,%
+			label={below:nom de famille noble}]%
+			at (-10.5,0)%
+			{Turenne};
+		\node[baseoutline]%
+			at (-8.5,0)%
+			{(};
+		\node[baseoutline,%
+			draw=purple,%
+			label={below:prénom}]%
+			at (-7.25,0)%
+			{Henri};
+		\node[baseoutline]%
+			at (-5.5,0)%
+			{de la};
+		\node[baseoutline,%
+			draw=red,%
+			label={below:nom de famille usuel}]%
+			at (-2.5,0)%
+			{Tour d'Auvergne};
+		\node[baseoutline,%
+			draw=orange,%
+			label={below:titre de noblesse}]%
+			at (1.3,0)%
+			{vicomte};
+		\node[baseoutline]%
+			at (3,0)%
+			{de)};
+	}
+	\caption{Les différentes parties du \tname}
+	\label{code:prepin_teiname_part}
+\end{figure}
+
+Il est donc nécessaire d'identifier les différentes structures possibles pour un \tname{} contenant un nom de personne. Celles-ci sont visibles en \ref{fig:teinametypes}. Pour les besoins de l'algorithme, deux structures principales ont été retenues: les \tname{} contenant des parenthèses et eux n'en contenant pas\footnote{Comme cela étant déjà visible dans la figure \ref{fig:extractmain}}. Comme nous le verrons, d'autres subdivisions existent ensuite.
+
+Les \tname{} contenant des parenthèses ont une structure bien plus claire que ceux n'en contenant pas; il est alors tout à fait possible d'identifier le rôle joué par les différents éléments de cette balise. L'organisation entre les différents types de noms est la même dans les exemples \ref{code:teiname_noble} et \ref{code:teiname_notnoble}, qui contiennent tous les deux des parenthèses. Le nom le plus important, sous lequel une personne est connue au \scl{XIX}, est contenu entre parenthèses et au début de l'entrée, parfois en majuscules. Le ou les noms suivants sont, eux, à l'intérieur des parenthèses. Le premier nom au sein des parenthèses est toujours le prénom; ensuite viennent des informations complémentaires. Ces deux exemples, cependant, forment deux sous-catégories dans le groupe des noms sans parenthèses:
+\begin{itemize}
+	\item Le premier exemple (\ref{code:teiname_noble}) contient uniquement des noms de personnes nobles. Dans ce cas, le nom hors parenthèses correspond au nom de famille noble; le nom de famille usuel d'une personne est contenu à l'intérieur des parenthèses. Ce détail est important, parce que les personnes sont souvent référencées sur \wkd{} par le nom de famille usuel. Lancer une recherche sur l'API avec les noms de famille usuel et noble à la fois ne retournera pas toujours de réponse, alors que ne rechercher qu'un des deux noms peut permettre d'obtenir le bon résultat. C'est pourquoi, dans ces cas, les deux noms sont distingués: le nom de famille usuel est associé avec la clé \texttt{lname} du \gls{dictionnaire}, et le nom noble lié au \texttt{nobname\_sts}.
+	\item Les personnes dans le second exemple (\ref{code:teiname_notnoble}) ne sont pas nobles, ce qui simplifie beaucoup l'extraction d'information. Il suffit de stocker la partie entre parenthèses hors du \texttt{lname}; le prénom entre parenthèses, identifié grâce à l'algorithme d'extraction des prénoms, est stocké dans le \texttt{fname}. Parfois, d'autres informations sont contenues dans les parenthèses; si elles sont signifiantes (comme dans le cas d'Alexandre Dumas père, où il est important de faire la distinction d'avec son fils), elles sont extraites. Sinon, ces informations supplémentaires sont abandonnées.
+\end{itemize}
+
+\begin{listing}[h]
+	\begin{minted}{xml}
+<name type="author">Turenne (Henri de la Tour d'Auvergne vicomte de)</name>
+<name type="author">HUMBOLDT (Alexandre baron de)</name>
+<name type="author">Tascher (Pierre-Jean-Alexandre-Jacquemin comte Imbert de)<name>
+	\end{minted}
+	\caption{Trois exemples de \tname{} avec titres de noblesse}
+	\label{code:teiname_noble}
+\end{listing}
+
+\begin{listing}[h]
+	\begin{minted}{xml}
+<name type=author>Viardot (Pauline)</name>
+<name type=author>Verdi (Giuseppe)</name>
+<name type=author>Sobieski (Thérèse-Cunégonde)</name>
+<name type="author">CAUCHY (le bon Alex.)</name>
+<name type="author">DUMAS (Alex. père)</name>
+	\end{minted}
+	\caption{Cinq exemples de \tname{} sans titres de noblesse}
+	\label{code:teiname_notnoble}
+\end{listing}
+
+Les \tname{} ne contenant pas de parenthèses (exemple \ref{code:teiname_nopar}) ne peuvent être traités avec la même granularité, puisqu'ils ne présentent pas de caractères récurrents pour faire la différence entre leurs différentes parties. Il est donc impossible de s'appuyer de façon récurrente sur la position des différents noms dans la phrase pour déduire leur signification. Cependant, il faut également remarquer que les éléments ne contenant pas de parenthèses contiennent en général bien moins d'informations que ceux qui en contiennent. Chercher à tout prix à identifier une structure à ces entrées afin de pouvoir avoir un \gls{dictionnaire} complet à partir duquel lancer plusieurs requêtes n'a pas non plus nécessairement d'intérêt.
+
+\begin{listing}[h]
+	\begin{minted}{xml}
+<name type="author">Sophie</name>
+<name type="author">Henri VI</name>
+<name type="author">DUPUIS</name>
+	\end{minted}
+	\caption{Trois exemples de \tname{} sans parenthèses}
+	\label{code:teiname_nopar}
+\end{listing}
+
+\begin{figure}[p]
+	\centering
+	\tikz{
+		\node[base] (start) at (0,3)%
+		{Analyse de la structure d'un \tname{}};
+		\node[choice] (choicepar) at (0,0) %
+		{Présence ou non de parenthèse};
+		\node[base] (yespar) at (-6,-2.5)%
+			{
+				\textbf{Présence d'une parenthèse}
+				\\~\\ \textit{Structure de l'entrée}:
+				\begin{itemize}
+					\item nom le plus important au début hors parenthèses
+					\item noms moins importants dans la parenthèse
+				\end{itemize}
+			};
+		\node[base] (nopar) at (6.5,-3.5) %
+			{
+				\textbf{Absence de parenthèse}
+				\\~\\ \textit{Structure de l'entrée}: moins claire et régulière.
+				\\~\\ \textit{Informations à récupérer}:
+				\begin{itemize}
+					\item titre de noblesse
+					\item noms et prénoms ensemble, sans distinction
+				\end{itemize}
+			};
+				
+		\node[choice] (choicenoble) at (-2.5,-7) %
+			{Présence ou non d'un titre de noblesse};
+		
+		\node[baseoutline] at (-4,-9) {NON};
+		\node[baseoutline] at (-1.1,-8.5) {OUI};
+		
+		\node[base] (ynoble) at (1.5,-15) %
+			{
+				\textbf{Présence d'un titre de noblesse}. 
+				\\~\\ \textit{Structure de l'entrée}:
+				\begin{itemize}
+					\item nom de famille noble hors parenthèses
+					\item entre parenthèses: prénoms, puis, nom de famille usuel et enfin titre de noblesse
+				\end{itemize}
+				\textit{Informations à récupérer}:
+				\begin{itemize}
+					\item prénom
+					\item nom de famille usuel
+					\item nom de famille noble
+					\item titre de noblesse
+				\end{itemize}
+			};
+		\node[base] (nnoble) at (-5.5,-15)%
+			{
+				\textbf{Absence de titre de noblesse}.
+				\\~\\ \textit{Structure de l'entrée}:
+				\begin{itemize}
+					\item nom de famille usuel
+					\item prénom dans les parenthèses, suivi éventuellement d'autres informations
+				\end{itemize}
+				\textit{Informations à récupérer}:
+				\begin{itemize}
+					\item prénom
+					\item nom de famille usuel
+				\end{itemize}
+			};
+		
+		\draw[arrow] (start) -- (choicepar);
+		\draw[arrow] (choicepar) -- (yespar);
+		\draw[arrow] (choicepar) -- (nopar);
+		\draw[arrow] (yespar) -- (choicenoble);
+		\draw[arrow] (choicenoble) -- (nnoble);
+		\draw[arrow] (choicenoble) -- (ynoble);	
+	}
+	\caption{Différentes structures possibles pour un \tname{}}
+	\label{fig:teinametypes}
+\end{figure}
+
+
+\subsubsection{Identifier et extraire les informations nominatives}
+C'est sur les différents critères présentés dans la partie précédente et résumés sous forme graphique dans la figure \ref{fig:teinametypes}, que se base l'extraction d'informations nominatives du \tname{}.
+
+
+Dans un premier temps, l'algorithme cherche à extraire des informations d'un \tname{} contenant des parenthèses (étape représentée dans le graphique: \ref{fig:extractparenthesis}). Il y a alors quatre données à identifier et à extraire: le nom de famille noble, le nom de famille usuel, le prénom et le titre de noblesse. L'algorithme commence par extraire des informations du texte contenu entre parenthèses avant de passer au texte hors parenthèses: il identifie un titre de noblesse avant d'extraire un prénom et éventuellement un nom de famille; pour finir, le nom hors parenthèses est extrait.
+
+L'extraction du titre de noblesse est l'étape la plus simple, puisqu'elle repose sur une table de conversion (\ref{appendix:convstatus}): l'algorithme cherche à identifier un titre de noblesse parmi les clés de ce \gls{dictionnaire}. Si des titres sont trouvés, alors leur version normalisée figurant en valeur de ce dictionnaire est ajoutée aux données extraites. Il est à noter que, comme tous les titres de noblesse les plus importants permettent d'obtenir des résultats sur \wkd{}, aucune valeur n'est associée aux titres les moins importants; dans ce cas, aucun titre n'est extrait, puisqu'il risque d'empêcher l'obtention d'un résultat. Cependant, même des titres de noblesse n'ayant pas d'équivalent, et qui ne seront donc pas extraits, figurent sur cette table de conversion: la table permet d'identifier la présence d'un titre de noblesse, ce qui est nécessaire pour extraire les autres informations.
+
+Si un titre de noblesse a été trouvé, un processus éliminatoire est engagé afin d'identifier le prénom et le nom de famille usuels contenus entre parenthèses. Comme cela apparaît dans les exemples plus haut, le texte entre parenthèses peut contenir du bruit: des mots comme \enquote{du, le...} qui n'aident pas à obtenir de résultats sur \wkd{}, ou encore des noms communs et des attributs des personnes. Il faut détecter tous les noms propres, situer leur rôle et les extraire. Il peut être tentant d'extraire seulement les noms propres à l'aide d'\glspl{expression régulière} -- c'est à dire, d'identifier tous les mots commençant par une majuscule -- et d'abandonner le reste. Cependant, certains noms communs peuvent être écrits avec une capitale; en suivant cette méthode, il y aurait donc un risque d'inclure du bruit dans les données utilisées pour lancer les requêtes. L'algorithme lance donc une série de simplifications du contenu entre parenthèses: il commence d'abord par supprimer les données déjà extraites: le prénom ou son abréviation identifiées et le titre de noblesse; ensuite, il supprime l'ensemble des termes \enquote{auxilliaires} (\enquote{le, la, dit...}), qu'ils aient des capitales ou non; enfin, tous les noms communs restants sont supprimés. Il ne reste alors du texte entre parenthèses qu'un ou plusieurs noms commençant par une majuscule et considérés comme des noms propres; quelle valeur donner à ce texte? Étant donné que le prénom a déjà été identifié, de même que le titre de noblesse, le texte entre parenthèses ne peut être qu'un nom de famille; on considère alors que le texte entre parenthèses est un de nom de famille usuel; le texte hors parenthèses est alors le nom de famille noble.
+
+Si un \tname{} contient des parenthèses mais pas de titre de noblesse, le processus est analogue à celui décrit ci-dessus -- mais plus simple, puisque le texte entre parenthèses a tendance à être bien plus complexe pour les personnes nobles. Le bruit est successivement détecté et supprimé à l'aide d'\glspl{expression régulière}; le prénom déjà extrait est supprimé. À ce stade, une deuxième extraction de prénoms a lieu: les prénoms étant parfois complexes et écrits d'une manière variable (avec ou sans parenthèses...), il arrive que ceux-ci ne soient pas entièrement extraits. Cette seconde extraction pose une légère difficulté, puisque l'on dispose alors de deux noms propres ayant la valeur d'un prénom. Il faut déterminer la relation entre ces deux \enquote{prénoms}: les mettre simplement bout-à-bout risquerait de créer des noms et prénoms dans le désordre; dans ces cas, le moteur de recherche de \wkd{} ne retournerait pas de résultat. Par conséquent, c'est en fonction de la position relative des deux \enquote{prénoms} que le prénom final est reconstruit: celui qui se situe au début du texte entre parenthèse est positionné en premier dans le prénom reconstruit. Pour finir, c'est le texte hors parenthèses qui est extrait, soit le nom de famille. En l'absence de titre de noblesse, il n'est pas nécessaire de faire la différence entre différents noms de famille; le nom hors parenthèses ne peut être qu'un nom de famille usuel.
+
+Si un nom ne contient pas de parenthèses, le processus d'extraction est à la fois plus simple et moins qualitatif: il est tout simplement impossible de classer les différentes données extraites par détection de motifs. Dans ce cas là, le bruit supprimé du \tname{}; l'objectif est de pouvoir lancer des recherches sur \wkd{} avec les données les plus propres possibles, afin de maximiser les possibilités d'obtenir un résultat correct.
+
+
+% en conclu de partie ou en conclu tout court
+% Ainsi, en s'appuyant sur une connaissance du corpus, il est possible d'approximer une véritable compréhension \enquote{humaine} d'un texte semi structuré, en utilisant uniquement des \glspl{expression régulière}. Si il n'est pas possible d'identifier le sens des différents éléments, il est possible de localiser et d'extraire les éléments signifiants. Il apparaît alors que ces éléments signifiants sont, d'une certaine manière, des formes, ou des motifs qui peuvent être détectés automatiquement; la signification peut être identifiée en fonction du type de donnée extraite (un nombre est une date). Mais, dans un corpus semi-structuré, il surtout est possible d'inférer du \enquote{sens} d'un élément à partir de sa position dans le texte. C'est dans ce cadre qu'un encodage en \xmltei{} des documents prend tout son intérêt: les différentes parties d'un texte sont balisées sémantiquement, ce qui est essentiel au traitement automatisé du texte: il devient possible de traiter le texte non pas dans son intégralité, mais au niveau d'une unité sémantique très précise, comme le nom donné à un manuscrit (le \tname{}) ou une brève description (le \ttrait{})
+
+, dans un premier temps, d'identifier des éléments pertinents dans un contexte de recherche; dans un deuxième temps, il est possible 
+
+\widepage
+\begin{figure}[!p]
+	\centering
+	\tikz[node distance=1cm]{
+		\node[base](start) at (0,0)%
+		{\tname{} contenant des parenthèses};
+		\node[base] (fname) at (8,0)%
+		{Prénoms extraits du \tname{} et éventuellement reconstruits (\ref{fig:abv2full})};
+		\node[label={[rotate=-90]below:Réinjection des prénoms déjà extraits}] at (8.75,-4.25) {};
+		
+		\node[choice](nobl) at (0,-3)%
+		{Est-ce que le \tname{} contient un titre de noblesse?};
+		\node[label={OUI}] at (-2.25,-5.25) {};
+		\node[label={NON}] at (2.25, -5.25) {};
+		
+		\node[transf](y1) at (-4,-8)%
+		{Extraction des données entre parenthèses: titre de noblesse (ajouté au \texttt{status}) et nom de famille personnel ajouté au \texttt{lname}};
+		\node[transf](y2) at (-4,-13)%
+		{Injection des prénoms extraits à l'épape précédente dans le \texttt{fname}};
+		\node[transf](y3) at (-4,-17.5)%
+		{Extraction des données en dehors des parenthèses: le nom de famille noble, ajouté au \texttt{nobname\_sts}};
+		
+		\node[transf](n1) at (4,-8.5)%
+		{Extraction des données entre parenthèses: seconde extraction de prénoms pour réduire le bruit et nettoyage};
+		\node[transf](n2) at (4,-13.5)%
+		{Réinjection des prénoms extraits et combinaison des prénoms extraits pour constituer le \texttt{fname}};
+		\node[transf](n3) at (4,-17.5)%
+		{Extraction du nom de famille hors parenthèses et constitution du \texttt{lname}};
+		
+		\node[base](end) at (0,-21)%
+		{Passage à l'extraction d'informations du \texttt{lname}};
+		
+		\begin{pgfonlayer}{bg} % \draw on the background of nodes
+			\draw[arrow] (start) -- (nobl);
+			\draw[arrow] (nobl) -- (y1);
+			\draw[arrow] (y1) -- (y2);
+			\draw[arrow] (y2) -- (y3);
+			\draw[arrow] (nobl) -- (n1);
+			\draw[arrow] (n1) -- (n2);
+			\draw[arrow] (n2) -- (n3);
+			\draw[arrow] (n3) -- (4,-21) -- (end);
+			\draw[arrow] (y3) -- (-4,-21) -- (end);
+			\draw[dotted,] (fname) -- (8,-13.5) -- (n2);
+			\draw[dotted] (fname) -- (8,-11) -- (-3.5,-11) -- (y2);
+		\end{pgfonlayer}	
+	}
+	\caption{Extraction d'informations d'un \tname{} contenant des parenthèses}
+	\label{fig:extractparenthesis}
+\end{figure}
+\restoregeometry
+
+
+\subsubsection{Reconstruire un prénom complet à partir de son abréviation}
 \ref{fig:extractparenthesis} (qui contient une sous-partie de l'algorithme pour plus de lisibilité)
 
-
-\subsection{Reconstruire un prénom complet à partir de son abréviation}
 Souvent, le prénom d'une personne est écrit en abrégé. Partant de ce constat, un algorithme a été construit pour:
 \begin{itemize}
 	\item Repérer lorsqu'un prénom est abrégé, en prenant en compte différents types d'abréviations (nom simple ou composé, nom entièrement ou partiellement abrégé) et des possibles fautes dans les catalogues (un point est oublié à la fin d'une abréviation, par exemple).
@@ -986,6 +811,13 @@ Souvent, le prénom d'une personne est écrit en abrégé. Partant de ce constat
 \end{itemize}
 
 Ici, l'approche est totalement prédictive: il est impossible d'être certain d'obtenir le bon nom complet à partir de son abréviation; on peut uniquement prédire que le prénom reconstruit sera conforme au vrai prénom (tel qu'il est écrit sur \wkd{}) et chercher à maximiser cette certitude.
+
+\begin{figure}[p]
+	\tikz{
+	}
+	\caption{Représentation graphique du processus d'extraction et de reconstitution d'un nom à partir de son abréviation}
+	\label{fig:abv2full}
+\end{figure}
 
 \subsection{Extraire des informations normalisées à partir d'un nom et de sa description}
 Cette sous-section détaille l'utilisation de tables de conversion pour traduire et normaliser certaines donnes importantes (dates de vie et mort, titres de noblesse et fonctions).
@@ -1119,511 +951,3 @@ Cette courte section détaille la mise à jour des fichiers \tei{} avec les iden
 
 \section{Des données à la monnaie: premiers résultats de l'étude}
 Sous réserve que l'étude des régressions linéaires ait été fait à temps (ce qui n'est pas garanti), j'aimerais ici présentés les premiers résultats sur les facteurs de l'évolution des prix.
-
-
-%%%%%%%%%%%%%%%%%%%%%% TROISIÈME PARTIE %%%%%%%%%%%%%%%%%%%%%%
-\part{Après la \tei{}: l'application web \ktb{}, interface de diffusion des données}
-\chapter{Design d'interfaces dans un projet d'humanités numériques: l'application web \ktb{}}
-\chaptermark{Design d'interface...}
-Ce chapitre s'intéresse aux relations entre \textit{web design}, données textuelles et humanités numériques, à partir de l'exemple du site web développé pour le projet \ktb{}.
-
-\section{Le design d'interfaces: une reconfiguration des méthodes de recherche et une transformation du corpus}
-Cette section s'intéresse aux nouveautés apportées par le design d'interfaces dans les humanités numériques. On s'intéresse à la manière dont le design d'interfaces (et le design de façon générale) transforme les méthodes de recherche \enquote{habituelles}, mais aussi une transformation du rapport aux documents.
-
-\subsection{Le design comme inversion des méthodes}
-Avec les humanités numériques, les questions de design et de structuration deviennent centrales, depuis la conception de schémas \tei{} (qui demandent de mettre en forme un document pré-existant) et d'ontologies jusqu'au développement d'interfaces et de sites web. Parmi ces questions \enquote{formelles}, le design d'interfaces occupe cependant une place particulière. En effet, dans la plupart des aspects des humanités numériques, le rapport entre questions techniques et scientifiques est clairement établi; la question scientifique préexiste, et la technique sert surtout à répondre à cette question (comme cela a été le cas jusqu'à dans la \enquote{pipeline} jusqu'ici). Cette hiérarchie entre théorie et pratique reste somme toute assez traditionnelle et correspond aux méthodes scientifiques établies. 
-
-Avec le design d'interfaces, ce rapport établi s'inverse. En effet, le design ne cherche pas à répondre à une question. Tout au plus, il répond à un cahier des charges (il faut, à minima, permettre de diffuser des données de façon lisible par des êtres humains). C'est avec la pratique du design que naissent les problématiques, parmi lesquelles: 
-\begin{itemize}
-	\item Comment organiser les différentes parties d'une page pour que celle ci soit lisible? 
-	\item Comment organiser la relation entre les pages pour qu'un site web soit facilement navigable? 
-	\item De quelle manière l'apparence d'un site détermine la réception des contenus?
-	\item En quoi le design d'un site web construit ou bouscule des habitudes et des formes d'utilisation chez ses utilisateur.ice ?
-\end{itemize}
-Toutes les questions posées par le design n'attendent pas nécessairement de réponse. Cependant, force est de constater que ce domaine appelle à une nouvelle approche pour des chercheur.euse.s et ingénieur.e.s issu.e.s des humanités; ces questions visuelles amènent à une approche semblable à celle de la recherche-création et demandent de développer un nouveau rapport à la technique.
-
-\subsection{Interface et document}
-En plus de perturber nos méthodes, la conception d'interfaces influence la perception des documents. Dans le cas du projet \ktb, le site web opère une médiation, il implique de une \enquote{scénographie} autour des catalogues de vente. Ceux-ci et les manuscrits qui y ont décrits sont intégrés à des pages, inclus dans un parcours, accessibles depuis différents points d'entrée. En plus de cette scénographie, les catalogues sont littéralement traduits, depuis la \tei{} vers le format \html{}. Là où la \tei{} est un format de balisage sémantique (c'est la signification des éléments guide l'encodage), le \html{} est pensé pour un balisage formel (le texte est balisé en fonction de la forme que l'on souhaite obtenir). Cela implique une perte d'information (les métadonnées du \texttt{teiHeader}) et l'éloignement d'une approche philologique du texte. Enfin, le site internet marque un éloignement intellectuel avec les documents: le catalogue n'y est plus l'unité intellectuelle dominante, alors qu'il restait l'un des critères structurants des fichiers \tei{} (un fichier représentant un catalogue). Sur le site web, on peut accéder directement aux éléments vendus, sans avoir à passer par les catalogues. Dans le contexte d'un projet issu de la littérature, toutes ces opérations ne sont pas neutres et méritent d'être explicitées. Pour mieux identifier ce que ces transformations impliquent, il peut être intéressant de revenir à la \enquote{roue} de Sahle\footcite[p. 11]{sahle_digital_2016}.
-
-
-\section{La conception d'interfaces, un problème pour les humanités numériques?}
-\chaptermark{La conception d'interfaces}
-Cette section s'intéresse aux rôle des interfaces en humanités numériques.
-
-\subsection{Pour une approche pragmatique du design d'interfaces dans un contexte d'humanités numériques}
-Le design graphique demande des compétences spécifiques qui ne font pas directement partie des cursus d'humanités numériques. Il ne sert pas seulement à faire des sites qui soient \enquote{beaux}, il joue un rôle essentiel en encadrant la réception des contenus présentés. Cependant, les approches plus \enquote{élaborées} de design d'interfaces demandent des financements et des techniques qui sont souvent hors de portée d'un projet universitaire. Des approches plus \enquote{critiques} du design ont également été développées dans les humanités numériques\footcite{drucker_visualisation_2020}. Ces approches ont tendance à être difficiles à mettre en œuvre; leur portée critique peut aller à l'encontre de l'utilité des interfaces, en faisant de l'interface l'objet principal d'intérêt, aux dépends des contenus présentés. 
-
-À l'opposé de ces approches, ce qui est défendu dans le cadre du projet \mssktb{} est une approche à la fois informée et pragmatique du \textit{web design}. Informée, car être conscient des enjeux du design permet un meilleur positionnement en tant qu'ingénieur.e, et donc une présentation des contenus plus intéressante. Pragmatique, parce que les solutions qui sont présentées sont des solutions techniquement réalisables dans le cadre d'un projet universitaire. C'est ici qu'est présentée la charte graphique développée pour l'application web \ktb{}.
-
-\subsection{Rejeter les interfaces?}
-Après avoir parlé de l'intérêt des interfaces et présenté l'approche suivie au sein du projet \mssktb{}, cette partie s'attache à développer une critique des interfaces. À partir d'une approche historique des interfaces graphiques, des contextes dans lesquelles elles se sont développées, nous revenons sur les concepts centraux à leur développement que sont la notion d'utilisateur et de design d'expérience. Il ne s'agit pas de remettre en cause l'utilisation d'interfaces, mais de défendre une approche critique et consciente de l'impact que la standardisation des \enquote{expériences utilisateur} sur internet peuvent avoir sur la diffusion des connaissances.
-
-\chapter{Donner à voir un corpus textuel}
-Ce chapitre s'intéresse aux visualisations développées pour l'application web \ktb{}.
-
-\section{Visualisation, design et sciences: des relations complexes}
-Ici, on s'intéresse à la place qu'occupe la visualisation de données dans la recherche scientifique. Le rapport entre les sciences et la visualisation est loin d'être simple et unidirectionnel: cette dernière n'est pas juste un outil, une méthode utilisée dans la recherche scientifique pour des raisons pratiques. Il est plus intéressant de penser la visualisation (et donc le design) et les sciences comme des domaines en interaction, qui s'influencent mutuellement. De la même manière que l'écriture implique des manières de penser particulières \footcite[p. 111-116]{masure_design_2017} en donnant au discours une existence spatiale (le texte est répandu sur une page et des renvois peuvent être fait d'un endroit de la page à un autre), la visualisation implique ses propres manières de penser et influence donc la recherche. Dans notre cas par exemple, produire des visualisations implique de s'intéresser à des informations quantifiables; cela encourage donc une approche statistique du corpus. À l'inverse, la recherche scientifique ne fait pas qu'\enquote{utiliser} le design. Certaines pratiques sont favorisées et deviennent force d'autorité dans des disciplines scientifiques. Se créent alors des \enquote{cultures visuelles}\footcite[p. 14]{hentschel_visual_2014} propres à ces disciplines, avec leurs traditions et motifs.
-
-\subsection{L'utilisation de supports visuels dans les sciences: une longue histoire}
-Ici, on retrace une histoire de l'utilisation du visuel dans les sciences (au sens large: sciences \enquote{dures} et sciences humaines), à partir (entres-autres) du travail de Anne-Lyse Renon\footcite[p. 47-88]{renon_design_2016} et de K. Hentschel\footcite{hentschel_visual_2014}.
-
-\subsection{Une vision objective? Visualisation et prétention à l'objectivité}
-Cette partie fait un retour sur la manière dont le visuel et la production de graphiques ont été utilisés comme arguments d'autorité, afin de montrer des faits de façon \enquote{objective}\footcite{renon_design_2015}.
-
-\subsection{La tendance visuelle des humanités numériques}
-Pour finir, on fait un bref retour sur la manière dont les humanités numériques \enquote{intensifient} la tendance à la visualisation, ou complexifient le rapport entre sciences et visualisation, pour deux raisons. En premier lieu, les humanités numériques viennent avec le développement de nouveaux outils. Ensuite, les humanités numériques marquent un retour à une approche quantitative et graphique dans les sciences humaines -- approche qui trouve ses sources, entre-autres, dans l'École des Annales et sa collaboration avec le Laboratoire de graphique de Jacques Bertin\footcite{orain_laboratoire_2021}, ainsi que dans le structuralisme, où les \enquote{structures} trouvent leur meilleure représentation sous forme graphique. Cette tendance visuelle des humanités numériques n'est pas sans poser problème, puisque les visualisations sont développées par des personnes qui n'ont pas nécessairement de formation en graphisme. Une approche pragmatique de la visualisation a tendance à primer (les graphiques servent à prouver quelque chose), aux dépens d'une approche critique (les représentations graphiques sont des interprétations, où les données sont signifiantes, mais où les formes et les méthodes de représentation importent aussi).
-
-
-\section{Interpréter le corpus de manuscrits}
-Ce chapitre s'intéresse à la manière dont le corpus de catalogues de vente de \ktb{} a été traduit en graphiques et à la manière dont ces représentations permettent un nouveau regard sur le corpus.
-
-\subsection{La visualisation comme objet de connaissance}
-Ici, on développe une analyse du corpus de catalogues et des manuscrits qui y sont décrits à partir des visualisations produites. Par leur capacité à traduire les informations sous des formes synthétiques\footcite[p. 36]{hentschel_visual_2014}, les visualisations sont des objets de connaissance qui permettent de comprendre le corpus traité.
-
-\subsection{La visualisation comme interprétation}
-Les représentations graphiques ne font pas que montrer des phénomènes. Leur rôle est moins analytique que démonstratif: elles ne révèlent pas une information qui serait cachée dans les données, mais interprètent celles-ci conformément à une problématique de recherche\footcite[p. 78]{drucker_visualisation_2020}. Représenter un jeu de données, c'est donc le lire, l'interpréter en fonction de certaines questions scientifiques. Ce processus interprétatif est donc partiel (on ne dit pas tout ce qui est dans un jeu de données, mais seulement ce qui est pertinent dans un certain contexte); il est aussi influencé par les propriétés graphiques des visualisations. Cette sous-section s'intéresse donc, à partir d'exemples concrets, à la manière dont les propriétés graphiques (choix de formes et de couleurs) ainsi que le pré-traitement des données et d'autres décisions techniques (représentation des prix en francs courants ou constants) influencent la lecture et la perception du corpus.
-
-
-%%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHIE %%%%%%%%%%%%%%%%%%%%%%
-\pagebreak
-\chapter*{Bibliographie}
-\chaptermark{Bibliographie}
-\addcontentsline{toc}{chapter}{Bibliographie}
-\printbibliography[heading=subbibintoc,keyword={katabase},title={Projet \mssktb{}}]
-\printbibliography[heading=subbibintoc,keyword={text},title={Édition numérique, traitement automatisé et analyse de texte}]
-\printbibliography[heading=subbibintoc, keyword={web}, title={Technologies du web}]
-\printbibliography[heading=subbibintoc,keyword={visualisation},title={Visualisation et design d'interfaces}]
-\printbibliography[heading=subbibintoc,keyword={econometrie},title={Marché de l'art, économétrie et statistiques}]
-
-
-%%%%%%%%%%%%%%%%%%%%%% TOCS %%%%%%%%%%%%%%%%%%%%%%
-\printglossaries
-\listoffigures
-% \listoftables
-\tableofcontents
-
-%%%%%%%%%%%%%%%%%%%%%% ANNEXES	 %%%%%%%%%%%%%%%%
-\appendix
-\chapter{Graphiques}
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{annexes/fig_wikidata_instances.png}
-	\caption \\Occurrences des différentes catégories auxquelles appartiennent les entités \wkd{} liées avec les entrées de catalogues
-	\label{appendix:wikidata_instances}
-\end{figure}
-
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{annexes/fig_teinametypes.png}
-	\caption{Répartition des différents types de \tname{}}
-	\label{appendix:tnametypes}
-\end{figure}
-
-\chapter{Code source et données encodées}
-\begin{listing}
-	\begin{minted}{python}
-functions = {
-	"général": "general",
-	"maréchal": "marshal",
-	"lieutenant": "military",
-	"officier": "military",
-	"colonel": "military",
-	"lieutenant-colonel": "military",
-	"commandant": "military",
-	"capitaine": "military",  # "less important" military positions
-	"roi": "king",
-	"empereur": "emperor",
-	"president": "president",
-	"homme politique": "politician",
-	"président de l'assemblée": "politician",
-	"orateur": "politician",
-	"député": "politician",
-	"secrétaire d'état": "politician",
-	"sénateur": "politician",
-	"écrivain": "writer",
-	"auteur": "writer",
-	"romancier": "writer",
-	"acteur": "actor",
-	"actrice": "actress",
-	"cantatrice": "singer",
-	"chanteur": "singer",
-	"chanteuse": "singer",
-	"peintre": "painter",
-	"sculpteur": "sculptor",
-	"statutaire": "sculptor",
-	"compositeur": "composer",
-	"musicien": "musician",
-	"musicienne": "musician",
-	"tragédien": "actor",
-	"chansonnier": "chansonnier",
-	"achitecte": "architect",
-	"journaliste": "journalist",
-	"inventeur": "inventor",
-	"chimiste": "chemist",
-	"connétable": "constable",
-	"archevêque": "archbishop",
-	"évêque": "bishop",
-	"docteur": "physicist",
-	"médecin": "physicist"
-}		
-	\end{minted}
-	\caption{Table de conversion associant un métier à son équivalent normalisé}
-	\label{appendix:convfunction}
-\end{listing}
-
-	
-\begin{listing}
-	\begin{minted}{python}
-dpts = [
-	"ain",
-	"aisne",
-	"allier",
-	"basses-alpes",
-	"hautes-alpes",
-	"alpes-maritimes",
-	"annepins",
-	"provence",
-	"ardèche",
-	"ardennes",
-	"arriège",
-	"arno",
-	"aube",
-	"aude",
-	"aveyron",
-	"bouches-de-l'elbe",
-	"bouches-de-l'escaut",
-	"bouches-de-l'yssel",
-	"bpuches-de-la-meuse",
-	"bouches-du-rhin",
-	"bouches-du-rhône",
-	"bouches-du-weser",
-	"calvados",
-	"cantal",
-	"charente",
-	"charente-inférieure",
-	"cher",
-	"corrèze",
-	"corse",
-	"côte-d'or",
-	"côtes-du-nord",
-	"creuse",
-	"deux-nèthes",
-	"deux-sèvres",
-	"doire",
-	"dordogne",
-	"doubs",
-	"drôme",
-	"dyle",
-	"ems-occidental",
-	"ems-oriental",
-	"ems-supérieur",
-	"escaut",
-	"eure",
-	"eure-et-loir",
-	"finistère",
-	"forêts",
-	"gard",
-	"haute-garonne",
-	"gers",
-	"gironde",
-	"hérault",
-	"ille-et-villaine",
-	"indre",
-	"indre-et-loire",
-	"isère",
-	"jemappes",
-	"jura",
-	"landes",
-	"léman",
-	"loire",
-	"loir-et-cher",
-	"haute-loire",
-	"loire-inférieure",
-	"loiret",
-	"lot",
-	"lot-et-garonne",
-	"lozère",
-	"lys",
-	"maine-et-loire",
-	"manche",
-	"marengo",
-	"marne",
-	"haute-marne",
-	"méditerrannée",
-	"mayenne",
-	"meurthe",
-	"meuse",
-	"meuse-inférieure",
-	"mont-blanc",
-	"mont-tonnerre",
-	"montenotte",
-	"morbihan",
-	"meuse",
-	"moselle",
-	"nièvre",
-	"nord",
-	"oise",
-	"ombrone",
-	"orne",
-	"ourte",
-	"paris",
-	"pas-de-calais",
-	"pô",
-	"puy-de-dôme",
-	"hautes-pyrénées",
-	"basses-pyrénées",
-	"pyrénées-orientales",
-	"haut-rhin",
-	"bas-rhin",
-	"rhin-et-moselle",
-	"rhône",
-	"rhône-et-loire",
-	"roer",
-	"rome",
-	"haute-saône",
-	"saône-et-loire",
-	"sambre-et-meuse",
-	"sarre",
-	"sarthe",
-	"seine",
-	"seine-et-marne",
-	"seine-et-oise",
-	"seine-inférieure",
-	"sézia",
-	"simplon",
-	"deux-sèvres",
-	"somme",
-	"stura",
-	"tarn",
-	"tarn-et-garonne",
-	"taro",
-	"trasimène",
-	"var",
-	"vaucluse",
-	"vendée",
-	"vienne",
-	"haute-vienne",
-	"vosges",
-	"yonne",
-	"yssel-supérieur",
-	"zuyderzée"
-]		
-	\end{minted}
-	\caption{Liste de départements du XIXe~s. pour détecter des informations géographiques}
-	\label{appendix:convdpt}
-\end{listing}
-
-\begin{listing}
-	\begin{minted}{python}
-countries = {
-	"états-unis d'amérique": "united states of america",
-	"etats-unis d'amérique": "united states of america",
-	"états unis d'amérique": "united states of america",
-	"etats unis d'amerique": "united states of america",
-	"états-unis": "united states of america",
-	"etats-unis": "united states of america",
-	"etats unis": "united states of america",
-	"états unis": "united states of america",
-	"italie": "italy",
-	"grèce": "greece",
-	"canada": "canada",
-	"chine": "china",
-	"haïti": "haiti",
-	"tobago": "tobago",
-	"brésil": "brasil",
-	"burkina-faso": "burkina-faso",
-	"cameroun": "cameroun",
-	"tchad": "tchad",
-	"congo": "congo",
-	"gabon": "gabon",
-	"guinée": "guinea",
-	"côte d'ivoire": "ivory coast",
-	"mali": "mali",
-	"mauritanie": "mauritania",
-	"niger": "niger",
-	"sénégal": "senegal",
-	"madagascar": "madagascar",
-	"seychelles": "seychelles",
-	"tanzanie": "tanzania",
-	"zanzibar": "zanzibar",
-	"liban": "lebanon",
-	"syrie": "syria",
-	"inde": "india",
-	"laos": "laos",
-	"viet-nâm": "vietnam"
-}	
-	\end{minted}
-	\caption{Table de conversion pour les pays}
-	\label{appendix:convcountry}
-\end{listing}
-
-\begin{listing}
-	\begin{minted}{python}
-colonies = [
-	"québec",
-	"ontario",
-	"saint-pierre-et-miquelon",
-	"mississippi",
-	"missouri",
-	"louisiane",
-	"anguilla",
-	"antigua",
-	"dominique",
-	"saint-domingue",
-	"guadeloupe",
-	"monsterrat",
-	"saint-martin",
-	"saint-barthélémy",
-	"sainte-lucy",
-	"saint-vincent-et-les-grenadines",
-	"saint-eustache",
-	"saint-christophe",
-	"martinique"
-	"guyane française",
-	"guyane",
-	"maroc",  # unfortunately the morocco referred to in XIXth century france is a french protectorate
-	"algérie",  # same
-	"algérie française",  # same
-	"tunisie",  # same
-	"fezzan",
-	"dahomey",
-	"haute-volta",
-	"oubangui-chari",
-	"congo français",
-	"moyen-congo",
-	"guinée française",
-	"soudan français",
-	"gorée",
-	"tigi",
-	"djibouti",
-	"cheikh saïd",
-	"comores",
-	"fort-dauphin",
-	"îles maurice",
-	"mayotte",
-	"la réunion",
-	"îles éparses",
-	"île amsterdam",
-	"île saint-paul",
-	"archipel crozet",
-	"îles kerguelen",
-	"castellorizo",
-	"grand-liban",
-	"sandjak d'alexandrette",
-	"indes françaises",
-	"pondichéry",
-	"karikal",
-	"yanaon",
-	"mahé",
-	"chanderngor",
-	"tonkin",
-	"annam",
-	"cochinchine",
-	"guangzhou wan",
-	"shanghai",
-	"guangzhou",
-	"tianjin",
-	"hankou",
-	"clipperton",
-	"nouvelle-calédonie",
-	"polynésie française",
-	"vanuatu",
-	"nouvelles-hébrides",
-"wallis et futuna"
-]
-	\end{minted}
-	\caption{Liste d'anciennes colonies françaises pour la détection de motifs}
-	\label{appendix:convcolonie}
-\end{listing}
-
-\begin{listing}
-	\begin{minted}{python}
-provinces = [
-	"armagnac",
-	"île-de-france",
-	"berry",
-	"orléanais",
-	"normandie",
-	"languedoc",
-	"lyonnais",
-	"dauphiné",
-	"champagne",
-	"aunis",
-	"saintonge",
-	"poitou",
-	"guyenne et gascogne",
-	"bourgogne",
-	"picardie",
-	"anjou",
-	"provence",
-	"angoumois",
-	"bourbonnais",
-	"marche",
-	"bretagne",
-	"maine",
-	"touraine",
-	"limousin",
-	"comté de foix",
-	"auvergne",
-	"béarn",
-	"alsace",
-	"artois",
-	"roussillon",
-	"flandre française et hainaut français",
-	"franche-comté",
-	"lorraine et trois-évêchés",
-	"corse",
-	"nivernais",
-]
-	\end{minted}
-	\caption{Liste d'anciennes provinces françaises pour la détection de motifs}
-	\label{appendix:convprov}
-\end{listing}
-
-\begin{listing}
-\begin{minted}{python}
-events = {
-	"défense nationale": "government of national defense",
-	"defense nationale": "government of national defense",
-	"révolution française": "french revolution",
-	"revolution francaise": "french revolution",
-	"guerre de trente ans": "thirty years' war 1618 1648",
-	"guerre de cent ans": "hundred years' war 1337 1453",
-	"guerre de sept ans": "seven years war 1756 1763",
-	"guerre": "war",
-	"insurrection": "war",
-	"siège de mayence": "siege of mainz",
-	"siège": "siege",
-	"commune": "commune",
-	"défense": "battle",
-	"révolution": "revolution"
-}
-\end{minted}
-	\caption{Table de conversion pour les évènements historiques}
-	\label{appendix:convevt}
-\end{listing}
-
-\begin{listing}
-\begin{minted}{python}
-\end{minted}
-\label{}
-\caption{Liste de colonies pour la détection de motifs}
-\end{listing}
-
-\begin{listing}
-\begin{minted}{python}
-\end{minted}
-\label{}
-\caption{Liste de colonies pour la détection de motifs}
-\end{listing}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-\end{document}

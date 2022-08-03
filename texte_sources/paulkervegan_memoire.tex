@@ -1,0 +1,339 @@
+%%%%%%%%%%%% métadonnées %%%%%%%%%%%%
+\author{Paul, Hector KERVEGAN}
+\title{Traitement et exploitation d'un corpus textuel semi-structuré: le cas des catalogues de vente de manuscrits.}
+\date{05.09.2022}
+
+%%%%%%%%%%%% encodage, format, langue et police %%%%%%%%%%%%
+\documentclass[a4paper, 12pt, twoside]{book}
+\usepackage[english, french]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+\usepackage{lmodern}
+\usepackage{graphicx}
+\usepackage{enumitem}
+
+%%%%%%%%%%%% code %%%%%%%%%%%%
+\usepackage[newfloat]{minted}
+\SetupFloatingEnvironment{listing}{name=Code source}
+\usemintedstyle{manni}
+\setminted{linenos, breaklines, tabsize=4, bgcolor=peachpuff}
+
+%%%%%%%%%%%% graphiques et couleurs %%%%%%%%%%%%
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+
+% thx https://latexcolor.com/
+\definecolor{palepink}{rgb}{0.98, 0.85, 0.87}
+\definecolor{plum}{rgb}{0.44, 0.11, 0.11}
+\definecolor{lilac}{rgb}{0.8, 0.8, 1.0}
+\definecolor{peachpuff}{rgb}{1.0, 0.85, 0.73}
+\definecolor{lightpink}{rgb}{1.0, 0.71, 0.76}
+\definecolor{pearl}{rgb}{0.94, 0.92, 0.84}
+\definecolor{lightmauve}{rgb}{0.86, 0.82, 1.0}
+\definecolor{cherryblossompink}{rgb}{1.0, 0.72, 0.77} 	
+\definecolor{nadeshikopink}{rgb}{0.96, 0.68, 0.78}
+\definecolor{pastelviolet}{rgb}{0.8, 0.6, 0.79}
+
+% db interaction: db
+% main step (start, stop...): main
+% transfo/relation: transf
+\tikzstyle{base} = [%
+	draw,%
+	rectangle,%
+	rounded corners=3pt,%
+	minimum height=1cm,%
+	fill=lilac,%
+	draw=plum,%
+	text centered,%
+	text width=4cm%
+]
+\tikzstyle{db} = [%
+	cylinder,%
+	shape border rotate=90,%
+	aspect=0.25,%
+	fill=pastelviolet,%
+	draw=plum,%
+	text centered,%
+	text width=4cm%
+]
+\tikzstyle{transf} = [%
+	trapezium,%
+	trapezium left angle=70,%
+	trapezium right angle=110,%
+	minimum height=1cm,%
+	fill=lightpink,%
+	draw=plum,%
+	text centered,%
+	text width=3cm%
+]
+\tikzstyle{choice} = [%
+	diamond,%
+	minimum width=2cm,%
+	aspect=2,%
+	fill=peachpuff,%
+	draw=plum,%
+	text centered,%
+	text width=4cm%
+]
+\tikzstyle{baseoutline} = [%
+	rectangle,%
+	rounded corners,%
+	draw=white,%
+	ultra thick
+]
+\tikzstyle{arrow} = [%
+	thick,%
+	->,%
+	>=stealth,%
+	color=plum%	
+]
+\tikzstyle{line} = [%
+	thick,%
+	color=plum%	
+]
+\tikzstyle{dotted} = [%
+	thick,%
+	->,%
+	>=stealth,%
+	color=plum,%
+	dash pattern=on 3pt off 4pt on \the\pgflinewidth off 4pt%
+]
+\pgfdeclarelayer{bg}    % declare background layer
+\pgfsetlayers{bg,main}  % set the order of the layers (main is the standard layer)
+
+% images
+\usepackage{subcaption}
+
+% mise en page ENC
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\setlength\parindent{1cm}
+
+% bibliographie
+\usepackage[toc]{appendix}
+\usepackage{csquotes}
+\usepackage[backend=biber,sorting=nyt,style=enc]{biblatex}
+\nocite{*}
+\addbibresource{bibliographie/visualisation.bib}
+\addbibresource{bibliographie/katabase.bib}
+\addbibresource{bibliographie/ecostat.bib}
+\addbibresource{bibliographie/textprocessing.bib}
+\addbibresource{bibliographie/web.bib}
+\defbibnote{intro}{Cette bibliographie contient tous les ressources utilisées pour l'écriture de ce mémoire.}
+
+\DeclareSourcemap{%
+ \maps[datatype=bibtex]{%
+ 	\map[overwrite]{%
+ 		\perdatasource{bibliographie/visualisation.bib}
+ 		\step[fieldset=keywords, fieldvalue={,visualisation}, append]
+ 	}
+ 	\map[overwrite]{%
+ 		\perdatasource{bibliographie/katabase.bib}
+ 		\step[fieldset=keywords, fieldvalue={,katabase}, append]
+ 	}
+	\map[overwrite]{%
+		\perdatasource{bibliographie/textprocessing.bib}
+		\step[fieldset=keywords, fieldvalue={,text}, append]
+	}
+ 	\map[overwrite]{%
+ 		\perdatasource{bibliographie/ecostat.bib}
+ 		\step[fieldset=keywords, fieldvalue={,econometrie}, append]
+ 	}
+ 	\map[overwrite]{%
+ 		\perdatasource{bibliographie/web.bib}
+ 		\step[fieldset=keywords, fieldvalue={,web}, append]
+ 	}
+  }
+}
+
+
+% notes de bas de page, table des matières citations et index
+\usepackage{imakeidx}
+% \makeindex
+% \makeindex[name=lieux,title=Index des noms de lieux]
+\usepackage{tocbibind}
+
+% autres paquets
+\usepackage{ifthen}
+ 
+% hyperref
+\usepackage{hyperref}
+\hypersetup{
+ pdfauthor={Paul, Hector KERVEGAN}, 
+ pdftitle={Traitement et exploitation d'un corpus textuel semi-structuré: le cas des catalogues de vente de manuscrits.}, 
+ pdfsubject={Traitement de données textuelles},
+ pdfkeywords={catalogues de vente}{mss}{katabase}{reconnaissance optique de caractères}{ocr}{web design}{visualisation de données}{traitement automatisé du language}{web de données}{Python}
+}
+
+
+% glossaire et acronmymes
+\usepackage[automake, acronym, toc]{glossaries}
+\setacronymstyle{short-long}
+\renewcommand{\glsnamefont}[1]{\makefirstuc{#1}}  % capitalize 1st letter in \printglossaries
+\makeglossaries
+\newglossaryentry{apig}{
+	name={API},
+	description={Une interface de programmation d'application (\textit{Application Programming Interface} en anglais) est un protocole qui pemret à un programme de communiquer avec un autre programme. Ce protocole documenté, correspond à un ensemble d'opérations permettant à un programme \enquote{consommateur} d'utiliser des fonctionnalités d'un programme \enquote{fournisseur}, comme par exemple de récupérer ou d'envoyer des données au fournisseur.}
+}
+\newglossaryentry{api}{
+	type=\acronymtype,
+	name={API},
+	description={Application Programming Interface},
+	first={Interface de programmation d'application (API), \glsadd{apig}},
+	see=[Glossaire:]{apig}
+}
+\newglossaryentry{dictionnaire}{
+	name={dictionnaire},
+	plural={dictionnaires},
+	description={Un dictionnaire est un format de données structuré en python qui associe à une donnée -- dite clé -- une ou plusieurs données nommées valeurs.}
+}
+\newglossaryentry{expression régulière}{
+	name={expression régulière},
+	plural={expressions régulières},
+	description={Une expression régulière, ou expression rationnelle est une chaîne de caractère, écrite selon une syntaxe précise, qui permet de détecter des motifs dans du texte\footcite{noauthor_expression_2022}. Les expressions régulières s'appuient sur la classification des caractères en classes (minuscules, majuscules, chiffres, espaces), sur des structures alternatives (un caractère ou un autre) et exclusives (un caractère n'ayant pas certaines propriétés) pour repérer des motifs. Par exemple, \enquote{2022} correspond au motif: \texttt{\textbackslash{}d{4}}, soit \enquote{quatre chiffres à la suite}. Une adresse mail est également un motif: \texttt{[\^~(@|\textbackslash{}s)]+@[\^~(@|\textbackslash{}s)]+}, soit \enquote{plusieurs caractères qui ne sont ni un espace une arobase, suivi d'une arobase, suivi de plusieurs caractères qui n'est ni un espace ni une arobase}.}
+}
+\newglossaryentry{python}{
+	name={python},
+	description={Python est un language de programmation impérative (c'est-à-dire, basé sur la production et la transformation de données par une suite d'instructions) créé en 1991. Il est particulièrement utilisé dans le domaine du traitement de données et des humanités numériques. C'est le langage le plus utilisé dans le projet \mssktb{}}
+}
+\newglossaryentry{score F1}{
+	name={score F1},
+	plural={scores F1},
+	description={Le score F1, ou \textit{F-score}, est la moyenne harmonique de la précision (vrais positifs par rapport au total de résultats obtenus) et du rappel (nombre de résultats positifs par rapport au total de résultats positifs).\footcite{noauthor_precision_2022, noauthor_f-score_2022}. Le score F1 a l'avantage de prendre en compte les vrais et les faux positifs. Ce score, dont la valeur est contenue entre 0 et 1, permet de mesurer l'exactitude d'un algorithme d'apprentissage machine, ou d'un moteur de recherche.}
+}
+\newglossaryentry{SPARQL}{
+	name={SPARQL},
+	description={SPARQL est un language de requête qui permet d'interagir avec une base de données au format RDF. \enquote{SPARQL exprime des requêtes sur des sources de données diverses [...]. SPARQL rend possible la requête de données en graphes [...], avec des données conjointes et disjointes. SPARQL permet également l'agrégation de données, les sous-requêtes, la négation, la création de données à l'aide d'expression, le test de données et la contrainte des requêtes. Les résultats de requêtes sparql peuvent être des jeux de résultats ou des graphes RDF.}\footnote{\enquote{SPARQL can be used to express queries across diverse data sources [...]. SPARQL contains capabilities for querying [...] graph patterns along with their conjunctions and disjunctions. SPARQL also supports aggregation, subqueries, negation, creating values by expressions, extensible value testing, and constraining queries by source RDF graph. The results of SPARQL queries can be result sets or RDF graphs.}\cite{harris_sparql_2013} (traduction de l'auteur).}}
+}
+\newglossaryentry{table de conversion}{
+	name={table de conversion},
+	plural={tables de conversion},
+	description={Une table de conversion est, tout simplement, un dictionnaire qui contient en clés un certain nombre d'informations telles qu'elles figurent dans le texte et, en valeurs, une version normalisée de cette information. Cela permet de détectier des motifs à extraire autant de normaliser les informations.}
+}
+
+% modèle: \newacronym{dom}{\textsc{dom}}{\emph{Document Object Model}}
+% modèle bis: \newglossaryentry{meta}{name=métadonnée,description={donnée servant à définir ou décrire une autre donné quel que soit son support}}
+
+% commandes perso: autres que les abbréviations
+\newcommand{\widepage}{\newgeometry{left=1cm,right=1cm}}  % smaller margins for big graphs; use \restoregeometry after !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+\newcommand{\scl}[1]{%
+	% #1 : le siècle en chiffres romains
+	#1%
+	\ifthenelse{\equal{#1}{I}}{\up{er}}{\up{ème}}%
+	~s.%
+}
+
+% commandes perso: abréviations
+% technologies en mono, sigles et sites web en italique
+\newcommand{\api}{\texttt{\gls{api}}}
+\newcommand{\alto}{\texttt{Alto}}
+\newcommand{\escr}{\textit{eScriptorium}}
+\newcommand{\html}{\texttt{HTML}}
+\newcommand{\js}{\texttt{Javascript}}
+\newcommand{\json}{\texttt{JSON}}
+\newcommand{\ktb}{\textit{Katabase}}
+\newcommand{\mss}{\textit{MSS}}
+\newcommand{\mssktb}{\mss{} / \ktb{}}
+\newcommand{\py}{\texttt{\gls{python}}}
+\newcommand{\rgxsg}{\gls{expression régulière}}
+\newcommand{\rgxpl}{\glspl{expression régulière}}
+\newcommand{\rdf}{\texttt{RDF}}
+\newcommand{\sparql}{\texttt{\gls{SPARQL}}}
+\newcommand{\tei}{\texttt{TEI}}
+\newcommand{\tsv}{\texttt{TSV}}
+
+\newcommand{\titem}{\texttt{item}}
+\newcommand{\tname}{\texttt{name}}
+\newcommand{\tnum}{\texttt{num}}
+\newcommand{\ttrait}{\texttt{trait}}
+\newcommand{\tp}{\texttt{p}}
+\newcommand{\tdesc}{\texttt{desc}}
+\newcommand{\tdate}{\texttt{date}}
+\newcommand{\tmeasure}{\texttt{measure}}
+\newcommand{\tnote}{\texttt{note}}
+
+\newcommand{\xml}{\texttt{XML}}
+\newcommand{\xmltei}{\texttt{XML-TEI}}
+\newcommand{\xsl}{\texttt{XSL}}
+\newcommand{\wkd}{\textit{Wikidata}}
+
+% modèle: https://www.overleaf.com/project/61a6185ee83481070ab68d99
+% liste des mémoires: https://docs.google.com/spreadsheets/d/1CZRaEX4BMqHNtqr97Dhg9UV9bPTt_4XS_IgPL5A-ZbU/edit
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% DÉBUT %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	\onehalfspacing
+	
+	\begin{titlepage}
+		\begin{center}		
+			\bigskip
+			
+			\begin{large}
+				ÉCOLE NATIONALE DES CHARTES\\
+			\end{large}
+			
+			\rule{2cm}{0.02cm}
+			
+			\begin{Large}
+				\textbf{Paul, Hector Kervegan}\\
+			\end{Large}
+			
+			\vfill
+			
+			\begin{Huge}
+				\textbf{Traitement, exploitation et analyse d'un corpus semi-structuré: le cas des catalogues de vente de manuscrits}
+			\end{Huge}
+			
+			\vfill
+			
+			\begin{large}
+				Mémoire pour le diplôme de master \\
+				\emph{Technologies numériques appliquées à l'histoire}
+				
+				\bigskip
+				
+				2022
+			\end{large}
+			
+		\end{center}
+	\end{titlepage}
+
+
+%%%%%%%%%%%%%%%%%%%% RÉSUMÉ + CORPS DU TEXTE %%%%%%%%%%%%%%%%%%%%
+
+\input{front.tex}
+
+\input{part_i.tex}
+
+\input{part_ii.tex}
+
+\input{part_iii.tex}
+
+%%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHIE %%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
+\chapter*{Bibliographie}
+\chaptermark{Bibliographie}
+\addcontentsline{toc}{chapter}{Bibliographie}
+\printbibliography[heading=subbibintoc,keyword={katabase},title={Projet \mssktb{}}]
+\printbibliography[heading=subbibintoc,keyword={text},title={Édition numérique, traitement automatisé et analyse de texte}]
+\printbibliography[heading=subbibintoc, keyword={web}, title={Technologies du web}]
+\printbibliography[heading=subbibintoc,keyword={visualisation},title={Visualisation et design d'interfaces}]
+\printbibliography[heading=subbibintoc,keyword={econometrie},title={Marché de l'art, économétrie et statistiques}]
+
+
+%%%%%%%%%%%%%%%%%%%%%% TOCS %%%%%%%%%%%%%%%%%%%%%%
+\printglossaries
+\listoffigures
+% \listoftables
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%% ANNEXES	 %%%%%%%%%%%%%%%%%%%%%%
+\input{appendix.tex}	
+	
+	
+	
+\end{document}
