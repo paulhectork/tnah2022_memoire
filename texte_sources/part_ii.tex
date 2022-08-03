@@ -683,8 +683,8 @@ Les \tname{} ne contenant pas de parenthèses (exemple \ref{code:teiname_nopar})
 		\node[choice] (choicenoble) at (-2.5,-7) %
 			{Présence ou non d'un titre de noblesse};
 		
-		\node[baseoutline] at (-4,-9) {NON};
-		\node[baseoutline] at (-1.1,-8.5) {OUI};
+		\node[blank] at (-4,-9) {NON};
+		\node[blank] at (-1.1,-8.5) {OUI};
 		
 		\node[base] (ynoble) at (1.5,-15) %
 			{
@@ -742,12 +742,6 @@ Si un titre de noblesse a été trouvé, un processus éliminatoire est engagé 
 Si un \tname{} contient des parenthèses mais pas de titre de noblesse, le processus est analogue à celui décrit ci-dessus -- mais plus simple, puisque le texte entre parenthèses a tendance à être bien plus complexe pour les personnes nobles. Le bruit est successivement détecté et supprimé à l'aide d'\glspl{expression régulière}; le prénom déjà extrait est supprimé. À ce stade, une deuxième extraction de prénoms a lieu: les prénoms étant parfois complexes et écrits d'une manière variable (avec ou sans parenthèses...), il arrive que ceux-ci ne soient pas entièrement extraits. Cette seconde extraction pose une légère difficulté, puisque l'on dispose alors de deux noms propres ayant la valeur d'un prénom. Il faut déterminer la relation entre ces deux \enquote{prénoms}: les mettre simplement bout-à-bout risquerait de créer des noms et prénoms dans le désordre; dans ces cas, le moteur de recherche de \wkd{} ne retournerait pas de résultat. Par conséquent, c'est en fonction de la position relative des deux \enquote{prénoms} que le prénom final est reconstruit: celui qui se situe au début du texte entre parenthèse est positionné en premier dans le prénom reconstruit. Pour finir, c'est le texte hors parenthèses qui est extrait, soit le nom de famille. En l'absence de titre de noblesse, il n'est pas nécessaire de faire la différence entre différents noms de famille; le nom hors parenthèses ne peut être qu'un nom de famille usuel.
 
 Si un nom ne contient pas de parenthèses, le processus d'extraction est à la fois plus simple et moins qualitatif: il est tout simplement impossible de classer les différentes données extraites par détection de motifs. Dans ce cas là, le bruit supprimé du \tname{}; l'objectif est de pouvoir lancer des recherches sur \wkd{} avec les données les plus propres possibles, afin de maximiser les possibilités d'obtenir un résultat correct.
-
-
-% en conclu de partie ou en conclu tout court
-% Ainsi, en s'appuyant sur une connaissance du corpus, il est possible d'approximer une véritable compréhension \enquote{humaine} d'un texte semi structuré, en utilisant uniquement des \glspl{expression régulière}. Si il n'est pas possible d'identifier le sens des différents éléments, il est possible de localiser et d'extraire les éléments signifiants. Il apparaît alors que ces éléments signifiants sont, d'une certaine manière, des formes, ou des motifs qui peuvent être détectés automatiquement; la signification peut être identifiée en fonction du type de donnée extraite (un nombre est une date). Mais, dans un corpus semi-structuré, il surtout est possible d'inférer du \enquote{sens} d'un élément à partir de sa position dans le texte. C'est dans ce cadre qu'un encodage en \xmltei{} des documents prend tout son intérêt: les différentes parties d'un texte sont balisées sémantiquement, ce qui est essentiel au traitement automatisé du texte: il devient possible de traiter le texte non pas dans son intégralité, mais au niveau d'une unité sémantique très précise, comme le nom donné à un manuscrit (le \tname{}) ou une brève description (le \ttrait{})
-
-, dans un premier temps, d'identifier des éléments pertinents dans un contexte de recherche; dans un deuxième temps, il est possible 
 
 \widepage
 \begin{figure}[!p]
@@ -812,12 +806,69 @@ Souvent, le prénom d'une personne est écrit en abrégé. Partant de ce constat
 
 Ici, l'approche est totalement prédictive: il est impossible d'être certain d'obtenir le bon nom complet à partir de son abréviation; on peut uniquement prédire que le prénom reconstruit sera conforme au vrai prénom (tel qu'il est écrit sur \wkd{}) et chercher à maximiser cette certitude.
 
+\begin{landscape}
 \begin{figure}[p]
-	\tikz{
+	\centering
+	\tikz[scale=0.70, transform shape]{
+		\node[base] (start) at (0,3)%
+			{Contenu du \tname{} entre parenthèses};
+		\node[transf] (extr) at (0,0)%
+			{Extraction de prénom complet ou abrégé par détection de motif};
+		\node[choice] (type) at (0,-4)%
+			{Quel type de nom a été détecté?};
+		\node[base] (abvcomp) at (-13,-7)%
+			{Prénom abrégé composé};
+		\node[base] (abvsimp) at (0,-7)%
+			{Prénom abrégé non composé};
+		\node[base] (full) at (10,-7)%
+			{Prénom complet non abrégé};
+			
+		\node[transf] (compfullmatch) at (-13,-11)%
+			{Tentative d'alignement de l'intégralité du prénom avec un prénom composé non abrégé};
+		\node[transf] (comppartmatch) at (-6.5,-11)%
+			{Tentative d'alignement d'une partie du prénom avec un prénom composé non abrégé};
+		\node[transf] (simpmatch) at (0,-11)%
+			{Tentative d'alignement d'un prénom abrégé non composé avec un prénom complet};
+		\node[choice] (fullmatch) at (11,-11)%
+			{S'agit-il véritablement d'un nom complet ou est-ce un faux positif?};
+		\node[transf] (fullfake) at (6,-16)%
+			{C'est une abréviation \\ Extraction d'un nom complet simple ou composé};
+		\node[transf] (fulltrue) at (13,-16)%
+			{Ce n'est pas une abbréviation \\ Pas de modifications du nom};
+			
+		\node[blank] at (-9.6,-10.5) {ECHEC*};
+		\node[blank] at (-3.1,-10.5) {ECHEC*};
+		\node[blank] at (-11.7,-14) {REUSSITE};
+		\node[blank] at (-5.2,-14) {REUSSITE};
+		\node[blank] at (6.7,-13.4) {ABRÉVIATION};
+		\node[blank] at (14,-14) {NOM COMPLET};
+		\node[base, fill=white] at (13,0) {*: L'échec peut être total (aucun prénom n'a été extrait) \\ ou partiel (une partie du prénom seulement a été extraite).};
+				
+		\node[base] (end) at (0,-20)%
+			{Prénom extrait et recomposé si possible};
+			
+		\draw[arrow] (start) -- (extr);
+		\draw[arrow] (extr) -- (type);
+		\draw[arrow] (type) -- (abvcomp);
+		\draw[arrow] (type) -- (abvsimp);
+		\draw[arrow] (type) -- (full);
+		\draw[arrow] (abvsimp) -- (simpmatch);
+		\draw[arrow] (abvcomp) -- (compfullmatch);
+		\draw[arrow] (compfullmatch) -- (comppartmatch);
+		\draw[arrow] (comppartmatch) -- (simpmatch);
+		\draw[arrow] (full) -- (fullmatch);
+		\draw[arrow] (fullmatch) -- (fullfake);
+		\draw[arrow] (fullmatch) -- (fulltrue);
+		\draw[arrow] (compfullmatch) -- (-13,-20) -- (end);
+		\draw[arrow] (comppartmatch) -- (-6.5,-20) -- (end);
+		\draw[arrow] (simpmatch) -- (end);
+		\draw[arrow] (fullfake) -- (6,-20) -- (end);
+		\draw[arrow] (fulltrue) -- (13,-20) -- (end);
 	}
 	\caption{Représentation graphique du processus d'extraction et de reconstitution d'un nom à partir de son abréviation}
 	\label{fig:abv2full}
 \end{figure}
+\end{landscape}
 
 \subsection{Extraire des informations normalisées à partir d'un nom et de sa description}
 Cette sous-section détaille l'utilisation de tables de conversion pour traduire et normaliser certaines donnes importantes (dates de vie et mort, titres de noblesse et fonctions).

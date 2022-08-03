@@ -3,7 +3,7 @@
 \title{Traitement et exploitation d'un corpus textuel semi-structuré: le cas des catalogues de vente de manuscrits.}
 \date{05.09.2022}
 
-%%%%%%%%%%%% encodage, format, langue et police %%%%%%%%%%%%
+%%%%%%%%%%%% generic packages: encodage, format, langue et police %%%%%%%%%%%%
 \documentclass[a4paper, 12pt, twoside]{book}
 \usepackage[english, french]{babel}
 \usepackage[utf8x]{inputenc}
@@ -12,6 +12,7 @@
 \usepackage{lmodern}
 \usepackage{graphicx}
 \usepackage{enumitem}
+\usepackage{lscape}
 
 %%%%%%%%%%%% code %%%%%%%%%%%%
 \usepackage[newfloat]{minted}
@@ -81,6 +82,11 @@
 	rounded corners,%
 	draw=white,%
 	ultra thick
+]
+\tikzstyle{blank} = [%
+	rectangle,%
+	draw=white,%
+	draw opacity=0%
 ]
 \tikzstyle{arrow} = [%
 	thick,%
