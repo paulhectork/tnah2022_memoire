@@ -469,9 +469,188 @@ status = {
 	\label{appendix:convstatus}
 \end{listing}
 
-\begin{listing}
+\begin{listing}[p]
 	\begin{minted}{python}
+comp_names = {
+	"arm ch": "armand-charles",
+	"ch m": "charles-marie",
+	"ch l f": "charles-louis-françois",
+	"f m": "francois-marie",
+	"fr emm.": "françois-emmanuel",
+	"j ant": "jean-antoine",
+	"j f": "jean-francois",
+	"j m": "jean-marie",
+	"j j": "jean-jacques",
+	"j l": "jean-louis",
+	"j b": "jean-baptiste",
+	"j p": "jean-pierre",
+	"j pierre": "jean-pierre",
+	"l f": "louis-françois",
+	"m f": "marius-felix",
+	"franc rené": "francois-rené",
+	"m madeleine": "marie-madeleine",
+	"ph h": "philippe henri",
+	"p aug": "pierre auguste",
+	"p alex": "pierre alexandre",
+	"p j": "pierre-jean",
+	"j sylvain": "jean-sylvain",
+	"l ph": "louis-philippe",
+	"edm ch": "edmond-charles",
+	"ch marie": "charles-marie"
+}
 	\end{minted}
-	\label{}
-	\caption{Liste de colonies pour la détection de motifs}
+	\caption{Table de conversion permettant de remplacer un nom abrégé composé par sa version complète}
+	\label{appendix:namecomp}
+\end{listing}
+
+\begin{listing}[p]
+	\begin{minted}{python}
+names = {
+	"ad": "adam",
+	"alex": "alexandre",
+	"alph": "alphonse",
+	"ant": "antoine",
+	"arm": "armand",
+	"aug": "auguste",
+	"ch": "charles",
+	"cl": "claude",
+	"dom": "dominique",
+	"emm": "emmanuel",
+	"ed": "edouard",
+	"et": "etienne",
+	"ét": "etienne",
+	"ferd": "ferdinand",
+	"fred": "frederic",
+	"fr": "françois",
+	"franc": "françois",
+	"franç": "françois",
+	"fréd": "frédéric",
+	"g": "guillaume",
+	"guill": "guillaume",
+	"gab": "gabriel",
+	"jh": "joseph",
+	"jacq": "jacques",
+	"jos": "joseph",
+	"math": "matthieu",
+	"nic": "nicolas",
+	"ph": "philippe",
+	"v": "victor",
+	"vr": "victor",
+}
+	\end{minted}
+	\caption{Table de conversion permettant de remplacer un nom abrégé non composé par sa version complète}
+	\label{appendix:namesimp}
+\end{listing}
+
+\begin{listing}[p]
+	\begin{minted}[breakanywhere]{python}
+def rgx_abvcomp(nstr):
+	"""
+	try to extract an abbreviated composed first name. if there is no match, return None
+	pattern
+	-------
+	the patterns in the example below are simplified to keep things readable
+	- two strings separated by a "-" or "\s"
+	- the first or second string can be a full name ([A-Z][a-z]+)
+	or an abbreviation ([A-Z][a-z]*\.)
+	- if the strings are separated by "\s", they must be finished by "\."
+	(to be sure that we don't capture full names, i.e: "J. Ch."  can be captured,
+	but not "Jean Charles")
+	- complex names with 3 or more words must have "-" and at least one "\."
+	- (\s|$) and (^|\s) are safeguards to avoid matching the end or beginning of another word
+	examples
+	--------
+	matched : M.-Madeleine Pioche de la Vergne  # matched string : M.-Madeleine
+	matched : C.-A. de Ferriol  # matched string : C.-A.
+	matched : J. F.  # matched string : J. F.
+	matched : Jean F.  # matched string : Jean F.
+	matched : Jean-F.  # matched string : Jean-F.
+	matched : A M  # matched string : A M
+	matched : C.-Edm.-G.  # matched string : C.-Edm.-G.
+	matched : Charles-Edm.-G.  # matched string : Charles-Edm.-G.
+	not matched : Anne M
+	not matched : Claude Henri blabla
+	not matched : Claude Henri
+	:param nstr: the name string used as input
+	:return: the matched string if there is a match ; None if there is no match
+	"""
+	mo = re.search(r"(^|,|\s)[A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ][a-zàáâäéèêëíìîïòóôöúùûüøœæç]*"
+			+ "\.?-[A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ][a-zàáâäéèêëíìîïòóôöúùûüøœæç]*\.(\s|,|$)", nstr) \
+		 or re.search(r"(^|,|\s)[A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ][a-zàáâäéèêëíìîïòóôöúùûüøœæç]*\."
+			+ "-[A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ][a-zàáâäéèêëíìîïòóôöúùûüøœæç]*\.?(\s|,|$)", nstr) \
+		 or re.search(r"(^|,|\s)[A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ]\.?\s"
+			+ "[A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ][a-zàáâäéèêëíìîïòóôöúùûüøœæç]*\.(\s|,|$)", nstr) \
+		 or re.search(r"(^|,|\s)[A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ][a-zàáâäéèêëíìîïòóôöúùûüøœæç]*\.?"
+		    + "\s[A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ]\.(\s|,|$)", nstr) \
+		 or re.search(r"(^|,|\s)[A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ]\.?\s[A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ]\.?(\s|,|$)", nstr) \
+		 or re.search(r"([A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ]\.){2,}", nstr) \
+		 or re.search(r"(^|,|\s)([A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ][a-zàáâäéèêëíìîïòóôöúùûüøœæç]*\.?-)+"
+			+ "([A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ][a-zàáâäéèêëíìîïòóôöúùûüøœæç]*\.)(\s|,|$)", nstr) \
+		 or re.search(r"(^|,|\s)([A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ][a-zàáâäéèêëíìîïòóôöúùûüøœæç]*\.-)+"
+		  	+ "([A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ][a-zàáâäéèêëíìîïòóôöúùûüøœæç]*\.?)(\s|,|$)", nstr)
+	if mo is not None:
+		return mo[0]
+	else:
+		return None
+	\end{minted}
+	\caption{Fonction permettant d'identifier et d'extraire un nom abrégé composé}
+	\label{appendix:rgxabvcomp}
+\end{listing}
+
+\begin{listing}[p]
+	\begin{minted}[breakanywhere]{python}
+def rgx_abvsimp(nstr):
+	"""
+	try to extract a "simple" (not composed) abbreviated first name. if there is no match, return None
+	pattern
+	-------
+	a capital letter (possibly followed by a certain number of lowercase letters)
+	ended with a dot. (\s|$) and (^|\s) are safeguards to avoid matching the beginning
+	end of another word.
+	*warning* : it can also capture parts of composed abbreviated names => must be used
+	in an if-elif after trying to match a composed abbreviated name
+	examples
+	--------
+	matched : bonjour Ad.  # matched string : Ad.
+	matched : J. baronne  # matched string : J.
+	matched : J. F.  # matched string : J.
+	matched : Jean F.  # matched string : F.
+	not matched : A.-M.
+	not matched : Anne M
+	not matched : Hector
+	:param nstr: the name string used as input
+	:return:
+	"""
+	mo = re.search(r"(^|\s)[A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ][a-zàáâäéèêëíìîïòóôöúùûüøœæç]*\.(\s|$|,)", nstr)
+	if mo is not None:
+		return mo[0]
+	else:
+		return None
+	\end{minted}
+	\caption{Fonction permettant de repérer et d'extraire un nom abrégé simple}
+	\label{appendix:rgxabvsimp}
+\end{listing}
+
+\begin{listing}[p]
+	\begin{minted}[breakanywhere]{python}
+def rgx_complnm(nstr):
+	"""
+	try to extract a complete name from a string. if there is no match, return None
+	pattern
+	-------
+	- an uppercase letter followed by several lowercase letters ;
+	- this pattern can be repeated several times, separated by a space or "-"
+	- (\s|$) and (^|\s) are safeguards to avoid matching the beginning or end of another word.
+	:param nstr: the string from which a name should be extracted
+	:return:
+	"""
+	mo = re.search(r"(^|\s)[A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ][a-zàáâäéèêëíìîïòóôöúùûüøœæç]+"
+		+ "((\s|-)[A-ZÀÂÄÈÉÊËÏÔŒÙÛÜŸ][a-zàáâäéèêëíìîïòóôöúùûüøœæç]+)*($|\s|,)", nstr)
+	if mo is not None:
+		return mo[0]
+	else:
+		return None
+	\end{minted}
+	\caption{Fonction permettant d'identifier et d'extraire un nom complet non abrégé}
+	\label{appendix:rgxfull}
 \end{listing}
