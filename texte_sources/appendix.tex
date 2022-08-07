@@ -16,6 +16,78 @@ L'intégralité du code produit pour le projet \ktb{}, depuis la création des d
 
 L'intégralité du code source est disponible sous licence libre (\href{https://www.gnu.org/licenses/gpl-3.0.html}{GNU GPL v3.0}, \href{https://mit-license.org/}{MIT} ou \href{https://creativecommons.org/}{Creative Commons}). Le site web peut également être consulté en ligne à \href{https://katabase.huma-num.fr/}{cette adresse}.
 
+\chapter{Résultat des tests de l'algorithme d'extraction d'informations de \wkd{}}
+\chaptermark{Résultat des tests}
+
+Les résultats des tests présentés dans les tables ci-dessous (\ref{appendix:testisolate}, \ref{appendix:testfinal}) ont été menés sur un jeu de 200 couples \tname{} et \ttrait{}. Ils ont été choisis de façon à être représentatifs du jeu de données complet, avec une variété d'entrées semblables (personnes nobles et non nobles, entrées qui ne sont pas consacrées à des personnes...). Ce jeu de test présente également une structure et un degré de détail semblable au jeu de données complet. Il y a notamment exactement la même proportion d'entrées présentant un \ttrait{} que dans le jeu de test et le jeu final.
+
+Les résultats en pourcentage sont toujours exprimés en \texttt{pourcentage du nombre total d'entrées requêtées} (soit 200).
+ 
+\begin{table}[h]
+	\centering
+	\begin{tabular}{>{\centering}m{3cm}m{2cm}m{2cm}m{2cm}m{2cm}m{2cm}}
+		\hline
+		\textbf{Type de requête} & \textbf{Noms} & \textbf{Noms et nom de famille noble} & \textbf{Noms et titre de noblesse} & \textbf{Noms et date de naissance et de mort} & \textbf{Noms et occupation} \\
+		\hline
+		\hline
+		Avec reconstitution des prénoms & 48\% & 45.9\% & 50\% & 52.6\% & 53.1\% \\
+		\hline
+		Sans reconstitution des prénoms & 42\% & 40.5\% & 50\% & 52.6\% & 53.1\% \\
+		\hline	
+	\end{tabular}
+	\caption{Tests menés avec un jeu de 200 entrées sur des paramètres isolés}
+	\label{appendix:testisolate}
+\end{table}
+
+Le tableau ci-dessus (\ref{appendix:testisolate}) présente les résultats de tests menés pour isoler l'impact de chaque paramètee dans l'obtention du bon résultat. Les mêmes requêtes ont été lancées sur un jeu de test de 200 entrées de catalogue. Toutes les requêtes contient le prénom et le nom de famille complets (\enquote{Noms} dans la table). La première requête ne contient que ce paramètre, tandis que toutes les autres requêtes sont lancées avec un paramètre en plus: titre de noblesse, nom de famille noble, dates et occupation. Le fait que ces paramètres soient utilisés ne garantit pas qu'ils soient disponibles dans le jeu de données utilisé en entrée.  Ce test permet d'isoler de mieux construire l'algorithme final de recherches en plein texte sur le moteur de recherche de \wkd{}, puisqu'il permet de voir quels sont les paramètres les plus fiables.
+
+\pagebreak
+\begin{table}[h]
+	\centering
+	\begin{tabular}{m{10cm}m{4cm}}
+		\textbf{Bons identifiants récupérés} & 65\% \\
+		\hline
+		\textbf{Score F1 } & 67.4\% \\
+		\hline
+		\textbf{Précision } & 67.7\% \\
+		\hline
+		\textbf{Rappel } & 67\% \\
+		\hline
+		\textbf{Résultats certains } & 36\% \\
+		\hline
+		\textbf{Faux positifs parmi les éléments certains} & 8.5\% \\
+		\hline
+		\textbf{Total d'entrées requêtées } & 200 \\
+		\hline
+		\textbf{Identifiants récupérés } & 192 \\
+		\hline
+		\textbf{Silence } & 8 \\
+		\hline
+		\textbf{Temps d'exécution avec l'option \texttt{fetch} } & 88.3 secondes \\
+		\hline
+		\textbf{Temps d'exécution sans l'option \texttt{fetch}} & 92.49 secondes \\
+	\end{tabular}
+	\caption{Tests menés avec un jeu de 200 entrées sur l'algorithme final}
+	\label{appendix:testfinal}
+\end{table}
+
+Le tableau ci-dessus présente les résultats d'un test évaluant les performances de l'algorithme final. Voici une explication de ces résultats:
+\begin{itemize}
+	\item \textit{Bons identifiants récupérés}: la proportion, exprimée en pourcentage, du nombre d'identifiants récupérés par l'algorithme qui correspondent aux identifiants récupérés manuellement
+	\item \textit{Score F1}: le \gls{score F1}, soit la moyenne pondérée de la précision et du silence. Contrairement  à la mesure ci-dessus, le score F1 prend en compte le silence et les faux négatifs, et offre donc une interprétation plus complète de la qualité du script.
+	\item \textit{Précision}: la précision est une composante du \gls{score F1} qui mesure la proportion d'identifiants pertinents obtenus parmi tous les identifiants obtenus.
+	\item \textit{Rappel}: le rappel est une composante du \gls{score F1} qui mesure la proportion d'identifiants pertinents obtenus parmi l'ensemble des identifiants pertinents qui existent.
+	\item \textit{Résultats certains}: pour accélérer le processus de relecture, un score de certitude a été attribué à certains identifiants obtenus grâce à l'algorithme. Ce score dépend du nombre de paramètres utilisés dans la recherche qui a permis de récupérer l'identifiant. 36\% des résultats obtenus sont considérés comme certains.
+	\item \textit{Faux positifs parmi les éléments certains}: le score de certitude présenté ci-dessus admet un taux d'erreur qui est ici quantifié: 8.5\% des résultats obtenus sont erronnés alors qu'ils ont été considérés comme certains (8,5\% du jeu de données total, donc).
+	\item \textit{Total d'entrées requêtées}: le volume du jeu de données de test, soit 200 entrées.
+	\item \textit{Identifiants récupérés}: le nombre d'identifiants obtenus, qu'ils soient corrects ou non.
+	\item \textit{Silence}: le nombre d'entrées pour lesquelles aucun identifiant n'a été obtenu.
+	\item \textit{Temps d'exécution avec l'option \texttt{fetch}}: le temps pris, en secondes, pour lancer l'intégralité de l'algorithme de récupération d'identifiants \wkd{} sur les 200 entrées en stockant dans des \glspl{log} les requêtes lancées et les identifiants requêtés.
+	\item \textit{Temps d'exécution sans l'option \texttt{fetch}}: le temps pris, en secondes, pour lancer l'intégralité de l'algorithme de récupération d'identifiants sur les 200 entrées sans utiliser de fichiers de log.
+\end{itemize}
+
+
+
 
 \chapter{Graphiques}
 \begin{figure}
