@@ -21,8 +21,9 @@ L'intégralité du code source est disponible sous licence libre (\href{https://
 
 Les résultats des tests présentés dans les tables ci-dessous (\ref{appendix:testisolate}, \ref{appendix:testfinal}) ont été menés sur un jeu de 200 couples \tname{} et \ttrait{}. Ils ont été choisis de façon à être représentatifs du jeu de données complet, avec une variété d'entrées semblables (personnes nobles et non nobles, entrées qui ne sont pas consacrées à des personnes...). Ce jeu de test présente également une structure et un degré de détail semblable au jeu de données complet. Il y a notamment exactement la même proportion d'entrées présentant un \ttrait{} que dans le jeu de test et le jeu final.
 
-Les résultats en pourcentage sont toujours exprimés en \texttt{pourcentage du nombre total d'entrées requêtées} (soit 200).
- 
+Les résultats en pourcentage sont toujours exprimés en \textbf{pourcentages du nombre total d'entrées requêtées} (soit 200).
+\pagebreak
+
 \begin{table}[h]
 	\centering
 	\begin{tabular}{>{\centering}m{3cm}m{2cm}m{2cm}m{2cm}m{2cm}m{2cm}}
@@ -40,8 +41,10 @@ Les résultats en pourcentage sont toujours exprimés en \texttt{pourcentage du 
 \end{table}
 
 Le tableau ci-dessus (\ref{appendix:testisolate}) présente les résultats de tests menés pour isoler l'impact de chaque paramètee dans l'obtention du bon résultat. Les mêmes requêtes ont été lancées sur un jeu de test de 200 entrées de catalogue. Toutes les requêtes contient le prénom et le nom de famille complets (\enquote{Noms} dans la table). La première requête ne contient que ce paramètre, tandis que toutes les autres requêtes sont lancées avec un paramètre en plus: titre de noblesse, nom de famille noble, dates et occupation. Le fait que ces paramètres soient utilisés ne garantit pas qu'ils soient disponibles dans le jeu de données utilisé en entrée.  Ce test permet d'isoler de mieux construire l'algorithme final de recherches en plein texte sur le moteur de recherche de \wkd{}, puisqu'il permet de voir quels sont les paramètres les plus fiables.
-
+\vfill
 \pagebreak
+
+
 \begin{table}[h]
 	\centering
 	\begin{tabular}{m{10cm}m{4cm}}

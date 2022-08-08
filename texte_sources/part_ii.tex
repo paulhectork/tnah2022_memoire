@@ -310,7 +310,7 @@ Pour faire face à la \enquote{rigidité} relative du moteur de recherche de \wk
 	\label{code:search1}
 \end{listing}
 
-En conclusion, il faut retenir que le moteur de recherche de \wkd{} n'admet pas d'erreurs, ni de requêtes partiellement erronées (dans l'exemple \ref{code:search1}, où la date de naissance soit correcte, mais pas la date de mort); il ne prend pas non plus en compte la synonymie, ce qui veut dire qu'il n'améliore pas la requête lancée par un.e utilisateur.ice... Cela signifie que les termes utilisés dans une requête doivent être adaptés à ceux que \wkd{} utilise. Les termes spécifiques utilisés dans les catalogues (\enquote{conventionnel}), mais aussi de nombreux titres militaires et de noblesse peu élevés (\enquote{capitaine}, \enquote{marquis}) sont relativement rarement présents sur \wkd{}. Lorsque les requêtes sont lancées, de tels termes sont donc abandonnés et parfois remplacés par des termes plus génériques: par exemple, \enquote{capitaine} est remplacé par \enquote{military}, traduction anglaise de \enquote{militaire}. De même, des termes principalement en usage dans la langue française, comme \enquote{conventionnel} sont moins efficaces pour lancer des recherches.
+En conclusion, il faut retenir que le moteur de recherche de \wkd{} n'admet pas d'erreurs, ni de requêtes partiellement erronées (dans l'exemple \ref{code:search1}, où la date de naissance soit correcte, mais pas la date de décès); il ne prend pas non plus en compte la synonymie, ce qui veut dire qu'il n'améliore pas la requête lancée par un.e utilisateur.ice... Cela signifie que les termes utilisés dans une requête doivent être adaptés à ceux que \wkd{} utilise. Les termes spécifiques utilisés dans les catalogues (\enquote{conventionnel}), mais aussi de nombreux titres militaires et de noblesse peu élevés (\enquote{capitaine}, \enquote{marquis}) sont relativement rarement présents sur \wkd{}. Lorsque les requêtes sont lancées, de tels termes sont donc abandonnés et parfois remplacés par des termes plus génériques: par exemple, \enquote{capitaine} est remplacé par \enquote{military}, traduction anglaise de \enquote{militaire}. De même, des termes principalement en usage dans la langue française, comme \enquote{conventionnel} sont moins efficaces pour lancer des recherches.
 
 \subsection{Une approche prédictive}
 L'alignement avec \wkd{} et l'extraction d'entités n'est donc pas une opération anodine: les données contenues dans les catalogues sont variées, autant par leur structure que par les informations qu'elles contiennent; il peut être difficile à faire la traduction de données du \scl{XIX} en chaînes de caractères pouvant retourner des réponses valides sur \wkd{}; enfin, le l'alignement repose sur une bonne connaissance du moteur de recherche de \wkd{}. 
@@ -831,10 +831,6 @@ Parmi les trois types de prénoms détectés -- prénom composé abrégé, prén
 
 Ce processus de reconstitution des prénoms permet d'augmenter la qualité des données en cherchant à pallier à leur plus grand écueil. Bien que ce processus soit totalement prédictif et qu'il vienne avec un certain risque d'erreur, son rôle est essentiel dans l'obtention de résultats valides sur le moteur de recherche de l'\api{} \wkd{}, surtout en l'absence d'informations biographiques. Cela apparaît dans les tests menés, et dont le résultat est visible en annexes (\ref{appendix:testisolate}). Lorsqu'une requête est lancée seulement sur le prénom et le nom de famille usuel, l'identifiant \wkd{} récupéré est valide dans 48\% des cas en reconstituant les prénoms. Si des requêtes sont lancées sur les noms de famille et les prénoms non reconstitués uniquement, ce taux de réussite tombe à 42\%. Cette différence est non négligeable lorsque l'on travaille sur 82000 entrées différentes à requêter. Ainsi, en utilisant une approche modulable et adaptée au corpus traité, il est possible de pallier à certaines absences dans les données disponibles. S'il n'y a pas toujours assez d'informations pour s'assurer que l'identifiant récupéré sur \wkd{} sera le bon, reconstituer les prénoms permet d'augmenter leur précision des données, et donc d'obtenir de meilleurs résultats. Comme cela a été dit plus tôt, cette approche est totalement prédictive, et il est difficile de garantir qu'un prénom reconstruit sera correct. Cette incertitude ne doit pas être oubliée dans la constitution du programme chargé de lancer les requêtes en tant que tel: toute opération d'extraction et de reconstitution des données risque d'introduire du bruit. Il est donc important de lancer les recherches sur l'\api{} de manière, là encore, modulaire, en multipliant le nombre de recherches pour chercher à pallier l'imperfection des données.
 
-%%%%%%%%%%%%%% À SUIVRE %%%%%%%%%%%%%%
-- extraction d'infos biographiques du \ttrait{}
-- quand on commence à parler de l'algo de requêtes, présenter les résultats de testisolate pour dire que c'est à cause de ces résultats qu'on a constitué l'algo.
-
 \begin{landscape}
 \begin{figure}[p]
 	\centering
@@ -899,12 +895,77 @@ Ce processus de reconstitution des prénoms permet d'augmenter la qualité des d
 \end{figure}
 \end{landscape}
 
-\subsection{Extraire des informations normalisées à partir d'un nom et de sa description}
-Cette sous-section détaille l'utilisation de tables de conversion pour traduire et normaliser certaines donnes importantes (dates de vie et mort, titres de noblesse et fonctions).
+\subsection{Extraire des informations biographiques du \ttrait{}}
+Si les informations nominatives sont déterminantes pour récupérer un identifiant valide, elles sont souvent incomplètes; la manière dont les informations y figurent ne correspond pas non plus toujours à ce qui est disponible sur \wkd{}. En plus du processus d'extraction d'informations nominatives issu du \tname{} présenté ci-dessus, des informations biographiques sont extraites dans le \ttrait{}. Pour cette étape encore, l'extraction s'appuie sur une détection de motifs augmentée par l'usage de tables de conversion. Deux informations sont récupérées: les dates de vie et de mort -- information cruciale car présentant un risque d'erreur très faible -- et la fonction occupée par une personne -- ce qui permet d'augmenter la certitude que l'identifiant \wkd{} récupéré pour une entrée de catalogue est valide.
 
-BIEN PENSER à parler du problème des informations extraites, mais qui ne se rattachent pas à la personne du \tname{} (eg: femme du comte...) => comment, par détection de motifs, est-ce que l'on règle le problème.
+\subsubsection{Identifier les dates de vie et de mort d'une personne}
+Comparativement à l'extraction d'informations nominatives, l'extraction du nom d'une personne par détection de motifs semble assez simple. Là où un nom peut prendre de nombreuses formes et structures différentes, l'\gls{expression régulière} correspondant à une date correspond à une suite de quatre chiffres, soit:
+
+\begin{center}
+	\texttt{\textbackslash{}d\{4\}}
+\end{center}
+
+S'il est facile de détecter une date, il est moins évident d'être certain que l'année extraite correspond à la naissance ou à la mort d'une personne. En effet, d'autres dates sont souvent présentes dans le \ttrait{}, comme cela apparaît dans l'exemple ci-desous (\ref{code:ttrait}). Se contenter d'une extraction de toutes les dates du \ttrait{} risquerait de faire exploser la quantité de bruit dans les données utilisées pour lancer des recherches sur l'\api{} \wkd{}. Comme avec l'extraction d'informations du \tname{}, détecter des motifs dans le texte ne permet pas d'attribuer une signification à ces motifs -- il ne suffit pas de repérer une date pour que cette date correspond à la naissance ou à la mort d'une personne.
+
+\begin{listing}[h!]
+	\begin{minted}{xml}
+<!-- exemple 1 -->
+<trait>
+	<p>maire (en 1848) du XIIe arrondissement, médecin, sous-directeur de l'hôpital de la Salpétrière.</p>
+</trait>
+
+<!-- exemple 2 -->
+<trait>
+	<p>célèbre maréchal de France, vainqueur d'Alger en 1830, né en 1773, mort en 1846</p>
+</trait>
+
+<!-- exemple 3 -->
+<trait>
+	<p>brave général de l'armée de l'Est pendant la guerre de 1870, né à Sarreguemines en 1840, mort en 1876</p>
+</trait>
+
+<!-- exemple 4 -->
+<trait>
+	<p>célèbre révolutionnaire, membre de la Commune de Paris, né en 1838, tué à Rueil le 3 avril 1871.</p>
+</trait>
+
+<!-- exemple 5 -->
+<trait>
+	<p>célèbre jurisconsulte, ministre et sénateur, un des ôtages de la Commune, né à Valence (Drôme) en 1804, fusillé avec l'archevêque de Paris le 27 mai 1871</p>
+</trait>
+	\end{minted}
+	\caption{Exemples de \ttrait{} contenant des dates autres que les dates de naissance et de mort}
+	\label{code:ttrait}
+\end{listing}
+
+Pour comprendre le sens des dates repérées dans le texte, il est encore une fois nécessaire de replacer cette date dans son contexte en s'appuyant sur la nature semi-structurée des documents. En effet, les \ttrait{} ayant tous une structure équivalente et utilisant un vocabulaire limité, il est possible de distinguer les dates pertinentes des autres. Les dates de naissance et de mort sont toujours des compléments dans les phrases, comme cela apparaît dans les différents exemples présentés ci-dessus (\ref{code:ttrait}). Dans l'exemple 5, par exemple, la date de naissance est un complément de \enquote{né} et la date de décès de \enquote{fusillé}. C'est donc en identifiant ce à quoi une date se rapporte qu'il est possible de distinguer les dates pertinentes des autres. En général, une date naissance est précédée par \enquote{né à, née à}. Le vocabulaire utilisé avec la date de décès d'une personne, quoique plus coloré, est la encore assez limité: \enquote{décapité.e, assassiné.e, fusillé.e, guillotiné.e, tué.e}. Ce vocabulaire étant relativement limité, il n'est pas nécessaire d'utiliser de tables de conversions. Dans le motif permettant d'extraire une date, il suffit simplement de prendre en compte le contexte de celle-ci. Le motif à rechercher correspond donc à:
+
+\begin{center}
+	\texttt{Mot indiquant une naissance ou un décès -- autres informations (lieu de naissance...) -- date}
+\end{center}
+
+L'implémentation de ce motif sous la forme d'\glspl{expression régulière} correspond donc à:
+
+\begin{center}
+	pour les dates de naissance: \texttt{(\^|\textbackslash{}s|,|\.)[Nn](.|\textbackslash{}s|ée?).+?(?=\textbackslash{}d\{4\})\textbackslash{}d\{4\}}
+	
+	pour les dates de decès: \texttt{(\^~|\textbackslash{}s|,|\.)((M\.|m\.)|[Mm](\textbackslash{}s|orte?)).+?(?=\textbackslash{}d\{4\})\textbackslash{}d\{4\}}
+	
+	et: \texttt{(\^~|\textbackslash{}s|,|\.)([Dd]écap|[Aa]ssa|[Tt]uée?|[Ff]usi|[Gg]uil).+?(?=\textbackslash{}d\{4\})\textbackslash{}d\{4\}}
+\end{center}
+
+Si ce motif est détecté, il est certain que la date est une date de naissance ou de décès. Il suffit alors d'extraire la date de son contexte. Ainsi, sur des documents semi-structurés, il est possible, à l'aide de détection de motifs, de resituer des éléments dans leur contexte afin de produire des données propres et réutilisables.
+
+\subsection{Identifier l'occupation d'une personne}
+Identifier et extraire l'occupation d'une personne s'appuie également sur de la détection de motifs, cette fois-ci augmentée de tables de conversion: il existe une grande variété dans les différents types de métiers occupés par une personne; de plus, un métier tel qu'il est décrit dans un catalogue n'a pas nécessairement d'équivalent sur \wkd{}. Il est donc nécessaire de normaliser les données extraites.
+
+
 
 \section{Extraire des identifiants \wkd{}}
+
+- quand on commence à parler de l'algo de requêtes, présenter les résultats de testisolate pour dire que c'est à cause de ces résultats qu'on a constitué l'algo.
+
+
 Une fois un dictionnaire de données normalisées produites, un algorithme lance des recherches en plein texte sur l'\api{} de \wkd{} afin de récupérer des identifiants. L'algorithme lance plusieurs requêtes successivement. L'objectif est de récupérer un identifiant en lançant le moins de requêtes, avec le plus de certitude possible.
 
 \subsection{Présentation générale}
@@ -986,7 +1047,7 @@ Un nombre assez conséquent de données ont donc été requêtées avec \sparql{
 		\item Le genre de la personne;
 		\item Sa nationalité, afin de voir si l'origine d'une personne influence le prix d'un manuscrit;
 		\item Les langues parlées par une personne; là encore, l'objectif est d'étudier l'impact de l'origine d'un.e auteur.ice sur un prix.
-		\item Les date de vie et de mort, afin de placer un manuscrit dans une époque et de voir comment son ancienneté et sa contemporanéité en influencent le prix.
+		\item Les date de naissance et de décès, afin de placer un manuscrit dans une époque et de voir comment son ancienneté et sa contemporanéité en influencent le prix.
 		\item Le lieu où une personne est née, où elle a vécu et où elle est morte, pour des raisons analogues.
 		\item La manière dont la personne est morte. Si cette information peut sembler anecdotique à un public contemporain, les catalogues de ventes sont marqués par un goût du sensationnel, et la manière dont une personne est morte est souvent mentionnée, notamment en cas d'exécutions.
 		\item La religion d'une personne: il peut être intéressant d'étudier si, et comment, ce critère influence l'évolution d'un prix.
