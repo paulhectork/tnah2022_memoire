@@ -947,7 +947,7 @@ Pour comprendre le sens des dates repérées dans le texte, il est encore une fo
 L'implémentation de ce motif sous la forme d'\glspl{expression régulière} correspond donc à:
 
 \begin{center}
-	pour les dates de naissance: \texttt{(\^|\textbackslash{}s|,|\.)[Nn](.|\textbackslash{}s|ée?).+?(?=\textbackslash{}d\{4\})\textbackslash{}d\{4\}}
+	pour les dates de naissance: \texttt{(\^~|\textbackslash{}s|,|\.)[Nn](.|\textbackslash{}s|ée?).+?(?=\textbackslash{}d\{4\})\textbackslash{}d\{4\}}
 	
 	pour les dates de decès: \texttt{(\^~|\textbackslash{}s|,|\.)((M\.|m\.)|[Mm](\textbackslash{}s|orte?)).+?(?=\textbackslash{}d\{4\})\textbackslash{}d\{4\}}
 	
@@ -957,16 +957,55 @@ L'implémentation de ce motif sous la forme d'\glspl{expression régulière} cor
 Si ce motif est détecté, il est certain que la date est une date de naissance ou de décès. Il suffit alors d'extraire la date de son contexte. Ainsi, sur des documents semi-structurés, il est possible, à l'aide de détection de motifs, de resituer des éléments dans leur contexte afin de produire des données propres et réutilisables.
 
 \subsection{Identifier l'occupation d'une personne}
-Identifier et extraire l'occupation d'une personne s'appuie également sur de la détection de motifs, cette fois-ci augmentée de tables de conversion: il existe une grande variété dans les différents types de métiers occupés par une personne; de plus, un métier tel qu'il est décrit dans un catalogue n'a pas nécessairement d'équivalent sur \wkd{}. Il est donc nécessaire de normaliser les données extraites.
+Identifier et extraire l'occupation d'une personne s'appuie également sur de la détection de motifs, cette fois-ci augmentée de tables de conversion: il existe une grande variété dans les différents types de métiers occupés par une personne; de plus, un métier tel qu'il est décrit dans un catalogue n'a pas nécessairement d'équivalent sur \wkd{}. Il est donc nécessaire de normaliser les données extraites. 
 
+Le processus d'extraction d'informations à l'aide de tables est assez similaire à l'extraction de titres de noblesse, par exemple: pour chaque \ttrait{} présent dans les catalogues, l'algorithme vérifie si un terme correspond à une occupation à l'aide de la table \ref{appendix:convfunction}. Si c'est le cas, l'occupation telle qu'elle est mentionnée dans les catalogues est remplacée par son équivalent normalisé. Celui-ci n'est pas seulement une traduction du terme tel qu'il est présent dans le \ttrait{}: les occupations ou fonctions sont remplacées par une version normalisée, qui permette d'obtenir des résultats sur le moteur de recherche de \wkd{}. Par exemple, le terme \enquote{maréchal} sera remplacé par \enquote{marshall} (sa traduction anglaise), tandis que des grades militaires moins élevés (\enquote{capitaine}, \enquote{commandant}) seront remplacés par le terme générique \enquote{militaire}. L'extraction d'informations n'étant pas viser à obtenir des données définitives, il n'est pas nécessaire de préserver les termes et les catégories utilisées dans les catalogues.
+
+Cette extraction d'informations \enquote{à l'aveugle} -- qui se soucie uniquement des mots utilisés et non du contexte dans lequel il le sont -- présente deux problèmes, visibles dans les exemples ci-dessous (\ref{code:traitfunc}). 
+\begin{itemize}
+	\item Dans le premier exemple, une personne est à la fois désignée comme étant \enquote{sculpteur} et \enquote{auteur}. À l'aide de la table de conversion, les deux termes sont extraits et normalisés, ce qui donne \enquote{sculptor writer}\footnote{\enquote{sculpeur écrivain}}. Non seulement la transformation est fausse (il ne s'agit pas d'un écrivain), mais elle rend inutile l'extraction d'informations: les deux termes se contredisent et ne permettront pas d'obtenir de résultats sur \wkd{}. Ce problème est récurrent, puisque des personnes ont souvent écrit ou réalisé une œuvre sans qu'elles soient connues comme écrivaines -- comme cela apparaît dans le deuxième exemple, où le personnage est général, mais a écrit des mémoires. Il faut donc déterminer laquelle de ces deux fonctions est à retenir pour faire des recherches sur l'\api{} \wkd{}. 
+	\item Au premier problème de l'extraction de plusieurs fonctions s'ajoute une deuxième difficulté: les occupations extraites ne se rattachent pas nécessairement à la personne nommée dans le \tname{}. C'est le cas dans le troisième exemple: \enquote{empereur} est présent dans la table de conversion -- contrairement à son équivalent féminin, qui ne permet pas souvent d'obtenir de résultats. La fonction extraite sera donc \enquote{empereur / emperor}, ce qui fausse les données extraites: c'est la femme de l'empereur qui est décrite dans cette entrée. Il est donc nécessaire de reconnaître lorsque, dans le \ttrait{}, une fonction ne se rattache pas à l'auteur.ice du manuscrit.
+\end{itemize}
+
+\begin{listing}[h]
+	\begin{minted}{xml}
+<!-- exemple 1 -->
+<trait>
+	<p>célèbre sculpteur, auteur de la statue de la Résistance, érigée à Dijon en 1875 et enlevée par ordre du gouvernement, né à Nuits (Côte-d'Or) en 1815, mort en 1876</p>
+</trait>
+
+<!-- exemple 2 -->
+<trait>
+	<p>célèbre général auteur de Mémoires, qui ont eu un grand succès, n. 1782, m. 1854.</p>
+</trait>
+
+<!-- exemple 3 -->
+<trait>
+	<p>impératrice des Romains, reine de Hongrie, fille de Charles-Quint, femme de l'empereur Maximilien II, morte en 1603</p>
+</trait>
+	\end{minted}
+	\caption{Difficultés liées à l'extraction de fonctions du \ttrait{}}
+	\label{code:traitfunc}
+\end{listing}
+
+Les deux problèmes trouvent des solutions différentes. Le premier problème naît de la différence entre les informations présentes dans les catalogues et celles qui sont nécessaires pour l'extraction d'informations de \wkd{}. Dans un texte fait pour être lu par des humains, il n'y a aucun problème à mettre bout à bout plusieurs occupations, fonctions ou faits notables à propos d'une personne. Un.e lecteur.ice est capable de comprendre la polysémie des mots (\enquote{auteur}, par exemple) et la relation des différentes fonctions entre elles. Dans le cas d'un catalogue, qui est fait pour vendre, il est normal que les descriptions de personnes soient mélioratives: la multiplication des hauts faits à propos d'une personne met en avant son statut, et justifie donc la valeur du manucrit vendu. Les techniques de traitement automatique utilisée ne comprennent pas la polysémie. Comme cela a été dit plus haut, le moteur de recherche de \wkd{} fonctionne mieux avec des termes spécifiques; il est moins efficace lorsque le nom d'une personne est recherché avec plusieurs fonctions en même temps. Il est donc nécessaire de déterminer l'occupation principale d'une personne. Après l'extraction des fonctions, les différents termes extraits sont comparés entre eux afin de déterminer le terme à retenir. La comparaison se fait entre les mots qui sont cooccurents, c'est-à-dire qui se retrouvent régulièrement ensemble, comme par exemple \enquote{marshall} et \enquote{military}. Dans ce cas, c'est la fonction la plus importante et la plus spécifique (\enquote{marshall}) qui est conservée, et le terme générique est abandonné. Les termes très génériques -- comme le \enquote{writer} qui est traduit d'\enquote{auteur} -- sont presque systématiquement abandonnés si d'autres termes ont été extraits: un.e auteur.ice n'est un.e écrivain.e que si ce terme est le seul utilisé pour le ou la décrire. Sinon, la personne est autrice de quelque chose sans que cela soit sa fonction principale.
+
+Le second problème naît de l'algorithme d'extraction d'informations lui-même: la récupération de fonctions ou de métiers est non-contextuelle: si un terme est présent, il est récupéré. Un post-traitement est donc nécessaire afin de déterminer si le terme se rapporte à l'auteur.ice du manuscrit, ou à une autre personne. L'algorithme cherche à voir si le terme est précédé des prépositions \enquote{du, de la, des}, comme c'est le cas dans le troisième exemple ci-dessus (\ref{code:traitfunc}). Dans ce cas, il est considéré que l'information récupérée n'est pas relative à l'auteur.ice, mais à une tierce personne et elle est donc abandonnée.
+
+La récupération de données biographiques du \ttrait{} marque la fin du processus d'extraction d'informations; à l'issue de celui-ci, l'ensemble des éléments récupérés sont stockés dans un \gls{dictionnaire} structuré (\ref{code:prepout}), ce qui permet d'attribuer à chaque terme une fonction, une signification spécifique. À partir d'un texte en langage naturel, il est donc possible d'extraire un certain nombre de paramètres à partir desquels lancer des recherches en plein texte. C'est grâce à la nature semi-structurée des entrées -- qui utilisent un vocabulaire peu varié dans des phrases structurellement proches les unes des autres -- qu'il est possible de faire une extraction d'informations avec un grand degré de précision en s'appuyant uniquement sur de la détection de motifs. Grâce à une bonne connaissance du corpus et à l'aide d'une approche modulaire, qui s'adapte à différents cas de figure, il est possible d'approximer une compréhension \enquote{humaine} du texte. L'extraction d'informations n'étant qu'un étape préalable, cette compréhension du texte est uniquement centrée sur les éléments qui sont pertinents pour le moteur de recherche de \wkd{}. Cette étape d'extraction est cependant prédictive: elle peut inclure du bruit dans des données, les informations extraites peuvent être mal structurées, puisque leur fonction est déterminée principalement en fonction de leur place dans le texte. De ce fait, l'étape suivante se doit de répondre à cette part de bruit possible, à l'aide d'un algorithme qui soit ici encore modulable. L'attribution à chaque terme d'une valeur ou d'une fonction spécifique est mise à profit pour pouvoir construire de façon automatique des recherches intelligentes, qui s'adaptent autant aux données disponibles que à l'outil auquel elles sont destinées: un moteur de recherche.
 
 
 \section{Extraire des identifiants \wkd{}}
+En utilisant les données extraites à l'étape précédente, des recherches en plein texte sont faites sur \wkd{} de façon automatique, grâce à l'\api{} développée par cette institution. \wkd{} retourne plusieurs résultats; il est impossible de vérifier quel résultat est pertinent parmi tous ceux qui sont obtenus, et seul le premier résultat est donc retenu. Ce résultat contient un identifiant \wkd{}, à partir duquel des requêtes pourront être menées avec \sparql{} afin de constituer un jeu de données sur les auteur.ice.s figurant dans les catalogues de vente de manuscrits. L'objectif de l'algorithme est alors de chercher à maximiser la probabilité que, avec les données produites à l'étape précédente, le premier résultat retourné par l'\api{} soit correct. Pour savoir comment maximiser cette probabilité, il est nécessaire de mieux comprendre la fiabilité des différents paramètres extraits à l'étape précédente. Après avoir étudié l'impact des différents paramètres dans l'obtention d'un résultat valide et présenté le fonctionnement d'une \api{}, la manière dont l'algorithme a été constitué sera présentée.
 
-- quand on commence à parler de l'algo de requêtes, présenter les résultats de testisolate pour dire que c'est à cause de ces résultats qu'on a constitué l'algo.
+% Une fois un dictionnaire de données normalisées produites, un algorithme lance des recherches en plein texte sur l'\api{} de \wkd{} afin de récupérer des identifiants. L'algorithme lance plusieurs requêtes successivement. L'objectif est de récupérer un identifiant en lançant le moins de requêtes, avec le plus de certitude possible.
 
 
-Une fois un dictionnaire de données normalisées produites, un algorithme lance des recherches en plein texte sur l'\api{} de \wkd{} afin de récupérer des identifiants. L'algorithme lance plusieurs requêtes successivement. L'objectif est de récupérer un identifiant en lançant le moins de requêtes, avec le plus de certitude possible.
+\subsection{Quantifier l'incertitude: quels sont les paramètres qui permettent d'obtenir le bon résultat?}
+Tout au long de la constitution de cet algorithme, des tests ont été menés pour maximiser sa qualité, et la probabilité d'obtenir des résultats valides. Le premier test est essentiel à la constitution de l'algorithme: il mesure l'impact de chaque paramètre de recherche (dates de naissance et de décès, titres...) dans l'obtention d'un identifiant valide (\ref{appendix:testisolate}).
+
+\subsection{Utiliser une API}
+blablabla c quoi une api comment on l'utile
 
 \subsection{Présentation générale}
 Ici est présenté le fonctionnement général de l'algorithme, qui se comporte différemment en fonction du type de données qu'il a à traiter (personne noble ou non, prénom reconstruit ou non...).
