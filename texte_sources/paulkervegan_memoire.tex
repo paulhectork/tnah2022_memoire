@@ -37,6 +37,7 @@
 \definecolor{cherryblossompink}{rgb}{1.0, 0.72, 0.77} 	
 \definecolor{nadeshikopink}{rgb}{0.96, 0.68, 0.78}
 \definecolor{pastelviolet}{rgb}{0.8, 0.6, 0.79}
+\definecolor{moccasin}{rgb}{0.98, 0.92, 0.84}
 
 % db interaction: db
 % main step (start, stop...): main
@@ -79,6 +80,13 @@
 	text centered,%
 	text width=4cm%
 ]
+\tikzstyle{expl} = [%
+	rectangle,%
+	draw=plum,%
+	fill=moccasin,%
+	text centered,%
+	text width=4cm%
+]
 \tikzstyle{baseoutline} = [%
 	rectangle,%
 	rounded corners,%
@@ -95,6 +103,12 @@
 	->,%
 	>=stealth,%
 	color=plum%	
+]
+\tikzstyle{doublearrow} = [%
+	thick,%
+	<->,%
+	>=stealth,%
+	color=plum,%
 ]
 \tikzstyle{line} = [%
 	thick,%
@@ -212,6 +226,10 @@
 	plural={fichiers de log},
 	description={Un fichier de log est un fichier qui est créé pendant l'exécution d'un algorithme pour sauvegarder des informations qui le concernent. Il s'agit en général d'informations annexes sur l'exécution du script: messages d'erreur, données produites en cours d'utilisation...}
 }
+\newglossaryentry{open source}{
+	name={\textit{open source}},
+	description={L'\textit{open source}, ou \enquote{code ouvert} définit à la fois un statut légal et un mouvement social. L'\textit{open source} correspond à un logicel ou programme dont le code est librement consultable en ligne et réutilisable selon différentes licences plus ou moins permissives, comme la \textit{GNU GPL v3.0} ou la \textit{MIT License}. Ce statut légal a beaucoup gagné en popularité, en partie pour des raisons pragmatiques (un code ouvert est maintenu gratuitement, ce qui diminue les coûts d'entreprises) et symboliques (les GAFAM se sont beaucoup associées à ce courant en raison de l'image positive qu'il donne). Le statut est également associé à plusieurs mouvements en faveur du partage et de la réutilisation des connaissances, tel que la science ouverte. Certaines franges de l'\textit{open source} sont plus radicales et ont une conception ouvertement politique de l'accessibilité au code, accessibilité qui permettrait aux utilisateur.ice.s de regagner en autonomie, de développer de nouveaux modèles communautaires et de reprendre le contrôle sur leurs comportements en ligne et leur consommation médiatique. Parmi les représentant.e.s les plus proéminent.e.s de ce courant se trouve Richard Stallman, créateur de la \textit{GNU Foundation} et du système d'exploitation GNU, à la base de la majorité des systèmes d'exploitation utilisant Linux.}
+}
 \newglossaryentry{python}{
 	name={python},
 	description={Python est un language de programmation impérative (c'est-à-dire, basé sur la production et la transformation de données par une suite d'instructions) créé en 1991. Il est particulièrement utilisé dans le domaine du traitement de données et des humanités numériques. C'est le langage le plus utilisé dans le projet \mssktb{}}
@@ -229,6 +247,10 @@
 	name={table de conversion},
 	plural={tables de conversion},
 	description={Une table de conversion est, tout simplement, un dictionnaire qui contient en clés un certain nombre d'informations telles qu'elles figurent dans le texte et, en valeurs, une version normalisée de cette information. Cela permet de détectier des motifs à extraire autant de normaliser les informations.}
+}
+\newglossaryentry{url}{
+	name={URL},
+	description={Une URI (\textit{Uniform Resource Locator}) est un identifiant unique sous la forme d'une chaîne de caractères pointant vers une ressource sur le Web. De la même manière qu'une cote de bibliothèque pointe vers un livre précis, un URL pointe vers une page ou une donnée sur le Web. L'URL permet d'agir sur une ressource (en envoyant des données...) et peut être associée à des données ainsi qu'à des reésentations (une page Web, par exemple)}
 }
 
 % modèle: \newacronym{dom}{\textsc{dom}}{\emph{Document Object Model}}

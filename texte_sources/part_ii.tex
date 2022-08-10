@@ -1002,10 +1002,111 @@ En utilisant les données extraites à l'étape précédente, des recherches en 
 
 
 \subsection{Quantifier l'incertitude: quels sont les paramètres qui permettent d'obtenir le bon résultat?}
-Tout au long de la constitution de cet algorithme, des tests ont été menés pour maximiser sa qualité, et la probabilité d'obtenir des résultats valides. Le premier test est essentiel à la constitution de l'algorithme: il mesure l'impact de chaque paramètre de recherche (dates de naissance et de décès, titres...) dans l'obtention d'un identifiant valide (\ref{appendix:testisolate}).
+Tout au long de la constitution de cet algorithme, des tests ont été menés pour maximiser sa qualité et la probabilité d'obtenir des résultats valides. Le premier test est essentiel à la constitution de l'algorithme: il mesure l'impact de chaque paramètre de recherche (dates de naissance et de décès, titres...) dans l'obtention d'un identifiant valide (\ref{appendix:testisolate}).
 
-\subsection{Utiliser une API}
-blablabla c quoi une api comment on l'utile
+Ce test a été mené sur un jeu de 200 entrées sélectionnées dans différents catalogues, avec une répartition des les différents types de \tname{} similaire à celle du jeu de données complet; de plus, la proportion d'entrées avec des \ttrait{} est la même dans le jeu de test et dans l'ensemble du catalogue. Pour chacune de ces 200 entrées, des données sont extraites du \tname{} et du \ttrait{}; ensuite, cinq requêtes sont lancées pour chaque entrée: d'abord une requête avec le nom de famille usuel et le prénom seulement; ensuite, une requête avec ces deux informations et un paramètre en plus -- nom de famille noble, titre de noblesse, dates, occupation. Les cinq requêtes sont lancées, peu importe si les différentes données sont disponibles pour une entrée ou non: l'intérêt est de pouvoir quantifier l'impact de chaque paramètre pour l'ensemble des entrées, et pas seulement pour celles où le paramètre est disponible. Par exemple, si les dates de naissance et de décès permettent une obtention du bon résultat dans 90\% des cas mais qu'elles sont disponibles pour 5\% entrées, leur impact global sur l'obtention d'un résultat valide est en fait très limité. Comme cela a été dit plus haut, ces cinq requêtes sont lancées deux fois: d'abord avec le nom et le prénom complet reconstitué si besoin, ensuite avec seulement les prénoms non-reconstitués, afin de vérifier l'utilité de la reconstitution (les résultats sont très positifs, avec une augmentation de performance allant jusqu'à +6\%).
+
+Ces tests permettent donc de connaître, au niveau de l'ensemble du jeu de données, les paramètres les plus fiables pour obtenir des résultats valides. Il en ressort que le paramètre le plus efficace est l'occupation, ou le métier d'une personne: celui-ci permet d'obtenir des résultats valides pour 53,1\% des entrées (contre 48\% en recherchant les noms et prénoms, et 42\% en cherchant les noms et uniquement les prénoms non-reconstruits). Ce résultat peut sembler inattendu puisque les fonctions ne sont pas toutes relevées et qu'elles subissent un retraitement, ce qui pourrait créer du bruit additionnel dans les recherches. Cependant, il montre l'importance de la connaissance à la fois de son corpus et de \wkd{}: c'est en s'adaptant à son moteur de recherche qu'une extraction efficace des fonctions a été rendue possible. Le deuxième paramètre le plus efficace est les dates de naissance et de mort (52,6\% de résultats valides): c'est une information qui n'est pas retraduite, et il n'y a pas de risque de création de bruit additionnel. Suivent les noms de famille noble (45,9\% de 40,5\%, respectivement avec et sans reconstitution des prénoms). Il est intéressant de remarquer que ce paramètre fait diminuer les performances des recherches (entre 1,5 et 2,1 points de moins qu'en utilisant uniquement prénom et nom de famille usuel). Cette chute s'explique probablement par le fait que, sur \wkd{}, une personne est rarement nommée à la fois par son nom usuel et par son nom de famille noble. Dans certains cas cependant, rechercher le nom de famille noble à la place du nom usuel peut permettre d'obtenir des résultats qui n'auraient pas été trouvés autrement.
+
+En quantifiant l'impact de chaque paramètre de recherche dans l'obtention d'un résultat, ce test permet de savoir à quelles données se fier et quelles données rechercher en premier sur l'\api{} de \wkd{}. Il permet donc de quantifier la certitude, ou l'incertitude, liée à chaque paramètre, et donc de développer un algorithme de recherche de façon plus intelligente. Mais avant de présenter cet algorithme, il peut être intéressant de revenir sur ce qu'est une \api{}, et sur la manière de les utiliser dans un contexte de recherche.
+
+\subsection{Automatiser l'enrichissement de données via des sources externes: les \api{}}
+\subsubsection{Qu'est-ce qu'une \api{}?}
+Une \api{} Web\footnote{Il existe également des \api{} qui ne sont pas faites pour le Web, et qui permettent par exemple la communication entre deux programmes présents sur un même ordinateur.} est un protocole qui permet à un programme d'interagir avec un autre dans le cadre d'une architecture client-serveur. Cette architecture est à la base du Web, qui est formé d'un ensemble d'ordinateurs reliés en réseau. Certains ordinateurs sont des hôtes et servent à diffuser du contenu ou des données: ce sont les serveurs. D'autres ordinateurs sont des clients, c'est-à-dire qu'ils consomment ce qui est fourni par les serveurs\footnote{Dans les faits, une seule machine peut à la fois être client et serveur.}. Le client lance des requêtes qui sont traitées par le serveur, qui en retour renvoie une réponse. Ce réseau d'ordinateurs communique grâce à des protocoles, au cœur desquels se trouve le protocole HTTP, ou \textit{Hypertext Transfer Protocol}\footcite[p. 116-127]{fielding_architectural_2000}. Le rôle de celui-ci est de définir comment un client et un serveur communiquent: il établit la sémantique des requêtes envoyées d'un client à un serveur, et des réponses que ce dernier renvoie en retour. Le protocole HTTP définit donc de façon générale comment deux machines communiquent: lorsqu'un client pose une question, le serveur saura toujours ce que la question signifie; de la même manière, le client pourra toujours interpréter la réponse du serveur. Cependant, ce protocole ne définit pas ce qui peut être demandé par un client à un serveur; il ne définit pas non plus précisément le modèle de données utilisé par la réponse du serveur. Des technologies et des protocoles supplémentaires sont donc nécessaires, pour définir le contenu des requêtes et des réponses, en plus de leur sémantique. C'est ici que les \api{} prennent leur importance: elles définissent ce qui peut être requêté, le vocabulaire spécifique à utiliser par les clients et les formats de réponse qui seront fournis en retour. En plus de définir un protocole, elles sont des programmes complets côté serveur: lorsqu'elle reçoit une requête d'un client, l'\api{} traite celle-ci, construit une réponse en interagissant avec serveur et la renvoie à un client. L'\api{} est donc un programme, avec des fonctions qui traitent des données, et un protocole, avec un vocabulaire permettre l'interaction client-serveur. Contrairement au HTTP qui est générique et défini à l'échelle du Web, les \api{} sont spécifiques à un projet, à une application (chaque application ayant des besoins différents) ou à un groupe d'applications\footnote{Il existe cependant des standards dans l'architecture des \api{}, comme le REST, défini par R. Fielding (\cite[p. 76-106]{fielding_architectural_2000})}. Une \api{} permet donc l'interaction entre deux types de programmes: le programme dit fournisseur (qui est soit l'\api{} en tant que telle, soit un programme côté serveur) et le consommateur (c'est-à-dire, un programme côté client)\footnote{Pour une représentation graphique de la communication avec une \api{} dans une architecture client-serveur, voir la figure \ref{fig:api}}. D'un point de vue de la conception d'applications, les \api{} ont de nombreux avantages. Elles garantissent la sécurité des données: selon les principes REST\footcite[p. 76-106]{fielding_architectural_2000}, le client n'accède jamais directement à une base de données dans le serveur, mais seulement à une représentation des données produite à la demande; puisque les données enregistrées sont distinctes des données communiquées, il est également possible de modifier la base de données derrière l'application sans pour autant devoir modifier l'intégralité de l'\api{}; de la même manière, le programme client n'a pas besoin d'être mis à jour à chaque mise à jour côté serveur: il doit seulement être modifié si l'\api{} est modifiée.
+
+\begin{figure}[!h]
+	 \centering %[scale=0.80, transform shape]
+	 \tikz{
+	 	\node[db] (server) at (0,-5)%
+	 		{Serveur};
+	 	\node[base] (api) at (0,0)%
+	 		{\api{}};
+	 	\node[transf] (http) at (0,5)%
+	 		{Protocole HTTP};
+	 	\node[base] (client) at (0,10)%
+	 		{Client};
+	 	
+	 	\node[blank,rotate=-90,text width=3cm] at (0.5,7.5)%
+	 		{Envoie des requêtes à l'\api{}};
+	 	\node[blank,rotate=90,text width=3cm] at (-0.5,2.5)%
+	 		{Envoie des réponses au client};
+	 	\node[blank,rotate=-90,text width=3cm] at (1.2,-2.2)%
+	 		{Récupère des informations sur une base de données};
+	 	
+	 		
+	 	\node[expl] (exhttp) at (6,5)%
+	 		{
+	 			Définit la syntaxe générale pour toute communication client-serveur:
+	 			\begin{itemize}
+	 				\item Sémantique
+	 				\item Méthodes (GET, POST...)
+	 				\item Utilisation d'URI/URLs...
+	 			\end{itemize}	
+ 			};
+ 		\node[expl] (exapi) at (-6,0)%
+ 			{
+ 				Permet la communication entre un programme fournisseur et des programmes consommateurs:
+ 				\begin{itemize}
+ 					\item Définit le vocabulaire autorisé pour le consommateur (paramètres de recherche...)
+ 					\item Définit les réponses possibles pour le fournisseur et leurs formats
+ 					\item Traite les données du serveur pour construire une réponse à envoyer au client
+ 				\end{itemize}
+ 			};
+ 		
+ 		\draw[doublearrow] (client) -- (http);
+ 		\draw[doublearrow] (http) -- (api);
+ 		\draw[doublearrow] (api) -- (server);
+ 		\draw[arrow] (http) -- (exhttp);
+ 		\draw[arrow] (api) -- (exapi);
+	 }
+ 	\caption{L'interaction client-serveur au travers d'une \api{}}
+ 	\label{fig:api}
+\end{figure}
+
+DEPLACER EN INTRO DE PARTIE ??????????????????????
+Si l'élaboration d'une \api{} est intéressant d'un point de vue de développement, d'architecture Web et d'interaction entre machines, l'utilisation d'\api{} dans un contexte de recherche en humanités peut être très fructueuse. Une \api{} permet la communication de données brutes (c'est-à-dire, d'informations \enquote{à l'état pur}, sans mise en page ou interface graphique) dans des formats documentés. Consommer une \api{}\footnote{C'est-à-dire récupérer des données} permet donc d'obtenir de façon automatisée des données déjà structurées, dans un format qui soit compréhensible par une personne humaine autant que par une machine. L'utilisation d'une telle technologie est donc totalement adaptée à l'alignement avec \wkd{}. Concrètement, en utilisant l'\api{} de \wkd{}, il est possible de lancer des recherches en plein texte sur le moteur de recherche de cette base de données de façon automatique. Même si les données obtenues doivent être ensuite corrigées, en écrivant un programme pour consommer une \api{}, on s'épargne le travail de faire manuellement plus de 80000 recherches.
+
+\subsubsection{Consommer une \api{}: le cas de l'application \textit{MediaWiki}}
+\wkd{} et les projets qui y sont affiliés (\textit{Wikipedia}, \textit{Wikimedia} et autres projets de la \textit{Wikimedia Foundation}) peuvent être consultés en ligne, par des utilisateur.ice.s humain.e.s, au travers d'un site web traditionnel. Il faut cependant distinguer le site web des données: le site n'est qu'une interface de présentation. Les projets de la \textit{Wikimedia Foundation} existent avant tout sous la forme d'un ensemble de bases de données (\ref{appendix:wikimedia_db}), qui sont accessibles au public via le logiciel \gls{open source} MediaWiki\footcite{noauthor_wikimedia_2022}. Ce logiciel permet la diffusion des données aux utilisateur.ice.s via une interface graphique traditionnelle; mais il est également possible de récupérer et d'envoyer des données de la \textit{Wikimedia Foundation} via l'\api{} de MediaWiki.
+
+Une \api{} web étant un équivalent d'une application Web conçue pour une machine, la manière d'accéder aux données est assez similaire à celle utilisée pour accéder à un site Web traditionnel: la requête passée par le client prend la forme d'un \gls{url}\footnote{Dans les faits, dans le protocole HTTP les URL sont nécessaires à une requête, mais ne sont qu'une partie de la requête: elle est également composée d'un en-tête et d'une méthode, c'est-à-dire d'une action à faire avec cet \gls{url} (demander des données, en envoyer, en supprimer...).} analogue à celui d'une page web traditionnelle. L'\gls{url} contient la plupart des informations nécessaires pour que l'\api{} comprenne la requête (interprète ce que le client demande) et construise une réponse (dans notre cas, renvoie des données). Ci-dessous, deux \gls{url} correspondant à une recherche en plein texte pour \enquote{Virginia Woolf}.
+\begin{itemize}
+	\item 
+\end{itemize}
+
+\begin{center}
+	Recherche sur le site \wkd{}: \texttt{\url{https://www.wikidata.org/w/index.php?search=virginia+woolf}}
+	\\~\\
+	Recherche sur l'\api{} \wkd{}:\\ \texttt{\url{https://www.wikidata.org/w/api.php?action=query&list=search&srsearch=virginia+woolf}}
+\end{center}
+
+Les deux \gls{url} posent la même question; cependant, le site \enquote{pour humain.e.s} est indiqué par \texttt{index.php?}; \texttt{api.php?} indique que le deuxième \gls{url} renvoie à l'\api{} et contient une suite de paramètres de recherches séparés par le caractère \texttt{\&}:
+\begin{itemize}
+	\item \texttt{action=query}: l'action effectuée par cette \gls{url} est une requête demandant des données au serveur.
+	\item \texttt{list=search}: il s'agit d'une recherche plein texte.
+	\item \texttt{srsearch=virginia+woolf}: rechercher les pages qui contiennent \enquote{Virginia Woolf}.
+\end{itemize}
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{0.48\textwidth}
+		\includegraphics[width=\textwidth]{img/wd_base.png}
+		\caption{Résultats retournés par le site traditionnel}
+		\label{fig:wd_base}
+	\end{subfigure}
+	\begin{subfigure}{0.48\textwidth}
+		\includegraphics[width=\textwidth]{img/wd_api.png}
+		\caption{Résultats retournés par l'\api{}}
+		\label{fig:wd_api}
+	\end{subfigure}
+	\caption{Résultats retournés par \wkd{} pour la recherche \enquote{Virginia Woolf}}
+	\label{fig:wd_search}
+\end{figure}
+
+Enfin, les données récupérées sont les mêmes, mais dans deux formats très différents (\ref{fig:wd_search}). Dans l'image de gauche (\ref{fig:wd_base}), les résultats sont visibles avec une interface graphique complète, comme sur n'importe quel site web. À droite cependant (\ref{fig:wd_api}), les résultats sont présentés sous la forme de données structurées au format \json{} (format analogue à un \gls{dictionnaire}). Ce résultat contient à la fois les résultats à proprement parler (en dessous de \enquote{Search}) et des informations descriptives. Par exemple, \texttt{query/searchinfo/totalhits} retourne le nombre de résultats pertinents, soit 208 pages.
+
+Cette brève présentation de la manière de consommer concrètement une \api{} indique également le protocole à suivre pour l'alignement des \tname{} avec des entités \wkd{}: il s'agit de concevoir un algorithme qui, à partir des données extraites du \tname{} et du \ttrait{}, construise des \gls{url} pour lancer des recherches en plein texte sur \wkd{}. Ensuite, l'algorithme doit transmettre à l'\api{} ces \url{}, interpréter le \json{} renvoyé par \wkd{} et enregistrer ces réponses dans un fichier. Étant donné que l'alignement avec \wkd{} prend plusieurs dizaines d'heures et demande des performances élevées, des \glspl{log} annexes sont créés en cours d'utilisation pour optimiser l'algorithme.
+
 
 \subsection{Présentation générale}
 Ici est présenté le fonctionnement général de l'algorithme, qui se comporte différemment en fonction du type de données qu'il a à traiter (personne noble ou non, prénom reconstruit ou non...).
