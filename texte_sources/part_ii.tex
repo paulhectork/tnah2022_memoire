@@ -91,6 +91,8 @@ Les entrées de catalogue contiennent beaucoup d'informations qualitatives, qui 
 
 Le parti pris a donc été d'aligner avec des identifiants \wkd{} les noms contenus dans les balises \tname{} à l'aide des descriptions contenues dans les \ttrait{}; à partir de cet alignement a été constituée une base de données. Cela permet d'approximer une lecture \enquote{humaine} des items en vente: pour chaque auteur.ice, un certain nombre d'informations auront été récupérées pour mieux identifier la personne (ses occupations, son origine, ses dates de vie...). L'analyse du corpus s'appuit alors sur un bagage de connaissances qui permet d'appréhender par lecture distante l'importance d'une personne. Il devient alors envisageable de voir dans quelle mesure la mention d'une personne impacte le prix d'un manuscrit, et quels sont les facteurs biographiques déterminant dans l'établissement de la valeur. Pour revenir à l'exemple de La Rochefoucauld: à défaut de permettre de savoir qui il est, un alignement avec \wkd{} permet d'identifier son statut et sa place dans la culture française, en récupérant le nombre de ses publications ou encore les institutions dont il est membre.
 
+\subsection{Quelle relation avec le liage d'entités nommées?}
+blablabla à compléter plus tard
 
 \subsection{Présentation générale de l'algorithme}
 Construire un jeu de données issu de \sparql{} à partir de la manière dont une personne est nommée et décrite au \scl{XIX} n'est pas une opération anodine. La chaîne de traitement est donc assez complexe, comme le montre le schéma \ref{fig:wkdmain}. Cette chaîne de traitement peut être séparée en trois étapes.
@@ -577,33 +579,35 @@ Les informations à extraire de cet élément sont visibles dans la figure \ref{
 \begin{figure}[h!]
 	\centering
 	\tikz{
-		\node[baseoutline,%
+		\node[outline-no-width,%
 			draw=nadeshikopink,%
-			label={below:nom de famille noble}]%
+			label={below:nom de famille noble}%
+			]%
 			at (-10.5,0)%
 			{Turenne};
-		\node[baseoutline]%
+		\node[outline-no-width,draw=white]%
 			at (-8.5,0)%
 			{(};
-		\node[baseoutline,%
+		\node[outline-no-width,%
 			draw=purple,%
-			label={below:prénom}]%
+			label={below:prénom}
+			]%
 			at (-7.25,0)%
 			{Henri};
-		\node[baseoutline]%
+		\node[outline-no-width]%
 			at (-5.5,0)%
 			{de la};
-		\node[baseoutline,%
+		\node[outline-no-width,%
 			draw=red,%
 			label={below:nom de famille usuel}]%
 			at (-2.5,0)%
 			{Tour d'Auvergne};
-		\node[baseoutline,%
+		\node[outline-no-width,%
 			draw=orange,%
 			label={below:titre de noblesse}]%
 			at (1.3,0)%
 			{vicomte};
-		\node[baseoutline]%
+		\node[outline-no-width,draw=white]%
 			at (3,0)%
 			{de)};
 	}
@@ -1110,6 +1114,91 @@ Cette brève présentation de la manière de consommer concrètement une \api{} 
 
 \subsection{Présentation générale}
 Ici est présenté le fonctionnement général de l'algorithme, qui se comporte différemment en fonction du type de données qu'il a à traiter (personne noble ou non, prénom reconstruit ou non...).
+
+%\begin{landscape}
+\widepage
+\begin{figure}[!p]
+	\centering
+	\tikz[scale=0.70, transform shape]{
+		\node[base] (start) at (-8,8)%
+			{Dictionnaire structuré contenant les données à rechercher sur l'\api{}};
+		\node[transf] (firsturl) at (0,8)%
+			{\textbf{Préparation de la première requête} \\ Premier URL mettant bout à bout tous les paramètres disponibles};
+		\node[choice] (type) at (0,1.5)%
+			{\textbf{Préparation de la deuxième série de requêtes} \\ Quel type d'entrée est-ce? Quelle données sont disponibles?};
+					
+		\node[base] (many) at (0,-4)%
+			{Plusieurs paramètres de recherche sont disponibles};
+		\node[base] (rebuilt) at (8,-4)%
+			{Le prénom est reconstitué};
+		\node[transf] (rebuilttr) at (8,-9)%
+			{Constitution d'un nouvel URL sans le prénom};
+		\node[transf] (sub) at (0,-9)%
+			{Algorithme soustractif *};
+		\node[base] (noble) at (-8,-4)%
+			{C'est le nom d'une personne noble};
+		\node[transf] (nobletr) at (-8,-9)
+			{
+				Préparation d'URLS par retrait successif des 
+				différentes informations nominatives:
+				\begin{itemize}
+					\item Prénom
+					\item Nom de famille usuel
+					\item Nom de famille noble
+				\end{itemize}
+			};
+
+			
+		\node[transf] (launch) at (0,-15)%
+			{Lancement de la requête};
+		\node[db] (log) at (8,-18)%
+			{Fichiers de log};
+		\node[transf] (cert) at (0,-20)
+			{Évaluation de la certitude du résultat};
+		\node[db] (end) at (0,-23)%
+			{Enregistrement des résultats};
+			
+		\node[blank] at (7,-15.3) {Si la première requête ne retourne pas de résultat};
+		\node[blank,rotate=-90,text width=3.8cm] at (2.6,-11.8) {Si les deuxièmes séries de requêtes ne retournent pas de résultat};
+		\node[blank,text width=4cm] at (4,-16.7) {Vérifier si la requête a déjà été lancée};
+		\node[blank,text width=4cm] at (4,-18.6) {\begin{flushright}Enregistrer la requête si elle est lancée\end{flushright}};
+		\node[outline, text width=7cm] (note) at (8,7)%
+			{
+				*: L'algorithme soustractif consiste à:
+				\begin{itemize}
+					\item si il y a deux dates (naissance et décès), en supprimer une des deux et relancer la requête
+					\item si il y a plusieurs paramètres, retirer tous les paramètres un à un et relancer la requête
+					\item pour finir, si encore aucun résultat n'a été obtenu, supprimer le prénom et relancer la requête
+				\end{itemize}
+			};
+		
+			
+		\begin{pgfonlayer}{bg}
+			\draw[arrow] (start) -- (firsturl);
+			\draw[arrow] (firsturl) -- (0,4.75) -- (-12.5,4.75) -- (-12.5,-15) -- (launch);
+			\draw[arrow] (launch) -- (12.5,-15) -- (12.5,1.5) -- (type);
+			\draw[arrow] (type) -- (noble);
+			\draw[arrow] (type) -- (rebuilt);
+			\draw[arrow] (type) -- (many);
+			\draw[arrow] (noble) -- (nobletr);
+			\draw[arrow] (many) -- (sub);
+			\draw[arrow] (rebuilt) -- (rebuilttr);
+			\draw[arrow] (nobletr) -- (-8,-14.5) -- (-2.5,-14.5) -- (launch);
+			\draw[arrow] (rebuilttr) -- (8,-14.5) -- (2.5,-14.5) -- (launch);
+			\draw[arrow] (sub) -- (launch);
+			\draw[arrow] (launch) -- (1.5,-14.5) -- (1.5,-9.75) -- (sub);
+			\draw[arrow] (launch) -- (cert);
+			\draw[arrow] (cert) -- (end);
+			\draw[arrow] (launch) -- (1.5,-15.5) -- (1.5,-17.25) -- (5.5,-17.25) -- (log);
+			\draw[arrow] (launch) -- (1.5,-15.5) -- (1.5,-18.25) -- (5.5,-18.25) -- (log);
+		\end{pgfonlayer}	
+		
+	}
+	\caption{Algorithme lançant des recherches en plein texte sur \wkd{}}
+	\label{fig:apialgo}
+\end{figure}
+\restoregeometry
+%\end{landscape}
 
 \subsection{Gérer la montée en charge: optimisation et réduction du temps d'exécution}
 Le script est assez compliqué, repose sur une \api{} et traite un grand nombre de données (plus de 82000 entrées). Il prend donc plus d'une dizaine d'heures à s'exécuter et demande des ressources élevées (la première version du script ne fonctionnait plus sur mon ordinateur après avoir traité 5\% du jeu de données). L'optimisation nécessaire de l'algorithme est décrite dans cette sous-section.
