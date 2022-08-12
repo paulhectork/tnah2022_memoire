@@ -1109,13 +1109,44 @@ Les deux \gls{url} posent la même question; cependant, le site \enquote{pour hu
 
 Enfin, les données récupérées sont les mêmes, mais dans deux formats très différents (\ref{fig:wd_search}). Dans l'image de gauche (\ref{fig:wd_base}), les résultats sont visibles avec une interface graphique complète, comme sur n'importe quel site web. À droite cependant (\ref{fig:wd_api}), les résultats sont présentés sous la forme de données structurées au format \json{} (format analogue à un \gls{dictionnaire}). Ce résultat contient à la fois les résultats à proprement parler (en dessous de \enquote{Search}) et des informations descriptives. Par exemple, \texttt{query/searchinfo/totalhits} retourne le nombre de résultats pertinents, soit 208 pages.
 
-Cette brève présentation de la manière de consommer concrètement une \api{} indique également le protocole à suivre pour l'alignement des \tname{} avec des entités \wkd{}: il s'agit de concevoir un algorithme qui, à partir des données extraites du \tname{} et du \ttrait{}, construise des \gls{url} pour lancer des recherches en plein texte sur \wkd{}. Ensuite, l'algorithme doit transmettre à l'\api{} ces \url{}, interpréter le \json{} renvoyé par \wkd{} et enregistrer ces réponses dans un fichier. Étant donné que l'alignement avec \wkd{} prend plusieurs dizaines d'heures et demande des performances élevées, des \glspl{log} annexes sont créés en cours d'utilisation pour optimiser l'algorithme.
+Cette brève présentation de la manière de consommer concrètement une \api{} indique également le protocole à suivre pour l'alignement des \tname{} avec des entités \wkd{}: il s'agit de concevoir un algorithme qui, à partir des données extraites du \tname{} et du \ttrait{}, construise des \gls{url} pour lancer des recherches en plein texte sur \wkd{}. Cela revient à associer au paramètre de l'\gls{url} \texttt{srsearch} la chaîne de caractère qui doit être recherchée sur la base de données de \wkd{}. Ensuite, l'algorithme doit transmettre à l'\api{} ces \url{}, interpréter le \json{} renvoyé par \wkd{} et enregistrer ces réponses dans un fichier. Étant donné que l'alignement avec \wkd{} prend plusieurs dizaines d'heures et demande des performances élevées, des \glspl{log} annexes sont créés en cours d'utilisation pour optimiser l'algorithme.
 
 
 \subsection{Présentation générale}
-Ici est présenté le fonctionnement général de l'algorithme, qui se comporte différemment en fonction du type de données qu'il a à traiter (personne noble ou non, prénom reconstruit ou non...).
+L'algorithme d'alignement avec \wkd{} construit des \gls{url} et lance des recherches en plein texte sur l'\api{} \wkd{}. De par son fonctionnement, il multiplie les requêtes. Puisqu'il est impossible de vérifier en cours d'exécution si la réponse retournée par l'\api{} contient un résultat valide, il est nécessaire d'organiser l'algorithme afin de maximiser la probabilité d'obtenir un résultat valide. C'est pourquoi les recherches sont faites en commençant par les celles qui ont la plus grande certitude d'obtenir des résultats valides et en terminant par les plus incertaines. Dès qu'une réponse est obtenue, l'algorithme s'arrête et l'entrée de catalogue suivante est traitée. Comme cela apparaît dans la figure \ref{fig:apialgo}, il a par conséquent un fonctionnement à plusieurs étapes.
 
-%\begin{landscape}
+La première étape est la même quelles que soient les informations contenues dans le \tname{}: l'ensemble des paramètres extraits lors de l'étape précédente sont mis bout à bout afin de lancer une recherche. Cela permet que la recherche soit la plus précise possible, afin de maximiser les possibilités d'obtenir un résultat valide.
+
+Si la réponse de l'\api{} ne contient pas de résultat, alors les données disponibles sont étudiées afin d'adopter le bon comportement. Comme cela a été dit, différents processus ont été utilisés pour extraire des données du \tname{} et du \ttrait{}; il est donc logique de ne pas traiter tous les \glspl{dictionnaire} de données de la même manière.
+
+Si l'entrée concerne une personne noble (c'est-à-dire, si le dictionnaire de données contient un nom de famille noble), alors il y a un possible conflit dans les données extraites: si le nom de famille usuel est recherché en même temps que le nom de famille noble sur \wkd{}, il arrive qu'aucun résultat ne soit retourné. Dans ce cas, une première requête est lancée en supprimant le nom de famille noble; si aucun résultat n'est obtenu, celui-ci est rajouté et c'est le nom de famille usuel qui est enlevé. Pour finir, une autre recherche est lancée sans le prénom. Si à ce stade aucun résultat n'a été obtenu, alors un algorithme de recherches soustractives est lancé; celui-ci est décrit plus bas.
+
+Le deuxième cas de figure concerne la reconstitution des prénoms. Bien que celle-ci augmente la proportion de résultats valides, un prénom mal reconstitué risque de retourner du silence. C'est pourquoi une clé \texttt{rebuilt} a été ajoutée au \gls{dictionnaire} qui contient les données extraites: cette clé permet d'indiquer qu'un nom a été reconstitué. Dans ce cas, une nouvelle recherche est lancée sans le prénom. Si aucun résultat n'est obtenu, alors c'est l'algorithme de recherches soustractives qui s'exécute.
+
+Le troisième cas de figure concerne la présence de plusieurs paramètres de recherche disponibles -- en langage technique, de plusieurs valeurs non-nulles dans le \gls{dictionnaire}. Dans ce cas, c'est directement l'algorithme soustractif qui s'exécute. Celui-ci a été conçu à partir du constat que, d'un côté, les données contiennent inévitablement de bruit; de l'autre, l'extraction de données risque elle aussi d'introduire du bruit. Cette logique soustractive cherche donc à supprimer le bruit qui a pu s'introduire. Afin d'éviter d'être trop \enquote{brut}, l'algorithme procède en séparant les différents types de bruit possibles. D'abord, il arrive souvent qu'un chiffre soit mal reconnu lors de l'océrisation, et il peut donc y avoir des erreurs dans les dates. Deux dates peuvent être extraites (naissance et décès); il y a cependant peu de chances d'erreur sur les deux dates. Par conséquent, une des deux dates est supprimée et la recherche est lancée; si aucun résultat n'est obtenu, c'est l'autre date qui est supprimée. La seconde source de bruit provient des prénoms: comme cela a été dit, au \scl{XIX}, les prénoms étrangers sont régulièrement traduits; il arrive souvent que les prénoms composés ne soient pas dans le même ordre que sur \wkd{}, ou qu'une personne soit nommée par son deuxième prénom -- peut-être parce que les catalogues utilisent des noms d'usage alors que \wkd{} s'en tient aux noms civils. Pour ces raisons, le prénom est retiré de la chaîne de caractères à rechercher avant de faire une requête sur l'\api{}. Bien que les risques liés aux dates et aux prénoms ont été corrigés (autant que possible), il est possible que l'auteur.ice n'ait pas encore été aligné avec une entité \wkd{}. À ce stade, tous les risques spécifiques ont été traités. L'algorithme relance alors des recherches en retirant à chaque fois un paramètre différent, jusqu'à ce qu'un identifiant ait été extrait de \wkd{} ou que toutes les permutations possibles aient été faites.
+
+Cette série de construction d'\gls{url} cherche à minimiser les redondances; cependant, il est possible qu'une même chaîne de caractères puisse être extraite à différentes étapes. C'est pourquoi des \glspl{log} sont créés en cours d'utilisation: ils servent à sauvegarder les chaînes de caractères qui ont déjà été recherchées et les résultats qui leur sont associées. Avant de lancer une requête sur l'\api{}, l'algorithme vérifie donc si la chaîne a déjà été recherchée. Si oui, il récupère le résultat obtenu; sinon, lance la recherche et sauvegarde le résultat retourné par \wkd{}.
+
+L'algorithme de recherche sur \wkd{} est visiblement complexe, puisque son objectif est de minimiser le taux d'erreur possible sur des données variées, ce qui demande d'adopter des comportements différents en fonction des informations disponibles. L'algorithme ayant tendance à retirer de plus en plus de paramètres de recherches en cours d'exécution (les dates, les prénoms...), il est possible que la chaîne recherchée qui finisse par obtenir un résultat soit très pauvre en informations. Le résultat obtenu peut alors être très générique. Si l'entité recherchée est \enquote{Napoléon Bonaparte}, mais que suffisamment de paramètres ont été retirés, il est possible que l'algorithme ne recherche que \enquote{Bonaparte}. Le résultat obtenu est alors \href{https://www.wikidata.org/w/index.php?search=bonaparte&search=bonaparte&title=Special%3ASearch&go=Go&ns0=1&ns120=1}{\enquote{Charles Lucien Bonaparte}}. Il est donc nécessaire d'avoir une mesure de la certitude (ou l'incertitude) de la validité d'un résultat, ne serait-ce que pour accélérer le processus de correction des identifiants (ce qui, sur plus de 82000 entrées, n'est pas une mince affaire). Le parti pris a été, tout simplement, d'établir un score de certitude en fonction du nombre de paramètres utilisés pour lancer une recherche. Ce score a été défini de façon expérimentale, en mesurant la proportion de résultats considérés comme certains et ainsi que le taux d'erreur au sein des résultats certains (c'est-à-dire, le nombre de résultats qui ont obtenu ce score de certitude mais qui sont en fait erronés). Après plusieurs différentes versions, le score de certitude \(x_{cert}\) pour un résultat obtenu en recherchant la chaîne de caractère \(q_{str}\) a été déterminé. Il suit la formule ci dessous:
+
+\begin{displaymath}
+	\text{Étant donnés}
+\end{displaymath}
+\begin{displaymath}
+	 \sum param \text{ la somme des paramètres utilisés dans } q_{str}
+\end{displaymath}
+\begin{displaymath}
+	d = 1 \text{ si une date est dans } q_{str}; \text{sinon, } d = 0
+\end{displaymath}
+\begin{displaymath}
+	r = 1 \text{ si le prénom utilisé dans } q_{str} \text{n'a pas été reconstitué; sinon, } r = 0
+\end{displaymath}
+\begin{displaymath}
+	x_{cert} = \sum param + d + r  
+\end{displaymath}
+
+Un élément est considéré comme étant \enquote{certain} si \(x_{cert} >= 4\) ou si des dates ont été utilisées dans la chaîne de caractères utilisée pour obtenir le résultat évalué (les chances qu'un alignement soit fait avec une entité homonyme ayant les mêmes dates de naissance ou de décès étant très faibles). Sur le jeu de données de test, 32\% des entrées atteignent ce seuil de certitude. 23,6\% de ces entrées comprennent en fait une erreur, soit 8,5\% du jeu de données total (voir le tableau en annexes: \ref{appendix:testfinal}). L'objectif de ce score de certitude n'est pas d'être parfaitement exact, mais d'accélérer la relecture des résultats: en acceptant un taux d'erreur total de 8,5\%, il est possible ne corriger que les entrées qui n'ont pas atteint le seuil de certitude. Seuls les deux tiers du jeu de données restent alors à corriger manuellement.
+
 \widepage
 \begin{figure}[!p]
 	\centering
@@ -1171,11 +1202,12 @@ Ici est présenté le fonctionnement général de l'algorithme, qui se comporte 
 					\item pour finir, si encore aucun résultat n'a été obtenu, supprimer le prénom et relancer la requête
 				\end{itemize}
 			};
+		\node[blank,text width=3cm,rotate=90] at (-1,-17.25) {Si un identifiant est trouvé, le script s'arrête};
 		
 			
 		\begin{pgfonlayer}{bg}
 			\draw[arrow] (start) -- (firsturl);
-			\draw[arrow] (firsturl) -- (0,4.75) -- (-12.5,4.75) -- (-12.5,-15) -- (launch);
+			\draw[arrow] (firsturl) -- (0,5) -- (-12.5,5) -- (-12.5,-15) -- (launch);
 			\draw[arrow] (launch) -- (12.5,-15) -- (12.5,1.5) -- (type);
 			\draw[arrow] (type) -- (noble);
 			\draw[arrow] (type) -- (rebuilt);
@@ -1198,7 +1230,6 @@ Ici est présenté le fonctionnement général de l'algorithme, qui se comporte 
 	\label{fig:apialgo}
 \end{figure}
 \restoregeometry
-%\end{landscape}
 
 \subsection{Gérer la montée en charge: optimisation et réduction du temps d'exécution}
 Le script est assez compliqué, repose sur une \api{} et traite un grand nombre de données (plus de 82000 entrées). Il prend donc plus d'une dizaine d'heures à s'exécuter et demande des ressources élevées (la première version du script ne fonctionnait plus sur mon ordinateur après avoir traité 5\% du jeu de données). L'optimisation nécessaire de l'algorithme est décrite dans cette sous-section.
