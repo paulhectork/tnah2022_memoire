@@ -3,7 +3,7 @@
 \title{Traitement et exploitation d'un corpus textuel semi-structuré: le cas des catalogues de vente de manuscrits.}
 \date{05.09.2022}
 
-%%%%%%%%%%%% generic packages: encodage, format, langue et police %%%%%%%%%%%%
+%%%%%%%%%%%% generic packages: encodage, format, langue, police, math %%%%%%%%%%%%
 \documentclass[a4paper, 12pt, twoside]{book}
 \usepackage[english, french]{babel}
 \usepackage[utf8x]{inputenc}
@@ -15,12 +15,26 @@
 \usepackage{lscape}
 \usepackage{array}
 \usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{diagbox}
+
 
 %%%%%%%%%%%% code %%%%%%%%%%%%
 \usepackage[newfloat]{minted}
 \SetupFloatingEnvironment{listing}{name=Code source}
 \usemintedstyle{manni}
 \setminted{linenos, breaklines, tabsize=4, bgcolor=peachpuff}
+\usepackage{listings}
+\lstset{%
+	basicstyle=\footnotesize\ttfamily,%
+	numbers=left,%
+	backgroundcolor=\color{peachpuff},%
+	breaklines=true%
+}
+% multi-page-minted
+\usepackage{caption}
+\newenvironment{multipageminted}{\captionsetup{type=listing}}{}
+
 
 %%%%%%%%%%%% graphiques et couleurs %%%%%%%%%%%%
 \usepackage{tikz}
@@ -233,6 +247,17 @@
 	plural={fichiers de log},
 	description={Un fichier de log est un fichier qui est créé pendant l'exécution d'un algorithme pour sauvegarder des informations qui le concernent. Il s'agit en général d'informations annexes sur l'exécution du script: messages d'erreur, données produites en cours d'utilisation...}
 }
+\newglossaryentry{nil}{
+	type=\acronymtype,
+	name={NIL},
+	description={Named Entity Linking (NIL)},
+	first={Named Entity Linking (NIL), \glsadd{nilg}},
+	see=[Glossaire:]{nilg}
+}
+\newglossaryentry{nilg}{
+	name={Named Entity Linking (NIL)},
+	description={Le \textit{Named Entity Linking}, ou \enquote{liage d'entités nommées} consiste à lier des entités -- c'est-à-dire des objets uniques, comme des lieux, des personnes ou des organisations -- à des sources de connaissance externes, comme des bases de connaissance en ligne.}
+}
 \newglossaryentry{open source}{
 	name={\textit{open source}},
 	description={L'\textit{open source}, ou \enquote{code ouvert} définit à la fois un statut légal et un mouvement social. L'\textit{open source} correspond à un logicel ou programme dont le code est librement consultable en ligne et réutilisable selon différentes licences plus ou moins permissives, comme la \textit{GNU GPL v3.0} ou la \textit{MIT License}. Ce statut légal a beaucoup gagné en popularité, en partie pour des raisons pragmatiques (un code ouvert est maintenu gratuitement, ce qui diminue les coûts d'entreprises) et symboliques (les GAFAM se sont beaucoup associées à ce courant en raison de l'image positive qu'il donne). Le statut est également associé à plusieurs mouvements en faveur du partage et de la réutilisation des connaissances, tel que la science ouverte. Certaines franges de l'\textit{open source} sont plus radicales et ont une conception ouvertement politique de l'accessibilité au code, accessibilité qui permettrait aux utilisateur.ice.s de regagner en autonomie, de développer de nouveaux modèles communautaires et de reprendre le contrôle sur leurs comportements en ligne et leur consommation médiatique. Parmi les représentant.e.s les plus proéminent.e.s de ce courant se trouve Richard Stallman, créateur de la \textit{GNU Foundation} et du système d'exploitation GNU, à la base de la majorité des systèmes d'exploitation utilisant Linux.}
@@ -244,7 +269,11 @@
 \newglossaryentry{score F1}{
 	name={score F1},
 	plural={scores F1},
-	description={Le score F1, ou \textit{F-score}, est la moyenne harmonique de la précision (vrais positifs par rapport au total de résultats obtenus) et du rappel (nombre de résultats positifs par rapport au total de résultats positifs).\footcite{noauthor_precision_2022, noauthor_f-score_2022}. Le score F1 a l'avantage de prendre en compte les vrais et les faux positifs. Ce score, dont la valeur est contenue entre 0 et 1, permet de mesurer l'exactitude d'un algorithme d'apprentissage machine, ou d'un moteur de recherche.}
+	description={Le score F1, ou \textit{F-score}, est la moyenne harmonique de la précision (vrais positifs par rapport au total de résultats obtenus) et du rappel (nombre de résultats positifs par rapport au total de résultats positifs).\footcite{noauthor_precision_2022, noauthor_f-score_2022}. Le score F1 a l'avantage de prendre en compte les vrais et les faux positifs. Ce score, dont la valeur est contenue entre 0 et 1, permet de mesurer l'exactitude d'un algorithme d'apprentissage machine, ou d'un moteur de recherche. Il se calcule de la manière suivante: 
+	\begin{displaymath}	
+		f = 2 \times \frac{\text{précision} \times \text{rappel}}{\text{précision} + \text{rappel}}
+	\end{displaymath}	
+	}
 }
 \newglossaryentry{SPARQL}{
 	name={SPARQL},

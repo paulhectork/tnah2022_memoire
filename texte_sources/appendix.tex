@@ -42,7 +42,7 @@ Les résultats en pourcentage sont toujours exprimés en \textbf{pourcentages du
 
 Le tableau ci-dessus (\ref{appendix:testisolate}) présente les résultats de tests menés pour isoler l'impact de chaque paramètee dans l'obtention du bon résultat. Les mêmes requêtes ont été lancées sur un jeu de test de 200 entrées de catalogue. Toutes les requêtes contient le prénom et le nom de famille complets (\enquote{Noms} dans la table). La première requête ne contient que ce paramètre, tandis que toutes les autres requêtes sont lancées avec un paramètre en plus: titre de noblesse, nom de famille noble, dates et occupation. Le fait que ces paramètres soient utilisés ne garantit pas qu'ils soient disponibles dans le jeu de données utilisé en entrée.  Ce test permet d'isoler de mieux construire l'algorithme final de recherches en plein texte sur le moteur de recherche de \wkd{}, puisqu'il permet de voir quels sont les paramètres les plus fiables.
 \vfill
-\pagebreak
+\clearpage
 
 
 \begin{table}[h]
@@ -50,11 +50,11 @@ Le tableau ci-dessus (\ref{appendix:testisolate}) présente les résultats de te
 	\begin{tabular}{m{10cm}m{4cm}}
 		\textbf{Bons identifiants récupérés} & 65\% \\
 		\hline
-		\textbf{Score F1 } & 67.4\% \\
+		\textbf{Score F1 } & 0.674 \\
 		\hline
-		\textbf{Précision } & 67.7\% \\
+		\textbf{Précision } & 0.677 \\
 		\hline
-		\textbf{Rappel } & 67\% \\
+		\textbf{Rappel } & 0.670 \\
 		\hline
 		\textbf{Résultats certains } & 36\% \\
 		\hline
@@ -77,7 +77,7 @@ Le tableau ci-dessus (\ref{appendix:testisolate}) présente les résultats de te
 Le tableau ci-dessus présente les résultats d'un test évaluant les performances de l'algorithme final. Voici une explication de ces résultats:
 \begin{itemize}
 	\item \textit{Bons identifiants récupérés}: la proportion, exprimée en pourcentage, du nombre d'identifiants récupérés par l'algorithme qui correspondent aux identifiants récupérés manuellement
-	\item \textit{Score F1}: le \gls{score F1}, soit la moyenne pondérée de la précision et du silence. Contrairement  à la mesure ci-dessus, le score F1 prend en compte le silence et les faux négatifs, et offre donc une interprétation plus complète de la qualité du script.
+	\item \textit{Score F1}: le \gls{score F1}, soit la moyenne pondérée de la précision et du rappel. Contrairement  à la mesure ci-dessus, le score F1 prend en compte le silence et les faux négatifs, et offre donc une interprétation plus complète de la qualité du script.
 	\item \textit{Précision}: la précision est une composante du \gls{score F1} qui mesure la proportion d'identifiants pertinents obtenus parmi tous les identifiants obtenus.
 	\item \textit{Rappel}: le rappel est une composante du \gls{score F1} qui mesure la proportion d'identifiants pertinents obtenus parmi l'ensemble des identifiants pertinents qui existent.
 	\item \textit{Résultats certains}: pour accélérer le processus de relecture, un score de certitude a été attribué à certains identifiants obtenus grâce à l'algorithme. Ce score dépend du nombre de paramètres utilisés dans la recherche qui a permis de récupérer l'identifiant. 36\% des résultats obtenus sont considérés comme certains.
@@ -88,6 +88,23 @@ Le tableau ci-dessus présente les résultats d'un test évaluant les performanc
 	\item \textit{Temps d'exécution avec l'option \texttt{fetch}}: le temps pris, en secondes, pour lancer l'intégralité de l'algorithme de récupération d'identifiants \wkd{} sur les 200 entrées en stockant dans des \glspl{log} les requêtes lancées et les identifiants requêtés.
 	\item \textit{Temps d'exécution sans l'option \texttt{fetch}}: le temps pris, en secondes, pour lancer l'intégralité de l'algorithme de récupération d'identifiants sur les 200 entrées sans utiliser de fichiers de log.
 \end{itemize}
+\clearpage
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{m{5cm}m{3cm}m{3cm}m{3cm}}
+		\diagbox[innerwidth=5cm]{Score}{Base de con-\\naissances} & Score F1 -- recherche des candidates & Score F1 -- Lien avec le candidat & Overall linking accuracy \\
+		DBPedia & 0.899 & 0.536 & 0.834 \\
+		DataBNF & 0.689 & 0.726 & 0.7 \\
+		Wikidata & 0.869 & 0.611 & 0.85 \\
+	\end{tabular}
+	\caption{Résultats du \gls{nil} de lieux dans des textes littéraires du XIXe~s. par Soudani et al. (2018)}
+	\label{appendix:soudani}
+\end{table}
+Scores obtenus par Aicha Soudani et al. pour le liage d'entités nommées pour des lieux dans des textes littéraires français du \scl{XIX}, présentés à la conférence \textit{HumaNS’2018}\footcite[p. 4]{soudani_adaptation_2018}. Les scores F1 ne figurent pas dans l'article original, qui ne présente que la précision et le rappel. Je les ai donc calculés moi même. La méthode de calcul de l'\textit{overall linking accuracy} (\enquote{exactitude générale du liage}) n'est pas précisée dans l'article; il est seulement indiqué que \enquote{Cette mesure essaie d'évaluer l'efficacité globale du système, et non par phase, et exprime la fiabilité de REDEN pour la tâche de résolution des entités nommées.}\footcite[p. 4]{soudani_adaptation_2018}.
+
+La méthode utilisée dans cet article est la suivante: les auteur.ice.s s'appuient fortement sur l'apprentissage machine, en identifiant d'abord des entités dans le texte à l'aide de \texttt{SEM} avant de lier les entités à différentes bases de connaissance en utilisant \texttt{REDEN}.
+
 
 \chapter{Graphiques}
 \begin{figure}
@@ -156,8 +173,8 @@ functions = {
 	\label{appendix:convfunction}
 \end{listing}
 
-
-\begin{listing}[p]
+\clearpage
+\begin{multipageminted}
 	\begin{minted}{python}
 dpts = [
 	"ain",
@@ -291,12 +308,13 @@ dpts = [
 	"vosges",
 	"yonne",
 	"yssel-supérieur",
-"zuyderzée"
+	"zuyderzée"
 ]		
 	\end{minted}
 	\caption{Liste de départements du XIXe~s. pour détecter des informations géographiques}
 	\label{appendix:convdpt}
-\end{listing}
+\end{multipageminted}
+\clearpage
 
 \begin{listing}[p]
 	\begin{minted}{python}
@@ -342,7 +360,8 @@ countries = {
 	\label{appendix:convcountry}
 \end{listing}
 
-\begin{listing}[p]
+\clearpage
+\begin{multipageminted}
 	\begin{minted}{python}
 colonies = [
 	"québec",
@@ -417,9 +436,10 @@ colonies = [
 	"wallis et futuna"
 ]
 	\end{minted}
-	\caption{Liste d'anciennes colonies françaises pour la détection de motifs}
+	\caption{Liste d'anciennes colonies françaises utilisées pour la détection de motifs}
 	\label{appendix:convcolonie}
-\end{listing}
+\end{multipageminted}
+\clearpage
 
 \begin{listing}[p]
 	\begin{minted}{python}
@@ -614,7 +634,8 @@ names = {
 	\label{appendix:namesimp}
 \end{listing}
 
-\begin{listing}[p]
+\clearpage
+\begin{multipageminted}
 	\begin{minted}[breakanywhere]{python}
 def rgx_abvcomp(nstr):
 	"""
@@ -667,7 +688,8 @@ def rgx_abvcomp(nstr):
 	\end{minted}
 	\caption{Fonction permettant d'identifier et d'extraire un nom abrégé composé}
 	\label{appendix:rgxabvcomp}
-\end{listing}
+\end{multipageminted}
+\clearpage
 
 \begin{listing}[p]
 	\begin{minted}[breakanywhere]{python}
@@ -726,6 +748,55 @@ def rgx_complnm(nstr):
 	\caption{Fonction permettant d'identifier et d'extraire un nom complet non abrégé}
 	\label{appendix:rgxfull}
 \end{listing}
+\pagebreak
+
+\clearpage
+\begin{figure}[!htb]
+	\begin{subfigure}{\textwidth}
+		\begin{minted}{xml}
+<item n="264" xml:id="CAT_000327_e264">
+	<!-- ... -->
+	<name type="author">Spontini (Gaspard)</name>
+	<trait>
+		<p>célèbre compositeur, auteur de la Vestale, né en 1779, mort en 1851.</p>
+	</trait>
+	<!-- ... -->
+</item>
+		\end{minted}
+		\subcaption{La source \xmltei{}}
+	\end{subfigure}
+	\begin{subfigure}{\textwidth}
+		\begin{minted}{python}
+{
+	'fname': 'gaspard ', 
+	'lname': 'spontini ', 
+	'nobname_sts': '', 
+	'status': '', 
+	'dates': '1779 1851 ', 
+	'function': 'writer', 
+	'rebuilt': False
+}
+		\end{minted}
+		\caption{Le dictionnaire d'informations structurées}
+	\end{subfigure}
+	\begin{subfigure}{\textwidth}
+		\begin{lstlisting}
+gaspard spontini 1779 1851 writer
+gaspard spontini 1851 writer
+gaspard spontini 1779 writer
+gaspard spontini writer
+spontini 1779 1851 writer
+spontini 1851 writer
+spontini 1779 writer
+spontini writer
+		\end{lstlisting}
+		\caption{Les recherches lancées sur l'\api{} \wkd{}}
+	\end{subfigure}
+	\caption{De la \tei{} à l'\api{}: document en entrée, informations extraites et chaînes de caractères recherchées}
+	\label{code:apipipeline}
+\end{figure}
+Ci dessus (\ref{code:apipipeline}) sont présentés l'entrée et les données produites lors de l'alignement avec \wkd{}: en premier les données en entrée, ensuite les informations qui en sont extraites et enfin les différentes chaînes de caractères recherchées. Il est à noter que, dans la plupart des cas, seules une ou deux recherches sont faites sur l'\api{} avant d'obtenir un résultat; ici, huit chaînes différentes ont été construites et recherchées, ce qui représente l'intégralité de l'algorithme.
+\clearpage
 
 \chapter{Images}
 \begin{figure}[p]
