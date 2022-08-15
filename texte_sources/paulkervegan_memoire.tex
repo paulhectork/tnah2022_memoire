@@ -224,8 +224,13 @@
 	type=\acronymtype,
 	name={API},
 	description={Application Programming Interface},
-	first={Interface de programmation d'application (API), \glsadd{apig}},
+	first={Interface de programmation d'application (API) \glsadd{apig}},
 	see=[Glossaire:]{apig}
+}
+\newglossaryentry{graph}{
+	name={base de données en graphe},
+	plural={bases de données en graphe},
+	description={Une base de données en graphe sert à stocker des données reliées entre elles au sein d'un graphe ou d'un réseau. Les données correspondent aux nœuds du graphe et les relations sont représentées sous forme d'arrêtes. Souvent, données et relations disposent d'identifiants uniques définis grâce à des ontologies. L'interaction avec de telles bases de données est permise grâce à des languages de requêtes, comme \sparql{}. La représentation en graphe a pour but de mettre l'accent sur l'interrelation entre les données et de permettre des liens complexes entre elles.\footcite{noauthor_graph_2022}}
 }
 \newglossaryentry{bleu}{
 	name={score BLEU},
@@ -242,6 +247,17 @@
 	plural={expressions régulières},
 	description={Une expression régulière, ou expression rationnelle est une chaîne de caractère, écrite selon une syntaxe précise, qui permet de détecter des motifs dans du texte\footcite{noauthor_expression_2022}. Les expressions régulières s'appuient sur la classification des caractères en classes (minuscules, majuscules, chiffres, espaces), sur des structures alternatives (un caractère ou un autre) et exclusives (un caractère n'ayant pas certaines propriétés) pour repérer des motifs. Par exemple, \enquote{2022} correspond au motif: \texttt{\textbackslash{}d{4}}, soit \enquote{quatre chiffres à la suite}. Une adresse mail est également un motif: \texttt{[\^~(@|\textbackslash{}s)]+@[\^~(@|\textbackslash{}s)]+}, soit \enquote{plusieurs caractères qui ne sont ni un espace une arobase, suivi d'une arobase, suivi de plusieurs caractères qui n'est ni un espace ni une arobase}.}
 }
+\newglossaryentry{http}{
+	type=\acronymtype,
+	name={HTTP},
+	description={\textit{Hypertext Transfer Protocol}},
+	first={\textit{HyperText Transfer Protocol} (HTTP) \glsadd{httpg}},
+	see=[Glossaire:]{httpg}
+}
+\newglossaryentry{httpg}{
+	name={HTTP},
+	description={Le \textit{Hypertext Transfer Protocol} (HTTP, ou P\enquote{protocole de transfert hypertexte}), est un protocole qui permet la communication entre différentes machines dans une architecture client-serveur, comme celle du Web. C'est donc le protocole qui est à la base d'Internet, puisqu'il établit la manière dont des machines peuvent interagir au sein d'un réseau. Il définit un ensemble de méthodes pour interagir avec le serveur -- demander (\texttt{GET}) des données, en envoyer (\texttt{POST})... Il définit également la manière dont le serveur répond au client et un ensemble d'erreurs\footcite[p. 116-127]{fielding_architectural_2000}, chacune disposant d'un code pour l'identifier (l'erreur 404 indiquant que la ressource demandée n'existe pas, ou l'erreur 418 signifiant \enquote{Je suis une théière}, un canular qui pouve l'humour des concepteur.ice.s du Web).}
+}
 \newglossaryentry{log}{
 	name={fichier de log},
 	plural={fichiers de log},
@@ -251,7 +267,7 @@
 	type=\acronymtype,
 	name={NIL},
 	description={Named Entity Linking (NIL)},
-	first={Named Entity Linking (NIL), \glsadd{nilg}},
+	first={Named Entity Linking (NIL) \glsadd{nilg}},
 	see=[Glossaire:]{nilg}
 }
 \newglossaryentry{nilg}{
@@ -284,9 +300,27 @@
 	plural={tables de conversion},
 	description={Une table de conversion est, tout simplement, un dictionnaire qui contient en clés un certain nombre d'informations telles qu'elles figurent dans le texte et, en valeurs, une version normalisée de cette information. Cela permet de détectier des motifs à extraire autant de normaliser les informations.}
 }
+\newglossaryentry{uri}{
+	type=\acronymtype,
+	name={URI},
+	description={\textit{Uniform Resource Identifier}},
+	first={\textit{Uniform Resource Identifier} (URI) \glsadd{urig}},
+	see=[Glossaire:]{urig}
+}
+\newglossaryentry{urig}{
+	name={URI},
+	description={Une URI (\textit{Uniform Resource Identifier}) est une chaîne de caractères qui identifie une ressoource sur un réseau. Cette URI est permanente, et permettra d'identifier une ressource même si celle-ci est supprimée. L'URL est un type particulier d'URI qui, en plus de d"crire une resource, la représente aussi: un URL de page \textit{Wikipedia} permet d'identifier une page de façon unique, comme toute URI (aucune autre page sur internet n'ayant le même URL); mais en plus, elle pêermet d'accéder à la page elle-même.}
+}
 \newglossaryentry{url}{
+	type=\acronymtype,
 	name={URL},
-	description={Une URI (\textit{Uniform Resource Locator}) est un identifiant unique sous la forme d'une chaîne de caractères pointant vers une ressource sur le Web. De la même manière qu'une cote de bibliothèque pointe vers un livre précis, un URL pointe vers une page ou une donnée sur le Web. L'URL permet d'agir sur une ressource (en envoyant des données...) et peut être associée à des données ainsi qu'à des reésentations (une page Web, par exemple)}
+	description={\textit{Uniform Resource Locator}},
+	first={\textit{Uniform Resource Locator} (URL) \glsadd{urlg}},
+	see=[Glossaire:]{urlg}
+}
+\newglossaryentry{urlg}{
+	name={URL},
+	description={Une URL (\textit{Uniform Resource Locator}) est un identifiant unique sous la forme d'une chaîne de caractères pointant vers une ressource sur le Web. De la même manière qu'une cote de bibliothèque pointe vers un livre précis, un URL pointe vers une page ou une donnée sur le Web. L'URL permet d'agir sur une ressource (en envoyant des données...) et peut être associée à des données ainsi qu'à des reésentations (une page Web, par exemple).}
 }
 
 % modèle: \newacronym{dom}{\textsc{dom}}{\emph{Document Object Model}}
