@@ -1412,6 +1412,23 @@ Les requêtes \sparql{} sont faites sur un serveur distant via le protocole \gls
 \restoregeometry
 
 \subsection{Développer un comportement uniforme pour produire des données exploitables à partir un corpus hétérogène}
+D'un point de vue technique, \sparql{} suit la logique des \enquote{triplets} présentée ci-dessus. Le langage permet d'interagir avec une base de données en graphe au format \rdf{} (récupérer des données, en envoyer, en mettre à jour ou en supprimer). Récupérer des données via \sparql{} revient à demander au langage d'extraire de la base de données l'ensemble des valeurs qui correspondent à un triplet sujet-prédicat-objet. Par exemple, récupérer tous les tableaux peints par Natalia Gontcharova est possible à l'aide de la requête:
+
+\begin{listing}
+	\begin{minted}{sql}
+SELECT ?painting ?paintingLabel 
+WHERE {
+	?painting wdt:P170 wd:Q232391 .
+	
+	SERVICE wikibase:label {
+		bd:serviceParam wikibase:language "en" .
+	}
+}
+	\end{minted}	
+	\caption{bla}
+	\label{vl}
+\end{listing}
+
 ALORS ALORS DE QUOI CA PARLE
 - le fonctionnement de sparql en triplets, en reprenant l'exemple plus haut
 - la division en plus petites requêtes pour éviter les timeouts
