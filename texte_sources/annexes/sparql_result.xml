@@ -1,0 +1,143 @@
+<?xml version="1.0" ?>
+<sparql xmlns="http://www.w3.org/2005/sparql-results#">
+	
+	
+	<head>
+		
+		
+		<variable name="painting"/>
+		
+		
+		<variable name="paintingLabel"/>
+		
+	
+	</head>
+	
+	
+	<results>
+		
+		
+		<result>
+			
+			
+			<binding name="painting">
+				
+				
+				<uri>http://www.wikidata.org/entity/Q4500028</uri>
+				
+			
+			</binding>
+			
+			
+			<binding name="paintingLabel">
+				
+				
+				<literal xml:lang="en">Circular Dance</literal>
+				
+			
+			</binding>
+			
+		
+		</result>
+		
+		
+		<result>
+			
+			
+			<binding name="painting">
+				
+				
+				<uri>http://www.wikidata.org/entity/Q19882576</uri>
+				
+			
+			</binding>
+			
+			
+			<binding name="paintingLabel">
+				
+				
+				<literal xml:lang="en">Cats (rayist percep.[tion] in rose, black, and yellow)</literal>
+				
+			
+			</binding>
+			
+		
+		</result>
+		
+		
+		<result>
+			
+			
+			<binding name="painting">
+				
+				
+				<uri>http://www.wikidata.org/entity/Q19883614</uri>
+				
+			
+			</binding>
+			
+			
+			<binding name="paintingLabel">
+				
+				
+				<literal xml:lang="en">Landscape 47</literal>
+				
+			
+			</binding>
+			
+		
+		</result>
+		
+		
+		<result>
+			
+			
+			<binding name="painting">
+				
+				
+				<uri>http://www.wikidata.org/entity/Q19883648</uri>
+				
+			
+			</binding>
+			
+			
+			<binding name="paintingLabel">
+				
+				
+				<literal xml:lang="en">Rayonism Blue-Green Forest</literal>
+				
+			
+			</binding>
+			
+		
+		</result>
+		
+		
+		<result>
+			
+			
+			<binding name="painting">
+				
+				
+				<uri>http://www.wikidata.org/entity/Q20200781</uri>
+				
+			
+			</binding>
+			
+			
+			<binding name="paintingLabel">
+				
+				
+				<literal xml:lang="en">Decor for the Ballet &quot;Liturgie&quot;</literal>
+				
+			
+			</binding>
+			
+		
+		</result>
+		
+	
+	</results>
+	
+
+</sparql>

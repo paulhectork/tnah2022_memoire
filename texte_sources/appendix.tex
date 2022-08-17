@@ -798,6 +798,254 @@ spontini writer
 Ci dessus (\ref{code:apipipeline}) sont présentés l'entrée et les données produites lors de l'alignement avec \wkd{}: en premier les données en entrée, ensuite les informations qui en sont extraites et enfin les différentes chaînes de caractères recherchées. Il est à noter que, dans la plupart des cas, seules une ou deux recherches sont faites sur l'\api{} avant d'obtenir un résultat; ici, huit chaînes différentes ont été construites et recherchées, ce qui représente l'intégralité de l'algorithme.
 \clearpage
 
+\begin{multipageminted}
+	\inputminted[breakanywhere]{python}{./annexes/sparql_result.json}
+	\caption{Exemple de réponse \sparql{} au format \json{} pour la requête \ref{code:sparql}}
+	\label{appendix:sparqlout_json}
+\end{multipageminted}
+\clearpage
+
+\begin{multipageminted}
+	\inputminted[breakanywhere]{xml}{./annexes/sparql_result.xml}
+	\caption{Exemple de réponse \sparql{} au format \xml{} pour la requête \ref{code:sparql}}
+	\label{appendix:sparqlout_xml}
+\end{multipageminted}
+\clearpage
+
+\begin{multipageminted}
+	\begin{minted}[breakanywhere]{python}
+{
+	# entrées précédentes...
+	"Q108438226": {
+		"instance": [
+			"Q3305213"
+		],
+		"instanceL": [
+			"painting"
+		],
+		"gender": [],
+		"genderL": [],
+		"citizenship": [],
+		"citizenshipL": [],
+		"lang": [],
+		"langL": [],
+		"deathmanner": [],
+		"deathmannerL": [],
+		"birthplace": [],
+		"birthplaceL": [],
+		"deathplace": [],
+		"deathplaceL": [],
+		"residplace": [],
+		"residplaceL": [],
+		"burialplace": [],
+		"burialplaceL": [],
+		"educ": [],
+		"educL": [],
+		"religion": [],
+		"religionL": [],
+		"occupation": [],
+		"occupationL": [],
+		"award": [],
+		"awardL": [],
+		"position": [],
+		"positionL": [],
+		"member": [],
+		"memberL": [],
+		"nobility": [],
+		"nobilityL": [],
+		"workcount": [],
+		"conflictcount": [],
+		"img": [
+			"http://commons.wikimedia.org/wiki/Special:FilePath/Louis%20de%20Frott%C3%A9.jpg"
+		],
+		"signature": [],
+		"birth": [],
+		"death": [],
+		"title": [
+			"Louis de Frott\u00e9 (1755-1800), g\u00e9n\u00e9ral vend\u00e9en"
+		],
+		"inception": [
+			"1822-01-01"
+		],
+		"author": [],
+		"authorL": [],
+		"pub": [],
+		"pubL": [],
+		"pubplace": [],
+		"pubplaceL": [],
+		"pubdate": [],
+		"creator": [
+			"Q51077254"
+		],
+		"creatorL": [
+			"Louise Bouteiller"
+		],
+		"material": [
+			"Q12321255",
+			"Q296955"
+		],
+		"materialL": [
+		"canvas",
+			"oil paint"
+		],
+		"height": [
+			"216"
+		],
+		"genre": [
+			"Q134307"
+		],
+		"genreL": [
+			"portrait"
+		],
+		"movement": [],
+		"movementL": [],
+		"creaplace": [],
+		"creaplaceL": [],
+		"viafID": [],
+		"bnfID": [],
+		"isniID": [],
+		"congressID": [],
+		"idrefID": []
+	},
+	"Q3383960": {
+		"instance": [
+			"Q5"
+		],
+		"instanceL": [
+			"human"
+		],
+		"gender": [
+			"Q6581097"
+		],
+		"genderL": [
+			"male"
+		],
+		"citizenship": [
+			"Q142"
+		],
+		"citizenshipL": [
+			"France"
+		],
+		"lang": [
+			"Q150"
+		],
+		"langL": [
+			"French"
+		],
+		"deathmanner": [],
+		"deathmannerL": [],
+		"birthplace": [
+			"Q1148468"
+		],
+		"birthplaceL": [
+			"Vendargues"
+		],
+		"deathplace": [],
+		"deathplaceL": [],
+		"residplace": [],
+		"residplaceL": [],
+		"burialplace": [],
+		"burialplaceL": [],
+		"educ": [],
+		"educL": [],
+		"religion": [],
+		"religionL": [],
+		"occupation": [
+			"Q47064",
+			"Q82955",
+			"Q189290"
+		],
+		"occupationL": [
+			"military personnel",
+			"politician",
+			"military officer",
+			"officer"
+		],
+		"award": [
+			"Q10855226",
+			"Q11593374",
+			"Q1313340"
+		],
+		"awardL": [
+			"Grand Croix of the L\u00e9gion d'honneur",
+			"Knight of the Royal and Military Order of Saint Louis",
+			"names inscribed under the Arc de Triomphe",
+			"Grand Cross of the Legion of Honour"
+		],
+		"position": [
+			"Q21032625",
+			"Q15904689"
+		],
+		"positionL": [
+			"member of the Chamber of Peers",
+			"Governor of Algeria"
+		],
+		"member": [],
+		"memberL": [],
+		"nobility": [
+			"Q165503"
+		],
+		"nobilityL": [
+			"baron"
+		],
+		"workcount": [],
+		"conflictcount": [
+			"1"
+		],
+		"img": [
+			"http://commons.wikimedia.org/wiki/Special:FilePath/Berthez%C3%A8ne.JPG"
+		],
+		"signature": [],
+		"birth": [
+			"1775-03-24"
+		],
+		"death": [
+			"1847-10-09"
+		],
+		"title": [],
+		"inception": [],
+		"author": [],
+		"authorL": [],
+		"pub": [],
+		"pubL": [],
+		"pubplace": [],
+		"pubplaceL": [],
+		"pubdate": [],
+		"creator": [],
+		"creatorL": [],
+		"material": [],
+		"materialL": [],
+		"height": [],
+		"genre": [],
+		"genreL": [],
+		"movement": [],
+		"movementL": [],
+		"creaplace": [],
+		"creaplaceL": [],
+		"viafID": [
+			"15030322"
+		],
+		"bnfID": [
+			"14643064j"
+		],
+		"isniID": [
+			"0000 0000 4820 9162"
+		],
+		"congressID": [
+			"n2005062361"
+		],
+		"idrefID": [
+			"088623629"
+		]
+	},
+	# entrées suivantes...
+}
+	\end{minted}
+	\caption{Extrait de la base de connaissance constituée grâce à \sparql{} suite  à l'alignement avec des entités \wkd{}}
+	\label{appendix:dbextract}
+\end{multipageminted}
+\clearpage
+
 \chapter{Images}
 \begin{figure}[p]
 	\includegraphics[width=\textwidth]{annexes/wikimedia_db_2020.png}

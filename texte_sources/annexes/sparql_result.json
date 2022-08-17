@@ -1,0 +1,67 @@
+{
+    "head": {
+        "vars": [
+            "painting",
+            "paintingLabel"
+        ]
+    },
+    "results": {
+        "bindings": [
+            {
+                "painting": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q4500028"
+                },
+                "paintingLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Circular Dance"
+                }
+            },
+            {
+                "painting": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q19882576"
+                },
+                "paintingLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Cats (rayist percep.[tion] in rose, black, and yellow)"
+                }
+            },
+            {
+                "painting": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q19883614"
+                },
+                "paintingLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Landscape 47"
+                }
+            },
+            {
+                "painting": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q19883648"
+                },
+                "paintingLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Rayonism Blue-Green Forest"
+                }
+            },
+            {
+                "painting": {
+                    "type": "uri",
+                    "value": "http://www.wikidata.org/entity/Q20200781"
+                },
+                "paintingLabel": {
+                    "xml:lang": "en",
+                    "type": "literal",
+                    "value": "Decor for the Ballet \"Liturgie\""
+                }
+            }
+        ]
+    }
+}

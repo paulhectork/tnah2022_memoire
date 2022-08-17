@@ -1412,10 +1412,11 @@ Les requêtes \sparql{} sont faites sur un serveur distant via le protocole \gls
 \restoregeometry
 
 \subsection{Développer un comportement uniforme pour produire des données exploitables à partir un corpus hétérogène}
-D'un point de vue technique, \sparql{} suit la logique des \enquote{triplets} présentée ci-dessus. Le langage permet d'interagir avec une base de données en graphe au format \rdf{} (récupérer des données, en envoyer, en mettre à jour ou en supprimer). Récupérer des données via \sparql{} revient à demander au langage d'extraire de la base de données l'ensemble des valeurs qui correspondent à un triplet sujet-prédicat-objet. Par exemple, récupérer tous les tableaux peints par Natalia Gontcharova est possible à l'aide de la requête:
+\subsubsection{Les spécificités techniques de \sparql{}: adapter les résultats à ses besoins}
+D'un point de vue technique, \sparql{} suit la logique des \enquote{triplets} présentée ci-dessus. Le langage permet d'interagir avec une base de données en graphe au format \rdf{} (récupérer des données, en envoyer, en mettre à jour ou en supprimer). Récupérer des données via \sparql{} revient à demander au langage d'extraire de la base de données l'ensemble des valeurs qui correspondent à un triplet sujet-prédicat-objet. Par exemple, récupérer tous les tableaux peints par Natalia Gontcharova est possible à l'aide de la requête suivante (\ref{code:sparql}):
 
-\begin{listing}
-	\begin{minted}{sql}
+\begin{listing}[h!]
+	\begin{minted}{sparql}
 SELECT ?painting ?paintingLabel 
 WHERE {
 	?painting wdt:P170 wd:Q232391 .
@@ -1424,18 +1425,74 @@ WHERE {
 		bd:serviceParam wikibase:language "en" .
 	}
 }
-	\end{minted}	
-	\caption{bla}
-	\label{vl}
+	\end{minted}
+	\caption{Une requête simple: les identifiants et les noms de tableaux peints par Natalia Gontcharova}
+	\label{code:sparql}
 \end{listing}
 
-ALORS ALORS DE QUOI CA PARLE
-- le fonctionnement de sparql en triplets, en reprenant l'exemple plus haut
-- la division en plus petites requêtes pour éviter les timeouts
-- les result formats définis par W3C (avec des exemples, en xml et json, en annexes), et donc vite fait le processus de conversion
-- la construction d'une base de données en sortie: format (json), structure. Cette base de connaissance abandonne l'aspect auto-descriptif des réponses \sparql{}: en plus de contenir les données renvoyées par \sparql{}, les formats de réponse définis par le W3C\footcite{beckett_sparql_2013} décrivent la requête (en stockant un ensemble de variables) et les données retournées (en définissant systématiquement un type de données, et en associant à ce type une \gls{uri}). Le deuxième, et le plus important problème des formats de réponse \sparql{}, est qu'ils contiennent de nombreuses redondances. Comme cela a été dit, une requête \sparql{} associe une variable à une \enquote{question}; celle-ci permet d'associer une ou plusieurs valeurs à cette variable. Une requête comprenant plusieurs variables peut donc retourner un nombre de valeurs différent pour chacune de ces variables. \sparql{} ne peut alors pas déterminer de lien logique entre les valeurs obtenues pour ces variables. \sparql{} fait donc le produit cartésien entre toutes la valeurs possibles pour chaque variable: il y a alors autant de \enquote{solutions à la requête}\footcite[§2.3.1. Variable Binding Results]{beckett_sparql_2013} qu'il y a de combinaisons possibles de résultats. Par exemple, si trois variables sont requêtées et que \sparql{} retourne trois résultats pour chaque variable, alors le nombre de \enquote{solutions à la requête} est de \(3 \times 3 \times 3 = 27\).
+La requête ci-dessus consiste à récupérer tous les résultats possibles pour la variable \texttt{?painting} qui ont la relation \texttt{P170} (\enquote{a pour créateur.ice}) avec l'entité \texttt{Q232391} (l'identifiant de N. Gontcharova): la requête récupère toutes les entités de \wkd{} ayant l'artiste pour créatrice. La partie suivant \texttt{SERVICE...} permet d'associer à chaque \texttt{?painting} une variable \texttt{?paintingLabel} qui contient le titre de l'entité \texttt{?painting} en anglais. Chaque entité ou relation dispose d'un préfixe (\texttt{wdt:, wd:, wikibase:}) qui permet de lier une information à un espace de noms spécifique. De cette brève description du fonctionnement technique de \sparql{}, il faut retenir que ce langage permet de récupérer d'une base de données toutes les informations qui correspondent à la proposition énoncée. Ces informations sont liées à des variables, ce qui permet d'accéder aux résultats renvoyés par \sparql{}.
 
-La réponse retournée comprend alors plusieurs 
+À l'origine, toutes les informations étaient demandées à \sparql{} dans une seule requête. Celle-ci fonctionnait sans difficultés pour certaines entités; dans d'autres cas cependant, elle ne s'exécutait pas dans le temps imparti. Plusieurs tentatives d'optimisation ont été menées, mais sans succès sur d'autres. Ce cas de figure, comme cela est noté\footcite{noauthor_query_2022} par la documentation \sparql{} de \wkd{}, est systématique lorsqu'un très grand nombre d'informations sont récupérées pour une variable requêtée. Cela fait exploser la complexité du traitement de la requête par le serveur et cause un dépassement du temps maximal de requête autorisé. Le problème, c'est qu'il est difficile de prévoir les cas de figure où trop de résultats seront récupérés par \sparql{}. Le choix a donc de continuer d'adopter un comportement uniforme. Plutôt que d'adapter les requêtes en fonction du type d'entités (et du risque qu'elle rende une requête trop difficile à traiter), plusieurs petites requêtes plus petites requêtes sont construites à la suite; leurs résultats sont agglomérés afin qu'une entité corresponde à une série de résultats. De plus, les risques de dépassement du temps maximal de traitement autorisé par \wkd{} ont été pris en compte: si cette durée est dépassée, la requête est relancée; si aucune réponse n'est obtenue cette seconde fois, alors une série de résultats vides sont associés à l'entité problématique dans la base de connaissances.
+
+La réponse retournée par \wkd{} ne peut être utilisée en tant que telle et doit donc être retravaillée. En effet, en plus de contenir les données renvoyées par \sparql{}, les formats de réponse définis par le W3C\footcite{beckett_sparql_2013} décrivent la requête (en stockant un ensemble de variables) et les données retournées (en définissant systématiquement un type de données, et en associant à ce type une \gls{uri}). Comme cela a été dit, une requête \sparql{} associe une variable à une \enquote{question}; celle-ci permet d'associer une ou plusieurs valeurs à cette variable. Une requête comprenant plusieurs variables peut donc retourner un nombre de valeurs différent pour chacune de ces variables. \sparql{} ne peut alors pas déterminer de lien logique entre les valeurs obtenues pour ces variables. \sparql{} fait donc le produit cartésien entre toutes la valeurs possibles pour chaque variable: il y a alors autant de \enquote{solutions à la requête}\footcite[§2.3.1. Variable Binding Results]{beckett_sparql_2013} qu'il y a de combinaisons possibles de résultats. Par exemple, si trois variables sont requêtées, que \sparql{} retourne trois résultats pour chaque variable et qu'il n'existe aucun lien logique entre elles (la valeur d'une variable ne dépend pas de la valeur des autres), alors le nombre de \enquote{solutions à la requête} est de \(3 \times 3 \times 3 = 27\). Des exemples de réponse aux formats \json{} (\ref{appendix:sparqlout_json}) et \xml{} (\ref{appendix:sparqlout_xml}) sont disponibles en annexes. Dans les deux cas, la structure est la même:
+
+\begin{itemize}
+	\item Un en-tête (\texttt{head}) contenant une liste des variables requêtées.
+	\item Un corps de texte (\texttt{results}) contenant une liste de toutes les \enquote{solutions de requêtes possibles} (\texttt{bindings}), c'est-à-dire toutes les combinaisons possibles des valeurs obtenues pour les requêtées. Chacune de ces solutions contient une entrée par variable obtenue. Pour chaque variable, plusieurs informations sont retournées:
+	\begin{itemize}
+		\item La valeur obtenue
+		\item Le type de cette valeur, qui permet de classifier la valeur en grands groupes: une \gls{uri}, du texte libre... 
+		\item Si le résultat obtenu est en texte libre, alors la langue de ce texte est également fournie.
+	\end{itemize} 
+\end{itemize}
+
+Cette variété d'informations documente précisément les données associées à chaque variables; cependant, cette structure imbriquée rend l'accès aux informations très difficile. Par conséquent, le format de réponse de \sparql{} présente deux problèmes. D'abord, il contient des informations inutiles pour la base de connaissance qui doit être constituée: celle-ci n'a pas besoin du le langage ou du type de valeurs récupérées associées à chaque variable. Ces informations étant définies dans la requête, leur valeur est déjà connue et peut être documentée dans alourdir la base de connaissance à construire. Ensuite, une réponse \sparql{} peut potentiellement contenir énormément de redondances. Dans les faits, il n'est pas nécessaire de déterminer un lien entre les différentes variables requêtées, puisque celles-ci sont indépendantes. Ce qui importe, ce n'est pas le lien entre les distinctions obtenues par une personne et les positions qu'il ou elle a occupé (cette relation n'existe pas), mais la relation entre l'entité et les valeurs récupérées: ce qui est nécessaire, c'est de savoir que telle valeur obtenue entretient telle relation avec l'entité qui est requêtée (par exemple, de savoir que \enquote{Membre de l'Académie Française} est une distinction honorifique).
+
+\subsubsection{La base de connaissances à construire}
+L'objectif de cette base de connaissance est de stocker toutes les informations obtenues avec \sparql{} pour toutes les entités, afin de faire les liens entre les auteur.ice.s de manuscrits et une source de données externe. Par conséquent, cette base de connaissance doit remplir les conditions suivantes:
+
+\begin{itemize}
+	\item Permettre un accès facile aux données: cette base n'est pas censée être accessible au public, mais être facilement manipulable par une machine.
+	\item Être construite dans un format léger et manipulable. Là encore, la base n'est pas censée être qualitative scientifiquement (contrairement à une édition textuelle en \tei{}), mais être utilisable rapidement par une machine. Le format utiliser doit donc favoriser le traitement des données, et non leur publication.
+	\item Limiter au maximum les redondances d'informations: les requêtes contenant plus de 18000 identifiants, la base constituée sera probablement volumineuse; plus elle occupe de mémoire, plus il est coûteux (en temps et en charge processeur) d'y récupérer des données.
+	\item Être malléable: le format et le schéma définis pour la base de données doit permettre de contenir, pour chaque variable, un nombre indéfini de valeurs.
+	\item Être accessible depuis les identifiants des entités \wkd{}: c'est eux qui permettent le lien avec les catalogues.
+\end{itemize}
+
+Trois formats ont été considérés pour la base de connaissance:
+\begin{itemize}
+	\item Le tableur (type \tsv{}): connu et utilisé par tout.e chercheur.euse, il a l'avantage d'être très facilement compréhensible et consultable par un public non-spécialiste. Dans ce cas, chaque colonne correspondrait à une variable et chaque ligne à une entité, ce qui permet à la fois un accès rapide aux identifiants et aux résultats de requête.
+	\item Une base de données document au format \xml{}. Ce langage à balises a l'avantage d'être hiérarchisé et de permettre des arborescences très complexes. Il est de plus possible de s'aligner sur des standards, comme le \xmltei{}; de plus, il est possible de concevoir des schémas de validation pour un fichier \xml{}; ceux-ci garantissent qu'il n'y ait pas d'erreur dans la structure de données, ce qui peut être intéressant puisque la base de connaissance est construite de façon automatique, et qu'une erreur est donc potentiellement possible.
+	\item Une base de données \json{}. Ce format, également hiérarchisé, permet de construire des structures arborescentes aussi complexe que le \xml{}. Il est par contre bien plus léger et facile d'utilisation que ce dernier; contrairement aux langages à balises, le balisage sémantique est moins facile (il est moins évident d'associer une signification à chaque élément). De plus, il n'est à ma connaissance pas possible de construire des schémas de validation pour un \json{}
+\end{itemize}
+
+C'est le \json{} qui correspond le mieux aux besoins du projet. Étant donné qu'il est impossible de prévoir le nombre de valeurs obtenues pour une variable à chaque requête, un format non-hiérarchisé est peu intéressant: dans un tableur, il n'est possible de stocker qu'une information par colonne/variable, à moins de créer des subdivisions au sein d'une colonne, ce qui rendrait le tableur plus complexe à manipuler. Au contraire, un format hiérarchisé permet d'associer chaque variable à une liste de résultats dont la longueur n'est pas définie par avance. Le \json{} a également été privilégié au \xml{}: ce dernier est considérablement plus complexe à manipuler, que ce soit pour y ajouter des informations que pour accéder à celles-ci. De plus, le langage à balises est bien plus lourd, et donc potentiellement plus long à manipuler. Étant donné que la base de connaissances est un format de \enquote{travail}, et non de publication, un balisage sémantique n'est pas nécessairement intéressant.
+
+La structure suivante a été définie pour la base de connaissance: à chaque identifiant \wkd{} est lié les résultats obtenus via \sparql{}. Ces résultats correspondent à toutes les variables requêtées; à celles-ci sont associées une liste de résultats. Toutes les variables requêtées sont toujours présentes. Si aucun résultat n'a été trouvé pour une variable, alors celle-ci est associée à une liste vide. Cela permet que toutes les entrées de la base aient toujours la même structure. Ainsi, la manipulation de la base est facilitée; en contrepartie, celle-ci est plus lourde que si les seules variables présentes étaient celles pour lesquelles des résultats ont été trouvés. En d'autres termes, la base de connaissance correspond au schéma ci-dessous (\ref{code:dbmodel}). Un exemple contenant deux entrées de la base figure en annexes (\ref{appendix:dbextract})
+
+\begin{listing}[h]
+	\begin{minted}{python}
+{
+	"identifiant wikidata 1": {
+		"variable 1": ["résultat 1", "résultat 2", "résultat N"],
+		"variable 2": ["résultat 1", "résultat 2", "résultat N"],
+		"variable N": ["résultat 1", "résultat 2", "résultat N"],
+	},
+	"identifiant wikidata N": {
+		"variable 1": ["résultat 1", "résultat 2", "résultat N"],
+		"variable 2": ["résultat 1", "résultat 2", "résultat N"],
+		"variable N": ["résultat 1", "résultat 2", "résultat N"],
+	},
+	# autres entités...
+}
+	\end{minted}
+	\caption{Structure de la base de connaissance construite à partir des résultats obtenus de \sparql{}}
+	\label{code:dbmodel}
+\end{listing}
+
+\subsubsection{Des réponses \sparql{} à la base de connaissance}
+blabla comment on transforme la réponse sparql en db
+
 
 Ici est détaillée 
 \begin{itemize}
