@@ -263,16 +263,16 @@
 	plural={fichiers de log},
 	description={Un fichier de log est un fichier qui est créé pendant l'exécution d'un algorithme pour sauvegarder des informations qui le concernent. Il s'agit en général d'informations annexes sur l'exécution du script: messages d'erreur, données produites en cours d'utilisation...}
 }
-\newglossaryentry{nil}{
+\newglossaryentry{nel}{
 	type=\acronymtype,
-	name={NIL},
-	description={Named Entity Linking (NIL)},
-	first={Named Entity Linking (NIL) \glsadd{nilg}},
+	name={NEL},
+	description={Named Entity Linking (NEL)},
+	first={Named Entity Linking (NEL) \glsadd{nelg}},
 	see=[Glossaire:]{nilg}
 }
-\newglossaryentry{nilg}{
+\newglossaryentry{nelg}{
 	name={Named Entity Linking (NIL)},
-	description={Le \textit{Named Entity Linking}, ou \enquote{liage d'entités nommées} consiste à lier des entités -- c'est-à-dire des objets uniques, comme des lieux, des personnes ou des organisations -- à des sources de connaissance externes, comme des bases de connaissance en ligne.}
+	description={Le \textit{Named Entity Linking}, traduit en français par \enquote{résolution d'entités nommées} ou \enquote{liage d'entités nommées} consiste à lier des entités -- c'est-à-dire des objets uniques, comme des lieux, des personnes ou des organisations -- à des sources de connaissance externes, comme des bases de connaissance en ligne.}
 }
 \newglossaryentry{open source}{
 	name={\textit{open source}},
@@ -285,10 +285,12 @@
 \newglossaryentry{score F1}{
 	name={score F1},
 	plural={scores F1},
-	description={Le score F1, ou \textit{F-score}, est la moyenne harmonique de la précision (vrais positifs par rapport au total de résultats obtenus) et du rappel (nombre de résultats positifs par rapport au total de résultats positifs).\footcite{noauthor_precision_2022, noauthor_f-score_2022}. Le score F1 a l'avantage de prendre en compte les vrais et les faux positifs. Ce score, dont la valeur est contenue entre 0 et 1, permet de mesurer l'exactitude d'un algorithme d'apprentissage machine, ou d'un moteur de recherche. Il se calcule de la manière suivante: 
-	\begin{displaymath}	
-		f = 2 \times \frac{\text{précision} \times \text{rappel}}{\text{précision} + \text{rappel}}
-	\end{displaymath}	
+	description={Le score F1, ou \textit{F-score}, est la moyenne harmonique de la précision (vrais positifs par rapport au total de résultats obtenus) et du rappel (nombre de résultats positifs par rapport au total de résultats positifs).\footcite{noauthor_precision_2022, noauthor_f-score_2022}. Le score F1 a l'avantage de prendre en compte les vrais et les faux positifs. Ce score, dont la valeur est contenue entre 0 et 1, permet de mesurer l'exactitude d'un algorithme d'apprentissage machine, ou d'un moteur de recherche. Soit \(F\) le score F1, \(P\) la précision et \(R\) le rappel, sa formule est la suivante:
+	\begin{align*}	
+		P &= \frac{\text{items pertinents obtenus}}{\text{total des items obtenus}} \\~\\
+		R &= \frac{\text{items pertinents obtenus}}{\text{ensemble des items pertinents}} \\~\\
+		F &= 2 \times \frac{P \times R}{P + R}
+	\end{align*}	
 	}
 }
 \newglossaryentry{SPARQL}{
