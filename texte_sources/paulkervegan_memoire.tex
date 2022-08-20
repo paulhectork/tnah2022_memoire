@@ -267,12 +267,16 @@
 	type=\acronymtype,
 	name={NEL},
 	description={Named Entity Linking (NEL)},
-	first={Named Entity Linking (NEL) \glsadd{nelg}},
+	first={\textit{Named Entity Linking} (NEL) \glsadd{nelg}},
 	see=[Glossaire:]{nilg}
 }
 \newglossaryentry{nelg}{
-	name={Named Entity Linking (NIL)},
+	name={Named Entity Linking (NEL)},
 	description={Le \textit{Named Entity Linking}, traduit en français par \enquote{résolution d'entités nommées} ou \enquote{liage d'entités nommées} consiste à lier des entités -- c'est-à-dire des objets uniques, comme des lieux, des personnes ou des organisations -- à des sources de connaissance externes, comme des bases de connaissance en ligne.}
+}
+\newglossaryentry{ontologie}{
+	name={ontologie},
+	description={Une ontologie correspond à la définition d'un ensemble de catégories, de propriétés et de relations qui unissent des données et des concepts; cet ensemble est complété par une modélisation (souvent sous forme graphique), qui indique la relation entre les différents termes de l'ontologie\footcite{noauthor_ontology_2022}. Ceux-ci sont souvent liés de façon hiérarchique (plusieurs termes spécifiques pouvant être dérivés d'un terme générique). Dans le Web sémantique, chaque terme a lui-même un identifiant unique, ce qui garantit une implémentation uniforme pour l'ontologie et réduit le risque de présence de doublons.}
 }
 \newglossaryentry{open source}{
 	name={\textit{open source}},
@@ -340,7 +344,7 @@
 
 % commandes perso: abréviations
 % technologies en mono, sigles et sites web en italique
-\newcommand{\api}{\texttt{\gls{api}}}
+\newcommand{\api}{\gls{api}}
 \newcommand{\alto}{\texttt{Alto}}
 \newcommand{\escr}{\textit{eScriptorium}}
 \newcommand{\html}{\texttt{HTML}}
