@@ -1,64 +1,46 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%% TROISIÈME PARTIE %%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%m TROISIEME PARTIE %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\part{Après la \tei{}: l'application web \ktb{}, interface de diffusion des données}
-\chapter{Design d'interfaces dans un projet d'humanités numériques: l'application web \ktb{}}
-\chaptermark{Design d'interface...}
-Ce chapitre s'intéresse aux relations entre \textit{web design}, données textuelles et humanités numériques, à partir de l'exemple du site web développé pour le projet \ktb{}.
+\part{Rendre la recherche réutilisable et interopérable: \textit{KatAPI}, une API pour échanger des données structurées}
 
-\section{Le design d'interfaces: une reconfiguration des méthodes de recherche et une transformation du corpus}
-Cette section s'intéresse aux nouveautés apportées par le design d'interfaces dans les humanités numériques. On s'intéresse à la manière dont le design d'interfaces (et le design de façon générale) transforme les méthodes de recherche \enquote{habituelles}, mais aussi une transformation du rapport aux documents.
+La problématique de cette partie est la suivante: comment rendre la recherche en humanités numériques réutilisable et encourager le partage de données entre projets de recherche? La réponse à cette question, au sein du projet \mssktb{} prend la forme d'une \api{}. Celle-ci diffuse des données source du projet, mais aussi des informations issues de la recherche et du traitement computationnel de celles-ci dans deux formats structurés: le \json{} et le \xmltei{}.
 
-\subsection{Le design comme inversion des méthodes}
-Avec les humanités numériques, les questions de design et de structuration deviennent centrales, depuis la conception de schémas \tei{} (qui demandent de mettre en forme un document pré-existant) et d'ontologies jusqu'au développement d'interfaces et de sites web. Parmi ces questions \enquote{formelles}, le design d'interfaces occupe cependant une place particulière. En effet, dans la plupart des aspects des humanités numériques, le rapport entre questions techniques et scientifiques est clairement établi; la question scientifique préexiste, et la technique sert surtout à répondre à cette question (comme cela a été le cas jusqu'à dans la \enquote{pipeline} jusqu'ici). Cette hiérarchie entre théorie et pratique reste somme toute assez traditionnelle et correspond aux méthodes scientifiques établies. 
+\chapter{Standards de design et statut des API dans pour les humanités numériques centrées sur le texte}
+\chaptermark{Standards de design et statut}
+Ici est présenté un état de l'art sur la conception d'\api{} dans un contexte d'humanités numériques. Sont présentés un standard de design pour la conception d'api (le REST), l'architecture API-DTS (équivalent du IIIF pour le texte). Si l'\api{} conçue ne se rattache pas à ces concepts, ceux-ci ont servi d'inspiration pour l'architecture de \textit{KatAPI}. Les principes FAIR (essentiels pour la recherche ouverte et interopérable) sont également présentés, ainsi que l'état de l'art pour le design d'\api{} dans un contexte d'humanités numériques. Il apparaît que de tels outils sont majoritairement conçus par des institutions (\textit{DataBnF}...) plutôt que par de simples projets de recherche.
 
-Avec le design d'interfaces, ce rapport établi s'inverse. En effet, le design ne cherche pas à répondre à une question. Tout au plus, il répond à un cahier des charges (il faut, à minima, permettre de diffuser des données de façon lisible par des êtres humains). C'est avec la pratique du design que naissent les problématiques, parmi lesquelles: 
-\begin{itemize}
-	\item Comment organiser les différentes parties d'une page pour que celle ci soit lisible? 
-	\item Comment organiser la relation entre les pages pour qu'un site web soit facilement navigable? 
-	\item De quelle manière l'apparence d'un site détermine la réception des contenus?
-	\item En quoi le design d'un site web construit ou bouscule des habitudes et des formes d'utilisation chez ses utilisateur.ice ?
-\end{itemize}
-Toutes les questions posées par le design n'attendent pas nécessairement de réponse. Cependant, force est de constater que ce domaine appelle à une nouvelle approche pour des chercheur.euse.s et ingénieur.e.s issu.e.s des humanités; ces questions visuelles amènent à une approche semblable à celle de la recherche-création et demandent de développer un nouveau rapport à la technique.
+\section{Pourquoi partager les données de la recherche? Les principes FAIR}
+Les principes \gls{fair}\footcite{boeckhout_fair_2018}, qui visent à établir un ensemble de caractéristiques que les données ouvertes doivent partager, sont présentés ici.
 
-\subsection{Interface et document}
-En plus de perturber nos méthodes, la conception d'interfaces influence la perception des documents. Dans le cas du projet \ktb, le site web opère une médiation, il implique de une \enquote{scénographie} autour des catalogues de vente. Ceux-ci et les manuscrits qui y ont décrits sont intégrés à des pages, inclus dans un parcours, accessibles depuis différents points d'entrée. En plus de cette scénographie, les catalogues sont littéralement traduits, depuis la \tei{} vers le format \html{}. Là où la \tei{} est un format de balisage sémantique (c'est la signification des éléments guide l'encodage), le \html{} est pensé pour un balisage formel (le texte est balisé en fonction de la forme que l'on souhaite obtenir). Cela implique une perte d'information (les métadonnées du \texttt{teiHeader}) et l'éloignement d'une approche philologique du texte. Enfin, le site internet marque un éloignement intellectuel avec les documents: le catalogue n'y est plus l'unité intellectuelle dominante, alors qu'il restait l'un des critères structurants des fichiers \tei{} (un fichier représentant un catalogue). Sur le site web, on peut accéder directement aux éléments vendus, sans avoir à passer par les catalogues. Dans le contexte d'un projet issu de la littérature, toutes ces opérations ne sont pas neutres et méritent d'être explicitées. Pour mieux identifier ce que ces transformations impliquent, il peut être intéressant de revenir à la \enquote{roue} de Sahle\footcite[p. 11]{sahle_digital_2016}.
+\section{Le standard REST: un modèle pour la conception d'API}
+Ici est présenté le standard REST, défini par Roy Fielding\footcite{fielding_architectural_2000}; ce standard architectural est considéré comme l'idéal à atteindre en matière de design d'\api{}. Il n'a cependant pas été suivi ici, en partie parce qu'il est mieux adapté à un projet de plus grande échelle, et en partie car il ne fonctionne pas de façon optimale avec le modèle de données défini, et notamment avec le choix de construire une \api{} renvoyant des réponses conformes à la \tei{}.
 
+\section{CTS, OAI-PMH et DTS: quels standards pour le partage du texte en humanités numériques?}
+Les principes REST, présentés ci-dessus, concernent l'architecture et le design d'une \api{}; ils ne définissent pas précisément quels formats de réponse définir, ni comment structurer ses (méta-)données. Ici sont présentés quelques protocoles visant à uniformiser les formats de réponse et l'interaction avec des API. Ils visent à encourager la standardisation et l'interopérabilité. Trois standards sont présentés en détail: le \gls{cts}\footcite{almas_continuous_2018}, \gls{oaipmh}\footcite{prime-claverie_defi_2017} et \gls{dts}\footcite{almas_distributed_2021}. Comme le REST, ces standards sont difficiles à intégrer à un petit projet de recherche; ils peuvent cependant servir d'inspiration pour la conception  d'une \api{} centrée sur le texte.
 
-\section{La conception d'interfaces, un problème pour les humanités numériques?}
-\chaptermark{La conception d'interfaces}
-Cette section s'intéresse aux rôle des interfaces en humanités numériques.
+\chapter{Définir un périmètre: que partager, et comment partager?}
+\chaptermark{Définir un périmètre}
+Après avoir présenté le paysage des \api{} en humanités numériques, ce chapitre décrit \textit{KatAPI} du point de vue de l'utilisateur.ice: quelles données peuvent être obtenues via l'\api{}, quels paramètres de recherche sont autorisés et quels sont les formats de données retournés par l'application. C'est donc les principes de la communication du client avec l'\api{} qui sont ici présentés.
 
-\subsection{Pour une approche pragmatique du design d'interfaces dans un contexte d'humanités numériques}
-Le design graphique demande des compétences spécifiques qui ne font pas directement partie des cursus d'humanités numériques. Il ne sert pas seulement à faire des sites qui soient \enquote{beaux}, il joue un rôle essentiel en encadrant la réception des contenus présentés. Cependant, les approches plus \enquote{élaborées} de design d'interfaces demandent des financements et des techniques qui sont souvent hors de portée d'un projet universitaire. Des approches plus \enquote{critiques} du design ont également été développées dans les humanités numériques\footcite{drucker_visualisation_2020}. Ces approches ont tendance à être difficiles à mettre en œuvre; leur portée critique peut aller à l'encontre de l'utilité des interfaces, en faisant de l'interface l'objet principal d'intérêt, aux dépends des contenus présentés. 
+\section{Quelles données partager?}
+Ici est défini le périmètre des données accessibles depuis l'\api{}: tout ce qui est produit par le projet n'est bien sûr pas accessible, et des choix ont dû être faits. Les jeux de données accessibles sont présentés ici.
 
-À l'opposé de ces approches, ce qui est défendu dans le cadre du projet \mssktb{} est une approche à la fois informée et pragmatique du \textit{web design}. Informée, car être conscient des enjeux du design permet un meilleur positionnement en tant qu'ingénieur.e, et donc une présentation des contenus plus intéressante. Pragmatique, parce que les solutions qui sont présentées sont des solutions techniquement réalisables dans le cadre d'un projet universitaire. C'est ici qu'est présentée la charte graphique développée pour l'application web \ktb{}.
+\section{Codifier l'accès aux données: présentation des paramètres de recherche possibles}
+Ici sont présentés les paramètres de recherche qui peuvent être utilisés pour récupérer des données, et comment ils permettent de filtrer ce qui est retourné par l'\api{}.
 
-\subsection{Rejeter les interfaces?}
-Après avoir parlé de l'intérêt des interfaces et présenté l'approche suivie au sein du projet \mssktb{}, cette partie s'attache à développer une critique des interfaces. À partir d'une approche historique des interfaces graphiques, des contextes dans lesquelles elles se sont développées, nous revenons sur les concepts centraux à leur développement que sont la notion d'utilisateur et de design d'expérience. Il ne s'agit pas de remettre en cause l'utilisation d'interfaces, mais de défendre une approche critique et consciente de l'impact que la standardisation des \enquote{expériences utilisateur} sur internet peuvent avoir sur la diffusion des connaissances.
+\section{Comment partager les données? Principes suivis pour le partage d'informations, formats et structure des réponses de l'API}
+Cette section décrit les formats de réponse de l'\api{}, en \json{} et \xmltei{}, pour les différents paramètres de requête définis.
 
-\chapter{Donner à voir un corpus textuel}
-Ce chapitre s'intéresse aux visualisations développées pour l'application web \ktb{}.
+\chapter{Implémentation et fonctionnement technique de \textit{KatAPI}}
+\chaptermark{Implémentation et fonctionnement technique}
+Ce chapitre décrit le fonctionnement de l'\api{} côté serveur: comment les données sont reçues, la manière dont elles sont traitées et comment les réponses sont construites (notamment la création automatisée de documents \xmltei{}). Le système de gestion des erreurs est également présenté.
 
-\section{Visualisation, design et sciences: des relations complexes}
-Ici, on s'intéresse à la place qu'occupe la visualisation de données dans la recherche scientifique. Le rapport entre les sciences et la visualisation est loin d'être simple et unidirectionnel: cette dernière n'est pas juste un outil, une méthode utilisée dans la recherche scientifique pour des raisons pratiques. Il est plus intéressant de penser la visualisation (et donc le design) et les sciences comme des domaines en interaction, qui s'influencent mutuellement. De la même manière que l'écriture implique des manières de penser particulières \footcite[p. 111-116]{masure_design_2017} en donnant au discours une existence spatiale (le texte est répandu sur une page et des renvois peuvent être fait d'un endroit de la page à un autre), la visualisation implique ses propres manières de penser et influence donc la recherche. Dans notre cas par exemple, produire des visualisations implique de s'intéresser à des informations quantifiables; cela encourage donc une approche statistique du corpus. À l'inverse, la recherche scientifique ne fait pas qu'\enquote{utiliser} le design. Certaines pratiques sont favorisées et deviennent force d'autorité dans des disciplines scientifiques. Se créent alors des \enquote{cultures visuelles}\footcite[p. 14]{hentschel_visual_2014} propres à ces disciplines, avec leurs traditions et motifs.
+\section{Présentation générale}
+Ici est présenté, schéma à l'appui, le fonctionnement technique de l'\api{} et la chaîne de traitement depuis la réception des requêtes jusqu'à l'envoi d'une réponse.
 
-\subsection{L'utilisation de supports visuels dans les sciences: une longue histoire}
-Ici, on retrace une histoire de l'utilisation du visuel dans les sciences (au sens large: sciences \enquote{dures} et sciences humaines), à partir (entres-autres) du travail de Anne-Lyse Renon\footcite[p. 47-88]{renon_design_2016} et de K. Hentschel\footcite{hentschel_visual_2014}.
+\section{Gestion des erreurs}
+L'\api{} étant une application devant interagir avec des utilisateur.ice.s et gérer leurs requêtes, il n'est pas pensable qu'elle \enquote{plante} ou ne renvoie pas d'erreur. Tout un système de gestion des erreurs a donc été défini. Ces erreurs peuvent être classées en deux catégoriés: côté client (dues à des entrées invalides des utilisateur.ice.s)  et côté serveur (erreurs inattendues qui empêchent l'exécution d'une requête). Si ces erreurs sont rencontrées, des réponses sont construites en \json{} ou \xmltei{} (selon le format demandé par l'utilisateur.ice.s). Celles-ci décrivent l'erreur et permettent donc aux utilisateur.ice.s de corriger les erreurs qui ont pu avoir lieu côté client.
 
-\subsection{Une vision objective? Visualisation et prétention à l'objectivité}
-Cette partie fait un retour sur la manière dont le visuel et la production de graphiques ont été utilisés comme arguments d'autorité, afin de montrer des faits de façon \enquote{objective}\footcite{renon_design_2015}.
-
-\subsection{La tendance visuelle des humanités numériques}
-Pour finir, on fait un bref retour sur la manière dont les humanités numériques \enquote{intensifient} la tendance à la visualisation, ou complexifient le rapport entre sciences et visualisation, pour deux raisons. En premier lieu, les humanités numériques viennent avec le développement de nouveaux outils. Ensuite, les humanités numériques marquent un retour à une approche quantitative et graphique dans les sciences humaines -- approche qui trouve ses sources, entre-autres, dans l'École des Annales et sa collaboration avec le Laboratoire de graphique de Jacques Bertin\footcite{orain_laboratoire_2021}, ainsi que dans le structuralisme, où les \enquote{structures} trouvent leur meilleure représentation sous forme graphique. Cette tendance visuelle des humanités numériques n'est pas sans poser problème, puisque les visualisations sont développées par des personnes qui n'ont pas nécessairement de formation en graphisme. Une approche pragmatique de la visualisation a tendance à primer (les graphiques servent à prouver quelque chose), aux dépens d'une approche critique (les représentations graphiques sont des interprétations, où les données sont signifiantes, mais où les formes et les méthodes de représentation importent aussi).
-
-
-\section{Interpréter le corpus de manuscrits}
-Ce chapitre s'intéresse à la manière dont le corpus de catalogues de vente de \ktb{} a été traduit en graphiques et à la manière dont ces représentations permettent un nouveau regard sur le corpus.
-
-\subsection{La visualisation comme objet de connaissance}
-Ici, on développe une analyse du corpus de catalogues et des manuscrits qui y sont décrits à partir des visualisations produites. Par leur capacité à traduire les informations sous des formes synthétiques\footcite[p. 36]{hentschel_visual_2014}, les visualisations sont des objets de connaissance qui permettent de comprendre le corpus traité.
-
-\subsection{La visualisation comme interprétation}
-Les représentations graphiques ne font pas que montrer des phénomènes. Leur rôle est moins analytique que démonstratif: elles ne révèlent pas une information qui serait cachée dans les données, mais interprètent celles-ci conformément à une problématique de recherche\footcite[p. 78]{drucker_visualisation_2020}. Représenter un jeu de données, c'est donc le lire, l'interpréter en fonction de certaines questions scientifiques. Ce processus interprétatif est donc partiel (on ne dit pas tout ce qui est dans un jeu de données, mais seulement ce qui est pertinent dans un certain contexte); il est aussi influencé par les propriétés graphiques des visualisations. Cette sous-section s'intéresse donc, à partir d'exemples concrets, à la manière dont les propriétés graphiques (choix de formes et de couleurs) ainsi que le pré-traitement des données et d'autres décisions techniques (représentation des prix en francs courants ou constants) influencent la lecture et la perception du corpus.
+\section{Garantir le bon fonctionnement de l'application}
+De la même manière que les systèmes de gestion des erreurs garantissent que l'application continue à fonctionner même en cas d'erreur, les tests garantissent que l'\api{} soit fonctionnelle, même dans \enquote{des conditions extrêmes}. Les réponses, formats et données retournées sont donc testés. C'est ce protocole de test qui est présenté ici.
