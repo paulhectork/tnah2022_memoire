@@ -246,18 +246,18 @@
 }
 \newglossaryentry{ctsg}{
 	name={CTS},
-	description={À DÉFINIR}
+	description={\textit{Canonical Text Services} (CTS) est une API et une spécification pour identifier et diffuser des citations au sein de textes encodés. L'API spécifie la manière d'identifier un texte, un témoin, un passage ou encore une série de textes à l'aide d'un URN (un identifiant unique analogue aux URI). Le CTS est une API, mais ne spécifie pas comment une API CTS doit être implémentée: ce qui importe, c'est que l'API CTS permette d'accéder à des extraits de textes grâce à leurs citations\footcite{smith_four_2012}.}
 }
 \newglossaryentry{dts}{
 	type=\acronymtype,
 	name={DTS},
 	description={\textit{Distributed Text Services}},
 	first={\textit{Distributed Text Services} (DTS) \glsadd{dtsg}},
-	see=[Glossaire:]{ctsg}
+	see=[Glossaire:]{dtsg}
 }
 \newglossaryentry{dtsg}{
 name={DTS},
-description={À DÉFINIR}
+description={Comme le CTS, le \textit{Distributed Text Services} (DTS) est une API visant à identifier et permettre l'identification et la diffusion de texte dans une architecture client-serveur. Cette API, développée à partir de 2018 sur un modèle communautaire, demande une réponse en XML-TEI et des métadonnées encodées en JSON-LD; ces spécifications techniques la distinguent de CTS, qui ne repose pas sur un format particulier. Comme le CTS, DTS ne définit pas comment implémenter l'API\footcite{almas_distributed_2021}.}
 }
 \newglossaryentry{dictionnaire}{
 	name={dictionnaire},
@@ -274,11 +274,11 @@ description={À DÉFINIR}
 	name={FAIR},
 	description={\textit{Findable Accessible Interoperable Reusable}},
 	first={\textit{Findable Accessible Interoperable Reusable} (FAIR) \glsadd{fairg}},
-	see=[Glossaire:]{ctsg}
+	see=[Glossaire:]{fairg}
 }
 \newglossaryentry{fairg}{
 	name={FAIR},
-	description={À DÉFINIR}
+	description={Les principes \textit{Findable Accessible Interoperable Reusable} (FAIR) correspondent à un ensemble de préconisations simples pour le partage de données dans un contexte de sciences ouvertes\footcite{boeckhout_fair_2018}.}
 }
 \newglossaryentry{http}{
 	type=\acronymtype,
@@ -301,7 +301,7 @@ description={À DÉFINIR}
 	name={NEL},
 	description={Named Entity Linking (NEL)},
 	first={\textit{Named Entity Linking} (NEL) \glsadd{nelg}},
-	see=[Glossaire:]{nilg}
+	see=[Glossaire:]{nelg}
 }
 \newglossaryentry{nelg}{
 	name={Named Entity Linking (NEL)},
@@ -312,11 +312,11 @@ description={À DÉFINIR}
 	name={OAI-PMH},
 	description={\textit{Open Archives Initiative Protocol for Metadata Harversting}},
 	first={\textit{Open Archives Initiative Protocol for Metadata Harversting} (OAI-PMH) \glsadd{oaipmhg}},
-	see=[Glossaire:]{ctsg}
+	see=[Glossaire:]{oaipmhg}
 }
 \newglossaryentry{oaipmhg}{
 	name={OAI-PMH},
-	description={À DÉFINIR}
+	description={L'OAI-PMH (\textit{Open Archives Initiative Protocol for Metadata Harversting}) est un protocole notamment utilisé par les bibliothèques et les archives; il permet de partager des métadonnées sur une collection de documents. Les données sont partagées en \xml{} et s'appuient fortement sur l'usage du \textit{Dublin Core}, un standard simple pour la structuration de métadonnées. Contrairement au CTS et au DTS, l'API OAI-PMH ne permet pas de partager un document, mais seulement ses métadonnées; comme ces deux autres standards cependant, le standard OAI-PMH ne définit pas une implémentation\footcite{prime-claverie_defi_2017}.}
 }
 \newglossaryentry{ontologie}{
 	name={ontologie},
@@ -335,11 +335,11 @@ description={À DÉFINIR}
 	name={REST},
 	description={\textit{Representational state transfer}},
 	first={\textit{Representational state transfer} (REST) \glsadd{restg}},
-	see=[Glossaire:]{ctsg}
+	see=[Glossaire:]{restg}
 }
 \newglossaryentry{restg}{
 	name={REST},
-	description={À DÉFINIR}
+	description={L'architecture REST, définie par Roy Fielding (2000)\footcite{fielding_architectural_2000} un standard pour le design et le fonctionnement interne d'API. Contrairement à d'autres standards (DTS, CTS, OAI-PMH), elle ne définit pas la manière de cibler des données grâce à des identifiants; cette architecture définit plutôt comment l'interaction client-serveur doit être implémentée, à l'aide d'une série de principes de design. C'est le standard le plus répandu pour la conception d'API, bien qu'il soit souvent mal implémenté, ce qui a ammené au développement d'API \textit{REST-like}.}
 }
 \newglossaryentry{score F1}{
 	name={score F1},
