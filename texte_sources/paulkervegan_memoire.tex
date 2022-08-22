@@ -163,7 +163,9 @@
 \addbibresource{bibliographie/katabase.bib}
 \addbibresource{bibliographie/ecostat.bib}
 \addbibresource{bibliographie/textprocessing.bib}
-\addbibresource{bibliographie/web.bib}
+\addbibresource{bibliographie/webgeneralites.bib}
+\addbibresource{bibliographie/webapi.bib}
+\addbibresource{bibliographie/websemantic.bib}
 \defbibnote{intro}{Cette bibliographie contient tous les ressources utilisées pour l'écriture de ce mémoire.}
 
 \DeclareSourcemap{%
@@ -185,9 +187,17 @@
  		\step[fieldset=keywords, fieldvalue={,econometrie}, append]
  	}
  	\map[overwrite]{%
- 		\perdatasource{bibliographie/web.bib}
- 		\step[fieldset=keywords, fieldvalue={,web}, append]
+ 		\perdatasource{bibliographie/webgeneralites.bib}
+ 		\step[fieldset=keywords, fieldvalue={,webgeneralites}, append]
  	}
+	\map[overwrite]{%
+		\perdatasource{bibliographie/websemantic.bib}
+		\step[fieldset=keywords, fieldvalue={,websemantic}, append]
+	}
+	\map[overwrite]{%
+		\perdatasource{bibliographie/webapi.bib}
+		\step[fieldset=keywords, fieldvalue={,webapi}, append]
+	}
   }
 }
 
@@ -493,7 +503,9 @@ description={Comme le CTS, le \textit{Distributed Text Services} (DTS) est une A
 \addcontentsline{toc}{chapter}{Bibliographie}
 \printbibliography[heading=subbibintoc,keyword={katabase},title={Projet \mssktb{}}]
 \printbibliography[heading=subbibintoc,keyword={text},title={Édition numérique, traitement automatisé et analyse de texte}]
-\printbibliography[heading=subbibintoc, keyword={web}, title={Technologies du web}]
+\printbibliography[heading=subbibintoc, keyword={webgeneralites}, title={Technologies du web: généralités}]
+\printbibliography[heading=subbibintoc, keyword={websemantic}, title={Technologies du web: Web sémantique}]
+\printbibliography[heading=subbibintoc, keyword={webapi}, title={Technologies du web: API}]
 \printbibliography[heading=subbibintoc,keyword={visualisation},title={Visualisation et design d'interfaces}]
 \printbibliography[heading=subbibintoc,keyword={econometrie},title={Marché de l'art, économétrie et statistiques}]
 
@@ -501,7 +513,7 @@ description={Comme le CTS, le \textit{Distributed Text Services} (DTS) est une A
 %%%%%%%%%%%%%%%%%%%%%% TOCS %%%%%%%%%%%%%%%%%%%%%%
 \printglossaries
 \listoffigures
- \listoftables
+\listoftables
 \tableofcontents
 
 %%%%%%%%%%%%%%%%%%%%%% ANNEXES	 %%%%%%%%%%%%%%%%%%%%%%
