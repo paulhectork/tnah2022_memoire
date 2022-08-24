@@ -1,0 +1,110 @@
+{
+    "head": {
+        "encoding_desc": {
+            "cat_type": "The type of catalogue (`LAC`|`RDA`|`AUC`|`OTH`)",
+            "currency": "The currency of the prices returned. `FRF` corresponds to french francs.",
+            "high_price_c": "The most expensive items in the catalogue, in constant 1900 francs. In the whole API, the `_c` suffix indicates that a price is expressed in constant 1900 francs.",
+            "high_price_items_c": "The most expensive items in the catalogue. Each item's `@xml:id` is associated to its price, in constant francs.",
+            "item_count": "The number of manuscripts for sale in the catalogue.",
+            "low_price_c": "The least expensive item's price, in constant 1900 francs.",
+            "mean_price_c": "The average price for a catalogue item, in constant 1900 francs.",
+            "median_price_c": "The median price for a catalogue item, in constant francs.",
+            "mode_price_c": "The mode price (the price that appears the most often in a catalogue)For an item, in constant francs.",
+            "sell_date": "The year of the sale presented in the catalogue.",
+            "title": "The title of the catalogue, and, by extension, of the sale.",
+            "total_price_c": "The sum of each item's price, in constant francs",
+            "variance_price_c": "The variance of the prices inside the catalogue."
+        },
+        "license": "Attribution 2.0 Generic (CC BY 2.0)",
+        "query": {
+            "format": "json",
+            "level": "cat_stat",
+            "name": "RDA",
+            "sell_date": "1800-1900"
+        },
+        "query_date": "2022-08-24T16:41:42.604421",
+        "status_code": 200
+    },
+    "results": {
+        "CAT_000001": {
+            "cat_type": "RDA",
+            "item_count": 379,
+            "sell_date": "1845",
+            "title": "Vente Charon, 14 mai 1845"
+        },
+        "CAT_000002": {
+            "cat_type": "RDA",
+            "currency": "FRF",
+            "high_price_c": 51.0,
+            "high_price_items_c": {
+                "CAT_000002_e189": 51.0
+            },
+            "item_count": 189,
+            "low_price_c": 1.53,
+            "mean_price_c": 5.4235483870967744,
+            "median_price_c": 3.57,
+            "mode_price_c": 3.06,
+            "sell_date": "Septembre - Decembre 1871",
+            "title": "RDA, N\u00b029 (septembre 1871)",
+            "total_price_c": 1008,
+            "variance_price_c": 44.285716441207086
+        },
+        "CAT_000004": {
+            "cat_type": "RDA",
+            "item_count": 133,
+            "sell_date": "1896",
+            "title": "Vente Etienne Charavay, 30 mai 1986"
+        },
+        "CAT_000005": {
+            "cat_type": "RDA",
+            "currency": "FRF",
+            "high_price_c": 663.0,
+            "high_price_items_c": {
+                "CAT_000005_e237": 663.0
+            },
+            "item_count": 137,
+            "low_price_c": 2.04,
+            "mean_price_c": 11.164651162790697,
+            "median_price_c": 3.57,
+            "mode_price_c": 2.55,
+            "sell_date": "1856-10",
+            "title": "Catalogue Laverdet, N\u00b03 (octobre 1856)",
+            "total_price_c": 1440,
+            "variance_price_c": 3410.2974357310254
+        },
+        "CAT_000017": {
+            "cat_type": "RDA",
+            "currency": "FRF",
+            "high_price_c": 165.75,
+            "high_price_items_c": {
+                "CAT_000017_e126": 165.75
+            },
+            "item_count": 1,
+            "low_price_c": 165.75,
+            "mean_price_c": 165.75,
+            "median_price_c": 165.75,
+            "mode_price_c": 165.75,
+            "sell_date": "1871",
+            "title": "Collection Merlin, 31 octobre 1871",
+            "total_price_c": 165,
+            "variance_price_c": 0.0
+        },
+        "CAT_000018": {
+            "cat_type": "RDA",
+            "currency": "FRF",
+            "high_price_c": 561.0,
+            "high_price_items_c": {
+                "CAT_000018_e144": 561.0
+            },
+            "item_count": 192,
+            "low_price_c": 1.53,
+            "mean_price_c": 10.565811518324606,
+            "median_price_c": 5.1,
+            "mode_price_c": 3.06,
+            "sell_date": "1873-08",
+            "title": "RDA, N\u00b037 (ao\u00fbt 1873)",
+            "total_price_c": 2018,
+            "variance_price_c": 1658.1071772210191
+        },
+	}
+}
