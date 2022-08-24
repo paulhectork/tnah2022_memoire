@@ -191,7 +191,7 @@ C'est le troisième point qui est le plus problématique: pour qu'un fichier soi
 
 \subsection{Les réponses, en général}
 Les formats de réponse varient en fonction de plusieurs facteurs: le point d'accès aux données, le format de réponse demandé par le client et le fait qu'il y ait eu une erreur. Tous ces facteurs amènent à des structures de données qui sont différentes. Ce sont des représentations. Cependant, à un niveau abstrait et indépendant de sa représentation, une réponse peut toujours être représentée de la même manière (\ref{fig:response})\footnote{
-	Des exemples de réponses en différents formats et avec différents paramètres sont visibles en annexes: au niveau \texttt{cat\_stat} en \json{} (\ref{appendix:api_cat_stat_json}) et \tei{} (\ref{appendix:api_cat_stat_json}), au niveau de l'\texttt{item} en \json{} (\ref{appendix:api_item_json}) et \tei{} (\ref{appendix:api_item_xml}); des messages d'erreur sont également présents en annexes, en \json{} (\ref{appendix:api_error_json}), et, là encore, en \tei{} (\ref{appendix:api_error_xml}). Un exemple de réponse complète est également \href{}{accessible en ligne} 
+	Des exemples de réponses en différents formats et avec différents paramètres sont visibles en annexes: au niveau \texttt{cat\_stat} en \json{} (\ref{appendix:api_cat_stat_json}) et \tei{} (\ref{appendix:api_cat_stat_json}), au niveau de l'\texttt{item} en \json{} (\ref{appendix:api_item_json}) et \tei{} (\ref{appendix:api_item_xml}); des messages d'erreur sont également présents en annexes, en \json{} (\ref{appendix:api_error_json}), et, là encore, en \tei{} (\ref{appendix:api_error_xml}). Un exemple de réponse complète est également \href{https://github.com/paulhectork/tnah2022_memoire/blob/main/texte_sources/annexes/api_cat_full.xml}{accessible depuis le dépôt en ligne de ce mémoire}, puisque le document est trop long pour être inclus en annexes.
 }:
 
 \begin{figure}[h!]
@@ -230,13 +230,32 @@ Toutes les réponses revoyées par l'\api{} contiennent un en-tête \gls{http} e
 La réponse est elle-même séparée entre un en-tête et un corps. Le premier définit le contexte dans lequel la réponse avec le serveur a été faite. Cet en-tête a plus de précision que celui prévu par le protocole \gls{http}; contrairement à celui-ci, qui n'est plus accessible une fois l'interaction avec le serveur terminée, l'en-tête de la réponse est toujours accessible, puisqu'il fait partie du fichier renvoyé. Le corps de la réponse en lui-même contient les données correspondant à la requête du client, ou, si une erreur a eu lieu, un message d'erreur descriptif. Cette séparation de la réponse en un en-tête et un corps est obligatoire lors de l'utilisation de la \tei{}; son utilisation par le \json{} est également inspirée par la structure des réponses \sparql{}\footcite{beckett_sparql_2013}, bien que celles-ci contiennent beaucoup moins de métadonnées qu'une réponse de \textit{KatAPI}.
 
 \subsection{L'en-tête des réponses, un conteneur pour les métadonnées}
-Si l'en-tête n'est pas voué à être conservé par les utilisateur.ice.s ayant réalisé des requêtes, il est néanmoins essentiel. Il permet à une personne qui n'est pas familière avec le projet d'aborder les données reçues et identifie précisément à quels critères elles correspondent. Il est garant du respect des principes \gls{fair}, puisqu'il contient suffisamment de métadonnées pour que quiconque manipule la réponse dispose d'informations suffisantes à leur réutilisation. Décrivant le contexte d'une réponse, il rend la réponse auto-descriptive, ce qui correspond avec l'utilisation des principes \gls{rest}. Les informations relatives à la requête sont les suivantes:
+Si l'en-tête n'est pas voué à être conservé par les utilisateur.ice.s ayant réalisé des requêtes, il est néanmoins essentiel. Il permet à une personne qui n'est pas familière avec le projet d'aborder les données reçues et identifie précisément à quels critères elles correspondent. Il est garant du respect des principes \gls{fair}, puisqu'il contient suffisamment de métadonnées pour que quiconque manipule la réponse dispose d'informations suffisantes à leur réutilisation. Décrivant le contexte d'une réponse, il rend la réponse auto-descriptive, ce qui correspond avec l'utilisation des principes \gls{rest}. Les informations relatives à la requête sont les suivantes (\ref{code:api_header_context_json}, \ref{code:api_header_context_tei}):
 
 \begin{itemize}
 	\item La requête, représentée sous la forme d'une table associant les paramètres de recherche utilisés (\texttt{level, format...}) aux valeurs que l'utilisateur.ice leur a associées.
 	\item La date à laquelle la requête est reçue, au format ISO. Cette information est surtout utile dans le cas où la réponse serait enregistrée par l'utilisateur.ice pour y accéder plus tard. Cela permet de dater les données produites, ce qui est utile puisque de nouveaux catalogues peuvent être ajoutés ultérieurement; dans ce cas, la réponse du serveur ne serait plus à jour.
 	\item Le statut \gls{http} de la réponse. Celui-ci est également présent dans l'en-tête \gls{http}, et sa présence ici peut donc sembler superflue. Il a été rajouté à cause du système de gestion des erreurs. Un choix de conception de l'application a en effet été de construire des messages d'erreurs sous la forme de \json{} ou de \tei{} valides. Cela veut dire qu'une erreur retourne une réponse valide qui décrive l'erreur. Dans le cas où les réponses obtenues par le client sont traitées automatiquement, un programme informatique ne détectera donc pas forcément de problème. L'ajout d'un code de statut permet d'adapter facilement un programme à ce cas de figure, en vérifiant à chaque réponse le code \gls{http} dans le corps du document.
 \end{itemize}
+
+\begin{listing}
+	\begin{minted}[breakanywhere]{json}
+{
+	"license": "Attribution 2.0 Generic (CC BY 2.0)",
+	"query": {
+		"format": "json",
+		"level": "cat_stat",
+		"name": "RDA",
+		"sell_date": "1800-1900"
+	},
+	"query_date": "2022-08-24T16:41:42.604421",
+	"status_code": 200
+	# reste de l'en-tête
+}
+	\end{minted}
+	\caption{Extrait d'en-tête de réponse en \json{} décrivant le contexte d'une requête}
+	\label{code:api_header_context_json}
+\end{listing}
 
 Les informations relatives aux données contenues dans le corps de la réponse, elles, permettent de mieux comprendre les données. Ces métadonnées sont différentes selon si le format de réponse est le \json{} ou le \tei{}. Dans les deux cas, une réponse contient une licence, qui définit de quelle manière les données peuvent être utilisées. La licence Creative Commons Attribution 2.0 Generic (CC BY 2.0) est utilisée par le projet. Étant une licence libre, elle permet aux utilisateur.ice.s de réutiliser les données en les citant. Toutes les réponses partagent également une ou plusieurs \enquote{taxonomies} (l'usage de ce terme est issu de la \tei{}). Celles-ci servent à définir les termes spécifiques au projet, qui ne seraient pas nécessairement compréhensibles par tou.te.s les utilisateur.ice.s. Les taxonomies associent à des termes présents dans le corps de la réponse une définition. L'explication du terme \texttt{variance\_price\_c} dans une taxonomie en \tei{} est visible dans l'exemple \ref{code:taxonomy}. Ces taxonomies améliorent la compréhension de la réponse par une personne humaine; mais elles offrent aussi des possibilités de traitement par une machine, puisqu'il est par exemple possible de remplacer un terme spécifique au projet par une définition. Les taxonomies présentes dans une réponse changent selon le point d'accès aux données choisi, puisque ce sont des termes différents qui auront besoin d'être expliqués à chaque fois.
 
@@ -252,12 +271,64 @@ Les informations relatives aux données contenues dans le corps de la réponse, 
 
 Si une réponse est encodée en \tei{}, alors d'autres informations sont présentes. Deux raisons sont derrière ce choix, qui implique que les réponses en \json{} et en \tei{} diffèrent. D'abord, la \tei{} définit toute une sémantique qui permet de caractériser très efficacement le contexte de production des données. Elle requiert qu'un document contienne un minimum d'informations dans son en-tête, ce qui a encouragé à étoffer l'en-tête. Ensuite, il a été considéré que la \tei{} est plus susceptible que le \json{} d'être un format définitif, dans lequel la richesse d'informations privilégiée. Un \json{}, au contraire, est utilisé parce qu'il est pratique, et il est susceptible d'être retraité par un.e utilisateur.ice de l'\api{} afin qu'il s'adapte à ses besoins. Par ailleurs, la présence ou l'absence de ces données ne change pas la structure globale de la réponse, mais seulement l'en-tête. Les informations supplémentaires contenues dans le \tei{} sont notamment un titre (\textit{KatAPI query results}, soit \enquote{Résultats de requête KatAPI}) et la mention des différents projets qui ont produit les données (\textit{e-Ditiones, Katabase et Manuscript SaleS Catalogues}) (\ref{appendix:api_cat_stat_xml}).
 
+Les métadonnées relatives à la requête doivent être encodées de façon légèrement différente lorsqu'un catalogue entier est requêté. Dans ce cas, la réponse n'est pas créée \textit{ex nihilo}, elle est construite en récupérant un document entier dans la base de données de catalogues. Cela pose une question à propos de la nature du document: faut-il modifier le catalogue encodé, en sachant que celui-ci est déjà un objet édité et pensé de façon cohérente? Le document transmis au client lors d'une requête est-il différent de celui qui est présent dans le serveur? En plus de ces questions pratiques, le problème est technique: les métadonnées relatives à la requête sont normalement encodées en \tei{} dans un élément \texttt{tei:publicationStmt}, qui décrit le contexte de publication d'un document électronique. Dans un catalogue complet, cet élément est déjà utilisé. Le fait que cet élément soit déjà utilisé, mais qu'il doive être réutilisé lors d'une requête résume bien la question posée ci-dessus. La réponse à ce problème est pragmatique. Il est toujours possible que, à cause d'un problème interne à l'\api{} ou dû au transfert de la réponse au client, que le catalogue soit corrompu ou contienne des erreurs. Dans ce cas, le catalogue transmis n'est pas différent de celui présent dans le serveur, mais il peut être considéré comme une édition de celui-ci. De ce fait, il est toujours nécessaire d'encoder le contexte dans lequel le catalogue a été transmis au client. La solution trouvée consiste à intégrer le contexte de la requête à l'intérieur d'un élément \texttt{tei:availability} -- qui définit les conditions d'accès à un document -- dans le \texttt{tei:publicationStmt} (\ref{code:api_header_context_tei}). Cela permet de ne pas perdre d'informations de l'original, tout en intégrant à la réponse les métadonnées relatives à la requête.
 
-\subsection{\texttt{cat\_full}}
+\begin{listing}[p]
+	\begin{minted}[breakanywhere]{xml}
+<publicationStmt>
+	<publisher>Projet e-Ditiones, Université de Neuchâtel</publisher>
+	<availability status="restricted">
+		<licence target="https://creativecommons.org/licenses/by/2.0">Attribution 2.0 Generic (CC BY 2.0)</licence>
+		<p>KatAPI query results. File created automatically by KatAPI, an API developped as part of the<ref target="https://katabase.huma-num.fr/">Manuscript SaleS Catalogues project</ref></p>
+		<p>Query run on<date when-iso="2022-08-24T16:41:52.101590">2022-08-24T16:41:52.101590</date></p>
+		<p>Query ran with HTTP status code:<ref target="https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200"/></p>
+		<p>The current file has been retrieved and updated as a response to the query:
+			<table>
+				<head>Query parameters</head>
+				<row>
+					<cell role="key" xml:id="id">id</cell>
+					<cell role="key" xml:id="output_format">format</cell>
+					<cell role="key" xml:id="level">level</cell>
+				</row>
+				<row>
+					<cell role="value" corresp="id">CAT_000300</cell>
+					<cell role="value" corresp="format">tei</cell>
+					<cell role="value" corresp="level">cat_full</cell>
+				</row>
+			</table>
+		</p>
+	</availability>
+</publicationStmt>
+	\end{minted}
+	\caption{Exemple de \texttt{tei:publicationStmt} décrivant le contexte de la requête}
+	\label{code:api_header_context_tei}
+\end{listing}
 
-\subsection{\texttt{cat\_stat}}
+L'en-tête sert à contextualiser les données contenues dans le corps de la réponse, afin qu'elles aient du sens au moment où elles sont reçues, mais aussi sur le long terme. En décrivant le contexte de la requête et de la production des docuemnt, et en indiquant la licence sous laquelle les documents sont diffusés, l'en-tête cherche à s'adapter aux principes \gls{fair}. L'éditorialisation de l'en-tête cherche également à construire une structure commune pour les différents points d'entrée, en accord avec les principes \gls{rest}. Son rôle principal est de permettre la compréhension du corps des réponses, qui sont elles mêmes issues d'un travail d'éditorialisation.
 
-\subsection{\texttt{item}}
+\subsection{Le corps d'une réponse au format \texttt{cat\_full}}
+Ce cas particulier implique un fonctionnement particulier de l'\api{}: plutôt que de construire un jeu de données sur mesure à transmettre au client, il s'agit de vérifier si le fichier demandé existe. Cela implique, comme on l'a vu, un en-tête de réponse est particulier; le corps l'est aussi. Dans le cas où une catalogue est trouvé, c'est le corps de ce catalogue qui est retourné au client. Cependant, si aucun catalogue correspondant à l'identifiant fourni par le client n'est trouvé, le corps comme l'en-tête sont différents. Il n'est pas possible de reprendre un en-tête existant, et un en-tête sur mesure est donc constitué, comme pour les points d'entrée \texttt{cat\_stat} et \texttt{item}. Le corps est vide, puisqu'aucun résultat n'a été trouvé (\ref{code:api_cat_full_empty}):
+
+\begin{listing}[h!]
+	\begin{minted}{xml}
+<TEI>
+	<teiHeader>
+		<!-- ... -->
+	</teiHeader>
+	<front>
+		<body>
+			<div type="search-results"/>
+		</body>
+	</front>
+</TEI>
+	\end{minted}
+	\caption{Extrait de réponse au niveau \texttt{cat\_full} lorsqu'aucun catalogue n'est trouvé}
+	\label{code:api_cat_full_empty}
+\end{listing}
+
+\subsection{Le corps d'une réponse au format \texttt{cat\_stat}}
+
+\subsection{Le corps d'une réponse au format \texttt{item}}
 
 \chapter{Implémentation et fonctionnement technique de \textit{KatAPI}}
 \chaptermark{Implémentation et fonctionnement technique}
