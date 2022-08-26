@@ -273,7 +273,7 @@ Si une réponse est encodée en \tei{}, alors d'autres informations sont présen
 
 Les métadonnées relatives à la requête doivent être encodées de façon légèrement différente lorsqu'un catalogue entier est requêté. Dans ce cas, la réponse n'est pas créée \textit{ex nihilo}, elle est construite en récupérant un document entier dans la base de données de catalogues. Cela pose une question à propos de la nature du document: faut-il modifier le catalogue encodé, en sachant que celui-ci est déjà un objet édité et pensé de façon cohérente? Le document transmis au client lors d'une requête est-il différent de celui qui est présent dans le serveur? En plus de ces questions pratiques, le problème est technique: les métadonnées relatives à la requête sont normalement encodées en \tei{} dans un élément \texttt{tei:publicationStmt}, qui décrit le contexte de publication d'un document électronique. Dans un catalogue complet, cet élément est déjà utilisé. Le fait que cet élément soit déjà utilisé, mais qu'il doive être réutilisé lors d'une requête résume bien la question posée ci-dessus. La réponse à ce problème est pragmatique. Il est toujours possible que, à cause d'un problème interne à l'\api{} ou dû au transfert de la réponse au client, que le catalogue soit corrompu ou contienne des erreurs. Dans ce cas, le catalogue transmis n'est pas différent de celui présent dans le serveur, mais il peut être considéré comme une édition de celui-ci. De ce fait, il est toujours nécessaire d'encoder le contexte dans lequel le catalogue a été transmis au client. La solution trouvée consiste à intégrer le contexte de la requête à l'intérieur d'un élément \texttt{tei:availability} -- qui définit les conditions d'accès à un document -- dans le \texttt{tei:publicationStmt} (\ref{code:api_header_context_tei}). Cela permet de ne pas perdre d'informations de l'original, tout en intégrant à la réponse les métadonnées relatives à la requête.
 
-\begin{listing}[p]
+\begin{listing}[hp!]
 	\begin{minted}[breakanywhere]{xml}
 <publicationStmt>
 	<publisher>Projet e-Ditiones, Université de Neuchâtel</publisher>
@@ -306,8 +306,11 @@ Les métadonnées relatives à la requête doivent être encodées de façon lé
 
 L'en-tête sert à contextualiser les données contenues dans le corps de la réponse, afin qu'elles aient du sens au moment où elles sont reçues, mais aussi sur le long terme. En décrivant le contexte de la requête et de la production des docuemnt, et en indiquant la licence sous laquelle les documents sont diffusés, l'en-tête cherche à s'adapter aux principes \gls{fair}. L'éditorialisation de l'en-tête cherche également à construire une structure commune pour les différents points d'entrée, en accord avec les principes \gls{rest}. Son rôle principal est de permettre la compréhension du corps des réponses, qui sont elles mêmes issues d'un travail d'éditorialisation.
 
-\subsection{Le corps d'une réponse au format \texttt{cat\_full}}
-Ce cas particulier implique un fonctionnement particulier de l'\api{}: plutôt que de construire un jeu de données sur mesure à transmettre au client, il s'agit de vérifier si le fichier demandé existe. Cela implique, comme on l'a vu, un en-tête de réponse est particulier; le corps l'est aussi. Dans le cas où une catalogue est trouvé, c'est le corps de ce catalogue qui est retourné au client. Cependant, si aucun catalogue correspondant à l'identifiant fourni par le client n'est trouvé, le corps comme l'en-tête sont différents. Il n'est pas possible de reprendre un en-tête existant, et un en-tête sur mesure est donc constitué, comme pour les points d'entrée \texttt{cat\_stat} et \texttt{item}. Le corps est vide, puisqu'aucun résultat n'a été trouvé (\ref{code:api_cat_full_empty}):
+\subsection{Les corps de réponse}
+À un niveau abstrait, les corps de réponse prennent toujours la forme d'une liste contenant les résultats pertinents en fonction de la requête faite par l'utilisateur.ice. Selon le point d'accès aux données, les résultats obtenus diffèrent.
+
+\subsubsection{Le corps d'une réponse au format \texttt{cat\_full}}
+Ce cas particulier implique un fonctionnement particulier de l'\api{}: plutôt que de construire un jeu de données sur mesure à transmettre au client, il s'agit de vérifier si le fichier demandé existe. Cela implique, comme on l'a vu, un en-tête de réponse est particulier; le corps l'est aussi. Dans le cas où une catalogue est trouvé, c'est le corps de ce catalogue qui est retourné au client. Cependant, si aucun catalogue correspondant à l'identifiant fourni par le client n'est trouvé, le corps comme l'en-tête sont différents. Il n'est pas possible de reprendre un en-tête existant, et un en-tête sur mesure est donc constitué, comme pour les points d'entrée \texttt{cat\_stat} et \texttt{item}. Le corps est vide, puisqu'aucun résultat n'a été trouvé (\ref{code:api_cat_full_empty}).
 
 \begin{listing}[h!]
 	\begin{minted}{xml}
@@ -315,30 +318,330 @@ Ce cas particulier implique un fonctionnement particulier de l'\api{}: plutôt q
 	<teiHeader>
 		<!-- ... -->
 	</teiHeader>
-	<front>
+	<text>
 		<body>
 			<div type="search-results"/>
 		</body>
-	</front>
+	</text>
 </TEI>
 	\end{minted}
 	\caption{Extrait de réponse au niveau \texttt{cat\_full} lorsqu'aucun catalogue n'est trouvé}
 	\label{code:api_cat_full_empty}
 \end{listing}
 
-\subsection{Le corps d'une réponse au format \texttt{cat\_stat}}
+\subsubsection{Le corps d'une réponse au format \texttt{cat\_stat}}
+À ce niveau de granularité, la réponse consiste en une liste de résultats correspondants aux paramètres de recherche fournis par l'utilisateur.ice. Chaque résultat est un identifiant de catalogue associé à des statistiques sur celui-ci; si les manuscrits vendus dans le catalogue sont à prix fixe (par opposition aux items vendus aux enchères), des statistiques supplémentaires sont incluses sur les prix. Il est considéré que l'intérêt de ce niveau de granularité est de permettre une comparaison entre les différents catalogues; c'est pourquoi tous les prix sont exprimés en francs constants 1900. La liste complète des données pouvant être transmises au client sur un catalogue est donc:
 
-\subsection{Le corps d'une réponse au format \texttt{item}}
+\begin{itemize}
+	\item Le titre du catalogue.
+	\item Le type de catalogue (\textit{Revue des autographes, catalogue de vente aux enchères}...).
+	\item Le nombre de manuscrits en vente dans un catalogue.
+	\item L'année de la vente.
+	\item La somme du prix de tous les items du catalogue.
+	\item Le prix de l'item le plus cher en vente.
+	\item La liste des items les plus cher du catalogue.
+	\item Le prix le plus faible pour un item.
+	\item La moyenne, le premier quartile et la médiane du prix d'un item dans ce catalogue.
+	\item Le mode du prix, c'est-à-dire le prix le plus fréquemment attribué à un item.
+	\item La variance des prix des items, ce qui permet de mesurer et de comparer la volatilité des prix d'un catalogue à un autre.
+\end{itemize}
 
-\chapter{Implémentation et fonctionnement technique de \textit{KatAPI}}
+Comment représenter ces données? La représentation en \json{} est assez simple, puisqu'il s'agit simplement de créer un \gls{dictionnaire} associant des clés (identifiant le type de donnée) à l'information elle-même (\ref{code:api_cat_stat_json}\footnote{
+	Un exemple de réponse complet est disponible en annexes (\ref{appendix:api_cat_stat_json}).
+}). Il est cependant plus difficile d'exprimer ces résultats dans un fichier \tei{}. Celle-ci impose des contraintes strictes sur la manière de structurer des éléments: seulement certains d'entre eux sont autorisés à certains endroits, et certains éléments doivent obligatoirement en contenir d'autres, par exemple. De plus, chaque élément a sa signification propre, qui doit être respectée dans la construction de la réponse; la \tei{} étant pensée pour le texte, il n'est pas évident de l'adapter à une liste de statistiques. Mais le véritable problème n'est pas seulement technique: la \tei{} est, par définition, spécifique et propre à un projet. Il existe une certaine liberté dans l'utilisation des éléments, de sorte que différents encodages soient des représentations différentes d'un même texte; un encodage est donc une interprétation du texte, qui dépend des visées d'un projet. À l'inverse, le format de réponse d'une \api{} doit être générique et pratique: être facilement utilisable et compréhensible (même sans connaissance approfondie de la \tei{}) et pouvoir s'adapter aux différents besoins des utilisateur.ice.s, sans privilégier une vision scientifique. Par expérience, les formats de réponse retournés par une \api{} ne correspondent en général pas aux besoins de l'utilisateur.ice de l'\api{}, qui récupère les données dans les réponses pour les adapter à ses propres besoins; dans ce cas, il est nécessaire de manipuler le \xml{} retourné et, par expérience, plus ce format est complexe, plus il est difficile de le manipuler avec des méthodes computationnelles. Une arborescence la plus simple possible doit donc être privilégiée, afin de faciliter sa manipulation. Cela encourage la création d'un format le plus générique possible. Faire coïncider un besoin de généricité avec un format qui encourage la spécificité n'est pas évident. 
+
+
+\begin{listing}[h!]
+	\begin{minted}{python}
+"CAT_000018": {
+	"cat_type": "RDA",
+	"currency": "FRF",
+	"high_price_c": 561.0,
+	"high_price_items_c": {
+		"CAT_000018_e144": 561.0
+	},
+	"item_count": 192,
+	"low_price_c": 1.53,
+	"mean_price_c": 10.565811518324606,
+	"median_price_c": 5.1,
+	"mode_price_c": 3.06,
+	"sell_date": "1873-08",
+	"title": "RDA, N\u00b037 (ao\u00fbt 1873)",
+	"total_price_c": 2018,
+	"variance_price_c": 1658.1071772210191
+}
+	\end{minted}
+	\caption{Représentation \json{} des données portant sur un catalogue}
+	\label{code:api_cat_stat_json}
+\end{listing}
+
+Aussi le parti pris a-t-il été d'encoder les données de la façon la plus simple possible (\ref{code:api_cat_stat_tei}\footnote{
+	Pour un exemple de réponse complète, voir en annexes (\ref{appendix:api_cat_stat_xml}).
+}). Les différents catalogues sont contenus dans un \texttt{tei:list}; en s'inspirant de l'encodage choisi pour les manuscrits dans les catalogues, chaque catalogue est représenté dans un \texttt{tei:item}. À l'intérieur est contenu un \texttt{tei:label} qui contient l'identifiant du catalogue. Les différentes données sont contenues dans un \texttt{tei:term}, un élément qui permet d'encoder un terme ou un symbole technique\footcite{tei_consortium_p5_2022}. Ce choix est adapté, puisque les différents termes associés aux données sont propres au projet. Le terme en lui-même est encodé dans un attribut \texttt{@key}, tandis que la valeur est dans le corps de l'élément. Cela permet de reproduire l'association clé-valeur utilisée dans le \json{} afin de permettre une similarité entre les deux formats de représentation des données. Pour maintenir l'arborescence la plus simple possible, la liste des items les plus chers est contenue à la racine du \texttt{tei:item} plutôt que dans une liste imbriquée. Dans ce cas, le prix se trouve dans le corps de l'élément, et l'identifiant du manuscrit dans un attribut \texttt{@ana}. L'usage d'attributs permet de caractériser les éléments de façon bien plus précise qu'avec un \json{}. Un attribut \texttt{@type} est utilisé pour caractériser certains types de données (date, prix constants); lorsqu'une requête est faite en utilisant certains paramètres, comme \texttt{sell\_date}, et que ces paramètres sont présents dans la réponse, alors un attribut \texttt{@ref} est utilisé pour pointer vers le descriptif de la requête dans l'en-tête. Cela permet de lier corps et en-tête des données.
+
+\begin{listing}[h!]
+	\begin{minted}{xml}
+<item ana="CAT_000362">
+	<label>CAT_000362</label>
+	<term key="title">Vente Jacques Charavay, août 1875, nº 185</term>
+	<term key="cat_type">LAC</term>
+	<term key="sell_date" type="date">1875</term>
+	<term key="item_count">106</term>
+	<term key="currency">FRF</term>
+	<term key="total_price_c" type="constant-price">1039</term>
+	<term key="low_price_c" type="constant-price">1.27</term>
+	<term key="high_price_c" type="constant-price">102.0</term>
+	<term key="mean_price_c" type="constant-price">9.810188679245282</term>
+	<term key="median_price_c" type="constant-price">4.59</term>
+	<term key="mode_price_c" type="constant-price">3.06</term>
+	<term key="variance_price_c" type="constant-price">194.2879773228907</term>
+	<term key="high_price_items_c" type="constant-price" ana="CAT_000362_e27096">102.0</term>
+</item>
+	\end{minted}
+	\caption{Représentation en \xmltei{} des données portant sur un catalogue}
+	\label{code:api_cat_stat_tei}
+\end{listing}
+
+Ces choix d'encodage permettent de construire des réponses simples, avec un minimum d'imbrication entre les éléments; l'utilisation d'attributs permet de créer des liens entre mots clés et valeurs, mais aussi des liens entre différentes parties de la réponse (puisque l'attribut \texttt{@key} du corps de la réponse est défini dans l'élement \texttt{tei:taxonomy} de l'en-tête). Un format de réponse en \tei{} permet donc de commenter et de caractériser les données avec une précision qui n'est pas possible dans un \json{}. Cependant, grâce aux choix de modélisation, une représentation des données en \tei{} présente la même structure qu'un \json{}, soit une série de couples clés-valeurs.
+
+\subsubsection{Le corps d'une réponse au format \texttt{item}}
+La problématique de la modélisation des réponses au niveau de l'item de catalogue est bien différente de ce qui a été exposé pour le niveau \texttt{cat\_stat}. Pour le point d'accès présenté ci-dessus, les données en \tei{} sont créées \textit{ex nihilo} à partir d'un \json{}. Il était donc nécessaire de trouver un moyen de les représenter dans un autre format. Une autre spécificité du point d'accès présenté ci-dessus est qu'il ne contient que des statistiques; de fait, la \tei{} n'est pas pensée pour ce type de format, ce qui demande de trouver un moyen pour adapter ces données dans ce format. Au niveau de l'entrée de catalogue, les données représentées sont des textuelles, puisque la réponse envoyée par le serveur contient une liste d'entrées de catalogue. De plus, ces données ont déjà été encodées en \tei{}, dans les catalogues originels. Le choix a été de ne pas modifier ces représentations: elles sont le fruit d'un travail scientifique d'édition, d'extraction de données, de normalisation et d'enrichissement. Les catalogues, encodés en \tei{}, ne sont donc pas seulement représentatifs des choix au moment de la première édition numérique des catalogues. Ils contiennent également des informations produites tout au long de la chaîne de traitement, dont les identifiants \wkd{} extraits lors de la résolution d'entités nommées décrite dans la partie précédente. L'encodage des items, tel qu'il est fait dans les catalogues, est donc une représentation synthétique de ceux-ci, qui témoigne des choix scientifiques faits tout au long de la chaîne de traitement. Conserver cet encodage permet de disposer d'une représentation complète et déjà éditorialisée des données; cela permet également de représenter tout le travail fait sur les données, et donc de diffuser celles-ci de manière transparente, en accord avec les principes \gls{fair}. Les choix d'encodage pour les sont également précisément documentés, ce dont peut bénéficier un.e chercheur.euse souhaitant les réutiliser. Par ailleurs, les données diffusées par \textit{KatAPI} ont traversé toute une chaîne de traitement; celle-ci est susceptible de s'étoffer, avec l'ajout de nouvelles étapes; dans ce cas, l'encodage des catalogues évoluerait lui-aussi. Il est alors naturel que la représentation de ces données évolue elle aussi, afin de s'adapter aux évolutions scientifiques du projet. Pour toutes ces raisons, il est plus intéressant de reprendre l'encodage déjà réalisé plutôt que de recréer une nouvelle représentation. Le problème est que les formats de réponse pourront alors changer, ce qui peut être peu pratique pour les utilisateur.ice.s de l'\api{} (qui, si il.elle.s retraitent les réponses automatiquement, devront modifier leur chaîne de traitement). Cependant, ces évolutions sont justifiées et souhaitables, puisqu'elles reflètent l'évolution d'un travail scientifique. Le corps des réponses, en \tei{} et au niveau \texttt{item}, est donc composé d'une \texttt{tei:list} contenant toutes les entrées de catalogues représentées par un \texttt{tei:item} (\ref{code:api_item_tei}\footnote{
+	Pour un exemple de réponse complète, voir l'annexe \ref{appendix:api_item_xml}.
+}).
+
+\begin{listing}[h!]
+	\begin{minted}{xml}
+<list>
+	<head>Search results</head>
+	<item n="108" xml:id="CAT_000204_e108">
+		<num type="lot">108</num>
+		<name type="author" ref="wd:Q255">BEETHOVEN (L. van)</name>
+		<trait>
+		<p>le grand compositeur de musique.</p>
+		</trait>
+		<desc xml:id="CAT_000204_e108_d1">
+		<term ana="#document_type_9">L. s.</term> à M. M. Schlesinger, à Berlin; Vienne, <date when="1820-05-31">31 mai 1820</date>, <measure type="length" unit="p" n="2">2 p.</measure>
+		<measure type="format" unit="f" ana="#document_format_4">in-4</measure>, cachet</desc>
+		<note>Curieuse lettre sur ses ouvrages. Il leur accorde le droit de vendre ses compositions en Angleterre, y compris les airs écossais, aux conditions indiquées par lui. Il s'engage à leur livrer dans trois mois trois sonates pour le prix de 90 florins qu'ils ont fixé. C'est pour leur être agréable qu'il accepte un si petit honoraire. « Je suis habitué à faire des sacrifices, la composition de mes OEuvres n'étant pas faite seulement au point de vue du rapport des honoraires, mais surtout dans l'intention d'en tirer quelque chose de bon pour l'art.»</note>
+	</item>
+	<!-- autres items --->
+</list>
+	\end{minted}
+	\caption{Représentation en \xmltei{} des réponses de l'API au niveau \texttt{item}}
+	\label{code:api_item_tei}
+\end{listing}
+
+La représentation en \json{} des entrées de catalogue existait elle aussi avant le développement de l'\api{}. Cette représentation cherchant à être l'équivalent le plus fidèle possible des entrées de catalogues encodées en \tei{}, elle a été réutilisée pour les réponses de l'\api{} (\ref{code:api_item_json}\footnote{
+	Pour un exemple de réponse complète de l'\api{} en \xmltei{} au niveau \texttt{item}, voir l'annexe \ref{appendix:api_item_json}.
+}). Au niveau \texttt{item}, la représentation des données est donc équivalente à leur représentation dans les différentes bases de données utilisées par l'\api{}. Cette représentation implique nécessairement une perte d'information. En premier lieu, seul le nom de famille de l'auteur.ice est conservé; l'élément \texttt{tei:note} est supprimé, de même que le numéro de lot dans le catalogue. La représentation en \json{} contient également toutes les informations produites durant la chaîne de traitement (normalisation, enrichissement), puisque ces informations, contenues dans des attributs, ont été extraites. Comme pour les réponses en \tei{}, les termes normalisés et spécifiques au projet sont définis au sein de taxonomies dans l'en-tête. Au premier abord, utiliser la structure de données présente dans les bases de données pour construire une réponse peut sembler aller à l'encontre du principe d'uniformité de l'interface du \gls{rest}: la structure des réponses n'est pas indépendante de la source de données. Ce choix se justifie cependant par les spécificités des données de recherche. Les informations, telles qu'elles sont stockées dans les différents fichiers consultés par l'\api{}, sont représentatifs de ce travail de recherche et de choix d'encodage spécifiques. Réutiliser ces structures de données permet de transmettre non seulement les données, mais l'intégralité de la recherche, puisque l'encodage numérique fait partie intégrante du travail scientifique. La structure des données est par ailleurs relativement stable sur le long terme; en évoluant, elle ne change pas drastiquement, puisque seulement de nouveaux attributs ou couples clés-valeurs sont ajoutés aux données. Cela permet donc une relative pérennité des représentations et des formats de réponse renvoyés au client. De plus, utiliser des données pré-existentes en \json{} et en \tei{} garantit que, à ce niveau, la des données représentation a une structure équivalente dans les deux formats.
+
+\begin{listing}[h]
+	\begin{minted}{json}
+"CAT_000185_e608_d1": {
+	"author": "S\u00e9vign\u00e9",
+	"author_wikidata_id": null,
+	"date": "1685",
+	"desc": "\n                        L. aut. \u00e0 sa fille; mercredi 14 f\u00e9vrier (1685), 7 p. 1/2\n                        in-4\n                    ",
+	"format": 4,
+	"number_of_pages": 7.5,
+	"price": null,
+	"sell_date": "1881",
+	"term": 8
+}
+
+	\end{minted}
+	\caption{Représentation en \json{} des réponses de l'API au niveau \texttt{item}}
+	\label{code:api_item_json}
+\end{listing}
+
+\subsubsection{Le corps d'une réponse en cas d'erreur}
+Comme cela a été dit, l'un des prérequis pour \textit{KatAPI} était la création de messages d'erreurs structurés et autodescriptifs, en \tei{} ou en \json{}. Deux types d'erreurs ont été définies. D'abord, les erreurs dues à une requête incorrecte de la part du client (soit qu'elle ne respecte pas la sémantique pour les requêtes, soit qu'elle utilise des valeurs non-autorisées). Ensuite, les erreurs de la part du serveur: l'application a été testée pour minimiser le risque d'erreurs, mais celles-ci sont toujours possibles; un système de gestion des erreurs a donc été mis en place pour informer l'utilisateur.ice si une telle erreur a lieu. Les réponses retournées ont la même structure dans les deux cas. Les choix de représentation des erreurs ont été faits pour être conformes avec la structure globale définie pour les réponses (\ref{fig:response}), mais aussi pour être cohérents avec les choix d'encodages faits pour les autres représentations présentées ci-dessus. Les réponses sont donc représentées sous la forme d'une liste qui associe à des clés des descriptions des erreurs. Ces clés correspondent, lorsque cela est possible, au nom des paramètres pour lesquelles des erreurs ont survenu. Les messages permettent à l'utilisateur.ice de corriger son erreur afin de pouvoir récupérer les résultats. En plus de cette liste, un message introductif définit l'erreur qui a eu lieu afin de savoir si l'erreur est due au client ou au serveur; pour aller dans le même sens, le statut \gls{http} est modifié dans l'entrée afin de caractériser précisément l'erreur. Lorsque le message d'erreur est en \json{}, l'encodage de la réponse est relativement simple (\ref{code:api_error_json}\footnote{
+	Un message d'erreur complet de l'\api{} est visible en annexes (\ref{appendix:api_error_json}).
+}).
+
+\begin{listing}[h]
+	\begin{minted}{json}
+"results": {
+	"__error_type__": "Invalid parameters or parameters combination",
+	"error_description": {
+		"format": "The format must match: (tei|json)",
+		"id_incompatible_params": "Invalid parameters with parameter id: ['sell_date']",
+		"name+id": "You cannot provide both a name and an id",
+		"sell_date": "The format must match: \d{4}(-\d{4})?",
+		"unallowed_params": "Unallowed parameters for the API: ['api']"
+	}
+}
+	\end{minted}
+	\caption{Corps de réponse en cas d'erreur de la part du client en \json{}}
+	\label{code:api_error_json}
+\end{listing}
+
+En \xmltei{}, la structure des données est inspirée de celle des autres formats de réponse, et particulièrement des réponses obtenues au niveau \texttt{item} (\ref{code:api_error_tei}\footnote{
+	Un message d'erreur complet en \json{} est visible en annexes: \ref{appendix:api_error_xml}.
+}). Les différents messages d'erreur sont contenus au sein d'une liste; chaque erreur correspond à un \texttt{tei:item}; le code du message d'erreur se trouve dans un attribut \texttt{@ana} de cet élément et dans le \texttt{tei:label}, ce qui permet d'identifier l'erreur; le message d'erreur en lui-même est contenu dans un \texttt{tei:desc}. Ainsi, les messages d'erreur correspondent aux principes définis pour les réponses \gls{rest}: ce sont des représentations qui sont toujours uniformes. Leur structure est de plus analogue aux autres représentations définies pour l'\api{}, ce qui permet à un.e utilisateur.ice de comprendre plus facilement les différents formats de réponse. Enfin, ces messages d'erreurs ont l'avantage d'être entièrement auto-descriptifs, et de pointer vers une manière de corriger sa requête. Cela limite le besoin d'avoir à se référer à une documentation externe pour corriger ses erreurs. Les messages d'erreurs émis par l'\api{} cherchent à être le plus facilement compréhensibles, autant du point de vue des messages eux-mêmes que de leur encodage. En effet, la structure définie pour ces réponses est la même que celle établie pour les réponses valides; ce sont également les mêmes éléments de la \tei{} qui sont utilisés, ce qui permet qu'un.e utilisateur.ice ne soit pas dérouté.e par la structure du message d'erreur et puisse uniquement se concentrer sur son contenu.
+
+\begin{listing}[h]
+	\begin{minted}{xml}
+div type="error-message">
+	<list>
+		<head>Invalid parameters or parameters combination</head>
+		<item ana="no_name+id">
+			<label>no_name+id</label>
+			<desc>You must specify at least a name or an id</desc>
+		</item>
+		<item ana="sell_date" corresp="sell_date">
+			<label>sell_date</label>
+			<desc>The format must match: \d{4}(-\d{4})?</desc>
+		</item>
+	</list>
+</div>
+	\end{minted}
+	\caption{Corps de réponse en cas d'erreur de la part du client en \xmltei{}}
+	\label{code:api_error_tei}
+\end{listing}
+
+Plus largement, les formats de réponses présentés dans cette partie sont garants à la fois du respect des principes \gls{rest}. Ils sont tous des implémentations différentes d'un modèle commun, lui-même inspiré des structures en en-tête/corps utilisés par le format de réponse \sparql{}, mais aussi par de nombreux standards d'encodage numérique, dont la \tei{}. Cette double inspiration reflète le statut intermédiaire des réponses envoyées par l'\api{} au client: ce sont à la fois des réponses d'\api{} (et donc des formats techniques, faits pour être manipulés par des machines) et des éditions crées à la demande pour répondre aux besoins d'utilisateur.ice.s. Répondre à leurs demandes implique également de respecter les principes \gls{fair}, et c'est aussi à cette fin que les réponses de l'\api{} ont été modélisées. En effet, celles-ci visent à contenir toutes les données et métadonnées nécessaires à la compréhension d'un résultat par une personne humaine ainsi qu'à son traitement par une machine. La quantité d'informations intégrées aux réponses permet de faire de celles-ci de simple formats de réponse qui seront modifiés par le client; mais elles peuvent également être conservées et restées intelligibles sur le long terme. La modélisation de l'\api{} au croisement des besoins de chercheur.euse.s et de bonnes pratiques informatiques met en avant que ces deux besoins ne sont pas contradictoires. En encourageant à produire des données compréhensibles et réutilisables, le \gls{fair} comme le \gls{rest} encouragent à mieux penser la conception d'applications, afin de produire des outils utiles et des réponses qui soient détaillées sans être excessivement complexes.
+
+\chapter{Implémentation et fonctionnement interne de \textit{KatAPI}}
 \chaptermark{Implémentation et fonctionnement technique}
-Ce chapitre décrit le fonctionnement de l'\api{} côté serveur: comment les données sont reçues, la manière dont elles sont traitées et comment les réponses sont construites (notamment la création automatisée de documents \xmltei{}). Le système de gestion des erreurs est également présenté.
+Le chapitre précédent s'attache à décrire le fonctionnement de l'\api{} côté client, c'est-à-dire la manière dont ce dernier interagit avec l'application, en présentant notamment la sémantique des requêtes et la structure des réponses. Cependant, une \api{} n'est pas seulement une interaction avec un client, c'est aussi un programme composé d'une série de fonctions chargées de traiter la requête du client, d'interagir avec la base de données et de construire une réponse. Ce chapitre décrit donc le fonctionnement de l'\api{} côté serveur: comment les données sont reçues, la manière dont elles sont traitées et comment les réponses sont construites.
 
-\section{Présentation générale}
-Ici est présenté, schéma à l'appui, le fonctionnement technique de l'\api{} et la chaîne de traitement depuis la réception des requêtes jusqu'à l'envoi d'une réponse.
+En suivant le principe de séparation des préoccupations, le fonctionnement interne de l'\api{} (\ref{fig:api_backend}) peut être divisé en trois parties: la réception des requêtes et la vérification de leur validité, l'interaction avec les bases de données et la construction des réponses.
 
-\section{Gestion des erreurs}
-L'\api{} étant une application devant interagir avec des utilisateur.ice.s et gérer leurs requêtes, il n'est pas pensable qu'elle \enquote{plante} ou ne renvoie pas d'erreur. Tout un système de gestion des erreurs a donc été défini. Ces erreurs peuvent être classées en deux catégoriés: côté client (dues à des entrées invalides des utilisateur.ice.s)  et côté serveur (erreurs inattendues qui empêchent l'exécution d'une requête). Si ces erreurs sont rencontrées, des réponses sont construites en \json{} ou \xmltei{} (selon le format demandé par l'utilisateur.ice.s). Celles-ci décrivent l'erreur et permettent donc aux utilisateur.ice.s de corriger les erreurs qui ont pu avoir lieu côté client.
+\section{Réception des requêtes}
+Comme cela a été précisé au début du chapitre précédent, l'\api{} procède à un contrôle strict des requêtes afin de ne pas faire essayer de traiter des demandes contradictoires et de ne pas lancer de requêtes inutiles. Trois étapes de vérifications ont lieu afin de garantir le respect de la sémantique des requêtes:
 
-\section{Garantir le bon fonctionnement de l'application}
-De la même manière que les systèmes de gestion des erreurs garantissent que l'application continue à fonctionner même en cas d'erreur, les tests garantissent que l'\api{} soit fonctionnelle, même dans \enquote{des conditions extrêmes}. Les réponses, formats et données retournées sont donc testés. C'est ce protocole de test qui est présenté ici.
+\begin{itemize}
+	\item Validité des paramètres utilisés: l'\api{} vérifie que la requête ne contienne pas de paramètres non autorisés.
+	\item Validité des valeurs utilisés: l'\api{} vérifie que toutes les valeurs associées à des paramètres soient autorisées. Cette validation est faite à l'aide d'\glspl{expression régulière} pour les champs qui demandent des informations normalisées, tel que les dates (qui doivent être au format \enquote{AAAA} ou \enquote{AAAA-AAAA}).
+	\item Absence de paramètres contradictoires: certains paramètres ne sont pas autorisés avec d'autres, car cela entraînerait la construction de requêtes incohérentes, en cherchant par exemple un nom d'auteur.ice et un identifiant qui ne correspondent pas. Pour éviter ce cas de figure, l'\api{} vérifie qu'une requête ne contienne pas de combinaisons \enquote{non-autorisées}.
+\end{itemize}
+
+Si la vérification se fait en plusieurs étapes, elle a lieu intégralement pour chaque requête (c'est-à-dire que l'exécution de la vérification ne cesse pas à la première erreur rencontrée). Cela permet d'obtenir une liste complète de toutes les erreurs présentes dans la requêtes: à chaque erreur détectée par l'\api{} est associé un mot clé. Si la requête n'est pas valide, alors il n'y a pas d'interaction avec le serveur. Une erreur \gls{http} 422 \textit{Unprocessable Content} (\textit{Contenu ne pouvant être traité}) est faite. Ce code d'erreur signifie que la requête est correcte d'après le protocole \gls{http} (sans quoi elle ne serait pas parvenue au serveur), mais qu'elle ne peut pas être traitée par le serveur\footcite[§15.5.21. \textit{422 Unprocessable Content}]{fielding_http_2022}. Le client doit donc modifier sa requête avant de la relancer. La liste d'erreurs constituée pendant la vérification est alors passée à un constructeur de réponse au format défini par le client (\json{} ou \tei{}). Ce constructeur de ajoute à la réponse un message pour chaque erreur rencontrée; il définit également l'en-tête de la réponse, avec le contexte de la requête, des taxonomies (éventuellement) et enfin le statut \gls{http}. Pour finir, les en-têtes \gls{http} sont établis, avec notamment le statut de la réponse et son type MIME, qui garantissent que le client pourra traiter ce que le serveur lui envoie. L'interaction avec le serveur prend alors fin.
+
+\section{Interaction avec les bases de données et construction des réponses}
+\sectionmark{Interaction...}
+Si aucune erreur n'a été identifiée, alors la requête est traitée par le serveur. Dans un premier temps sont définies des valeurs par défaut pour les requêtes. Si aucune valeur n'a été fournie pour le paramètre \texttt{format}, alors le format de réponse est le \json{}; si aucun point d'accès n'a été défini, alors des données sont traitées au niveau du manuscrit. Commence alors la phase de récupération des données. Celle-ci est très différente en fonction du point d'accès défini par l'utilisateur.ice.
+
+\subsection{Au niveau du catalogue complet (\texttt{cat\_full})}
+C'est au niveau du catalogue complet que le traitement est le plus simple: l'\api{} se contente de chercher si le catalogue demandé par l'utilisateur.ice existe. Si c'est le cas, alors ce catalogue est passé à un constructeur de réponse. Celui-ci complète l'en-tête du catalogue en ajoutant dans le \texttt{tei:publicationStmt} le contexte de la requête (date, paramètres de la requête) et le statut \gls{http} 200, qui indique que l'interaction s'est déroulée normalement\footcite[§15.3.1 200 \textit{OK}]{fielding_http_2022}. Si le catalogue demandé n'est pas trouvé, alors le constructeur de réponse adopte un fonctionnement différent. Normalement, la réponse pour ce point d'accès est construite en ajoutant des données à un document pré-existant. Si celui-ci n'existe pas, alors une réponse complète doit être créée \textit{ex-nihilo} pour être renvoyée à l'utilisateur.ice. Dans ce cas, la réponse créée prend le même format que celle des deux autres points d'accès. Le constructeur renseigne le contexte de la requête et ajoute le statut \gls{http} 200. Celui-ci est utilisé même lorsqu'aucune réponse n'est obtenue: le fait que la ressource recherchée par le client n'existe pas ne veut pas dire pour autant qu'il y ait eu une erreur. Enfin, les en-têtes sont construits pour que la réponse soit renvoyée au client.
+
+
+\subsection{Aux niveaux des manuscrits et des statistiques sur les catalogues (\texttt{item} et \texttt{cat\_stat})}
+Aux niveaux \texttt{cat\_stat} et \texttt{item}, le traitement d'une requête fonctionne de façon analogue. Deux bases de données en \json{} contiennent des données sur tous les manuscrits et tous les catalogues. L'application commence alors par chercher dans ces fichiers tous les catalogues ou manuscrits pertinents. La recherche se fait en deux temps.
+
+D'abord, l'application identifie toutes les manuscrits dont l'auteur.ice correspond au nom fourni par le client, ou tous les catalogues dont le type correspond à celui recherché par le client (\textit{RDA, AUC...}). Pour augmenter le nombre de résultats pertinents à retourner à l'utilisateur.ice, la recherche se fait en simplifiant à la fois la requête et les informations présentes dans la source de données. Par exemple, quand un manuscrit est recherché à partir du nom d'un.e auteur.ice, cette recherche se fait en comparant le nom fourni par le client avec celui présent dans la source de données. Normalement, cette recherche se fait par alignement complet des informations de la requête avec celles du fichier \json{}. Les données sont donc retraitées pour que la comparaison se fasse sans prendre en compte les différences de casse, d'accents et de ponctuation. Par exemple, si le client recherche tous les manuscrits écrits par \enquote{sévigné}, alors des manuscrits dont l'autrice est décrite comme étant \enquote{SÉVIGNÉ}, \enquote{Sévigné} ou \enquote{SEVIGNE} seront également jugés pertinents. Cette simplification de chaînes de caractères va dans le même sens que les méthodes utilisées par les moteurs de recherche contemporains. Cependant, la recherche pourrait être alignée plus finement encore, par exemple en sélectionnant les items pertinents non pas par correspondance de chaînes de caractères, mais en calculant une distance de Levenshtein. Celle-ci correspond au nombre de caractères de différence entre deux chaînes de caractères, et permet donc d'inclure un certain degré de bruit qui peut être très utile pour récupérer tous les résultats pertinents, surtout au vu des erreurs d'OCR qui rajoutent du bruit aux données. La recherche par nom d'auteur.ice.s a également une faiblesse majeure: elle ne se fait que par noms de famille, puisque ce n'est que ceux-ci qui sont présents dans la source de données.
+
+Ensuite, ces résultats sont filtrés en fonction des autres paramètres de la requête du client, à savoir les dates de vente et, pour les manuscrits, de création. Si une date fournie correspond à une année, alors l'application ne conserve que les entrées datant de cette année. Si c'est au contraire une plage de dates qui est fournie, alors l'application ne conserve que les entrées qui sont contenues dans cette plage. Pour les manuscrits, date de création et date de vente peuvent être fournies. Dans ce cas, un manuscrit doit correspondre à ces deux dates (ou plages de dates) pour être conservé.
+
+Une fois les données pertinentes extraites, soit une réponse est construite en \json{}, soit ces résultats sont transposés en \tei{}. C'est au niveau de la transposition qu'apparaît la différence de traitement entre les deux niveaux. Au niveau \texttt{cat\_stat}, il n'existe pas de représentation \tei{} des statistiques sur les différents catalogues. L'ensemble de ces statistiques sont donc extraites de la base de données en \json{} avant d'être traduites en un \tei{}. Lorsque des informations sont recherchées au niveau des manuscrits, cependant, une représentation \tei{} existe déjà. C'est donc elle qui doit être renvoyée à l'utilisateur.ice. Pourquoi, alors, ne pas rechercher directement les données pertinentes dans les fichiers \tei{}? Ce choix s'explique par des raisons de performance. Si les données sont directement extraites de la \tei{}, alors l'application doit rechercher des manuscrits dans près de 500 fichiers, ce qui demande d'ouvrir tous ces fichiers, de lire leur contenu et de rechercher à l'intérieur les manuscrits correspondants. Au contraire, la base de données sur les manuscrits en \json{} n'est qu'un seul (très volumineux) fichier. Il est donc plus rapide de commencer par ouvrir cette source de données pour extraire tous les identifiants des manuscrits correspondant aux paramètres souhaités. Un identifiant de manuscrit commençant par l'identifiant du catalogue dans lequel il est contenu, il ne reste plus qu'à ouvrir les catalogues pertinents pour récupérer les descriptions des manuscrits encodées en \tei{}.
+
+Pour finir, des réponses complètes sont construites à partir des données extraites. En \json{} comme en \tei{}, la méthode est la même que celle qui a déjà été présentée: l'en-tête du document est reconstruite pour contenir les métadonnées décrivant la requête et les données contenues dans le corps de la réponse; ensuite, l'en-tête \gls{http} est défini, et la réponse est retournée à l'utilisateur.ice.
+
+\section{Gestion des erreurs imprévues}
+Le processus de traitement d'une requête a été testé, et ne rencontre théoriquement pas d'erreur. Cependant, l'application est exposée au public; une erreur imprévue est donc toujours possible, du fait d'une requête du client qui comprenne un problème imprévu ou d'une erreur qui n'ait pas été rencontrée pendant la conception de l'application et la rédaction des tests. Comme il n'est pas possible que l'application s'arrête tout simplement de fonctionner en cas d'erreur imprévue, un processus de gestion des erreurs internes a été défini. Si une erreur arrive entre le moment où une requête commence à être traitée et le moment où l'interaction prend fin, alors une erreur \gls{http} \textit{Internal Server Error} (\enquote{Erreur de serveur interne}) 500 est émise. Ce code d'erreur est un code générique qui indique au client qu'une erreur imprévue a été rencontrée\footcite[§15.6.1. 500 \textit{Internal Server Error}]{fielding_http_2022}. L'émission de cette erreur lance un processus isolé du reste de l'application de construction et de renvoi d'un message d'erreur. Ce processus étant entièrement séparé de la chaîne de traitement \enquote{normale} d'une requête, il ne risque pas d'être impacté par une autre erreur issue de \textit{KatAPI}. En cas d'erreur 500, une réponse est construire en \tei{} ou en \json{}. Elle contient dans son en-tête le contexte de la requête et la taxonomies nécessaires; le corps de la réponse est fait d'un message indiquant qu'une erreur imprévue a été rencontrée. Comme toujours avant l'envoi d'une réponse au client, les en-têtes \gls{http} sont définis; enfin, la requête est envoyée au client.
+
+\widepage
+\begin{figure}[p]
+	\centering
+	\tikz[scale=0.75, transform shape]{
+		\node[base] (client) at (0,-10)%
+			{Client};
+		\node[base] (server) at (0,-7)%
+			{Serveur};
+		\node[choice] (valid) at (0,-4)%
+			{Est-ce que la requête est valide?};
+		\node[choice] (level) at (0,0.5)%
+			{Quel est le point d'accès?};
+		\node[base] (error422) at (7,-4)%
+			{Erreur HTTP 422};
+		\node[base] (catfull) at (-7,4)%
+			{\texttt{cat\_full}};
+		\node[base] (catstat) at (0,4)%
+			{\texttt{cat\_stat}};
+		\node[base] (item) at (7,4)%
+			{\texttt{item}};
+		\node[transf] (catfull-get) at (-7,6)%
+			{Extraction du catalogue};
+		\node[transf] (catstat-get) at (0,6)%
+			{Extraction de données sur les catalogues};
+		\node[transf] (item-get) at (7,6)%
+			{Extraction de données sur les items};
+		\node[choice] (catstat-format) at (0,9)%
+			{Quel est le format demandé?};
+		\node[choice] (item-format) at (7,9)%
+			{Quel est le format demandé?};
+		\node[transf] (catstat-tei) at (-4.5,13)%
+			{Traduction des données en \tei{}};
+		\node[transf] (item-tei) at (4.5,13)%
+			{Extraction des données en \tei{} depuis les catalogues};
+		\node[transf] (build-json) at (8,17)%
+			{Construction d'une réponse en \json{}};
+		\node[transf] (build-tei) at (-6,17)%
+			{Construction d'une réponse en \tei{}};
+		\node[transf, minimum width=7cm] (headers) at (0,20)%
+			{Construction des en-têtes HTTP};
+		\node[%
+			outline,%
+			minimum width=22cm,%
+			minimum height=11cm,%
+			dash dot dot,%
+			draw=persimmon,%
+			label={%
+				[rotate=-90,yshift=0.5cm,xshift=-4cm]%
+				right:Erreur HTTP 500 lancée en cas de problème
+			}%
+		] (error500) at (1,8.75) {};
+		
+		\node[blank] at (-2.5,-8.5) {Requête};
+		\node[blank] at (2.5,-8.5) {Réponse};
+		\node[blank,rotate=-90,minimum width=4cm,text width=7cm] at (11.75,-2) %
+			{Construction d'une réponse \\ en \json{} ou \tei{}};
+		\node[blank] at (8.5,10.5) {\json{}};
+		\node[blank] at (-2.25,10.5) {\tei{}};
+		\node[blank] at (1.25,10.5) {\json{}};
+		\node[blank] at (5.5,10.5) {\tei{}};
+		\node[blank] at (4,-4.3) {NON};
+		\node[blank] at (0.5,-1.75) {OUI};
+		
+		\begin{pgfonlayer}{bg}
+			\draw[arrow] (client) -- (-1.5,-10) -- (-1.5,-7.75) -- (server);
+			\draw[arrow] (server) -- (1.5,-7) -- (1.5,-9.25) -- (client);
+			\draw[arrow] (server) -- (valid);
+			\draw[arrow] (valid) -- (error422);
+			\draw[arrow] (valid) -- (level);
+			\draw[arrow] (level) -- (catfull);
+			\draw[arrow] (level) -- (catstat);
+			\draw[arrow] (level) -- (item);
+			\draw[arrow] (catfull) -- (catfull-get);
+			\draw[arrow] (catstat) -- (catstat-get);
+			\draw[arrow] (item) -- (item-get);
+			\draw[arrow] (catfull-get) -- (-7,16) -- (build-tei);
+			\draw[arrow] (catstat-get) -- (catstat-format);
+			\draw[arrow] (item-get) -- (item-format);
+			\draw[arrow] (item-format) -- (item-tei);
+			\draw[arrow] (catstat-format) -- (catstat-tei);
+			\draw[arrow] (catstat-tei) -- (-4.5,15) -- (build-tei);
+			\draw[arrow] (item-tei) -- (0,13) -- (build-tei);
+			\draw[arrow] (item-format) -- (8,11) -- (build-json);
+			\draw[arrow] (catstat-format) -- (1,11.5) -- (8,11.5) -- (build-json);
+			\draw[arrow] (build-tei) -- (headers);
+			\draw[arrow] (build-json) -- (headers);
+			\draw[arrow] (headers) -- (-11,20) -- (-11,-7) -- (server);
+			\draw[dotted, ultra thick] (error422) -- (11,-4) -- (11,15) -- (9,15) -- (build-json);
+			\draw[dotted, ultra thick] (9,15) -- (0,15) -- (build-tei);
+		\end{pgfonlayer}
+	}
+	\caption{Fonctionnement interne de \textit{KatAPI}}
+	\label{fig:api_backend}
+\end{figure}
+\restoregeometry
+
+\section{En conclusion}
+L'application présentée ici vise à être un outil pour chercheur.euse.s, qui permette le partage de données de façon automatisée. Cela peut faciliter la récupération de données brutes, sans avoir à passer par un téléchargement \enquote{à la main}. L'objectif est donc d'enrourager la réutilisation de données dans un contexte de science ouverte. L'\api{} va cependant plus loin que la simple récupération de données brutes, puisqu'elle fonctionne comme un moteur de recherche à facettes. Elle permet par exemple de rechercher tous les manuscrits vendus entre 1880 et 1890 et écrits par Mme de Sévigné entre 1660 et 1680. Cette fonctionnalité, et la possibilité de mener des recherches à différents niveaux, peut aider à la constitution de jeux de données sur mesure, ce qui peut être utile autant dans la suite du projet que pour d'autres chercheur.euse.s. Si les données partagées sont brutes, leur partage demande d'être tout sauf brut. Des données hors contexte sont inutilisables, autant par une personne humaine que par une machine. C'est pourquoi deux standards ont été suivis: l'un technique (le \gls{rest}) et l'autre scientifique, le \gls{fair}. Ces standards et principes servent à la recherche, puisqu'ils permettent tout simplement la production de données utilisables par des chercheur.euse.s. Cependant, ils aident également à la technique, puisqu'ils forcent à penser aux manières de bien diffuser des données, une question qui sont éminemment technique. La conception de cette \api{}, et la réflexion qu'elle engendre sur les manières de diffuser des données de recherche, montrent que le partage de données n'est pas uniquement un problème technique, qui dépend de la disponibilité d'outils. Ce n'est pas non plus seulement un problème légal, où des licences encadrant clairement le partage et l'utilisation de données par autrui sont nécessaires. La diffusion de données de recherche est avant tout un problème scientifique, qui ne peut être résolu que par une bonne compréhension de ce qui est partagé. Il apparaît, au final, qu'il n'existe pas vraiment de données \enquote{brutes}: celles-ci demandent à être éditorialisées et incluses dans des fichiers structurés et documentés afin d'être réutilisables.
+
+% \section{Gestion des erreurs}
+% L'\api{} étant une application devant interagir avec des utilisateur.ice.s et gérer leurs requêtes, il n'est pas pensable qu'elle \enquote{plante} ou ne renvoie pas d'erreur. Tout un système de gestion des erreurs a donc été défini. Ces erreurs peuvent être classées en deux catégoriés: côté client (dues à des entrées invalides des utilisateur.ice.s)  et côté serveur (erreurs inattendues qui empêchent l'exécution d'une requête). Si ces erreurs sont rencontrées, des réponses sont construites en \json{} ou \xmltei{} (selon le format demandé par l'utilisateur.ice.s). Celles-ci décrivent l'erreur et permettent donc aux utilisateur.ice.s de corriger les erreurs qui ont pu avoir lieu côté client.
+
+% \section{Garantir le bon fonctionnement de l'application}
+% De la même manière que les systèmes de gestion des erreurs garantissent que l'application continue à fonctionner même en cas d'erreur, les tests garantissent que l'\api{} soit fonctionnelle, même dans \enquote{des conditions extrêmes}. Les réponses, formats et données retournées sont donc testés. C'est ce protocole de test qui est présenté ici.
