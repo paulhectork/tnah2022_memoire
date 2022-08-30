@@ -1,0 +1,81 @@
+\section*{Output Data - level 1}
+\addcontentsline{toc}{section}{Output Data - level 1}
+
+This repository contains digitised manuscripts sale catalogs encoded in XML-TEI at level 1.
+
+The data have not been cleaned (\href{https://github.com/katabase/2\_CleanedData}{level 2}) or post-processed (\href{https://github.com/katabase/3\_TaggedData}{level 3}).
+\section*{Description of the data}
+\addcontentsline{toc}{subsection}{Description of the data}
+
+Basic bibliographic information for each catalogue are available \href{https://github.com/katabase/1\_OutputData/blob/master/\_listDATA.csv}{here}.
+\subsection*{Schema}
+\addcontentsline{toc}{subsubsection}{Schema}
+
+You can find the ODD that validates the encoding in the repository \href{https://github.com/katabase/Data\_extraction/tree/master/\_schemas}{Data\_extraction (folder \texttt{\_schemas})}.
+\section*{Workflow}
+\addcontentsline{toc}{subsection}{Workflow}
+\subsection*{Creation of the data}
+\addcontentsline{toc}{subsubsection}{Creation of the data}
+
+The creation process is described in detail in the following \href{https://github.com/katabase/GROBID\_Dictionaries/blob/master/DOCUMENTATION.md}{repo}.
+\subsection*{Cleaning the data}
+\addcontentsline{toc}{subsubsection}{Cleaning the data}
+
+Entries of catalogues look like the following:
+
+\begin{listing}[h!]
+   \begin{minted}{xml}
+<item n="80" xml:id="CAT_000146_e80">
+   <num>80</num>
+   <name type="author">Cherubini (L.),</name>
+   <trait>
+   <p>l'illustre compositeur</p>
+   </trait>
+   <desc>L. a s.; 1836, 1 p 1 /2 in8.</desc>
+   <measure commodity="currency" unit="FRF" quantity="12">12</measure>
+</item>
+
+   \end{minted}
+\end{listing}
+
+Most of the reconciliation process uses data from the \texttt{<desc\textgreater{}} element of our xml files. We therefore need to correct typos to ease further post-processing, \_e.g.\_
+  * \texttt{L. a s.} -\textgreater{} \texttt{L. a. s.}
+  * \texttt{in8} -\textgreater{} \texttt{in-8}
+  * \texttt{1 /2} -\textgreater{} \texttt{1/2}
+  * \texttt{1 p} -\textgreater{} \texttt{1 p.}
+
+The \texttt{clean\_xml.py} script \href{https://github.com/katabase/1\_OutputData/blob/master/script/clean\_xml.py}{available here} tackles this problem.
+\section*{Installation and use}
+\addcontentsline{toc}{subsection}{Installation and use}
+
+\begin{listing}[h!]
+   \begin{minted}{bash}
+* git clone https://github.com/katabase/1_OutputData.git
+* cd 1_OutputData
+* python3 -m venv my_env
+* source my_env/bin/activate
+* pip install -r requirements.txt
+* python script/clean_xml.py -f FILENAME processes one single file
+	OR
+* python script/clean_xml.py -d DIRECTORY processes all the files contained in a directory
+
+   \end{minted}
+\end{listing}
+\section*{Credits}
+\addcontentsline{toc}{subsection}{Credits}
+
+* The ODD was created by Lucie Rondeau du Noyer.
+
+* \texttt{clean\_xml.py}was created by Simon Gabay.
+
+* The catalogs were encoded by Lucie Rondeau du Noyer, Simon Gabay, Matthias Gille Levenson, Ljudmila Petkovic and Alexandre Bartz.
+
+\section*{Cite this repository}
+\addcontentsline{toc}{subsection}{Cite this repository}
+
+Alexandre Bartz, Simon Gabay, Matthias Gille Levenson, Ljudmila Petkovic and Lucie Rondeau du Noyer, \_Manuscript sale catalogues\_, Neuchâtel: Université de Neuchâtel, 2019, \href{https://github.com/katabase/1\_OutputData}{https://github.com/katabase/1\_OutputData}.
+
+\section*{Licence}
+\addcontentsline{toc}{subsection}{Licence}
+
+The catalogues are licensed under a \href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International Licence} and the code is licensed under a GNU GPL-3.0 license.

@@ -1,0 +1,289 @@
+\section*{LEVEL 3 - WIKIDATA ENRICHMENTS}
+\addcontentsline{toc}{section}{LEVEL 3 - WIKIDATA ENRICHMENTS}
+
+\par\noindent\rule{\linewidth}{0.4pt}
+\section*{Presentation}
+\addcontentsline{toc}{subsection}{Presentation}
+
+This part of the pipeline
+
+\begin{itemize}
+\item reconciles the names in our dataset with wikidata IDs
+\item runs the same 4 \texttt{sparql} requests on all IDs
+\item stores the output of the \texttt{sparql} requests in a \texttt{sparql} file
+\item updates the \texttt{tei} files with the wikidata IDs 
+\end{itemize}
+
+The aim is to produce normlised data to connect to catalogue entries, in
+order to understand our dataset better and to isolate the factors detrmining
+a price.
+
+\par\noindent\rule{\linewidth}{0.4pt}
+\section*{Installation, pipeline and use}
+\addcontentsline{toc}{subsection}{Installation, pipeline and use}
+
+\par\noindent\rule{\linewidth}{0.4pt}
+\subsection*{In short}
+\addcontentsline{toc}{subsubsection}{In short}
+
+With the proper python virtual environment sourced, without running tests, just type:
+
+\begin{lstlisting}
+shell
+python main.py -n # build the input data table
+python main.py -i # align tei:names with wikidata entities
+python main.py -s # run sparql queries on those entities
+python main.py -w # reinject the wikidata ids into the tei catalogues
+\end{lstlisting}
+
+Even simpler, you can just run the below script:
+
+\begin{lstlisting}
+shell
+bash pipeline.sh
+\end{lstlisting}
+
+\par\noindent\rule{\linewidth}{0.4pt}
+\subsection*{Installation}
+\addcontentsline{toc}{subsubsection}{Installation}
+
+This works on MacOS and Linux (ubuntu, debian based distributions).
+
+\begin{lstlisting}
+shell
+git clone https://github.com/katabase/3_WikidataEnrichment # clone the repo
+cd 3_WikidataEnrichment # move to the dictory
+python3 -m venv env # create a python virtualenv
+source env/bin/activate # source python from the virtualenv
+pip install -r requirements.txt # install the necessary librairies
+\end{lstlisting}
+
+\par\noindent\rule{\linewidth}{0.4pt}
+\subsection*{Pipeline and use}
+\addcontentsline{toc}{subsubsection}{Pipeline and use}
+
+All scripts run by running \texttt{main.py} with a specific argument. 4 GBs of RAM are recommended to
+run the scripts. 
+
+As a reminder, here is catalogue entries'\texttt{tei} 
+structure:
+
+\begin{listing}[h!]
+   \begin{minted}{xml}
+<item n="80" xml:id="CAT_000146_e80">
+   <num>80</num>
+   <name type="author">Cherubini (L.),</name>
+   <trait>
+   <p>l'illustre compositeur</p>
+   </trait>
+   <desc>
+   <term>L. a. s.</term>;<date>1836</date>,
+   <measure type="length" unit="p" n="1">1 p.</measure> 
+   <measure unit="f" type="format" n="8">in-8</measure>.
+   <measure commodity="currency" unit="FRF" quantity="12">12</measure>
+   </desc>
+</item>
+
+   \end{minted}
+\end{listing}
+
+\par\noindent\rule{\linewidth}{0.4pt}
+
+\textbf{Step 1 : create an input TSV} - \texttt{python main.py -n}
+
+The first step is to create a \texttt{tsv} file that will be used to retrieve the wikidata IDs:
+
+\begin{itemize}
+\item the \texttt{tsv} is made of 5 columns (see example below):
+\begin{itemize} 
+ \item \texttt{xml id} : the item's \texttt{xml:id}
+\item \texttt{wikidata id} : the wikidata ID (to be retrieved in the next step)
+\item \texttt{name} : the \texttt{tei:name} of that item
+\item \texttt{trait} : the \texttt{tei:trait} of that item 
+\end{itemize}
+\end{itemize}
+
+\begin{table}[h]
+\begin{tabular}{c|c|c|c}
+xml id & wikidata id & name & trait \\
+\hline 
+CAT\_000362\_e27086 & & ADAM (Ad.) & célèbre compositeur de musique.
+\end{tabular}
+\end{table}
+
+
+\begin{itemize}
+\item \textbf{running this step}: 
+\end{itemize}
+
+\begin{lstlisting}
+shell
+python main.py -n
+\end{lstlisting}
+
+\par\noindent\rule{\linewidth}{0.4pt}
+
+\textbf{Step 2 : retrieve the wikidata IDs} - \texttt{python main.py -i}
+
+The wikidata IDs are retrieved by running a full text search using the 
+\href{https://www.wikidata.org/w/api.php}{wikidata API}. 
+
+\begin{itemize}
+\item the \textbf{algorithm functions} as follows:
+\begin{itemize} 
+ \item the input is file created at the previous step (\texttt{script/tables/nametable\_in.tsv}). The \texttt{name} and \texttt{trait} columns are used to create data for the API search
+\item two columns are processed to prepare the data for the API search:
+\begin{itemize} 
+ \item from the \texttt{name}, we determine the kind of \texttt{name} we're working with (the name of a person, of a nobility, of an event, of a place...). This determines different behaviours.
+\item the \texttt{name} is normalized: we extract and translate nobility titles, locations... First and last names are extracted. If the first name is abbreviated, we try to rebuild a full name from its abbreviated version.
+\item the \texttt{trait} is processed to extract and translate occupations, dates...
+\item the output is stored in a dictionnary
+\end{itemize}
+\item this \texttt{dict} is passed to a second algorithm to run text searches on the API. Depending on the data stored in the dict, different queries are ran. A series of queries are run until a result is obtained
+\item finally, the result is written to a TSV file (\texttt{out/wikidata/nametable\_out.tsv}). Its structure is the same as that of \texttt{nametable\_in}, with some changes. Here are the column names:
+\begin{itemize} 
+ \item \texttt{tei:xml\_id} : the \texttt{@xml:id} from the \texttt{tei} files
+\item \texttt{wd:id} : the wikidata ID
+\item \texttt{tei:name} : the \texttt{tei:name}
+\item \texttt{wd:name} : the name corresponding to the wikidata ID (to ease the data verification process)
+\item \texttt{wd:snippet} : a short summary of the wikidata page (to ease the data verification process)
+\item \texttt{tei:trait} : the \texttt{tei:trait}
+\item \texttt{wd:certitude} : an evaluation of the degree of certitude (whether we're certain that the proper id has been retrieved)
+\end{itemize}
+\item once this script has completed, a deduplicated list of wikidata IDs is written to \texttt{script/tables/id\_wikidata.txt}. This file will be used as input for the next step.
+\item the F1 score for this step (evaluating the number of good wikidata IDs retrieved) is \texttt{0.674}, based on tests run on 200 items.
+\item this step takes a lot of time to complete, but, thanks to log files, the script can be interrupted and restarted at any point.
+\end{itemize}
+\item \textbf{running this step} : 
+\end{itemize}
+
+\begin{lstlisting}
+shell
+python main.py -i
+\end{lstlisting}
+
+\par\noindent\rule{\linewidth}{0.4pt}
+
+\textbf{Step 3 : running \texttt{sparql} queries} - \texttt{python main.py -s}
+
+\begin{itemize}
+\item the \textbf{algorithm} is much simpler: for each wikidata ID, 4 sparql queries are run. The results are returned in \texttt{json} or, if there's a mistake, \texttt{xml}. The results are translated to a simpler \texttt{json} and the result is stored to \texttt{out/wikidata/wikidata\_enrichments.json}. This step takes a lot of time, but the script can be stopped and continued at any point.
+\item the \textbf{output structure} is as follows (each key is mapped to a list of results ; the list can be empty ; the empty lines in the dict separates the different wikidata queries): 
+\end{itemize}
+
+\clearpage
+\begin{listing}[ph!]
+   \begin{minted}{python}
+   out = {'instance': [], 'instanceL': [], # what "category" an id belongs to (person, litterary work...)
+   'gender': [], 'genderL': [], # the gender of a person
+   'citizenship': [], 'citizenshipL': [], # citizenship
+   'lang': [], 'langL': [], # languages spoken
+   'deathmanner': [], 'deathmannerL': [], # the way a person died
+   'birthplace': [], 'birthplaceL': [], # the place a person is born
+   'deathplace': [], 'deathplaceL': [], # the place a person died
+   'residplace': [], 'residplaceL': [], # the place a person lived
+   'burialplace': [], 'burialplaceL': [], # where a person is buried
+
+   'educ': [], 'educL': [], # where a person studied
+   'religion': [], 'religionL': [], # a person's religion
+   'occupation': [], 'occupationL': [], # general description of a person's occupation
+   'award': [], 'awardL': [], # awards gained
+   'position': [], 'positionL': [], # precise positions held by a person
+   'member': [], 'memberL': [], # institution a person is member of
+   'nobility': [], 'nobilityL': [], # nobility titles
+   'workcount': [], # number of works (books...) documented on wikidata
+   'conflictcount': [], # number of conflicts (wars...) a person has participated in
+   'image': [], # url to the portrait of a person
+   'signature': [], # url to the signature of a person
+   'birth': [], 'death': [], # birth and death dates
+   'title': [], # title of a work of art / book...
+   'inception': [], # date a work was created or published
+   'author': [], 'authorL': [], # author of a book
+   'pub': [], 'pubL': [], # publisher of a work
+   'pubplace': [], 'pubplaceL': [], # place a work was published
+   'pubdate': [], # date a work was published
+   'creator': [], 'creatorL': [], # creator of a work of art
+   'material': [], 'materialL': [], # material in which a work of art is made
+   'height': [], # height of a work of art
+   'genre': [], 'genreL': [], # genre of a work or genre of works created by a person
+   'movement': [], 'movementL': [], # movement in which a person or an artwork are inscribed
+   'creaplace': [], 'creaplaceL': [], # place where a work was created
+   'viafID': [], # viaf identifier
+   'bnfID': [], # bibliothèque nationale de france ID
+   'isniID': [], # isni id
+   'congressID': [], # library of congress identifier
+   'idrefID': [] # idref identifier}
+
+   \end{minted}
+\end{listing}
+
+\begin{itemize}
+\item \textbf{running this step}: 
+\end{itemize}
+
+\begin{lstlisting}
+python main.py -s
+\end{lstlisting}
+
+\par\noindent\rule{\linewidth}{0.4pt}
+
+\textbf{Step 4: reinject the wikidata ids into the TEI catalogues} - \texttt{python main.py -w}
+
+\begin{itemize}
+\item all \texttt{tei:items} are linked with a wikidata ID retrieved during the process. 
+\item the wikidata IDs are included in a \texttt{@key} attribute inside the \texttt{tei:name} and prefixed by the token \texttt{wd:}.
+\item a pattern to handle this prefix is provided in the \texttt{tei:teiHeader}, in the \texttt{tei:editorialDecl//tei:listPrefixDef}. this allows to automatically rebuilt a URL to the proper wikidata page.
+\item the output is written to \texttt{out/catalogues}. 
+\end{itemize}
+
+\par\noindent\rule{\linewidth}{0.4pt}
+
+\textbf{Running tests} - \texttt{python main.py -t}
+
+\begin{itemize}
+\item the tests are only run on the \textbf{step 2} (for the rest, we are certain of the result). 
+\begin{itemize} 
+ \item They are based on 200 catalogue entries. The test dataset ressembles the full dataset (about as many different kinds of entries, from different catalogues, with as many \texttt{tei:trait}s as in the main dataset)
+\item Several tests are run. Two tests are testing isolate parameters of the dictionnary built in the step 1 and the efficiency of the function that rebuilds the first name from its abbreviation. The other tests are for the final algorithm and they build statistics it. They also calculate its execution time using different parameters.
+\end{itemize}
+\item \textbf{running the tests}: 
+\end{itemize}
+
+\begin{lstlisting}
+python main.py -t
+\end{lstlisting}
+
+\par\noindent\rule{\linewidth}{0.4pt}
+
+\textbf{Other options}:
+
+\begin{itemize}
+\item \textbf{counting the most used words in the \texttt{tei:trait}s} of the input dataset (to tweak the way the dictionnary is built in the step 2) : \texttt{python main.py -c}
+\item \textbf{\texttt{python main.py -x}} : a throwaway option to map to a function in order to use a script that is not accessible from the above arguments 
+\end{itemize}
+
+\par\noindent\rule{\linewidth}{0.4pt}
+
+\textbf{Summarizing, the options are}
+
+\begin{lstlisting}
+* -c --traitcounter : count most used terms in the tei:trait (to tweak the matching tables)
+* -t --test : run tests (takes ~20 minutes)
+* -i --wikidataids : retrieve wikidata ids (takes up to 10 to 20 hours!)
+* -s --runsparql : run sparql queries (takes +-5 hours)
+* -n --buildnametable: build the input table for -i --wikidataids (a table from which 
+   to retrieve wikidata ids
+* -x --throwaway : run the current throwaway script (to test a function or whatnot)
+\end{lstlisting}
+
+\par\noindent\rule{\linewidth}{0.4pt}
+\section*{Credits}
+\addcontentsline{toc}{subsection}{Credits}
+
+Scripts developped by Paul Kervegan in spring-summer 2022. 
+
+\par\noindent\rule{\linewidth}{0.4pt}
+\section*{License}
+\addcontentsline{toc}{subsection}{License}
+
+The catalogues are licensed under a \href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International Licence} and the code is licensed under a GNU GPL-3.0 license.

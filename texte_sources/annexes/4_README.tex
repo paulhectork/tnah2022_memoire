@@ -1,0 +1,101 @@
+\section*{Tagged Data - level 3}
+\addcontentsline{toc}{section}{Tagged Data - level 3}
+
+This repository contains digitised manuscripts sale catalogs encoded in XML-TEI at level 3.
+
+The data have been cleaned (\href{https://github.com/katabase/2\_CleanedData}{level 2}) and post-processed (level 3).
+\section*{Schema}
+\addcontentsline{toc}{subsection}{Schema}
+
+You can find the ODD that validates the encoding in the repository \href{https://github.com/katabase/Data\_extraction/tree/master/\_schemas}{Data\_extraction (folder \texttt{\_schemas})}.
+\section*{Workflow}
+\addcontentsline{toc}{subsection}{Workflow}
+
+Once the data have been cleaned and post-processed, we can check them. Some errors may appear and some corrections may be needed. 
+
+From this data, \texttt{extractor-json.py} extracts informations and retrieves them in an JSON file, \href{https://github.com/katabase/3\_TaggedData/tree/main/output}{available here}.
+
+The script transforms this 
+
+\begin{listing}[h!]
+   \begin{minted}{xml}
+<item n="80" xml:id="CAT_000146_e80">
+   <num>80</num>
+   <name type="author">Cherubini (L.),</name>
+   <trait>
+   <p>l'illustre compositeur</p>
+   </trait>
+   <desc>
+   <term>L. a. s.</term>;<date>1836</date>,
+   <measure type="length" unit="p" n="1">1 p.</measure> 
+   <measure unit="f" type="format" n="8">in-8</measure>.
+   <measure commodity="currency" unit="FRF" quantity="12">12</measure>
+   </desc>
+</item>
+
+   \end{minted}
+\end{listing}
+
+into 
+
+\begin{listing}[h!]
+   \begin{minted}{json}
+{"CAT_000146_e80_d1": {"desc": "L. a. s.; 1836, 1 p. in-8. 12",
+   "price": 12.0,
+   "author": "Cherubini",
+   "date": "1836",
+   "number_of_pages": 1.0,
+   "format": 8,
+   "term": 7,
+   "sell_date": "1893-03"}}
+
+   \end{minted}
+\end{listing}
+
+From \texttt{export.json}, we can proceed at the reconciliation of the catalogues entries. 
+
+If you want to learn more about the reconciliation, visite \href{https://raw.github.com/katabase/reconciliation}{this repository}. 
+
+If you want to query the database, don't hesitate to try our \href{https://raw.github.com/katabase/application}{application}.
+\section*{Installation and use}
+\addcontentsline{toc}{subsection}{Installation and use}
+
+\begin{listing}[h!]
+   \begin{minted}{bash}
+* git clone https://github.com/katabase/3_TaggedData.git
+* cd 3_TaggedData
+* python3 -m venv my_env
+* source my_env/bin/activate
+* pip install -r requirements.txt
+* cd script 
+* python3 extractor_json.py
+
+   \end{minted}
+\end{listing}
+\textbf{Note that you have to be in the folder \texttt{script}to execute \texttt{extractor\_json.py}.}
+
+The output file, \texttt{export.json}, is in the folder \texttt{output}.
+\subsection*{Unittest}
+\addcontentsline{toc}{subsubsection}{Unittest}
+
+If you want run some unittests, try in the folder \texttt{script}: 
+
+\begin{listing}[h!]
+   \begin{minted}{bash}
+python3 test.py
+
+   \end{minted}
+\end{listing}
+\section*{Credits}
+\addcontentsline{toc}{subsection}{Credits}
+
+* The script was created by Alexandre Bartz with the help of Matthias Gille Levenson and Simon Gabay.
+* The catalogs were encoded by Lucie Rondeau du Noyer, Simon Gabay, Matthias Gille Levenson, Ljudmila Petkovic and Alexandre Bartz.
+\section*{Cite this repository}
+\addcontentsline{toc}{subsection}{Cite this repository}
+
+Alexandre Bartz, Simon Gabay, Matthias Gille Levenson, Ljudmila Petkovic and Lucie Rondeau du Noyer, \_Manuscript sale catalogues\_, Neuchâtel: Université de Neuchâtel, 2020, \href{https://github.com/katabase/3\_TaggedData}{https://github.com/katabase/3\_TaggedData}.
+\section*{Licence}
+\addcontentsline{toc}{subsection}{Licence}
+
+The catalogues are licensed under a \href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International Licence} and the code is licensed under a GNU GPL-3.0 license.

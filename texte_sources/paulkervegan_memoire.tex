@@ -1,10 +1,10 @@
 %%%%%%%%%%%% métadonnées %%%%%%%%%%%%
 \author{Paul, Hector KERVEGAN}
-\title{Traitement et exploitation d'un corpus textuel semi-structuré: le cas des catalogues de vente de manuscrits.}
-\date{05.09.2022}
+\title{Modélisation, enrichissement sémantique et diffusion d'un corpus textuel semi-structuré: le cas des catalogues de vente de manuscrits}
+\date{15.09.2022}
 
 %%%%%%%%%%%% generic packages: encodage, format, langue, police, math %%%%%%%%%%%%
-\documentclass[a4paper, 12pt, twoside]{book}
+\documentclass[a4paper,12pt,twoside]{book}
 \usepackage[english, french]{babel}
 \usepackage[utf8x]{inputenc}
 \usepackage[T1]{fontenc}
@@ -17,6 +17,7 @@
 \usepackage{multicol}
 \usepackage{amsmath}
 \usepackage{diagbox}
+\usepackage{afterpage}
 
 
 %%%%%%%%%%%% code %%%%%%%%%%%%
@@ -160,7 +161,6 @@
 \usepackage{csquotes}
 \usepackage[backend=biber,sorting=nyt,style=enc]{biblatex}
 \nocite{*}
-\addbibresource{bibliographie/visualisation.bib}
 \addbibresource{bibliographie/katabase.bib}
 \addbibresource{bibliographie/ecostat.bib}
 \addbibresource{bibliographie/textprocessing.bib}
@@ -171,10 +171,6 @@
 
 \DeclareSourcemap{%
  \maps[datatype=bibtex]{%
- 	\map[overwrite]{%
- 		\perdatasource{bibliographie/visualisation.bib}
- 		\step[fieldset=keywords, fieldvalue={,visualisation}, append]
- 	}
  	\map[overwrite]{%
  		\perdatasource{bibliographie/katabase.bib}
  		\step[fieldset=keywords, fieldvalue={,katabase}, append]
@@ -216,9 +212,9 @@
 \usepackage{hyperref}
 \hypersetup{
  pdfauthor={Paul, Hector KERVEGAN}, 
- pdftitle={Traitement et exploitation d'un corpus textuel semi-structuré: le cas des catalogues de vente de manuscrits.}, 
+ pdftitle={Modélisation, enrichissement sémantique et diffusion d'un corpus textuel semi-structuré: le cas des catalogues de vente de manuscrits}, 
  pdfsubject={Traitement de données textuelles},
- pdfkeywords={catalogues de vente}{mss}{katabase}{reconnaissance optique de caractères}{ocr}{web design}{visualisation de données}{traitement automatisé du language}{web de données}{Python}
+ pdfkeywords={catalogues de vente}{mss}{katabase}{ocr}{web sémantique}{linked open data}{web de données}{traitement automatisé du language}{détection de motifs}{api}{fair}{rest}
 }
 
 
@@ -235,7 +231,7 @@
 	type=\acronymtype,
 	name={API},
 	description={Application Programming Interface},
-	first={Interface de programmation d'application (API) \glsadd{apig}},
+	first={\textit{Application Programming Interface} (\enquote{Interface de programmation d'application}, ou API) \glsadd{apig}},
 	see=[Glossaire:]{apig}
 }
 \newglossaryentry{graph}{
@@ -300,7 +296,7 @@ description={Comme le CTS, le \textit{Distributed Text Services} (DTS) est une A
 }
 \newglossaryentry{httpg}{
 	name={HTTP},
-	description={Le \textit{Hypertext Transfer Protocol} (HTTP, ou P\enquote{protocole de transfert hypertexte}), est un protocole qui permet la communication entre différentes machines dans une architecture client-serveur, comme celle du Web. C'est donc le protocole qui est à la base d'Internet, puisqu'il établit la manière dont des machines peuvent interagir au sein d'un réseau. Il définit un ensemble de méthodes pour interagir avec le serveur -- demander (\texttt{GET}) des données, en envoyer (\texttt{POST})... Il définit également la manière dont le serveur répond au client et un ensemble d'erreurs\footcite[p. 116-127]{fielding_architectural_2000}, chacune disposant d'un code pour l'identifier (l'erreur 404 indiquant que la ressource demandée n'existe pas, ou l'erreur 418 signifiant \enquote{Je suis une théière}, un canular qui pouve l'humour des concepteur.ice.s du Web).}
+	description={Le \textit{Hypertext Transfer Protocol} (HTTP, ou \enquote{protocole de transfert hypertexte}), est un protocole qui permet la communication entre différentes machines dans une architecture client-serveur, comme celle du Web. C'est donc le protocole qui est à la base d'Internet, puisqu'il établit la manière dont des machines peuvent interagir au sein d'un réseau. Il définit un ensemble de méthodes pour interagir avec le serveur -- demander (\texttt{GET}) des données, en envoyer (\texttt{POST})... Il définit également la manière dont le serveur répond au client et un ensemble d'erreurs\footcite[p. 116-127]{fielding_architectural_2000}, chacune disposant d'un code pour l'identifier (l'erreur 404 indiquant que la ressource demandée n'existe pas, ou l'erreur 418 signifiant \enquote{Je suis une théière}, un canular qui pouve l'humour des concepteur.ice.s du Web).}
 }
 \newglossaryentry{log}{
 	name={fichier de log},
@@ -376,7 +372,7 @@ description={Comme le CTS, le \textit{Distributed Text Services} (DTS) est une A
 	type=\acronymtype,
 	name={URI},
 	description={\textit{Uniform Resource Identifier}},
-	first={\textit{Uniform Resource Identifier} (URI) \glsadd{urig}},
+	first={\textit{Uniform Resource Identifier} (\enquote{Identifiant unique de ressource}, ou URI) \glsadd{urig}},
 	see=[Glossaire:]{urig}
 }
 \newglossaryentry{urig}{
@@ -399,6 +395,13 @@ description={Comme le CTS, le \textit{Distributed Text Services} (DTS) est une A
 % modèle bis: \newglossaryentry{meta}{name=métadonnée,description={donnée servant à définir ou décrire une autre donné quel que soit son support}}
 
 % commandes perso: autres que les abbréviations
+\newcommand{\cleartwopages}{%
+	\afterpage{
+		\pagestyle{empty}
+		\newpage~\newpage~\newpage~
+		%\setcounter{page}{2}
+	}
+}
 \newcommand{\widepage}{\newgeometry{left=1cm,right=1cm}}  % smaller margins for big graphs; use \restoregeometry after !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 \newcommand{\scl}[1]{%
@@ -461,13 +464,16 @@ description={Comme le CTS, le \textit{Distributed Text Services} (DTS) est une A
 			\rule{2cm}{0.02cm}
 			
 			\begin{Large}
-				\textbf{Paul, Hector Kervegan}\\
+				\textbf{Paul, Hector Kervegan}
 			\end{Large}
 			
 			\vfill
 			
 			\begin{Huge}
-				\textbf{Traitement, exploitation et analyse d'un corpus semi-structuré: le cas des catalogues de vente de manuscrits}
+				\textbf{
+					Modélisation, enrichissement sémantique et diffusion d'un corpus textuel
+					semi-structuré: le cas des catalogues de vente de manuscrits
+				}
 			\end{Huge}
 			
 			\vfill
@@ -497,8 +503,17 @@ description={Comme le CTS, le \textit{Distributed Text Services} (DTS) est une A
 
 \input{conclusion.tex}
 
+
+%%%%%%%%%%%%%%%%%%%%%% ANNEXES %%%%%%%%%%%%%%%%%%%%%%
+\cleartwopages
+\part*{Annexes}
+\addcontentsline{toc}{part}{Annexes}
+\input{appendix.tex}	
+
+
 %%%%%%%%%%%%%%%%%%%%%% BIBLIOGRAPHIE %%%%%%%%%%%%%%%%%%%%%%
-\pagebreak
+\backmatter
+\cleartwopages
 \chapter*{Bibliographie}
 \chaptermark{Bibliographie}
 \addcontentsline{toc}{chapter}{Bibliographie}
@@ -507,7 +522,6 @@ description={Comme le CTS, le \textit{Distributed Text Services} (DTS) est une A
 \printbibliography[heading=subbibintoc, keyword={webgeneralites}, title={Technologies du web: généralités}]
 \printbibliography[heading=subbibintoc, keyword={websemantic}, title={Technologies du web: Web sémantique}]
 \printbibliography[heading=subbibintoc, keyword={webapi}, title={Technologies du web: API}]
-\printbibliography[heading=subbibintoc,keyword={visualisation},title={Visualisation et design d'interfaces}]
 \printbibliography[heading=subbibintoc,keyword={econometrie},title={Marché de l'art, économétrie et statistiques}]
 
 
@@ -517,9 +531,4 @@ description={Comme le CTS, le \textit{Distributed Text Services} (DTS) est une A
 \listoftables
 \tableofcontents
 
-%%%%%%%%%%%%%%%%%%%%%% ANNEXES	 %%%%%%%%%%%%%%%%%%%%%%
-\input{appendix.tex}	
-	
-	
-	
 \end{document}

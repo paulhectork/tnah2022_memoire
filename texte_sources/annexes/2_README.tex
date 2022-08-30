@@ -1,0 +1,89 @@
+\section*{Cleaned Data - level 2}
+\addcontentsline{toc}{section}{Cleaned Data - level 2}
+
+This repository contains digitised manuscripts sale catalogs encoded in XML-TEI at level 2.
+
+The data have been cleaned (level 2) but not post-processed (\href{https://github.com/katabase/3\_TaggedData}{level 3}) yet.
+\section*{Schema}
+\addcontentsline{toc}{subsection}{Schema}
+
+You can find the ODD that validates the encoding in the repository \href{https://github.com/katabase/Data\_extraction/tree/master/\_schemas}{Data\_extraction (folder \texttt{\_schemas})}.
+\section*{Workflow}
+\addcontentsline{toc}{subsection}{Workflow}
+
+Once the data have been cleaned, we can start to extract information from the \texttt{desc}.
+
+\texttt{extractor-xml.py} extracts informations and then retrieves them in the same XML file (level 3). 
+
+The script transforms this
+
+\begin{listing}[h!]
+   \begin{minted}{xml}
+<item n="80" xml:id="CAT_000146_e80">
+   <num>80</num>
+   <name type="author">Cherubini (L.),</name>
+   <trait>
+   <p>l'illustre compositeur</p>
+   </trait>
+   <desc>L. a. s.; 1836, 1 p. in-8.</desc>
+   <measure commodity="currency" unit="FRF" quantity="12">12</measure>
+</item>
+
+   \end{minted}
+\end{listing}
+
+\pagebreak
+into
+
+\begin{listing}[h!]
+   \begin{minted}{xml}
+<item n="80" xml:id="CAT_000146_e80">
+   <num>80</num>
+   <name type="author">Cherubini (L.),</name>
+   <trait>
+   <p>l'illustre compositeur</p>
+   </trait>
+   <desc>
+   <term>L. a. s.</term>;<date>1836</date>,
+   	<measure type="length" unit="p" n="1">1 p.</measure> 
+   	<measure unit="f" type="format" n="8">in-8</measure>.
+   	<measure commodity="currency" unit="FRF" quantity="12">12</measure>
+   </desc>
+</item>
+
+   \end{minted}
+\end{listing}
+
+To carry this task we use \texttt{extractor\_xml.py} \href{https://github.com/katabase/2\_CleanedData/tree/master/script/extractor-xml.py}{[available here}].
+\section*{Installation and use}
+\addcontentsline{toc}{subsection}{Installation and use}
+
+\begin{listing}[h!]
+   \begin{minted}{bash}
+* git clone https://github.com/katabase/2_CleanedData.git
+* cd 2_CleanedData
+* python3 -m venv my_env
+* source my_env/bin/activate
+* pip install -r requirements.txt
+* cd script 
+* python3 extractor_xml.py directory_to_process
+
+   \end{minted}
+\end{listing}
+
+\textbf{Note that you have to be in the folder \texttt{script}to execute \texttt{extractor\_xml.py} and that the script only works with filenames ending with \texttt{\_clean.xml} (files must have been beforehand cleaned).}
+
+The output files will be in the folder \texttt{output}.
+\section*{Credits}
+\addcontentsline{toc}{subsection}{Credits}
+
+* Scripts were created by Matthias Gille Levenson and improved by Alexandre Bartz with the help of Simon Gabay.
+* The catalogs were encoded by Lucie Rondeau du Noyer, Simon Gabay, Matthias Gille Levenson, Ljudmila Petkovic and Alexandre Bartz.
+\section*{Cite this repository}
+\addcontentsline{toc}{subsection}{Cite this repository}
+
+Alexandre Bartz, Simon Gabay, Matthias Gille Levenson, Ljudmila Petkovic and Lucie Rondeau du Noyer, \_Manuscript sale catalogues\_, Neuchâtel: Université de Neuchâtel, 2020, \href{https://github.com/katabase/2\_CleanedData}{https://github.com/katabase/2\_CleanedData}.
+\section*{Licence}
+\addcontentsline{toc}{subsection}{Licence}
+
+The catalogues are licensed under a \href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International Licence} and the code is licensed under a GNU GPL-3.0 license.
