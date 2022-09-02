@@ -46,7 +46,7 @@ L'extraction du texte est faite de façon semi-automatisée: une étape automati
 L'encodage numérique d'un document se doit, autant que possible, d'être représentatif du document originel ou de certains aspects de celui-ci qui sont considérés comme importants en fonction des objectifs scientifiques du projet. La première étape de l'encodage est donc de comprendre la structure de ce qui sera encodé. Comme celrick rossa a été dit, plusieurs typologies de documents existent; dans le cadre de mon stage, la production de données s'est concentrée sur les catalogues de ventes aux enchères organisées par Étienne Charavay. C'est donc à partir de la structure de ceux-ci que s'appuie la présentation qui suit.
 
 \subsubsection{La structure des catalogues}
-L'encodage numérique repose sur des choix scientifiques: il n'est pas possible d'encoder toutes les caractéristiques possibles d'un document. Il est donc nécessaire de faire des choix qui privilégient les enjeux scientifiques du projet; ces choix se reflètent dans ce qui est conservé et ce qui ne l'est pas au sein  des documents. Le projet \mssktb{} choisit une orientation particulière, qui se concentre sur les manuscrits en vente dans les catalogues\footcite[p. 27]{rondeau_du_noyer_encoder_2019}. Cela implique donc que certaines pages de catalogues ne sont pas retranscrites ni encodées. Dans les revues-catalogues à prix marqués, par exemple, les pages contenant des articles et des réclames ne sont pas retranscrites. D'abord, leur retranscription ne servirait pas les objectifs du projet. Mais de plus, ces pages, qui contiennent des images, sont trop homogènes pour le processus de reconnaissance optique de caractères. En effet, un tel processus repose sur l'entraînement d'un logiciel qui \enquote{apprend} à reconnaître des caractères dans un texte numérisé. Ce logiciel ne pouvant par défaut pas faire la distinction entre le texte et les parties graphiques des catalogues, il cherche à interpréter les illustrations comme du texte. Il est donc important de faire la différence entre la structure du document réel, tel qu'il est conservé par une bibliothèque, et la structure retenue pour ce projet, qui ne contient que les pages de catalogue considérées comme étant utiles. La page de titre d'un catalogue est retenue pour deux raisons: elle permet d'identifier celui-ci et offre des données bruitées (puisque cette page contient des motifs graphiques), qui sont utiles pour entraîner le logiciel de reconnaissance de caractères. Les catalogues de vente aux enchères contiennent également une ou deux pages introductives (qui présentent la vente et d'autres ouvrages publiés par l'éditeur). Celles-ci sont transcrites, là encore pour produire des données bruitées. Les pages de conclusion (qui contiennent notamment une liste de publications de l'éditeur) ne sont pas retranscrites. Le corps d'un catalogue est fait de pages listant les manuscrits en vente. Ces pages sont la source des données utilisées par \mssktb{}, et sont donc décrites ci-dessous.
+L'encodage numérique repose sur des choix scientifiques: il n'est pas possible d'encoder toutes les caractéristiques possibles d'un document. Il est donc nécessaire de faire des choix qui privilégient les enjeux scientifiques du projet; ces choix se reflètent dans ce qui est conservé et ce qui ne l'est pas au sein  des documents. Le projet \mssktb{} choisit une orientation particulière, qui se concentre sur les manuscrits en vente dans les catalogues\footcite[p. 27]{rondeau_du_noyer_encoder_2019}. Cela implique donc que certaines pages de catalogues ne sont pas retranscrites ni encodées. Seulement une page de catalogue aux enchères sur deux est imprimée: l'autre page est quadrillée, et utilisée par le commissaire priseur pour tenir le compte des ventes. En face de chaque item vendu est écrit le prix de vente ainsi que le nom de l'acheteur.euse. Dans les revues-catalogues à prix marqués, par exemple, les pages contenant des articles et des réclames ne sont pas retranscrites. D'abord, leur retranscription ne servirait pas les objectifs du projet. Mais de plus, ces pages, qui contiennent des images, sont trop homogènes pour le processus de reconnaissance optique de caractères. En effet, un tel processus repose sur l'entraînement d'un logiciel qui \enquote{apprend} à reconnaître des caractères dans un texte numérisé. Ce logiciel ne pouvant par défaut pas faire la distinction entre le texte et les parties graphiques des catalogues, il cherche à interpréter les illustrations comme du texte. Il est donc important de faire la différence entre la structure du document réel, tel qu'il est conservé par une bibliothèque, et la structure retenue pour ce projet, qui ne contient que les pages de catalogue considérées comme étant utiles. La page de titre d'un catalogue est retenue pour deux raisons: elle permet d'identifier celui-ci et offre des données bruitées (puisque cette page contient des motifs graphiques), qui sont utiles pour entraîner le logiciel de reconnaissance de caractères. Les catalogues de vente aux enchères contiennent également une ou deux pages introductives (qui présentent la vente et d'autres ouvrages publiés par l'éditeur). Celles-ci sont transcrites, là encore pour produire des données bruitées. Les pages de conclusion (qui contiennent notamment une liste de publications de l'éditeur) ne sont pas retranscrites. Le corps d'un catalogue est fait de pages listant les manuscrits en vente. Ces pages sont la source des données utilisées par \mssktb{}, et sont donc décrites ci-dessous.
 
 Comme cela apparaît dans la figure \ref{fig:catpage}, la structure des pages de catalogues présente une grande régularité. La page de gauche présentée ici fait partie des quelques pages \enquote{spéciales} qui sont contenues dans les catalogues, puisque c'est la première page listant les items en vente. Elle débute donc par un bandeau décoratif et un titre dans une police plus grande que le reste de la page. Les autres pages listant des pièces en vente ont une structure plus homogène, puisqu'elles ne contiennent ni d'éléments graphiques ni de différence dans les fontes utilisées. La structure de la majorité des pages de catalogues ressemble donc à la page de droite dans la figure \ref{fig:catpage}. Les entrées se succèdent les unes après les autres; chaque entrée de catalogue étant numérotée, le début d'une nouvelle entrée est facilement identifiable grâce à son identifiant numéraire.
 
@@ -64,17 +64,17 @@ Comme cela apparaît dans la figure \ref{fig:catpage}, la structure des pages de
 
 \subsubsection{Appréhender la structure de la page à l'aide de SegmOnto}
 % La structure des catalogues est présentée au niveau de la page. L'ontologie SegmOnto\footcite{christensen_segmonto_2022} est utilisée, autant pour appréhender la structure de la page que pour exprimer cette structure de façon standardisée.
-La segmentation de la page en zones est une tâche centrale dans la transcription de documents. Elle est définie par Antonacopoulos et al. (2011, cité.e.s par Thibault Clérice\footcite[p. 4]{clerice_you_2022}) comme l'identification de zones de textes sur une page (la segmentation en tant que telle) et la classification de ces zones en fonction de leur contenus. La segmentation a tout d'abord une utilité \enquote{intellectuelle}: elle permet de mieux comprendre comment les contenus d'un document s'organisent sur une page. L'analyse de la disposition des informations sur une page est en fait la manière dont un.e lecteur.ice aborde un document\footcite{christensen_segmonto_2022}. Ce processus a également un rôle essentiel pour l'automatisation de la transcription automatique: la détection des zones de texte est une étape préalable à la reconnaissance des caractères. De plus, expliciter la distinction entre les différentes parties de la page permet, ultérieurement, de filtrer les différentes parties du texte pour ne conserver que celles qui sont pertinentes. Cela est particulièrement utile dans le domaine de la \gls{ocr}. Si un document contient dans sa partie centrale de l'imprimé et dans ses marges du texte manuscrit et que les deux parties sont transcrites, l'entraînement d'un modèle sur ce document aura des résultats pour le moins problématiques. Le modèle apprendra en effet à identifier deux formes d'écritures très différentes comme étant la même. C'est ici que le zonage du texte est pertinent: il permet, par exemple, de ne conserver que le texte principal, et donc de diminuer le bruit présent dans les données.
+La segmentation de la page en zones est une tâche centrale dans la transcription de documents. Elle est définie par Antonacopoulos et al. (2011, cité.e.s par Thibault Clérice\footcite[p. 4]{clerice_you_2022}) comme l'identification de zones de textes sur une page (la segmentation en tant que telle) et la classification de ces zones en fonction de leur contenus. L'analyse de la disposition des informations sur une page est un processus important dans tout processus de lecture, puisque c'est avec ce processus qu'un.e lecteur.ice aborde un document\footcite{christensen_segmonto_2022}. La segmentation a tout d'abord une utilité \enquote{intellectuelle}: elle permet de mieux comprendre comment les contenus d'un document s'organisent sur une page. Ce processus a également un rôle essentiel pour l'automatisation de la transcription automatique: la détection des zones de texte est une étape préalable à la reconnaissance des caractères. De plus, expliciter la distinction entre les différentes parties de la page permet, ultérieurement, de filtrer les différentes parties du texte pour ne conserver que celles qui sont pertinentes. Cela est particulièrement utile pour la reconnaissance optique de caractères. Si un document contient dans sa partie centrale de l'imprimé et dans ses marges du texte manuscrit et que les deux parties sont transcrites, l'entraînement d'un modèle sur ce document aura des résultats pour le moins problématiques. Le modèle identifiera en effet à identifier deux formes d'écritures très différentes comme étant la même. C'est ici que le zonage du texte est pertinent: il permet, par exemple, de ne conserver que le texte principal, et donc de diminuer le bruit présent dans les données.
 
-La segmentation des zones faite automatiquement par \textit{Kraken} est reconnue comme étant une faiblesse de ce moteur d'\gls{ocr}\footcite[p. 1]{clerice_you_2022}. Celle-ci se base sur la construction d'un ou de plusieurs polygones pour englober le texte d'une page (\ref{fig:seg}). Les différentes zones ne sont pas perçues comme ayant une fonction différente dans le texte, et Kraken a tendance à agglomérer dans un seul polygone des zones de texte qui devraient être considérées de façon distinctes. C'est le cas dans l'exemple \ref{fig:seg}, où tout le corps de la page est intégré dans une seule zone de texte. La segmentation faite par Kraken ne correspond donc pas avec les besoins de la production de vérité de terrain. Aussi doit-elle être remplacée. Des méthodes alternatives ont été développées permettant une segmentation plus qualitative de documents, comme \textit{YALTAi}\footcite{clerice_you_2022}, qui s'appuie sur des méthodes de reconnaissance des formes. Cet outil n'était pas encore fonctionnel lors de la phase de transcription de documents de mon stage; aussi la segmentation des catalogues a-t-elle été faite manuellement.
+La segmentation des zones faite automatiquement par \textit{Kraken} est reconnue comme étant une faiblesse de ce moteur d'\gls{ocr}\footcite[p. 1]{clerice_you_2022}. Celle-ci se base sur la construction d'un ou de plusieurs polygones pour englober le texte d'une page (\ref{fig:seg}). Ce système permet de définir une zone sur laquelle extraire du texte; cependant, il ne perçoit pas la fonction des différents éléments d'une page, et ne peut les considérer comme des éléments ayant une valeur différente. Par conséquent, Kraken a tendance à agglomérer dans un seul polygone des zones de texte qui devraient être considérées de façon distinctes. C'est le cas dans l'exemple \ref{fig:seg}, où tout le corps de la page est intégré dans une seule zone de texte. La segmentation faite par Kraken ne correspond donc pas aux besoins de la production de vérité de terrain réutilisable. Aussi doit-elle être remplacée. Des méthodes alternatives ont été développées pour une annotation sémantique des documents qui soit plus qualitative, comme \textit{YALTAi}\footcite{clerice_you_2022}, qui s'appuie sur des méthodes de reconnaissance des formes. Cet outil n'était pas encore fonctionnel lors de la phase de transcription de documents de mon stage; aussi la segmentation des catalogues a-t-elle été faite manuellement.
 
-Segmenter un texte manuellement n'est pas difficile; la classification des zones, cependant, ne peut être faite en utilisant un vocabulaire \enquote{fait maison}: une vérité de terrain n'est réutilisable par d'autres que si le texte retranscrit est segmenté de façon compréhensible. Dans un souci d'interopérabilité, la définition de zones dans la page a donc été fait à l'aide de \textit{SegmOnto}, une ontologie pour la segmentation de documents\footcite{christensen_segmonto_2022, gabay_segmonto_2021}. Utiliser un vocabulaire commun à plusieurs projets est un moyen de rendre les données produites plus facilement compréhensibles par d'autres et de faciliter leur réutilisation par d'autres projets de recherche. \textit{SegmOnto} définit un vocabulaire permettant une segmentation sémantique des document, c'est-à-dire un découpage qui explicite le rôle des différentes parties de la page. Le projet a développé une approche matérielle des documents\footcite{gabay_segmonto_2021} qui cherche à définir un vocabulaire commun et simple pour segmenter la plus grande quantité de manuscrits possibles. Ce vocabulaire est conçu de façon modulaire: chaque zone doit appartenir à un \enquote{type}, c'est-à-dire à un terme issu d'un vocabulaire contrôlé; l'un de ces termes est \enquote{CustomZone}, qui permet de définir des zones n'appartenant pas à \textit{SegmOnto}. Ces différents types peuvent de plus être précisés grâce à des sous-types (qui sont librement définis par un projet); enfin, les zones peuvent être hiérarchisées entre elles. Une zone conforme à \textit{SegmOnto} doit donc correspondre à l'expression suivante: \texttt{type(:sous-type)?(\#\textbackslash{}d)?} (soit un type suivi d'un sous-type optionnel et d'une hiérarchisation optionnelle).
+Segmenter un texte manuellement n'est pas difficile; la classification des zones, cependant, ne peut être faite en utilisant un vocabulaire \enquote{fait maison}: une vérité de terrain n'est réutilisable par d'autres que si le texte retranscrit est segmenté de façon compréhensible. Dans un souci d'interopérabilité, la définition de zones dans la page a donc été fait à l'aide de \textit{SegmOnto}, une ontologie pour la segmentation de documents\footcite{christensen_segmonto_2022, gabay_segmonto_2021}. Utiliser un vocabulaire commun à plusieurs projets est un moyen de rendre les données produites plus facilement compréhensibles par d'autres et de faciliter leur réutilisation par différents projets de recherche. \textit{SegmOnto} définit un vocabulaire permettant une segmentation sémantique des document, c'est-à-dire un découpage qui explicite le rôle des différentes parties de la page. Le projet a développé une approche matérielle des documents\footcite{gabay_segmonto_2021} qui cherche à définir un vocabulaire commun et simple pour segmenter la plus grande quantité de manuscrits possibles. Ce vocabulaire est conçu de façon modulaire: chaque zone doit être annotée avec un terme (dit \enquote{type}) issu d'un vocabulaire contrôlé; l'un de ces termes est \enquote{CustomZone}, qui permet de définir des zones n'appartenant pas à \textit{SegmOnto}. Ces différents types peuvent de plus être précisés grâce à des sous-types (qui sont librement définis par un projet); enfin, les zones peuvent être hiérarchisées entre elles. Une zone conforme à \textit{SegmOnto} doit donc correspondre à l'expression suivante: \texttt{type(:sous-type)?(\#\textbackslash{}d)?} (soit un type suivi d'un sous-type optionnel et d'une hiérarchisation optionnelle).
 
 \textit{SegmOnto} définit un vocabulaire simple à la finalité pratique: pouvoir filtrer les différentes parties d'une page pour entraîner des modèles d'\gls{ocr} sur des données propres. Par conséquent, l'utilisation de \textit{SegmOnto} pour structurer des catalogues de vente de manuscrits est elle aussi simple. Les éléments utilisés sont les suivants:
 
 \begin{itemize}
 	\item \texttt{MainZone}: cet zone correspond à la partie principale d'une page.
-	\item \texttt{TitlePageZone}: cette zone identifie la partie principale de la page de titre. Elle est utilisée sur la page de titre à la place de \texttt{MainZone} car la page de titre contient de nombreux éléments graphiques, alors que la partie principale des autres pages n'en contient pas.
+	\item \texttt{TitlePageZone}: cette zone identifie la partie principale d'une page de titre. Elle est utilisée sur à la place de \texttt{MainZone} car la page de titre contient de nombreux éléments graphiques, alors que la partie principale des autres pages n'en contient pas.
 	\item \texttt{GraphicZone}: cette zone permet de contenir des éléments graphiques qui doivent être distingués du corps du texte.
 	\item \texttt{RunningTitltZone} est une zone permettant d'indiquer la présence d'un titre courant.
 	\item \texttt{MarginTextZone}: l'usage de cette zone permet de contenir des signatures et autres notes manuscrites en marge du texte.
@@ -82,7 +82,7 @@ Segmenter un texte manuellement n'est pas difficile; la classification des zones
 	\item \texttt{CustomZone:EntryEnd} est utilisée lorsqu'une entrée de catalogue se poursuit sur plus d'une page: elle sert à indiquer qu'une entrée a été débutée à la fin de la page précédente.
 \end{itemize}
 
-À l'aide de ces sept éléments (dont deux qui n'ont pas été définis par \textit{SegmOnto}), il est possible d'annoter l'intégralité des catalogues. Comme cela apparaît dans les exemples \ref{fig:catzones}, les éléments utilisés diffèrent beaucoup en fonction de la page qui est segmentée. Les pages contenant des items en vente (\ref{fig:catp1}, \ref{fig:catp2}) sont majoritairement composées d'une \texttt{MainZone} contenant des \texttt{CustomZone:Entry} et \texttt{CustomZone:EntryEnd}. La première de ces deux pages est également la première page du catalogue, et elle contient donc également un \texttt{RunningTitleZone}, ainsi qu'un \texttt{GraphicZone}. La segmentation de la page de titre (\ref{fig:cattitle}) diffère beaucoup des autres pages du catalogue. La page de titre contient beaucoup d'éléments graphiques; pour la distinguer des autres pages, elle est donc contenue dans un \texttt{TitlePageZone}. Elle peut également être complétée de signatures, ou de notes manuscrits; ici, une signature est contenue dans un \texttt{MarginTextZone}.
+À l'aide de ces sept éléments (dont deux qui n'ont pas été définis par \textit{SegmOnto}), il est possible d'annoter l'intégralité des catalogues. Comme cela apparaît dans les exemples \ref{fig:catzones}, les éléments utilisés diffèrent beaucoup en fonction de la page qui est segmentée. Les pages contenant des items en vente (\ref{fig:catp1}, \ref{fig:catp2}) sont majoritairement composées d'une \texttt{MainZone} contenant des \texttt{CustomZone:Entry} et \texttt{CustomZone:EntryEnd}. La première de ces deux pages est également la première page du catalogue, et elle contient donc également un \texttt{RunningTitleZone} contenant le titre courant, ainsi qu'un \texttt{GraphicZone} pour inclure un bandeau graphique. La segmentation de la page de titre (\ref{fig:cattitle}) diffère beaucoup des autres pages du catalogue. La page de titre contient beaucoup d'éléments graphiques; pour la distinguer des autres pages, elle est donc contenue dans un \texttt{TitlePageZone}. Elle peut également être complétée de signatures, ou de notes manuscrits; ici, une signature est contenue dans un \texttt{MarginTextZone}.
 
 \begin{sidewaysfigure}[p]
 	\begin{subfigure}{0.33\textwidth}
@@ -104,7 +104,7 @@ Segmenter un texte manuellement n'est pas difficile; la classification des zones
 	\label{fig:catzones}
 \end{sidewaysfigure}
 
-Si cette segmentation n'est pas réutilisée dans une fois que les fichiers \alto{} ont été convertis en \tei{}, cette étape est néamoins importante. D'abord, elle garantit que la recherche produite par \mssktb{} soit réutilisable par d'autres projets, puisque l'utilisation de \textit{SegmOnto} permet que la vérité de terrain produite soit réutilisable. Ensuite, le découpage des pages de catalogues en zones met également en avant une unité intellectuelle pour les catalogues: celle des items vendus. Mettre en avant l'item comme élément structurant marque un éloignement des catalogues papiers, où la page c'est la page qui joue un rôle d'importance. Au contraire, les catalogues encodés ne gardent pas mention des pages, mais prennent pour élément central les entrées individuelles.
+Si cette segmentation n'est pas réutilisée dans une fois que les fichiers \alto{} ont été convertis en \tei{}, cette étape est néanmoins importante. D'abord, elle garantit que les données produites par \mssktb{} soit réutilisable par d'autres projets, puisque l'utilisation de \textit{SegmOnto} facilite la diffusion de vérité de terrain. Ensuite, le découpage des pages de catalogues en zones met également en avant une unité intellectuelle pour les catalogues: celle des items vendus. Mettre en avant l'item comme élément structurant marque un éloignement des catalogues papiers, où c'est la page qui joue un rôle d'importance. Au contraire, les catalogues encodés ne gardent pas mention des pages, mais prennent pour élément central les entrées individuelles.
 
 
 \subsubsection{Description des entrées de catalogue: préparer l'édition \tei{}}
@@ -114,7 +114,7 @@ Si cette segmentation n'est pas réutilisée dans une fois que les fichiers \alt
 %	\item Au niveau  \enquote{textuel}: quels sont les séparateurs, c'est à dire les éléments dans le texte qui permettent de séparer les pages de catalogue en entrées et les entrées en sous-éléments) correspondant à la structure intellectuelle décrite ci-dessus.
 %\ end{itemize}
 
-Au niveau de l'entrée, les catalogues de vente présentent la même régularité: chaque item en vente est décrit de façon analogue à ce qui est visible en \ref{fig:catitem}. Après le numéro de l'item se trouve le nom de l'auteur.ice du manuscrit ainsi qu'une description succincte de cette personne. Il arrive que, à la place du nom de l'auteur soit utilisé une titre comme \enquote{Documents divers} ou la mention d'un évènement historique (\enquote{Révolution française}). Lorsque c'est avec le nom d'une personne que débute une entrée de catalogue, celui-ci est souvent composé d'un nom de famille complet ainsi que d'un prénom, abrégé ou non. Celui-ci est souvent entre parenthèses et aprestès le nom de famille. La description mentionne quelques faits biographiques. Dans la grande majorité des cas, ceux-ci se concentrent sur l'occupation de la personne, sa date de naissance et de décès; parfois, la façon dont une personne est morte peut également être décrite. Ensuite se trouve une description de l'item en vente lui-même (\enquote{L. a. s. au citoyen Victor Delaunay...}). Cette description, pour des raisons d'économie d'espace, s'appuie sur un vocabulaire et une structure très codifiée, avec de nombreuses abréviations. D'abord est indiqué le type de lettre (\enquote{L. a. s.}, pour \enquote{Lettre autographe signée}). Dans le cas d'une lettre est également indiqué le ou la destinataire ainsi que le lieu et la date où celle-ci a été écrite. Après cette description très succincte et normée se trouve parfois un paragraphe additionnel donnant des détails sur les lettres, comme c'est le cas dans cet exemple. C'est en général dans ce paragraphe qu'est indiqué le sujet du manuscrit, ainsi que, parfois, un extrait de celui-ci. Lorsqu'un manuscrit est vendu à prix fixe, alors ce prix est également indiqué à la fin de l'entrée.
+La régularité présente au niveau du catalogue complet se retrouve également au niveau des entrées:< chaque item en vente est décrit de façon analogue à ce qui est visible en \ref{fig:catitem}. Après le numéro de l'item se trouve le nom de l'auteur.ice du manuscrit ainsi qu'une description succincte de cette personne. Il arrive que, à la place du nom de l'auteur soit utilisé une titre comme \enquote{Documents divers} ou la mention d'un évènement historique (\enquote{Révolution française}). Lorsque c'est avec le nom d'une personne que débute une entrée de catalogue, celui-ci est souvent composé d'un nom de famille complet ainsi que d'un prénom, abrégé ou non. Celui-ci est souvent entre parenthèses et aprestès le nom de famille. La description mentionne quelques faits biographiques. Dans la grande majorité des cas, ceux-ci se concentrent sur l'occupation de la personne, sa date de naissance et de décès; parfois, la façon dont une personne est morte peut également être décrite. Ensuite se trouve une description de l'item en vente lui-même (\enquote{L. a. s. au citoyen Victor Delaunay...}). Cette description, pour des raisons d'économie d'espace, s'appuie sur un vocabulaire et une structure très codifiée, avec de nombreuses abréviations. D'abord est indiqué le type de lettre (\enquote{L. a. s.}, pour \enquote{Lettre autographe signée}). Dans le cas d'une lettre est également indiqué le ou la destinataire ainsi que le lieu et la date où celle-ci a été écrite. Après cette description très succincte et normée se trouve parfois un paragraphe additionnel donnant des détails sur les lettres, comme c'est le cas dans cet exemple. C'est en général dans ce paragraphe qu'est indiqué le sujet du manuscrit, ainsi que, parfois, un extrait de celui-ci. Lorsqu'un manuscrit est vendu à prix fixe, alors ce prix est également indiqué à la fin de l'entrée.
 
 \begin{figure}[h]
 	\centering
@@ -123,7 +123,7 @@ Au niveau de l'entrée, les catalogues de vente présentent la même régularit�
 	\label{fig:catitem}
 \end{figure}
 
-Il apparaît donc que les catalogues de vente de manuscrits ont toujours une structure très rigide, aussi bien au niveau de l'ensemble du catalogue, que de la page et même de l'entrée. Des sauts de ligne marquent la différence entre les entrées et, dans les catalogues de ventes d'Étienne Charavay, des sauts de ligne distinguent également les différentes parties d'une entrée. D'autres caractères typographiques permettent d'établir des séparations supplémentaires entre les différentes informations présentes. Par exemple, le prénom est distinct du nom de famille à l'aide de parenthèses; une virgule distingue la description de l'auteur.ice de son nom. Enfin, à l'exception du paragraphe contenant des détails additionnels et du prix, tous les catalogues contiennent les mêmes informations. Il est donc possible de définir un modèle abstrait qui soit à même de représenter tous les catalogues (\ref{fig:catmodel}). Ce modèle peut servir de base pour structurer les données extraites des catalogues afin qu'elles soient manipulables; cependant, il reste un long processus pour arriver à ces données structurées.
+Il apparaît donc que les catalogues de vente de manuscrits ont toujours une structure très rigide, aussi bien au niveau de l'ensemble du catalogue, que de la page et même de l'entrée. Des sauts de ligne marquent la différence entre les entrées et, dans les catalogues de ventes d'Étienne Charavay, des sauts de ligne distinguent également les différentes parties d'une entrée. D'autres caractères typographiques permettent d'établir des séparations supplémentaires entre les différentes informations présentes. Par exemple, le prénom est distinct du nom de famille à l'aide de parenthèses; une virgule distingue la description de l'auteur.ice de son nom. Enfin, à l'exception du paragraphe contenant des détails additionnels et du prix, tous les catalogues contiennent les mêmes informations. Il est donc possible de définir un modèle abstrait qui soit à même de représenter tous les catalogues (\ref{fig:catmodel}). Ce modèle peut servir de base pour structurer les données extraites des catalogues afin qu'elles soient manipulables.
 
 \begin{figure}[h]
 	\centering
@@ -136,21 +136,73 @@ Il apparaît donc que les catalogues de vente de manuscrits ont toujours une str
 		{Entrées de catalogues};
 		\node[base] (conclu) at (5,-2)
 		{Pages de fin};
-		\node[base] (tname) at (-7.5,-4)%
-		{Nom de l'auteur.ice};
-		\node[base] (ttrait) at (-2.5,-4)%
-		{Description de l'auteur.ice};
-		\node[base] (tdesc) at (2.5,-4)%
-		{Description du manuscrit};
-		\node[base] (tnote) at (7.5,-4)%
+		\node[base] (e1) at (-6.25,-4)%
+		{Entrée 1};
+		\node[base] (e2) at (-0,-4)%
+		{Entrée 2};
+		\node[base] (eN) at (6.25,-4)%
+		{Entrée $n$};
+		\node[base] (tname) at (-7.5,-6)%
+		{
+			Nom de l'auteur.ice
+		};
+		\node[expl] (exname) at (-7.5,-10)%
+		{
+			\begin{itemize}
+				\item Nom de famille (usuel et nom de famille noble)
+				\item Prénoms
+				\item Titre de noblesse
+			\end{itemize}
+		};
+		\node[base] (ttrait) at (-2.5,-6)%
+		{
+			Description de l'auteur.ice
+		};
+		\node[expl] (extrait) at (-2.5,-10)%
+		{
+			\begin{itemize}
+				\item Occupation
+				\item Date de naissance et de décès
+				\item Parents ou proches illustres
+			\end{itemize}
+		};
+		\node[base] (tdesc) at (2.5,-6)%
+		{
+			Description du manuscrit
+		};
+		\node[expl] (exdesc) at (2.5,-10)%
+		{
+			\begin{itemize}
+				\item Type de document
+				\item Dimensions
+				\item Format
+				\item Date
+				\item Destinataire
+			\end{itemize}
+		};
+		\node[base] (tnote) at (7.5,-6)%
 		{Détails additionnels};
+		\node[expl] (exnote) at (7.5,-10)%
+		{
+			\begin{itemize}
+				\item Sujet du manuscrit
+				\item Extrait du manuscrit
+			\end{itemize}
+		};
 		\draw[arrow] (cat) -- (intro);
 		\draw[arrow] (cat) -- (main);
 		\draw[arrow] (cat) -- (conclu);
-		\draw[arrow] (main) -- (tname);
-		\draw[arrow] (main) -- (ttrait);
-		\draw[arrow] (main) -- (tdesc);
-		\draw[arrow] (main) -- (tnote);
+		\draw[arrow] (main) -- (e1);
+		\draw[arrow] (main) -- (e2);
+		\draw[arrow] (main) -- (eN);
+		\draw[arrow] (e2) -- (tname);
+		\draw[arrow] (e2) -- (ttrait);
+		\draw[arrow] (e2) -- (tdesc);
+		\draw[arrow] (e2) -- (tnote);
+		\draw[arrow] (tname) -- (exname);
+		\draw[arrow] (ttrait) -- (extrait);
+		\draw[arrow] (tdesc) -- (exdesc);
+		\draw[arrow] (tnote) -- (exnote);
 	}
 	\caption{Modèle d'un catalogue de vente de manuscrits}
 	\label{fig:catmodel}
@@ -158,8 +210,126 @@ Il apparaît donc que les catalogues de vente de manuscrits ont toujours une str
 
 
 \section{L'encodage des manuscrits en \xmltei{}}
+\subsection{\textit{eXtensible Markup Language} et \textit{Text Encoding Initiative}: l'environnement technique pour encoder les catalogues}
+Les possibilités pour encoder des données textuelles de façon numérique sont nombreuses, tant en termes de formats techniques que de standards qui pourraient être suivis pour encoder des documents. Pour représenter la complexité du texte, la structure de données arborescente du \xml{} est aujourd'hui privilégiée. La structure arborescente du \xml{} est, de façon conventionnelle, considérée comme étant la meilleure manière de représenter un texte, qui serait lui-même composé en parties, chapitres, sections... Cette idée est notamment développée dans \textit{What is text, really?} (1990)\footcite{derose_what_1990}, article séminal sur la modélisation du texte sous forme d'arborescence co-écrit par Steven DeRose, l'un des concepteurs du \xml{} et se son ancêtre, le \texttt{SGML}. L'argumentaire développé par DeRose et al. porte sur l'idée que le discours sur le texte et ses représentations en dehors d'un environnement numérique sous-entendent déjà l'existence d'une structure arborescente pour le texte. Par exemple, un texte imprimé contient souvent une table des matières, organisée de façon hiérarchique; de la même manière, les manuels typographiques et autres chartes graphiques pour le texte définissent des règles de style qui s'appliquent à des ensembles, comme les blocs de citation, qui est un élément au sein d'une structure arborescente\footcite[p. 4]{derose_what_1990}. L'idée qu'un texte soit déjà une arborescence, en dehors de tout environnement technique, est bien sûr problématique et a été remise de nombreuses fois en question, comme nous le verrons. Cependant, elle est à la base d'une théorie centrale à la modélisation du texte: \gls{ohco}. Comme son nom l'indique, l'\gls{ohco} -- développée vers 1990 et défendue (entres autres) par DeRose, Durand, Mylonas et Renear -- revient à comprendre le texte comme une collection hiérarchisée d'unités linguistiques. Ces unités (page, partie, chapitre...) peuvent elles-mêmes en contenir d'autres. 
+
+Ce modèle du texte est particulièrement intéressant d'un point de vue computationnel, surtout à la date où il a été élaboré, et c'est pour ces raisons que le modèle continue d'influencer la modélisation du texte aujourd'hui. Le principal avantage de l'\gls{ohco}, c'est qu'il permet de modéliser la structure du texte de façon indépendante de son apparence formelle (à l'inverse d'un éditeur de type \textit{LibreOffice} ou \textit{Microsoft Word}, où c'est la forme qui détermine la structure de données). Séparer la structure de l'apparence permet de réellement penser la modélisation du texte, c'est-à-dire sa représentation sous la forme d'une structure abstraite d'éléments imbriqués; la modélisation peut donc mettre en avant les aspects scientifiques du texte selon un vocabulaire codifié\footnote{
+	Ce processus de modélisation, comme le remarquent Julia Flanders et Fotis Jannidis dans \textit{The shape of data in digital humanities}, n'est pas nécessairement dépendant d'une infrastructure informatique. L'édition critique, par exemple, est une forme de modélisation des textes et de la relation qu'ils entretiennent; elle s'appuie sur un système formel permettant de codifier l'information et de la représenter dans l'espace de façon synthétique\footcite[p. 3-4]{flanders_data_2019}.
+}. Cette structuration non-formelle du texte est également garante d'interopérabilité, puisqu'elle peut s'appuyer sur des formats ouverts, là où de nombreux logiciels de traitement de texte sont propriétaires. En modélisant directement le texte, il est également possible de l'enrichir grâce à de nombreux éléments méta-textuels -- comme des notes ou des éléments de bibliographie -- et de distinguer ceux-ci du corps du texte\footcite[p. 11-13]{derose_what_1990}. DeRose, Durand, Mylonas et Renear envisagent déjà qu'un encodage conforme avec les principes de l'\gls{ohco} permettrait le traitement automatisé des documents, puisque dans ces formats la structure de données est explicite (contrairement aux logiciels de traitement de texte à interface graphique)\footcite[p. 17-18]{derose_what_1990}. Il existe tout d'abord des systèmes de validations, pour garantir le respect d'un schéma \xml{} ou \texttt{SGML}; ensuite, ces documents encodés peuvent servir de bases de données d'où des informations peuvent être extraites et diffusées de façon automatique. Enfin, un document modélisé selon les principes de l'\gls{ohco} peut être transformé en de nombreux autres formats, y compris en une édition papier traditionnelle.
+
+Le \xml{} est un format qui permet d'implémenter techniquement les principes de l'\gls{ohco} afin d'encoder des données brutes et des documents textuels. En \xml{}, les différents \enquote{objets linguistiques} doivent être encodés dans des éléments, dont le début est marqué par une balise ouvrante et la fin par une balise fermante. Par exemple, le nom d'une personne peut être encodée dans une balise \texttt{name}: \mintinline{xml}|<name>Virginia Woolf</name>|. Cet élément peut être complété par informations supplémentaires, contenus dans des attributs situés au niveau de la balise ouvrante, comme ici un identifiant: \mintinline{xml}|<name id="vw">Virginia| \mintinline{xml}|Woolf</name>|. Un élément peut être contenu dans un autre, ou en contenir d'autres; cependant, deux éléments ne doivent pas se chevaucher; tous les éléments ouverts demandent à être fermés. Enfin, dans un document \xml{}, tous les objets linguistiques doivent être contenus à l'intérieur d'un élément, qui est dit l'élément racine.
+
+Cette structure définie par la spécification \xml{} ne précise pas les éléments qui sont autorisés; il est donc possible de réaliser un encodage sans s'aligner sur des standards. Cependant, pour permettre l'interopérabilité des documents et garantir des encodages plus qualitatifs, des standards se sont progressivement développés. Ceux-ci définissent un ensemble d'éléments qui peuvent être autorisés dans un document \xml{}, ainsi que la manière dont ces éléments peuvent être combinés pour former un document complet et valide. Ces standards sont souvent propres à des communautés scientifiques. Pour l'encodage du texte dans des projets de recherche, c'est la \texttt{Text Encoding Initiative} (\tei{}) qui domine. Ce projet, développé de façon communautaire par le \textit{TEI Consortium} depuis 1987 et à l'origine de Lou Burnard, vise à établir une sémantique commune pour le balisage de n'importe quel type de texte. La manière dont Burnard définit la \tei{} montre l'influence de l'\gls{ohco}: selon lui, le principe de ce standard est de modéliser le texte sous la forme d'un ensemble d'objets interconnectés à l'intérieur d'une structure qui soit représentative d'une lecture d'un texte\footcite[p. 108]{burnard_how_2019}. Le projet se dévelope comme une solution alternative à deux écoles de pensées qui dominaient le traitement computationnel du texte dans les années 1980. La première école considérait le texte comme un artefact physique (où c'est donc la structure formelle du document, y compris des pages, qui sont signifiantes). La deuxième développe une approche linguistique du texte: celui-ci est un phénomène du langage, fait de mots et de leur interrelation; dans ce cas, il n'importe pas de modéliser la structure globale d'un texte. L'approche de la \tei{} retient quelques aspects de ces deux approches et voit le texte comme une structure d'objets linguistiques et comme une instance d'un modèle\footcite[§3]{burnard_search_2021}. Le deuxième aspect est important pour comprendre la spécificité de la \tei{} par rapport à d'autres standards d'encodage: il existe une différence entre le texte et le modèle utilisé pour encodé celui-ci. Un modèle est une spécification propre à un projet, faite à partir de la \tei{}, qui serve à représenter un corpus précis de documents. 
+
+Pour structurer ces documents, la \tei{} définit un ensemble d'éléments, qui ont chacun une signification précise et auxquels un ensemble de contraintes peuvent être attachées: un élément ne peut être contenu que dans certains éléments, en contenir certains autres (ou aucun) et n'avoir que certains attributs. Les éléments sont définis avec une approche sémantique: une balise doit servir à expliciter la signification ou le rôle de l'objet linguistique qu'elle sert à encoder. Les éléments utilisés n'ont donc pas toujours d'équivalent formel qui serait identifiable dans un document physique. La définition de ces éléments est faite à partir de besoins de chercheurs, puisque les communautés d'utilisateur.ice.s sont libres de proposer la création de nouveaux éléments\footcite[p. 110]{burnard_how_2019}. Il s'ensuit que la \tei{} est particulièrement complexe et riche de possibilités pour une très grande variété de documents (manuscrits comme imprimés, éditions critiques, textes en vers ou en prose, pièces de théâtre ou encore transcription d'enregistrements sonores). En plus de l'encodage du texte, la \tei{} se distingue par l'importance qu'elle apporte aux métadonnées\footcite[p. 104]{burnard_how_2019}. Chaque document encodé contient un en-tête décrivant le document source ainsi que l'encodage numérique. Pour mettre l'avant sur le rôle de la \tei{} comme \enquote{machine à générer des modèles}\footnote{\textit{machine for generating schemas}, \cite[§ 30]{burnard_what_2019}.}, la \tei{} permet également de créer un \enquote{méta-document} \xml{} qui permette de définir des modèles de données: le \gls{odd}. Ce document peut être qualifié de \enquote{méta}, puisque non seulement il contient des métadonnées relatives, non pas à un document, mais à un modèle pouvant être utilisé sur plusieurs documents. Il contient donc une documentation définissant les choix d'encodage pour un modèle; de plus, il contient une spécification technique qui peut servir à valider des documents encodés en suivant ce schéma (un document \tei{} n'est valide que si il se conforme à une \gls{odd}, et cette vérification peut être faite automatiquement). Une \gls{odd} peut contenir des modèles très complexes, puisque la spécification \tei{}, son schéma et sa documentation, sont encodées sous la forme d'une seule \gls{odd}. La \tei{} permet donc un encodage scientifique des documents, mais aussi la définition d'un modèle de données sur-mesure qui puisse être utilisé pour une variété de documents; grâce à l'accent mis sur la documentation et les métadonnées, il est possible de décrire précisément les documents d'origines, mais aussi la manière dont ils ont été encodés et pourquoi ces choix d'encodage ont été faits. C'est donc grâce à ce standard que les documents sont encodés.
+
+% Ce format a l'avantage de pouvoir contenir de grandes quantités de textes, comme des paragraphes de façon structurée; contrairement à un tableur, cette structure ne doit pas nécessairement être répétitive. Cela veut dire que la structure peut différer d'un endroit à l'autre d'un document \xml{}; par exemple, deux items de catalogues peuvent, en théorie, être encodés de deux manières différentes dans un même document.
+
 \subsection{Encoder les catalogues en \tei{}}
-Ici est présentée la représentation \xmltei{} des catalogues de vente.
+Le schéma conçu pour encoder les catalogues du projet \mssktb{} ressemble, dans les grandes lignes, au du modèle présenté en \ref{fig:catmodel}. Cependant, parce que le projet se concentre sur les manuscrits vendus dans les catalogues, une sélection a été fait dans l'édition pour se concentrer sur les items en vente. L'édition, présentée ci-dessous, a pour élément racine une balise \texttt{tei:TEI} (comme tous les documents suivant les principes de la \textit{Text Encoding Initiative}). Cet élément présente un identifiant \texttt{@xml:id} qui permet d'identifier le catalogue précisément. Cet identifiant est composé de \enquote{CAT\_} suivi d'une séries de chiffres, puisque les catalogues sont numérotés en quotation continue.
+
+\subsubsection{Le \texttt{tei:teiHeader}}
+Comme toute édition \tei{}, le schéma défini pour encoder les catalogues commence par un long \texttt{tei:teiHeader} contenant des métadonnées descriptives. Il est lui-même composé de plusieurs sous-éléments. 
+
+Le premier est le \texttt{tei:fileDesc}, qui contient des informations portant sur l'édition numérique et sa source, le catalogue papier. Il contient notamment le titre du document (dans un \texttt{tei:titleStmt}) et des informations sur la publication du document électronique, comme la licence sous laquelle il est distribué (dans un \texttt{tei;publicationStmt}). Toujours dans le \texttt{tei:fileDesc} se trouve un \texttt{tei:sourceDesc} qui sert à décrire les catalogues papiers (\ref{code:sourcedesc}). La description faite de ceux-ci est à plusieurs niveaux. D'abord est construite une notice bibliographique complète du catalogue, dans un \texttt{tei:bibl}. Cependant, ce n'est pas n'importe quel exemplaire de ces catalogues qui est encodé, mais un exemplaire précis. Celui-ci porte de nombreuses inscriptions manuscrites , puisque le commissaire priseur inscrit le prix des différents manuscrits vendus et leur acheteur.euse en face de l'item correspondant. En reprenant la typologie développée par l'ontologie de bibliothéconomie \gls{frbr}, les catalogues sont donc encodés comme manifestation plutôt que comme items\footcite[p. 28]{rondeau_du_noyer_encoder_2019}. Pour identifier spécifiquement l'exemplaire du catalogue encodé, la notice bibliographique est complétée d'un \texttt{tei:listWit} contenant un \texttt{tei:witness}, éléments généralement utilisés pour décrire les témoins d'une édition critique. Dans le \texttt{tei:witness}, le catalogue est décrit dans un \texttt{tei:msDesc}; celui-ci sert généralement à décrire les manuscrits, mais est ici utilisé puisque le document encodé est un unicum. Mais les catalogues de vente aux enchères sont publiés pour et existent en vertu de cette vente. Dans ce cas, le \texttt{tei:sourceDesc} est complété d'un \texttt{tei:listEvent} contenant un \texttt{tei:event} pour encoder des informations sur la vente. Celle-ci est notamment décrite avec sa date et son adresse ainsi que le nom des commissaires priseurs.
+	
+\begin{listing}[h]
+	\begin{minted}{xml}
+<sourceDesc>
+	<bibl>
+		<!-- description bibliographique du catalogue -->
+	</bibl>
+	<listEvent>
+		<event>
+			<!-- description de la vente -->
+		</event>
+	</listEvent>
+	<listWit>
+		<witness>
+			<msDesc>
+				<!-- description de l'exemplaire encodé -->
+			</msDesc>
+		</witness>
+	</listWit>
+</sourceDesc>
+	\end{minted}
+	\caption{Modèle de \texttt{tei:sourceDesc}}
+	\label{code:sourcedesc}
+\end{listing}
+	
+L'élément utilisé après le \texttt{tei:fileDesc} est un \texttt{tei:profileDesc}. Il sert uniquement à indiquer la langue dans laquelle le catalogue est encodé de façon normalisée, comme le montre l'exemple ci-dessous (\ref{code:profiledesc}).
+
+\begin{listing}[h]
+	\begin{minted}{xml}
+<profileDesc>
+	<langUsage>
+		<language ident="fr"/>
+	</langUsage>
+</profileDesc>
+	\end{minted}
+	\caption{Usage du \texttt{tei:profileDesc}}
+	\label{code:profiledesc}
+\end{listing}
+
+Le dernier élément présent dans le \texttt{tei:teiHeader} est l'\texttt{tei:encodingDesc}\ref{code:encodingdesc}, qui permet de définir les normes suivies pour l'encodage d'un catalogue, et la manière dont un document a été encodé. Le premier élément contenu dans le \texttt{tei:encodingDesc} est un \texttt{tei:samplingDesc}. Celui-ci indique que l'intégralité du document n'a pas été encodée, mais seulement la liste des manuscrits en vente. Suit le \texttt{tei:appInfo}, qui permet d'indiquer les applications utilisées pour produire le présent encodage. Au cours du projet, trois applications (\textit{Transkribus, eScriptorium} et \textit{GROBID-Dictionnaries}) ont été utilisées; deux \texttt{tei:application} sont donc utilisés, l'un pour indiquer l'utilisation de \textit{GROBID-Dictionnaries} et l'autre pour mentionner la plateforme de transcription utilisée (\textit{Transkribus} ou \textit{eScriptorium}). C'est encore dans le \texttt{tei:encodingDesc} que sont définis les termes spécifiques au projet qui sont utilisés dans les catalogues et qui pourraient ne pas être compris. Les termes sont classifés en \texttt{tei:taxonomy} (avec une taxonomie par sujet, contenues dans un \texttt{tei:classDecl}). Chaque terme à définir est conteny dans un \texttt{tei:category}. Un attribut \texttt{@xml:id} pointe vers le terme à définir; la définition se trouve dans un élément \texttt{tei:catDesc} qui est incluse dans l'élément précédent.
+
+\begin{listing}[h]
+	\begin{minted}{xml}
+<encodingDesc>
+	<samplingDesc>
+		<!-- description des pages de catalogues conservées -->
+	</samplingDesc>
+	<appInfo>
+		<!-- applications utilisées pour la production du document -->
+	</appInfo>
+	<classDecl>
+		<taxonomy xml:id="identifiant de la taxonomie">
+			<category xml:id="terme à définir">
+				<catDesc>
+					<!-- définition du terme -->
+				</catDesc>
+			</category>
+		</taxonomy>
+	</classDecl>
+</encodingDesc>
+	\end{minted}
+	\caption{Usage du \texttt{tei:encodingDesc}}
+	\label{code:encodingdesc}
+\end{listing}
+
+Ainsi, le \texttt{tei:teiHeader} contient des données permettant de décrire le document original d'une façon bibliographique ainsi que d'identifier un exemplaire précis utilisé pour l'encodage. Est également décrite l'édition numérique; le vocabulaire spécifique qui y est utilisé ainsi que les outils techniques utilisés pour la produire sont indiqués. Ce \texttt{tei:teiHeader} remplace la page de titre qui est présente dans les catalogues papier, puisque toutes les informations présentes sur cette page se retrouvent dans l'en-tête du document numérique.
+
+\subsubsection{Encoder le corps des catalogues dans le \texttt{tei:text}}
+En comparaison avec l'en-tête, le corps est catalogues est relativement simple et suit de très prêt le modèle abstrait présenté en \ref{fig:catmodel}. Le \texttt{tei:text} sert à accueillir l'intégralité d'un document encodé; il peut contenir un \texttt{tei:front} (pour l'avant-propos, la préface ou tout autre élément ne faisant pas directement partie du document), un \texttt{tei:body} qui contient le corps du document et un \texttt{tei:back} qui contient tout ce qui vient après le corps. Dans le projet \mssktb{}, seules les entrées des documents sont encodées; l'élément \texttt{tei:body} est le seul utilisé. Dans les catalogues imprimés, les items en vente se succèdent sans autre forme de hiérarchie. L'ensemble des documents est donc contenue dans un \texttt{tei:list}\ref{code:body}.
+
+\begin{listing}[h]
+	\begin{minted}{xml}
+<text>
+	<body>
+		<list>
+			<item>
+				<!-- première entrée de catalogue -->
+			</item>
+			<item>
+				<!-- deuxième entrée -->
+			</item>
+			<!-- ... -->
+		</list>
+	</body>
+</text>
+	\end{minted}
+	\caption{Modèle du \texttt{tei:text}}
+	\label{code:body}
+\end{listing}
+
+Chaque item en vente a la même structure\ref{code:teiitem}. Il est contenu dans un élément \texttt{tei:item}. Celui-ci a deux attributs obligatoires: \texttt{@n} qui contient le numéro de l'entrée dans le catalogue ainsi qu'un indentifiant unique \texttt{@xml:id} pour cet item. L'identifiant est composé de l'\texttt{@xml:id} du catalogue suivi de \texttt{e\_} (pour \enquote{entry}) et du numéro de l'entrée. Le \texttt{tei:item} contient ensuite un \texttt{tei:num} qui là encore indique le numéro de l'entrée de catalogue. Ensuite, un \texttt{tei:name} est utilisé pour définir indiqué le nom indiqué dans un catalogue. Celui-ci est souvent celui de l'auteur.ice du document en vente, mais ce n'est pas toujours le cas. C'est pourquoi un attribut \texttt{@type} est utilisé, qui peut prendre pour valeurs \enquote{author} ou \enquote{other}, afin de caractériser le texte contenu par l'élément. Ensuite, un \texttt{tei:trait} est utilisé pour contenir la description de l'auteur.ice du document. Lorsque cet élément optionnel est utilisé, le texte est contenu dans un paragraphe \texttt{tei:p}. La description de la pièce en vente est contenue dans un \texttt{tei:desc}. Le texte de celle-ci est le même que celui des catalogues, mais il est enrichi au cours de la chaîne de traitement d'éléments qui permettent de cibler les différentes informations présentes et de les normaliser. Un \texttt{tei:date} sert notamment à indiquer la date; deux \texttt{tei:measure} sont utilisés, le premier pour indiqué la longueur du document (en pages, le plus souvent) et le second pour indiquer son format (\textit{in-octo, in-quatro}...). Si un item a un prix, un élément \texttt{tei:measure} est utilisé pour le contenir. La monnaie dans laquelle il est vendu est indiquée dans un attribut \texttt{@unit}. La description de l'élément est enfin complétée de deux éléments additionnels: un \texttt{tei:note} contenant les notes supplémentaires sur l'item et un \texttt{tei:add} qui n'est utilisé que pour les ventes aux enchères. Ce dernier permet d'indiquer le prix auquel un manuscrit a été vendu lors d'une vente aux enchères, information qui n'est pas présente dans l'imprimé mais souvent rajoutée à la main par le commissaire priseur.
+
+\begin{listing}[h]
+	\inputminted{xml}{code/tei_item.xml}
+	\caption{Exemple d'entrée de catalogue encodée dans un \texttt{tei:item}}
+	\label{code:teiitem}
+\end{listing}
+
 
 \subsection{L'encodage en \tei{}: un processus sélectif qui réduit les significations du texte}
 Après une étape d'\gls{océrisation} via \escr{}, le texte extrait des PDF peut être exporté soit en texte brut, soit en \xml{} \texttt{Page} ou \alto{}. Ces formats s'attachent à garder une relation entre le \xml{} et le document numérisé (les zones de texte sont indiquées, chaque ligne est dans une balise...). Cependant, l'unité intellectuelle centrale à la suite du projet, ce n'est pas la page numérisée, mais l'entrée de catalogue. Un format plus complexe que le \xml{} d'\escr{} est donc nécessaire. Assez logiquement, la suite du projet s'appuie sur une traduction des catalogues en \tei{}. On s'intéresse autant à la structure des documents \xml{} (quelles balises sont utilisées...) qu'à l'intérêt scientifique d'une édition numérique (balisage sémantique, possibilité de normaliser les informations grâce à des attributs).
