@@ -119,13 +119,55 @@ Scores obtenus par Aicha Soudani et al. pour le liage d'entités nommées pour d
 
 La méthode utilisée dans cet article est la suivante: les auteur.ice.s s'appuient fortement sur l'apprentissage machine, en identifiant d'abord des entités dans le texte à l'aide de \texttt{SEM} avant de lier les entités à différentes bases de connaissance en utilisant \texttt{REDEN}.
 
+\chapter{Graphiques et statistiques sur les catalogues}
+Ce chapitre contient différentes statistiques sur les catalogues de ventes et les manuscrits qui y sont mis en vente. Certaines de ces statistiques, et les visualisations qui y sont liées, ont originellement été produites pour le site Web de \ktb{}. Tous les prix sont exprimés en francs constants 1900. Ces graphiques ont été produits avec la librairie \texttt{plotly} de \py{}; le code source des graphiques est visible sur \href{https://github.com/katabase/visualisations}{GitHub}
 
-\chapter{Graphiques}
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{annexes/fig_wikidata_instances.png}
-	\caption \\Occurrences des différentes catégories auxquelles appartiennent les entités \wkd{} liées avec les entrées de catalogues
-	\label{appendix:wikidata_instances}
+\begin{figure}[p]
+	\includegraphics[width=\textwidth]{annexes/fig_count_itm.png}
+	\caption{Nombre d'items à prix fixes et aux enchères mis en vente par an (en francs constants 1900)}
+	\label{appendix:countitm}
+\end{figure}
+
+\begin{figure}[p]
+	\includegraphics[width=\textwidth]{annexes/fig_total_cat.png}
+	\caption{Somme du prix de tous les manuscrits vendus à prix fixes par an (en francs constants 1900)}
+	\label{appendix:totalcat}
+\end{figure}
+
+\begin{figure}[p]
+	\includegraphics[width=\textwidth]{annexes/fig_avg_cat.png}
+	\caption{Prix moyen de l'ensemble des items d'un catalogue par an (en francs constants 1900)}
+	\label{appendix:avgcat}
+\end{figure}
+
+\begin{figure}[p]
+	\includegraphics[width=\textwidth]{annexes/fig_med_cat.png}
+	\caption{Prix médian de l'ensemble des items d'un catalogue, par an (en francs constants 1900)}
+	\label{appendix:medcat}
+\end{figure}
+
+\begin{figure}[p]
+	\includegraphics[width=\textwidth]{annexes/fig_avg_itm.png}
+	\caption{Prix moyen d'une entrée de catalogue par an (en francs constants 1900)}
+	\label{appendix:avgitm}
+\end{figure}
+
+\begin{figure}[p]
+	\includegraphics[width=\textwidth]{annexes/fig_med_itm.png}
+	\caption{Prix médian d'un item par an (en francs constants 1900)}
+	\label{appendix:meditm}
+\end{figure}
+
+\begin{figure}[p]
+	\includegraphics[width=\textwidth]{annexes/fig_quart_itm.png}
+	\caption{Prix médian d'un item, en tranches de cinq ans (en francs constants 1900)}
+	\label{appendix:quartitm}
+\end{figure}
+
+\begin{figure}[p]
+	\includegraphics[width=\textwidth]{annexes/fig_term_itm.png}
+	\caption{Évolution des différents termes utilisés pour décrire les manuscrits par an}
+	\label{appendix:termitm}
 \end{figure}
 
 \begin{figure}
@@ -135,7 +177,16 @@ La méthode utilisée dans cet article est la suivante: les auteur.ice.s s'appui
 	\label{appendix:tnametypes}
 \end{figure}
 
-\chapter{Code source et données encodées}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{annexes/fig_wikidata_instances.png}
+	\caption{Différentes catégories auxquelles appartiennent les entités \wkd{} extraites}
+	\label{appendix:wikidata_instances}
+\end{figure}
+
+\chapter{Code source et données brutes}
+Ce chapitre contient des données brutes et des extraits de code source qui sont discutés dans le corps de ce mémoire. Se trouvent notamment des tables de conversion utilisées, ainsi que des exemples de réponses d'\api{} ainsi que des scripts \py{} et des données produites grâce à ceux-ci.
+
 \begin{listing}[p]
 	\begin{minted}{python}
 functions = {
