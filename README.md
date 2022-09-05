@@ -54,4 +54,5 @@ langage, détection de motifs, Web sémantique, *Linked Open Data*, API, FAIR, R
         author = {Kervegan, Hector, Paul},
         urldate = {2022-09-02},
         date = {2022}
+}
 ```
