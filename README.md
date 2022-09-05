@@ -13,12 +13,15 @@ textuel semi-structuré: le cas des catalogues de vente de manuscrits*. Il a ét
 Le présent mémoire présente certains aspects d'une chaîne de traitement consacrée à un 
 corpus de catalogues de vente de manuscrits datant du XIXe siècle au début du XXe siècle. 
 Ces catalogues forment un corpus de données semi-structurées, puisqu'ils sont organisés 
-sous la forme d'une liste d'items de manuscrits qui sont toujours décrits de façon semblable.
+sous la forme d'une liste de manuscrits qui sont toujours décrits de façon semblable.
 Grâce à cette nature semi-structurée des documents, il est possible de développer une 
 chaîne de traitement entièrement basée sur la détection de motifs, c'est-à-dire sur 
-l'identification d'éléments récurrents d'une entrée à l'autre. Le fil conducteur de ce 
+l'identification d'éléments récurrents d'une entrée à l'autre. 
+
+Le fil conducteur de ce 
 mémoire est donc une analyse de la manière dont la nature semi-structurée du corpus peut 
 être mobilisée pour analyser, manipuler et diffuser des données textuelles. 
+
 Le présent texte s'intéresse notamment à la manière dont les documents sont encodés et 
 aux aspects des catalogues imprimés qui sont sélectionnés pour produire un encodage 
 manipulable automatiquement. Ensuite, ce mémoire présente une chaîne de traitement pour 
