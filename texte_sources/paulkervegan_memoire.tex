@@ -399,6 +399,10 @@ first={\textit{One ordered collection of objects} (\enquote{Une collection ordon
 	plural={tables de conversion},
 	description={Une table de conversion est, tout simplement, un dictionnaire qui contient en clés un certain nombre d'informations telles qu'elles figurent dans le texte et, en valeurs, une version normalisée de cette information. Cela permet de détectier des motifs à extraire autant de normaliser les informations.}
 }
+\newglossaryentry{tei}{
+	name={TEI},
+	description={La \texttt{TEI} (acronyme de \textit{Text Encoding Initiative}, \enquote{Initiative pour l'encodage du texte}), est un projet universitaire visant à standardiser l'encodage du texte. La \texttt{TEI} définit un ensemble d'éléments avec une sémantique précise qui définissent différentes parties d'un texte: paragraphes, notes de bas de pages... La \texttt{TEI} se caractérise par une approche philologique du texte qui permet d'encoder des documents très différents: il est par exemple possible de constituer des éditions critiques ou d'encoder des manuscrits.}
+}
 \newglossaryentry{uri}{
 	type=\acronymtype,
 	name={URI},
@@ -421,6 +425,10 @@ first={\textit{One ordered collection of objects} (\enquote{Une collection ordon
 	name={URL},
 	description={Une URL (\textit{Uniform Resource Locator}) est un identifiant unique sous la forme d'une chaîne de caractères pointant vers une ressource sur le Web. De la même manière qu'une cote de bibliothèque pointe vers un livre précis, un URL pointe vers une page ou une donnée sur le Web. L'URL permet d'agir sur une ressource (en envoyant des données...) et peut être associée à des données ainsi qu'à des reésentations (une page Web, par exemple).}
 }
+\newglossaryentry{xml}{
+	name={XML},
+	description={Le \texttt{XML} (acronyme d'\textit{eXtensible Markup Language}, ou \enquote{Langage de balisage extensible}) est un métalangage de balisage informatique. Il définit une syntaxe simple pour encoder des données textuelles à l'intérieur d'éléments. Ces éléments contiennent du texte entre une balise ouvrante (par exemple: \texttt{<note>}) et une balise fermante (\texttt{</note>}). On parle de métalangage car le \texttt{XML} définit une syntaxe pour l'encodage, mais pas un vocabulaire: différents standards existent qui définissent un ensemble de balises \texttt{XML}, comme la \texttt{TEI}.}
+}
 \newglossaryentry{w3c}{
 	type=\acronymtype,
 	name={\textit{World Wide Web Consortium}},
@@ -441,11 +449,14 @@ first={\textit{One ordered collection of objects} (\enquote{Une collection ordon
 	}
 }
 \newcommand{\widepage}{\newgeometry{left=1cm,right=1cm}}  % smaller margins for big graphs; use \restoregeometry after !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+\makeatletter
 \newcommand{\scl}[1]{%
+	% normalisation des siècles en écriture romaine
 	% #1 : le siècle en chiffres romains
 	#1%
 	\ifthenelse{\equal{#1}{I}}{\up{er}}{\up{ème}}%
-	~s.%
+	~s%
+	\@ifnextchar.{}{.\@ifnextchar,{}{ }}
 }
 
 % commandes perso: abréviations
@@ -464,7 +475,7 @@ first={\textit{One ordered collection of objects} (\enquote{Une collection ordon
 \newcommand{\rgxpl}{\glspl{expression régulière}}
 \newcommand{\rdf}{\texttt{RDF}}
 \newcommand{\sparql}{\texttt{\gls{SPARQL}}}
-\newcommand{\tei}{\texttt{TEI}}
+\newcommand{\tei}{\texttt{\gls{tei}}}
 \newcommand{\tsv}{\texttt{TSV}}
 
 \newcommand{\titem}{\texttt{tei:item}}
@@ -477,7 +488,7 @@ first={\textit{One ordered collection of objects} (\enquote{Une collection ordon
 \newcommand{\tmeasure}{\texttt{tei:measure}}
 \newcommand{\tnote}{\texttt{tei:note}}
 
-\newcommand{\xml}{\texttt{XML}}
+\newcommand{\xml}{\texttt{\gls{xml}}}
 \newcommand{\xmltei}{\texttt{XML-TEI}}
 \newcommand{\xsl}{\texttt{XSL}}
 \newcommand{\wkd}{\textit{Wikidata}}
@@ -500,9 +511,18 @@ first={\textit{One ordered collection of objects} (\enquote{Une collection ordon
 			
 			\rule{2cm}{0.02cm}
 			
+			\bigskip
+			
 			\begin{Large}
 				\textbf{Paul, Hector Kervegan}
 			\end{Large}
+		
+			\bigskip
+		
+			\begin{normalsize} 
+				\textit{licencié ès histoire de l'art}\\
+				\textit{diplômé de master en histoire de l'art et humanités numériques}
+			\end{normalsize}
 			
 			\vfill
 			
