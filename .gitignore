@@ -1,5 +1,9 @@
 _minted-paulkervegan_memoire
 env_memoire/*
+__pycharm__/*
+**/__pycharm__/*
+.idea/*
+**/.idea/*
 
 ## aux files
 *.acn
