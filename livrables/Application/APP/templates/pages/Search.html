@@ -1,0 +1,194 @@
+{% extends "layout.html" %}
+{% block title %} Search {% endblock %}
+{% block corps %}
+<div class="container">
+   <!-- This part is about the display of results. -->
+   {% if results %}
+   <!-- If there are results, a smaller search form is displayed. -->
+   <form action="{{ url_for('search') }}" class="form-inline right">
+      <div class="row">
+         <div class="col">
+            <input type="text" name="author" class="form-control" placeholder="Sévigné" required
+               aria-describedby="HelpAuthor1">
+            <small id="HelpAuthor1" class="form-text text-muted">Required field.</small>
+         </div>
+         <div class="col">
+            <input type="text" name="date" class="form-control" placeholder="1660-1680"
+               aria-describedby="HelpDate1">
+            <small id="Helpdate1" class="form-text text-muted">Optional field (YYYY-YYYY).</small>
+         </div>
+         <div class="col">
+            <button type="submit" class="btn btn-outline-danger">Search</button>
+         </div>
+      </div>
+   </form>
+   <br/>
+   <br/>
+   <!-- Let's display the results of the search ! -->
+   <div class="container">
+      <!-- If there is no result... -->
+      {% if results.result == 0 %}
+      <h1>No result</h1>
+      <p class="lead">Sorry, no matching results were found for "{{ author }}".</p>
+      <p>Do not hesitate to try again with an other search !</p>
+      <!-- If there are results -->
+      {% elif results.result > 0 %}
+      <!-- First, display a title -->
+      {% if author and date %}
+      <h2>Results for "{{ author }}, {{ date }}"</h2>
+      {% elif author %}
+      <h2>Results for "{{ author }}"</h2>
+      {% endif %}
+      <!-- Display the number of matching entries and reconciliated entries-->
+      <p class="lead">
+         {{ results.result }} entries match your search and
+         {% if results.groups|length == 0 %}
+         there is no manuscript sold multiple times.
+      </p>
+      {% elif results.groups|length == 1 %}
+      1 manuscript is sold multiple times.</p>
+      {% else %}
+      {{ results.groups|length }} manuscripts are sold multiple times.</p>
+      {% endif %}
+      <!-- Display, with nav, the two categories of results-->
+      <ul class="nav nav-pills nav-fill" id="pills-tab" role="tablist">
+         <li class="nav-item" role="presentation">
+            <a class="nav-link act" id="pills-sell-tab" data-toggle="pill" href="#pills-sell"
+               role="tab" aria-controls="pills-sell" aria-selected="true">
+               View by sale
+            </a>
+         </li>
+         <li class="nav-item" role="presentation">
+            <a class="nav-link" id="pills-manuscript-tab" data-toggle="pill" href="#pills-manuscript"
+               role="tab" aria-controls="pills-manuscript" aria-selected="false">
+               View by manuscript
+            </a>
+         </li>
+      </ul>
+      <div class="tab-content container" id="pills-tabContent">
+         <div class="tab-pane fade show active" id="pills-sell" role="tabpanel" aria-labelledby="nav-sell-tab">
+            <!--This part displays the results sale by sale -->
+            <div class="results">
+               <p>Click on an author's name to see the entry in its context.</p>
+               <!-- First, entries are grouped by sale, each sale corresponds to a catalogue (we use its id. ) -->
+               {% for cat_id, entries in results.filtered_data.values()|groupby('cat_id')|sort(attribute="1.0.metadata.norm_date") %}
+
+               <div>
+                  <!-- loop.index is used to automatically increment elements of a list. -->
+                  <b>{{ loop.index }}.
+                  {{ entries[0].metadata.title }},
+                  {% if entries[0].metadata.num %}
+                     n° {{ entries[0].metadata.num }}
+                  {% endif %}
+                  {% if entries[0].metadata.editor %}
+                     - {{ entries[0].metadata.editor }},
+                  {% endif %}
+                  {% if entries[0].metadata.date %}
+                     {{ entries[0].metadata.date }}.
+                  {% endif %}
+                  </b>
+                  <!-- Then, each desc is grouped by its entry. Doing so, if there are multiple descs,
+                     we display all descs of a same entry together. -->
+                  <div class="container">
+                     {% for entry_id, descs in entries|groupby('cat_entry') %}
+                     <p>
+                        {% if descs[0].text.trait %}
+                        <b>
+                        <a href="{{ url_for('view', cat_id=cat_id) }}#{{ entry_id }}">
+                           <i class="fas fa-arrow-circle-right"></i>
+                        {{ descs[0].text.author }}</a></b>, {{ descs[0].text.trait }}
+                        {% elif descs[0].text.author %}
+                        <b>
+                        <a href="{{ url_for('view', cat_id=cat_id) }}#{{ entry_id }}">
+                           <i class="fas fa-arrow-circle-right"></i>
+                        {{ descs[0].text.author }}</a></b>
+                        {% else %}
+                        <b>
+                        <a href="{{ url_for('view', cat_id=cat_id) }}#{{ entry_id }}">
+                           <i class="fas fa-arrow-circle-right"></i>
+                        {{ author }}</a></b>
+                        {% endif %}
+                     </p>
+                     {% for desc in descs %}
+                     <p>{{ desc.desc }}</p>
+                     {% endfor %}
+                     <p class="font-italic">{{ descs[0].text.note }}</p>
+                     <p class="text-right">{{ descs[0].text.price }}</p>
+                     {% endfor %}
+                     <hr/>
+                  </div>
+               </div>
+               {% endfor %}
+            </div>
+         </div>
+         <div class="tab-pane fade results" id="pills-manuscript" role="tabpanel" aria-labelledby="nav-manuscript-tab">
+            <!--This part displays the results manuscript by manuscript -->
+            {% for entries in results.filtered_data.values() %}
+            <p>
+               <b>{{ loop.index }}.</b>
+               {% if entries.text.trait %}
+               <b>{{ entries.text.author }}</b>, {{ entries.text.trait }}
+               {% else %}
+               <b>{{ entries.text.author }}</b>
+               {% endif %}
+            </p>
+            <p>
+               {{ entries.desc }}
+            </p>
+            <ul>
+               {# To do : change data structure in JSON #}
+               {% if entries.desc_id in results.recon_desc  %}
+               {% for groups in results.groups %}
+               {% if entries.desc_id in groups[0] %}
+               {% for group in groups[1:] %}
+               <p>
+               {% for key, value in group.items() %}
+                  <i class="fas fa-arrow-circle-right"></i> Sell date :
+                  <a href="{{ url_for('view', cat_id=value.cat_id) }}#{{ value.cat_entry }}" target="_blank">{{ value.sell_date }}</a>
+                  - price : {{ entries.text.price }} - {{ entries.number_of_pages }} page(s).
+               {% endfor %}
+               </p>
+               {% endfor %}
+               {% endif %}
+               {% endfor %}
+               {% else %}
+               <p>
+                 <i class="fas fa-arrow-circle-right"></i> Sell date :
+                  <a href="{{ url_for('view', cat_id=entries.cat_id) }}#{{ entries.cat_entry }}" target="_blank">{{ entries.sell_date }}</a>
+                  - price : {{ entries.text.price }} - {{ entries.number_of_pages }} page(s).
+               </p>
+               {% endif %}
+            </ul>
+            <hr/>
+            {% endfor %}
+         </div>
+      </div>
+      {% endif %}
+   </div>
+   {% else %}
+   <!-- This part is displayed first, before the search (and the results). -->
+   <h1>Search</h1>
+   <p class="lead">On this page, you can search a specific author in all the catalogues.
+      You can try a more precise search by specifying the date.
+   </p>
+   <br/>
+   <br/>
+   <form action="{{ url_for('search') }}">
+      <div class="row">
+         <div class="col">
+            <input type="text" name="author" class="form-control" placeholder="Sévigné" required
+               aria-describedby="HelpAuthor">
+            <small id="HelpAuthor" class="form-text text-muted">This first field is required.</small>
+         </div>
+         <div class="col">
+            <input type="text" name="date" class="form-control" placeholder="1660-1680"
+               aria-describedby="HelpDate">
+            <small id="Helpdate" class="form-text text-muted">This second field is optional.
+            Please use this format YYYY-YYYY for your search.</small>
+         </div>
+         <button type="submit" class="btn btn-outline-danger btn-lg btn-block">Search</button>
+      </div>
+   </form>
+   {% endif %}
+</div>
+{% endblock %}

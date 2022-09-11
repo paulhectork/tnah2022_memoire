@@ -1,0 +1,12 @@
+.DS_Store
+.idea
+
+__pycache__
+
+save.xml
+test_api/*xml
+
+# Virtual env
+my_env
+env_app/*
+env_test/*

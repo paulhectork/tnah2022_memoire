@@ -1,0 +1,337 @@
+{% extends "layout.html" %}
+{% block title %} View {{ metadata.title }} {% endblock %}
+{% block corps %}
+
+<div class="container">
+    <div class="text-center">
+
+        <h2>
+            {{ metadata.main_title }}
+        </h2>
+
+        <h3>
+            {% if metadata.num %}
+                {{ metadata.title}}, n° {{ metadata.num }}
+            {% else %}
+                {{ metadata.title}}
+            {% endif %}
+        </h3>
+
+        <p class="lead">
+    {% if metadata.publisher %}
+
+        {% if metadata.pubPlace and metadata.date %}
+
+            Published by {{ metadata.publisher }} in {{ metadata.pubPlace }} on/in {{ metadata.date }}.
+
+        {% elif metadata.pubPlace %}
+
+            Published by {{ metadata.publisher }} in {{ metadata.pubPlace }}.
+
+        {% elif metadata.date %}
+
+            Published by {{ metadata.publisher }} on/in {{ metadata.date }}.
+
+        {% else %}
+
+            Published by {{ metadata.publisher }}.
+
+        {% endif %}
+
+    {% endif %}
+        </p>
+        <div id="auction">
+            <p>
+            {% if metadata.auction_date and metadata.auction_place %}
+
+            The auction took place on {{ metadata.auction_date }}, in {{ metadata.auction_place }}
+
+            {% elif metadata.auction_date %}
+
+            The auction took place on {{ metadata.auction_date }}
+
+            {% elif metadata.auction_place %}
+
+            The auction took place in {{ metadata.auction_place }}
+            <br/>
+            {% endif %}
+
+                {% if metadata.auctioneer|length > 1 %}
+
+                    The auctioneers were
+                    {% for auctioneer in metadata.auctioneer[:-1] %}
+                        {{ auctioneer }} and
+                    {% endfor %}
+                    {% for auctioneer in metadata.auctioneer[-1:] %}
+                        {{ auctioneer }}.
+                    {% endfor %}
+
+                {% elif metadata.auctioneer|length == 1 %}
+
+                    The auctioneer was {{ metadata.auctioneer[0] }}.
+
+                {% endif %}
+
+                {% if metadata.expert|length > 1 %}
+
+                    The expert were
+                    {% for expert in metadata.expert[:-1] %}
+                        {{ expert }} and
+                    {% endfor %}
+                    {% for expert in metadata.expert[-1:] %}
+                        {{ expert }}.
+                    {% endfor %}
+
+                {% elif metadata.expert|length == 1 %}
+
+                    The expert was {{ metadata.expert[0] }}.
+
+                {% endif %}
+
+                {% if metadata.collector|length > 1 %}
+
+                    The collectors were
+                    {% for collector in metadata.collector[:-1] %}
+                        {{ collector }} and
+                    {% endfor %}
+                    {% for collector in metadata.collector[-1:] %}
+                        {{ collector }}.
+                    {% endfor %}
+
+                {% elif metadata.collector|length == 1 %}
+
+                    The collector was {{ metadata.collector[0] }}.
+
+                {% endif %}
+
+            </p>
+
+        </div>
+
+        <div id="witness">
+
+            {% if metadata.witness|length == 1 %}
+
+                <p>A witness is retained in
+
+                {% for witness in metadata.witness %}
+
+                    {% if witness.ms_country %}
+                        {{ witness.ms_country }},
+                    {% endif %}
+
+                    {% if witness.ms_settlement %}
+                        {{ witness.ms_settlement }},
+                    {% endif %}
+
+                    {% if witness.ms_institution %}
+                        {{ witness.ms_institution }},
+                    {% endif %}
+
+                    {% if witness.ms_repository %}
+                        {{ witness.ms_repository }},
+                    {% endif %}
+
+                    {% if witness.ms_idno %}
+                        with the identifier {{ witness.ms_idno }}.
+                    {% endif %}
+
+                     {% if witness.ptr|length > 1 %}
+
+                        {% for ptr in witness.ptr[:1] %}
+                            See the <a href="{{ ptr.ptr_target}}" target="_blank">{{ ptr.ptr_type}}</a>
+                        {% endfor %}
+
+                        {% for ptr in witness.ptr[1:] %}
+                            and the <a href="{{ ptr.ptr_target}}" target="_blank">{{ ptr.ptr_type}}</a>
+                        {% endfor %}
+                        online.
+
+                    {% elif witness.ptr|length == 1 %}
+                        {% for ptr in witness.ptr %}
+                            See the <a href="{{ ptr.ptr_target}}" target="_blank">{{ ptr.ptr_type}}</a> online.
+                        {% endfor %}
+
+                    {% endif %}
+
+                    {% if witness.desc %}
+                        <small>{{ witness.desc }}</small>
+                    {% endif %}
+
+                {% endfor %}
+                </p>
+
+            {% elif metadata.witness|length > 1 %}
+            <p>
+                {% for witness in metadata.witness[:1] %}
+
+                    A first witness is retained in
+
+                    {% if witness.ms_country %}
+                        {{ witness.ms_country }},
+                    {% endif %}
+
+                    {% if witness.ms_settlement %}
+                        {{ witness.ms_settlement }},
+                    {% endif %}
+
+                    {% if witness.ms_institution %}
+                        {{ witness.ms_institution }},
+                    {% endif %}
+
+                    {% if witness.ms_repository %}
+                        {{ witness.ms_repository }},
+                    {% endif %}
+
+                    {% if witness.ms_idno %}
+                        with the identifier {{ witness.ms_idno }}.
+                    {% endif %}
+
+                    {% if witness.ptr|length > 1 %}
+
+                        {% for ptr in witness.ptr[:1] %}
+                            See the <a href="{{ ptr.ptr_target}}" target="_blank">{{ ptr.ptr_type}}</a>
+                        {% endfor %}
+
+                        {% for ptr in witness.ptr[1:] %}
+                            and the <a href="{{ ptr.ptr_target}}" target="_blank">{{ ptr.ptr_type}}</a>
+                        {% endfor %}
+                        online.
+
+                    {% elif witness.ptr|length == 1 %}
+                        {% for ptr in witness.ptr %}
+                            See the <a href="{{ ptr.ptr_target}}" target="_blank">{{ ptr.ptr_type}}</a> online.
+                        {% endfor %}
+
+                    {% endif %}
+
+                    {% if witness.desc %}
+                        <small>{{ witness.desc }}</small>
+                    {% endif %}
+
+                {% endfor %}
+                <br/>
+                {% for witness in metadata.witness[1:] %}
+
+                    An other witness is retained in
+
+                    {% if witness.ms_country %}
+                        {{ witness.ms_country }},
+                    {% endif %}
+
+                    {% if witness.ms_settlement %}
+                        {{ witness.ms_settlement }},
+                    {% endif %}
+
+                    {% if witness.ms_institution %}
+                        {{ witness.ms_institution }},
+                    {% endif %}
+
+                    {% if witness.ms_repository %}
+                        {{ witness.ms_repository }},
+                    {% endif %}
+
+                    {% if witness.ms_idno %}
+                        with the identifier {{ witness.ms_idno }}.
+                    {% endif %}
+
+                    {% if witness.ptr|length > 1 %}
+
+                        {% for ptr in witness.ptr[:1] %}
+                            See the <a href="{{ ptr.ptr_target}}" target="_blank">{{ ptr.ptr_type}}</a>
+                        {% endfor %}
+
+                        {% for ptr in witness.ptr[1:] %}
+                            and the <a href="{{ ptr.ptr_target}}" target="_blank">{{ ptr.ptr_type}}</a>
+                        {% endfor %}
+                        online.
+
+                    {% elif witness.ptr|length == 1 %}
+                        {% for ptr in witness.ptr %}
+                            See the <a href="{{ ptr.ptr_target}}" target="_blank">{{ ptr.ptr_type}}</a> online.
+                        {% endfor %}
+
+                    {% endif %}
+
+                    {% if witness.desc %}
+                        <small>{{ witness.desc }}</small>
+                    {% endif %}
+
+                {% endfor %}
+            </p>
+
+            {% endif %}
+
+        </div>
+
+    <div id="digital_publication">
+
+    {% if metadata.encoder and metadata.XML_publisher %}
+
+        <p>Catalogue encoded by {{ metadata.encoder }}, {{ metadata.XML_publisher }}.</p>
+
+    {% elif metadata.encoder and metadata.XML_Publisher %}
+
+         <p>Catalogue encoded by {{ metadata.encoder }}, {{ metadata.XML_publisher }}.</p>
+
+    {% elif metadata.encoder %}
+
+        <p>Catalogue encoded by {{ metadata.encoder }}.</p>
+
+    {% endif %}
+        <p>
+            <a href="https://github.com/katabase/Application/blob/main/APP/data/{{ file }}.xml" target="_blank">
+                XML encoded catalogue available on GitHub.</a>
+        </p>
+        {% if metadata.licence %}
+        <small>
+            {{ metadata.licence}}
+        </small>
+        {% endif %}
+    </div>
+        <br/>
+    </div>
+
+    {% if figpath is sameas true %}
+        <!-- the "cat" class allows the javascript script to know what type of page we are
+        on: index page, catalogue page -->
+        <!-- <div>
+            <div>
+                <label for="dwn" class="label">See another graph</label>
+                <select class="btn dropdown cat" id="dwn" name="dwn" aria-expanded="false">
+                    <option value="1" class="dropdown-item">Price distribution</option>
+                    <option value="2" class="dropdown-item">Most expensive items</option>
+                </select>
+            </div>
+        </div> -->
+        {# {% set id1 = cat_id ~ "_1" %}
+        {% set id2 = cat_id ~ "_2" %} #}
+        <div id="fig"><iframe class="cat" src="{{ url_for('fig_grabber', key=cat_id) }}"></iframe></div>
+    {% endif %}
+
+    <div class="container">
+
+        {% for entry in content %}
+        <div>
+
+            <p id="{{ entry.id}}">
+                {{ entry.num }}.
+                {% if entry.trait %}
+                <b>{{ entry.author }}</b> - {{ entry.trait }}
+                {% else %}
+                <b>{{ entry.author }}</b>
+                {% endif %}
+            </p>
+                {% for desc in entry.desc %}
+                    <p>- {{ desc.text }}</p>
+                {% endfor %}
+            <p class="font-italic text-justify">{{ entry.note }}</p>
+            <p class="text-right">{{ entry.price }}</p>
+            <hr/>
+        </div>
+
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}
