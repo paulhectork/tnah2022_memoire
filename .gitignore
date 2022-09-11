@@ -4,6 +4,10 @@ __pycharm__/*
 **/__pycharm__/*
 .idea/*
 **/.idea/*
+env_app/*
+env_3/*
+**/env_app/*
+**/env_3/*
 
 ## aux files
 *.acn
