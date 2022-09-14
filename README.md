@@ -8,6 +8,36 @@ textuel semi-structuré: le cas des catalogues de vente de manuscrits*. Il a ét
 
 ---
 
+## Structure du dépôt
+
+Le mémoire est disponible en `pdf` à la racine, le code `LaTeX` utilisé pendant la rédaction
+se trouve dans `texte_source/` et les livrables techniques dans `livrables/`. Il est à
+noter que des extraits de code et de données brutes sont également présents dans les
+annexes de ce mémoire.
+
+```
+racine du dossier
+  |__paulkervegan_memoire.pdf : le mémoire au format PDF
+  |__LICENSE : la licence sous laquelle ce mémoire est disponible
+  |__README.md : le présent document
+  |
+  |__livrables/ : les livrables techniques
+  |    |__3_WikidataEnrichment/ : le code pour la résolution d'entités nommées à l'aide de Wikidata
+  |    |__Application/ : le code de l'application Katabase et de son API
+  |    |__README.md : un document détaillant le contenu des livrables
+  |
+  |__texte_source/ : le code LaTeX du présent mémoire
+       |__annexes/ : les documents présents en annexes
+       |__bibliographie/ : les fichiers `.bib` contenant la bibliographie utilisée dans ce mémoire
+       |__code/ : le code exécutable et les données brutes présentées dans le mémoire ou le code utilisé pour produire des données utilisées dans le mémoire
+       |__img/ : les images utilisées dans le corps du texte
+       |__paulkervegan_memoire.pdf : le PDF de ce mémoire
+       |__*.tex : les fichiers `.tex` composant ce mémoire
+       |__clean_aux.sh : un court script shell
+```
+
+---
+
 ## Résumé
 
 Le présent mémoire présente certains aspects d'une chaîne de traitement consacrée à un 
@@ -51,7 +81,7 @@ langage, détection de motifs, Web sémantique, *Linked Open Data*, API, FAIR, R
         location = {Paris},
         title = {Modélisation, enrichissement sémantique et diffusion d'un corpus textuel semi-structuré: le cas des catalogues de vente de manuscrits},
         url = {https://github.com/paulhectork/tnah2022_memoire/},
-        pagetotal = {187},
+        pagetotal = {195},
         institution = {École nationale des Chartes},
         type = {Mémoire pour le diplôme de master "Technologies numériques appliquées à l'histoire"},
         author = {Kervegan, Hector, Paul},

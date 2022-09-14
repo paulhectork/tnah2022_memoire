@@ -24,7 +24,7 @@
 
 %%%%%%%%%%%% code %%%%%%%%%%%%
 \usepackage[newfloat]{minted}
-\SetupFloatingEnvironment{listing}{name=Code source}
+\SetupFloatingEnvironment{listing}{name=Données brutes}
 \usemintedstyle{borland}
 \setminted{linenos, breaklines, tabsize=4, bgcolor=lightmauve}
 \usepackage{listings}
@@ -169,7 +169,6 @@
 \addbibresource{bibliographie/webgeneralites.bib}
 \addbibresource{bibliographie/webapi.bib}
 \addbibresource{bibliographie/websemantic.bib}
-\defbibnote{intro}{Cette bibliographie contient tous les ressources utilisées pour l'écriture de ce mémoire.}
 
 \DeclareSourcemap{%
  \maps[datatype=bibtex]{%
@@ -278,7 +277,6 @@ description={Comme le CTS, le \textit{Distributed Text Services} (DTS) est une A
 	plural={expressions régulières},
 	description={Une expression régulière, ou expression rationnelle est une chaîne de caractère, écrite selon une syntaxe précise, qui permet de détecter des motifs dans du texte\footcite{noauthor_expression_2022}. Les expressions régulières s'appuient sur la classification des caractères en classes (minuscules, majuscules, chiffres, espaces), sur des structures alternatives (un caractère ou un autre) et exclusives (un caractère n'ayant pas certaines propriétés) pour repérer des motifs. Par exemple, \enquote{2022} correspond au motif: \texttt{\textbackslash{}d{4}}, soit \enquote{quatre chiffres à la suite}. Une adresse mail est également un motif: \texttt{[\^~(@|\textbackslash{}s)]+@[\^~(@|\textbackslash{}s)]+}, soit \enquote{plusieurs caractères qui ne sont ni un espace une arobase, suivi d'une arobase, suivi de plusieurs caractères qui n'est ni un espace ni une arobase}.}
 }
-
 \newglossaryentry{frbr}{
 	type=\acronymtype,
 	name={FRBR},
@@ -359,10 +357,10 @@ description={Comme le CTS, le \textit{Distributed Text Services} (DTS) est une A
 	first={\textit{One document does it all} \enquote{Un document pour tout faire} (ODD)}
 }
 \newglossaryentry{ohco}{
-type=\acronymtype,
-name={OHCO},
-description={\textit{One ordered collection of objects} (OHCO)},
-first={\textit{One ordered collection of objects} (\enquote{Une collection ordonnée d'objets}, OHCO)}
+	type=\acronymtype,
+	name={OHCO},
+	description={\textit{One ordered collection of objects} (OHCO)},
+	first={\textit{One ordered collection of objects} (\enquote{Une collection ordonnée d'objets}, OHCO)}
 }
 \newglossaryentry{python}{
 	name={python},
@@ -436,19 +434,18 @@ first={\textit{One ordered collection of objects} (\enquote{Une collection ordon
 	first={\textit{World Wide Web Consortium (W3C)}}
 }
 
-
 % modèle: \newacronym{dom}{\textsc{dom}}{\emph{Document Object Model}}
 % modèle bis: \newglossaryentry{meta}{name=métadonnée,description={donnée servant à définir ou décrire une autre donné quel que soit son support}}
 
-% commandes perso: autres que les abbréviations
+% commandes perso
+% pour les abbréviations: technologies en mono, sigles et sites web en italique
 \newcommand{\cleartwopages}{%
 	\afterpage{
 		\pagestyle{empty}
 		\newpage~\newpage~\newpage~
-		%\setcounter{page}{2}
 	}
 }
-\newcommand{\widepage}{\newgeometry{left=1cm,right=1cm}}  % smaller margins for big graphs; use \restoregeometry after !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+\newcommand{\widepage}{\newgeometry{left=1cm,right=1cm}}  % smaller margins; use \restoregeometry after
 \makeatletter
 \newcommand{\scl}[1]{%
 	% normalisation des siècles en écriture romaine
@@ -458,9 +455,6 @@ first={\textit{One ordered collection of objects} (\enquote{Une collection ordon
 	~s%
 	\@ifnextchar.{}{.\@ifnextchar,{}{ }}
 }
-
-% commandes perso: abréviations
-% technologies en mono, sigles et sites web en italique
 \newcommand{\api}{\gls{api}}
 \newcommand{\alto}{\texttt{Alto}}
 \newcommand{\escr}{\textit{eScriptorium}}
@@ -495,7 +489,6 @@ first={\textit{One ordered collection of objects} (\enquote{Une collection ordon
 
 % modèle: https://www.overleaf.com/project/61a6185ee83481070ab68d99
 % liste des mémoires: https://docs.google.com/spreadsheets/d/1CZRaEX4BMqHNtqr97Dhg9UV9bPTt_4XS_IgPL5A-ZbU/edit
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% DÉBUT %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
