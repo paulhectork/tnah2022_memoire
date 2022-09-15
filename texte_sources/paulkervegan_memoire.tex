@@ -6,8 +6,6 @@
 %%%%%%%%%%%% generic packages: encodage, format, langue, police, math %%%%%%%%%%%%
 \documentclass[a4paper,12pt,twoside]{book}
 \usepackage[english, french]{babel}
-% \usepackage[utf8x]{inputenc}
-% \usepackage[T1]{fontenc}
 \usepackage{fontspec}
 \usepackage{lmodern}
 \usepackage{graphicx}
@@ -56,6 +54,11 @@
 \definecolor{pastelviolet}{rgb}{0.8, 0.6, 0.79}
 \definecolor{moccasin}{rgb}{0.98, 0.92, 0.84}
 \definecolor{persimmon}{rgb}{0.93, 0.35, 0.0}
+\definecolor{electricpurple}{rgb}{0.75, 0.0, 1.0}
+\definecolor{wildstrawberry}{rgb}{1.0, 0.26, 0.64}
+\definecolor{outrageousorange}{rgb}{1.0, 0.43, 0.29}
+\definecolor{darkterracotta}{rgb}{0.8, 0.31, 0.36}
+
 
 % db interaction: db
 % main step (start, stop...): main
@@ -212,10 +215,21 @@
 % hyperref
 \usepackage{hyperref}
 \hypersetup{
- pdfauthor={Paul, Hector KERVEGAN}, 
- pdftitle={Modélisation, enrichissement sémantique et diffusion d'un corpus textuel semi-structuré: le cas des catalogues de vente de manuscrits}, 
- pdfsubject={Traitement de données textuelles},
- pdfkeywords={catalogues de vente}{mss}{katabase}{ocr}{web sémantique}{linked open data}{web de données}{traitement automatisé du language}{détection de motifs}{api}{fair}{rest}
+	colorlinks=false,
+	citebordercolor=outrageousorange,
+	filebordercolor=electricpurple,
+	linkbordercolor=electricpurple,
+	menubordercolor=darkterracotta,
+	urlbordercolor=wildstrawberry,
+	runbordercolor=wildstrawberry,
+	% linkcolor=electricviolet,
+	% filecolor=violet,
+	% citecolor=electricviolet,      
+	% urlcolor=electricviolet,
+	pdfauthor={Paul, Hector KERVEGAN}, 
+	pdftitle={Modélisation, enrichissement sémantique et diffusion d'un corpus textuel semi-structuré: le cas des catalogues de vente de manuscrits}, 
+	pdfsubject={Traitement de données textuelles},
+	pdfkeywords={catalogues de vente}{mss}{katabase}{ocr}{web sémantique}{linked open data}{web de données}{traitement automatisé du language}{détection de motifs}{api}{fair}{rest}
 }
 
 
@@ -362,9 +376,27 @@ description={Comme le CTS, le \textit{Distributed Text Services} (DTS) est une A
 	description={\textit{One ordered collection of objects} (OHCO)},
 	first={\textit{One ordered collection of objects} (\enquote{Une collection ordonnée d'objets}, OHCO)}
 }
+\newglossaryentry{precision}{
+	name={précision},
+	plural={précisions},
+	description={La précision est, avec le rappel, une des deux mesures statistiques permettant de calculer un score F1. La précision mesure la validité des résultats obtenus. Elle correspond à la proportion d'items pertinents par rapport à l'ensemble des items proposés, soit la proportion de vrais positifs parmi tous les résultats positifs obtenus. Elle se calcule de la façon suivante:
+		\begin{displaymath}
+			P = \frac{\text{Nombre de résultats pertinents obtenus (vrais positifs)}}{\text{Ensemble des résultats obtenus (vrais positifs + faux positifs)}}
+		\end{displaymath}
+	}
+}
 \newglossaryentry{python}{
 	name={python},
 	description={Python est un language de programmation impérative (c'est-à-dire, basé sur la production et la transformation de données par une suite d'instructions) créé en 1991. Il est particulièrement utilisé dans le domaine du traitement de données et des humanités numériques. C'est le langage le plus utilisé dans le projet \mssktb{}}
+}
+\newglossaryentry{rappel}{
+	name={rappel},
+	plural={rappels},
+	description={En statistiques, le rappel est l'une des deux mesures permettant de calculer un score F1. Le rappel mesure la quatité de résultats pertinents obtenus. Il correspond à la proportion de résultats pertinents obtenus par rapport à tous les résultats pertinents qui auraient dû être obtenus. Il se calcule donc de la façon suivante:
+		\begin{displaymath}
+			R = \frac{\text{Nombre de résultats pertinents obtenus (vrais positifs)}}{\text{Ensemble des résultats pertinents (vrais positifs + faux négatifs)}}
+		\end{displaymath}
+	}
 }
 \newglossaryentry{rest}{
 	type=\acronymtype,
@@ -519,12 +551,16 @@ description={Comme le CTS, le \textit{Distributed Text Services} (DTS) est une A
 			
 			\vfill
 			
-			\begin{Huge}
-				\textbf{
-					Modélisation, enrichissement sémantique et diffusion d'un corpus textuel
-					semi-structuré: le cas des catalogues de vente de manuscrits
+			\textbf{%
+				\Huge{M}%
+				\Large{%
+					\MakeUppercase{%
+						odélisation, enrichissement sémantique et diffusion %
+						d'un corpus textuel semi-structuré: le cas des catalogues %
+						de vente de manuscrits
+					}
 				}
-			\end{Huge}
+			}
 			
 			\vfill
 			
