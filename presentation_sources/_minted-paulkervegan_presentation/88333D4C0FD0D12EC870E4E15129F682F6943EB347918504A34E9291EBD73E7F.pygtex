@@ -1,0 +1,18 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nt}{\PYGZlt{}publicationStmt\PYGZgt{}}
+  \PYG{n+nt}{\PYGZlt{}ab\PYGZgt{}}
+    \PYG{n+nt}{\PYGZlt{}date} \PYG{n+na}{type=}\PYG{l+s}{\PYGZdq{}file\PYGZhy{}creation\PYGZhy{}date\PYGZdq{}} \PYG{n+na}{when\PYGZhy{}iso=}\PYG{l+s}{\PYGZdq{}2022\PYGZhy{}08\PYGZhy{}24T16:41:40.267860\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}2022\PYGZhy{}08\PYGZhy{}24T16:41:40.267860\PYG{n+nt}{\PYGZlt{}/date\PYGZgt{}}
+      \PYG{n+nt}{\PYGZlt{}ref} \PYG{n+na}{type=}\PYG{l+s}{\PYGZdq{}http\PYGZhy{}status\PYGZhy{}code\PYGZdq{}} \PYG{n+na}{target=}\PYG{l+s}{\PYGZdq{}https://developer.mozilla.org/en\PYGZhy{}US/docs/Web/HTTP/Status/200\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}200\PYG{n+nt}{\PYGZlt{}/ref\PYGZgt{}}
+	  \PYG{n+nt}{\PYGZlt{}note\PYGZgt{}}Original data made available under Creative Commons Attribution 2.0 Generic (CC BY 2.0)\PYG{n+nt}{\PYGZlt{}/note\PYGZgt{}}
+	  \PYG{n+nt}{\PYGZlt{}table\PYGZgt{}}
+	    \PYG{n+nt}{\PYGZlt{}head\PYGZgt{}}Query parameters\PYG{n+nt}{\PYGZlt{}/head\PYGZgt{}}
+		\PYG{n+nt}{\PYGZlt{}row\PYGZgt{}}\PYG{c}{\PYGZlt{}!\PYGZhy{}\PYGZhy{} en\PYGZhy{}têtes \PYGZhy{}\PYGZhy{}\PYGZgt{}}\PYG{n+nt}{\PYGZlt{}/row\PYGZgt{}}
+	    \PYG{n+nt}{\PYGZlt{}row\PYGZgt{}}
+	      \PYG{n+nt}{\PYGZlt{}cell} \PYG{n+na}{role=}\PYG{l+s}{\PYGZdq{}value\PYGZdq{}} \PYG{n+na}{corresp=}\PYG{l+s}{\PYGZdq{}level\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}item\PYG{n+nt}{\PYGZlt{}/cell\PYGZgt{}}
+	      \PYG{n+nt}{\PYGZlt{}cell} \PYG{n+na}{role=}\PYG{l+s}{\PYGZdq{}value\PYGZdq{}} \PYG{n+na}{corresp=}\PYG{l+s}{\PYGZdq{}id\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}CAT\PYGZus{}000204\PYGZus{}e108\PYGZus{}d1\PYG{n+nt}{\PYGZlt{}/cell\PYGZgt{}}
+	      \PYG{n+nt}{\PYGZlt{}cell} \PYG{n+na}{role=}\PYG{l+s}{\PYGZdq{}value\PYGZdq{}} \PYG{n+na}{corresp=}\PYG{l+s}{\PYGZdq{}format\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}tei\PYG{n+nt}{\PYGZlt{}/cell\PYGZgt{}}
+	    \PYG{n+nt}{\PYGZlt{}/row\PYGZgt{}}
+	  \PYG{n+nt}{\PYGZlt{}/table\PYGZgt{}}
+	\PYG{n+nt}{\PYGZlt{}/ab\PYGZgt{}}
+\PYG{n+nt}{\PYGZlt{}/publicationStmt\PYGZgt{}}
+\end{Verbatim}

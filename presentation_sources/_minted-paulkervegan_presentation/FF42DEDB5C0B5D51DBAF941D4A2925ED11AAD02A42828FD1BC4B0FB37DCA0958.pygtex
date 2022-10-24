@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nt}{\PYGZlt{}item} \PYG{n+na}{n=}\PYG{l+s}{\PYGZdq{}19\PYGZdq{}} \PYG{n+na}{xml:id=}\PYG{l+s}{\PYGZdq{}CAT\PYGZus{}000193\PYGZus{}e19\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}
+	\PYG{n+nt}{\PYGZlt{}num} \PYG{n+na}{type=}\PYG{l+s}{\PYGZdq{}lot\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}19\PYG{n+nt}{\PYGZlt{}/num\PYGZgt{}}
+	\PYG{n+nt}{\PYGZlt{}name} \PYG{n+na}{type=}\PYG{l+s}{\PYGZdq{}author\PYGZdq{}} \PYG{n+na}{ref=}\PYG{l+s}{\PYGZdq{}wd:Q63314476\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}Commune de 1871\PYG{n+nt}{\PYGZlt{}/name\PYGZgt{}}
+	\PYG{n+nt}{\PYGZlt{}desc} \PYG{n+na}{xml:id=}\PYG{l+s}{\PYGZdq{}CAT\PYGZus{}000193\PYGZus{}e19\PYGZus{}d1\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}
+		\PYG{n+nt}{\PYGZlt{}date} \PYG{n+na}{when=}\PYG{l+s}{\PYGZdq{}1871\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}46 lettres ou pièces originales de personnages ayant coopéré à la Commune de 1871\PYG{n+nt}{\PYGZlt{}/date\PYGZgt{}}, environ \PYG{n+nt}{\PYGZlt{}measure} \PYG{n+na}{type=}\PYG{l+s}{\PYGZdq{}length\PYGZdq{}} \PYG{n+na}{unit=}\PYG{l+s}{\PYGZdq{}p\PYGZdq{}} \PYG{n+na}{n=}\PYG{l+s}{\PYGZdq{}100\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}100 p.\PYG{n+nt}{\PYGZlt{}/measure\PYGZgt{}\PYGZlt{}measure} \PYG{n+na}{type=}\PYG{l+s}{\PYGZdq{}format\PYGZdq{}} \PYG{n+na}{unit=}\PYG{l+s}{\PYGZdq{}f\PYGZdq{}} \PYG{n+na}{ana=}\PYG{l+s}{\PYGZdq{}\PYGZsh{}document\PYGZus{}format\PYGZus{}4\PYGZdq{}}\PYG{n+nt}{\PYGZgt{}}in\PYGZhy{}4 o\PYG{n+nt}{\PYGZlt{}/measure\PYGZgt{}}u in\PYGZhy{}8
+	\PYG{n+nt}{\PYGZlt{}/desc\PYGZgt{}}
+    \PYG{n+nt}{\PYGZlt{}note\PYGZgt{}}Important dossier historique. Parmi les noms qui y sont contenus on remarque les suivants: Grousset (Paschal), Longuet, Ranvier, Lullier, Miot, Michel (Louise), Bergeret, Cluseret, Malon, Lefrançais, Delescluze, Urbain, Tridon, Vermorel, etc.\PYG{n+nt}{\PYGZlt{}/note\PYGZgt{}}
+\PYG{n+nt}{\PYGZlt{}/item\PYGZgt{}}
+\end{Verbatim}
