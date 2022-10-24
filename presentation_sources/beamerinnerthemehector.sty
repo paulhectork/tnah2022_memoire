@@ -1,0 +1,40 @@
+\mode<presentation>
+
+%%%%%%%%%%%%%%%%%%%%% GLOBAL %%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{items}[square]
+\setbeamertemplate{sections/subsections in toc}[square]
+
+%%%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%%%
+% these inner theme templates will only be used on the first page thanks 
+% to the `\ifnum` condition. `background` sets the background of the page,
+% `title page` sets the foreground (where the title goes, which fonts...)
+\setbeamertemplate{background}{
+	\begin{tikzpicture}
+		\useasboundingbox(0,0) rectangle(\the\paperwidth,\the\paperheight);
+		\fill[color=hyperblue](0,0) rectangle(\the\paperwidth,\the\paperheight);
+		\fill[color=white] (0,0) rectangle(2.95,1.9);
+		\fill[color=white] (3.05,0) rectangle(\the\paperwidth,1.9);
+		
+		% test if it's the first page to only use this template on the titme page
+		\ifnum\thepage>1\relax%
+			\fill[color=white,opacity=1](0,0) rectangle(\the\paperwidth,\the\paperheight);
+		\fi
+	\end{tikzpicture}
+}
+
+\defbeamertemplate*{title page}{hector}[1][]{% 
+	% \begin{textblock}{hsize}[ho,vo](hpos,vpos)
+	\begin{textblock}{10}(3,-0.75)
+		\begin{beamercolorbox}[sep=8pt,#1]{title page header}%
+			\scshape\usebeamerfont{title}\inserttitle\par%
+		\end{beamercolorbox}%
+		\vskip0.5cm%
+		\begin{beamercolorbox}[leftskip=0.25cm,#1]{title page author}
+			\usebeamerfont{author}\insertauthor%
+		\end{beamercolorbox}
+		\vskip0.2cm%
+		\begin{beamercolorbox}[leftskip=0.25cm,#1]{title page date}
+			\usebeamerfont{author}\insertdate%
+		\end{beamercolorbox}
+	\end{textblock}
+}

@@ -1,0 +1,25 @@
+\mode<presentation>
+
+% frame title
+\defbeamertemplate*{frametitle}{hector}[1][]
+{
+	\vskip1cm%
+	\begin{beamercolorbox}[wd=\paperwidth,ht=1.8cm]{frametitle} 
+		\begin{tikzpicture}
+			% boxes
+			\useasboundingbox[fill=white](0,-1) rectangle(\the\paperwidth,1.9);
+			\fill[hyperblue] (0,0) rectangle(2.95,1.9);
+			\fill[hyperblue] (3.05,0) rectangle(\the\paperwidth,1.9);
+			
+			% subtitle
+			\ifx\insertframesubtitle\@empty%
+			{\node[anchor=west,lightpink,font=\large] at (3.2,0.1.15){\insertframetitle};}%
+			\else%
+			{\node[anchor=west,white,font=\large] at (3.2,1.15){\insertframetitle};%
+				\node[anchor=west,white,font=\small] at (3.2,0.6){\insertframesubtitle};}%
+			\fi
+		\end{tikzpicture}
+	\end{beamercolorbox}
+}
+
+\mode<all>
