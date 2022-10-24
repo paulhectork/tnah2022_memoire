@@ -34,3 +34,5 @@ env_3/*
 *.cb
 *.cb2
 .*.lb
+*.nav
+*.snm
