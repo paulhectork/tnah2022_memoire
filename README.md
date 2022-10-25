@@ -10,10 +10,11 @@ textuel semi-structuré: le cas des catalogues de vente de manuscrits*. Il a ét
 
 ## Structure du dépôt
 
-Le mémoire est disponible en `pdf` à la racine, le code `LaTeX` utilisé pendant la rédaction
-se trouve dans `texte_source/` et les livrables techniques dans `livrables/`. Il est à
-noter que des extraits de code et de données brutes sont également présents dans les
-annexes de ce mémoire.
+Le mémoire et la présentation de soutenance sont disponibles en `pdf` à la racine, le 
+code `LaTeX` utilisé pendant la rédaction se trouve dans `texte_sources/` (pour le texte)
+et `presentation_sources/` pour la présentation de soutenance; les livrables techniques dans 
+`livrables/`. Il est à noter que des extraits de code et de données brutes sont également 
+présents dans les annexes de ce mémoire. 
 
 ```
 racine du dossier
@@ -26,7 +27,13 @@ racine du dossier
   |    |__Application/ : le code de l'application Katabase et de son API
   |    |__README.md : un document détaillant le contenu des livrables
   |
-  |__texte_source/ : le code LaTeX du présent mémoire
+  |__presentation_sources/ : le code LaTeX du support de présentation
+  |    |__includes/ : les fichiers inclus dans la présentation
+  |    |__*.sty : les feuilles de styles du thème `hector` (voir plus bas)
+  |    |__paulkervegan_presentation.pdf : la présentation en PDF
+  |    |__paulkervegan_presentation.tex : le code de la présentation LaTeX
+  |
+  |__texte_sources/ : le code LaTeX du présent mémoire
        |__annexes/ : les documents présents en annexes
        |__bibliographie/ : les fichiers `.bib` contenant la bibliographie utilisée dans ce mémoire
        |__code/ : le code exécutable et les données brutes présentées dans le mémoire ou le code utilisé pour produire des données utilisées dans le mémoire
@@ -71,6 +78,19 @@ décrits les principes architecturaux et le fonctionnement interne de l'applicat
 
 catalogues de vente, *Manuscript Sales Catalogues / Katabase*, traitement automatisé du 
 langage, détection de motifs, Web sémantique, *Linked Open Data*, API, FAIR, REST
+
+---
+
+## Thème `hector` de la présentation
+
+La présentation a été réalisée en utilisant un thème `LaTeX / beamer` conçu à l'occasion. 
+Il peut être librement repris, adapté et réutilisé pour une autre présentation `LaTeX`. 
+Il suffit de copier les fichiers `presentation_sources/*.sty` dans un dossier contenant le 
+code `LaTeX` pour une présentation et de pointer vers ce thème dans le préambule:
+
+```tex
+\usetheme{hector}
+```
 
 ---
 
